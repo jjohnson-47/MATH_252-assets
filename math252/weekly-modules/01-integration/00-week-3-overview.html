@@ -3,214 +3,210 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Week 3: Integration Techniques</title>
-    <script id="MathJax-script" async
-            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    <title>Week 3: Integration Techniques | MATH A252 Summer 2025</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
     </script>
+
+    <!-- CALC II Summer 2025 shared theme -->
     <style>
-        :root {
-            --neon-pink: #ff2b9d;
-            --neon-blue: #00f3ff;
-            --neon-purple: #9d00ff;
-            --dark-bg: #120458;
-        }
+      /* -------------------------------------------------------------------------
+         Theme variables (matches section styling)  
+         --------------------------------------------------------------------- */
+      :root {
+        --calc2-primary-dark-blue: #1a237e;
+        --calc2-primary-purple:   #512da8;
+        --calc2-accent-teal:      #4dd0e1;
+        --calc2-accent-green:     #66bb6a;
+        --calc2-background:       #ffffff;
+        --calc2-text:             #212121;
+        --calc2-heading:          #1a237e;
+        --calc2-focus-outline:    #ffeb3b;
+      }
 
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-        body {
-            background-color: var(--dark-bg);
-            background: linear-gradient(180deg, #120458 0%, #1e0f7c 100%);
-            color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
+      /* --------------------------------------------------------------------- */
+      /*  Base layout & typography                                             */
+      /* --------------------------------------------------------------------- */
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        font-size: 1rem;
+        color: var(--calc2-text);
+        background-color: var(--calc2-background);
+        margin: 0;
+        padding: 0;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-            position: relative;
-            z-index: 1;
-        }
+      .calc2-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
 
-        .retro-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(180deg,
-                rgba(18, 4, 88, 0.9),
-                rgba(30, 15, 124, 0.9)
-            );
-            overflow: hidden;
-            z-index: 0;
-        }
+      .calc2-title {
+        font-size: 2.5rem;
+        margin: 0 0 1.5rem 0;
+        color: var(--calc2-heading);
+        border-bottom: 3px solid var(--calc2-primary-purple);
+        padding-bottom: 0.5rem;
+        text-align: center;
+      }
 
-        .grid-lines {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-image:
-                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
-                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg);
-            transform-origin: 50% 0;
-            animation: grid-move 20s linear infinite;
-        }
-        @keyframes grid-move {
-            0% {
-                transform: perspective(500px) rotateX(60deg) translateY(0);
-            }
-            100% {
-                transform: perspective(500px) rotateX(60deg) translateY(40px);
-            }
-        }
+      .calc2-subtitle {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem 0;
+        color: var(--calc2-heading);
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid var(--calc2-accent-teal);
+      }
 
-        .title {
-            font-size: 2.8rem;
-            color: var(--neon-pink);
-            text-shadow: 0 0 10px var(--neon-pink);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+      /* Week overview specific styling */
+      .week-overview-box {
+        background: #f5f5f5;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-primary-purple);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
 
-        .content-box {
-            background: rgba(18, 4, 88, 0.8);
-            border: 2px solid var(--neon-blue);
-            border-radius: 10px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-        }
+      .objectives-box {
+        background-color: rgba(77, 208, 225, 0.1);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-teal);
+      }
 
-        .objectives-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .objectives-list li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-        .objectives-list li::before {
-            content: ">";
-            position: absolute;
-            left: 0;
-            color: var(--neon-blue);
-            font-weight: bold;
-        }
+      .due-dates-box {
+        background-color: rgba(102, 187, 106, 0.1);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-green);
+      }
 
-        .due-dates {
-            background: rgba(157, 0, 255, 0.1);
-            border-left: 4px solid var(--neon-purple);
-            padding: 1rem;
-            margin: 1rem 0;
-        }
+      .topics-section {
+        background: #f5f5f5;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-green);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
 
-        .integral-symbol {
-            font-size: 56px;
-            color: #ff6b00;
-            text-align: center;
-            animation: glow 2s ease-in-out infinite;
-            margin-bottom: 1rem;
-        }
-        @keyframes glow {
-            0%, 100% {
-                text-shadow: 0 0 10px #ff6b00;
-            }
-            50% {
-                text-shadow:
-                    0 0 20px #ff6b00,
-                    0 0 30px #ff9d00;
-            }
-        }
+      .topic-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+      }
 
-        h2 {
-            color: var(--neon-blue);
-            text-shadow: 0 0 5px var(--neon-blue);
-            margin-top: 0;
-            font-size: 2rem;
-        }
-        h3 {
-            margin-bottom: 0.5rem;
-            font-size: 1.4rem;
-        }
+      .topic-item:not(:last-child) {
+        border-bottom: 1px dotted #ccc;
+      }
 
-        .section {
-            margin-bottom: 1.5rem;
-        }
+      .topic-item h3 {
+        color: var(--calc2-primary-dark-blue);
+        margin-bottom: 0.5rem;
+      }
 
-        @media (prefers-reduced-motion: reduce) {
-            .grid-lines {
-                animation: none;
-            }
-            .integral-symbol {
-                animation: none;
-            }
-        }
+      .integral-visual {
+        text-align: center;
+        font-size: 3rem;
+        color: var(--calc2-primary-purple);
+        margin: 2rem 0;
+        font-weight: bold;
+      }
+
+      a { color: var(--calc2-primary-purple); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      em { font-style: italic; }
+      strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+      @media (max-width: 768px) {
+        .calc2-container { padding: 1rem; }
+        .calc2-title     { font-size: 2rem; }
+        .calc2-subtitle  { font-size: 1.25rem; }
+      }
     </style>
 </head>
 <body>
-    <div class="retro-grid">
-        <div class="grid-lines"></div>
-    </div>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Unit 2: Techniques of Antidifferentiation</h1>
+    <h2 class="calc2-subtitle" style="text-align: center; color: var(--calc2-primary-purple);">Week 3 Overview • June 2-13, 2025</h2>
+    
+    <div class="integral-visual">∫ ∫ ∫</div>
 
-    <div class="container">
-        <h1 class="title">WEEK 3: Integration Techniques</h1>
-        
-        <div class="integral-symbol">∫∫∫</div>
+    <!-- Week overview -->
+    <section class="week-overview-box">
+      <h3 style="margin-top: 0; color: var(--calc2-primary-dark-blue);">🎯 This Week's Focus</h3>
+      <p>This week we dive into <strong>Chapter 6: Techniques of Antidifferentiation</strong>, learning our first major integration methods beyond basic antiderivative rules. You'll master two fundamental techniques that handle a wide variety of integrals encountered in calculus and real-world applications.</p>
+      <p><strong>The big picture:</strong> While the Fundamental Theorem of Calculus shows us <em>how</em> to evaluate definite integrals using antiderivatives, finding those antiderivatives requires specific techniques. This week introduces the two most essential methods.</p>
+    </section>
 
-        <div class="content-box">
-            <h2>Learning Objectives</h2>
-            <ul class="objectives-list">
-                <li>Apply u-substitution to evaluate indefinite and definite integrals where a function's derivative appears in the integrand</li>
-                <li>Identify integrands that require integration by parts and apply the technique to evaluate them</li>
-                <li>Recognize which integration technique is most appropriate for a given integral</li>
-                <li>Solve application problems that require these integration methods</li>
-            </ul>
-        </div>
+    <!-- Learning objectives -->
+    <section class="objectives-box">
+      <h3 style="margin-top: 0;">📚 Learning Objectives</h3>
+      <ul>
+        <li><strong>Master substitution:</strong> Apply u-substitution to evaluate indefinite and definite integrals where a function's derivative appears in the integrand</li>
+        <li><strong>Learn integration by parts:</strong> Use the product rule in reverse to integrate products of functions</li>
+        <li><strong>Develop pattern recognition:</strong> Identify which integration technique is most appropriate for a given integral</li>
+        <li><strong>Solve real applications:</strong> Apply these methods to problems involving area, volume, and motion</li>
+        <li><strong>Build integration strategy:</strong> Combine multiple techniques when necessary</li>
+      </ul>
+    </section>
 
-        <div class="content-box">
-            <h2>This Week's Topics</h2>
-            
-            <div class="section">
-                <h3>Section 6.1: Substitution</h3>
-                <p>We begin with the technique of u-substitution, which is the reverse of the chain rule. You'll learn to identify when this method is appropriate and how to apply it effectively. Key concepts include:</p>
-                <ul>
-                    <li>Recognizing when a function's derivative appears in an integral</li>
-                    <li>Choosing an appropriate substitution</li>
-                    <li>Adjusting the bounds for definite integrals</li>
-                </ul>
-            </div>
-            
-            <div class="section">
-                <h3>Section 6.2: Integration by Parts</h3>
-                <p>Next, we'll explore integration by parts, which is derived from the product rule. This powerful technique allows us to integrate products of functions. You'll learn:</p>
-                <ul>
-                    <li>The formula \( \int u\,dv = uv - \int v\,du \)</li>
-                    <li>Strategies for choosing u and dv effectively</li>
-                    <li>Handling repeated applications of integration by parts</li>
-                </ul>
-            </div>
-        </div>
+    <!-- Topics covered -->
+    <section class="topics-section">
+      <h3 style="margin-top: 0;">📖 Topics Covered This Week</h3>
+      
+      <div class="topic-item">
+        <h3>Section 6.1: Integration by Substitution</h3>
+        <p>We begin with <strong>u-substitution</strong>, which reverses the Chain Rule. This is often the first technique to try when faced with a complex integral. Key concepts include:</p>
+        <ul>
+          <li><strong>Pattern recognition:</strong> Identifying when a function's derivative appears in an integral</li>
+          <li><strong>Choosing substitutions:</strong> Strategic selection of $u = g(x)$ to simplify the integrand</li>
+          <li><strong>Definite integral techniques:</strong> Changing bounds vs. converting back to original variables</li>
+          <li><strong>Common substitution patterns:</strong> Exponential, trigonometric, and algebraic functions</li>
+        </ul>
+      </div>
+      
+      <div class="topic-item">
+        <h3>Section 6.2: Integration by Parts</h3>
+        <p>Next, we explore <strong>integration by parts</strong>, derived from the Product Rule. This powerful technique handles products of functions and includes:</p>
+        <ul>
+          <li><strong>The LIATE strategy:</strong> Systematic approach for choosing $u$ and $dv$</li>
+          <li><strong>The formula:</strong> $\int u\,dv = uv - \int v\,du$ and how to apply it effectively</li>
+          <li><strong>Repeated applications:</strong> When integration by parts must be used multiple times</li>
+          <li><strong>Special cases:</strong> Integrals involving logarithms, inverse trig functions, and polynomials with exponentials</li>
+        </ul>
+      </div>
+    </section>
 
-        <div class="content-box">
-            <h2>Important Due Dates</h2>
-            <div class="due-dates">
-                <p>📘 Weekly Quiz 3 (Sections 6.1-6.2): Due Wednesday, January 29 by 11:59 PM</p>
-                <p>📝 Edfinity Homework 3 (Sections 6.1-6.2): Due Friday, January 31 by 11:59 PM</p>
-                <p>✍️ Discussion Participation: Ongoing throughout the week</p>
-            </div>
-        </div>
-    </div>
+    <!-- Important dates -->
+    <section class="due-dates-box">
+      <h3 style="margin-top: 0;">📅 Important Summer 2025 Due Dates</h3>
+      <p><strong>📘 Chapter 6 Quiz & Discussion:</strong> Due Friday, June 6th at 11:59 PM</p>
+      <p><strong>📝 Unit 2 Edfinity Homework:</strong> Due Friday, June 13th at 11:59 PM</p>
+      <p><strong>✍️ Written Submission #2:</strong> Due Friday, June 13th at 11:59 PM</p>
+      <p><strong>💬 Discussion Participation:</strong> Active engagement throughout the week</p>
+      
+      <p style="margin-top: 1rem;"><em><strong>Note:</strong> This intensive summer format covers 2 weeks of material in about 10 days. Stay on top of the reading and practice problems to keep up with the accelerated pace!</em></p>
+    </section>
+
+  </main>
 </body>
 </html>
