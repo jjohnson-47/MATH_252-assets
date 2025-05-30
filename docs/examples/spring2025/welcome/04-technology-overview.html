@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Technology Requirements</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--primary-purple), var(--primary-dark-blue));
+            color: var(--neutral-white);
+            border-radius: 8px;
+        }
+
+        .calc2-section {
+            background: rgba(26, 35, 126, 0.9);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid var(--neutral-white);
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-subtitle {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-teal);
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calc2-list li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calc2-list li::before {
+            content: "•";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .calc2-emphasis {
+            font-weight: bold;
+            color: var(--accent-teal);
+        }
+
+        .calc2-link {
+            color: var(--accent-teal);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+
+        .calc2-link:hover {
+            color: var(--neutral-white);
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+
+            .calc2-title {
+                font-size: 1.75rem;
+            }
+
+            .calc2-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">Technology Requirements</h1>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Hardware Requirements</h2>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Computer:</span> A newer computer (PC or Mac) with updated operating systems (Windows 10+ or Mac OS 10.9+) is recommended. Linux or Chrome OS can work but may require extra configuration.</li>
+                <li><span class="calc2-emphasis">Internet:</span> A reliable high-speed internet connection is essential for streaming course videos and completing online tasks.</li>
+                <li><span class="calc2-emphasis">Headset/Mic:</span> A headset with a microphone is required for online office hours or live Zoom sessions.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Required Software & Tools</h2>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Web Browsers:</span> Install at least two browsers (e.g., Google Chrome, Firefox) in case one performs better for particular tasks or websites.</li>
+                <li><span class="calc2-emphasis">Google Docs:</span> Required for document creation and editing.</li>
+                <li><span class="calc2-emphasis">PDF Reader:</span> Adobe Reader (recommended) or another lightweight PDF viewer (Sumatra PDF).</li>
+                <li><span class="calc2-emphasis">Microsoft Office 365:</span> Available free to all UAA/KPC students (online and desktop versions).</li>
+                <li><span class="calc2-emphasis">Calculators:</span> Access to the following online calculators is required:
+                    <ul class="calc2-list">
+                        <li>Desmos Scientific Calculator (<a href="https://www.desmos.com/scientific" target="_blank" class="calc2-link">desmos.com/scientific</a>)</li>
+                        <li>Desmos Graphing Calculator (<a href="https://www.desmos.com/calculator" target="_blank" class="calc2-link">desmos.com/calculator</a>)</li>
+                        <li>GeoGebra Calculators and Tools</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

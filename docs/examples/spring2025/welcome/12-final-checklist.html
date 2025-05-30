@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Final Checklist - MATH A252 Calculus 2</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --accent-hot-pink: #ff006e; /* New hot pink accent */
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+            --info-color: #2196f3;
+            --unit-color: #ff9800;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            /* Updated background gradient with a pink mid-stop */
+            background: linear-gradient(
+                to bottom,
+                var(--primary-purple) 0%,
+                var(--accent-hot-pink) 50%,
+                var(--primary-dark-blue) 100%
+            );
+            color: var(--neutral-white);
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-info-box {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid var(--info-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .calc2-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calc2-list li::before {
+            content: "⬜";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .calc2-final-note {
+            text-align: center;
+            padding: 2rem 1rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        /* Synthwave grid with pink vertical lines and teal horizontal lines */
+        .synthwave-grid {
+            width: 300px;
+            height: 150px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(
+                    0deg,
+                    var(--primary-dark-blue) 0%,
+                    transparent 50%
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    var(--accent-hot-pink) 0px,
+                    var(--accent-hot-pink) 1px,
+                    transparent 1px,
+                    transparent 20px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    var(--accent-teal) 0px,
+                    var(--accent-teal) 1px,
+                    transparent 1px,
+                    transparent 20px
+                );
+            perspective: 500px;
+            transform: rotateX(60deg);
+            /* Smooth, infinite scroll animation */
+            animation: grid-move 20s linear infinite;
+        }
+
+        /* Neon text with pink glow */
+        .neon-text {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neutral-white);
+            text-shadow:
+                0 0 5px var(--accent-hot-pink),
+                0 0 10px var(--accent-hot-pink),
+                0 0 20px var(--accent-hot-pink);
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+
+        /* Grid moves vertically for a retro effect */
+        @keyframes grid-move {
+            0% {
+                background-position-y: 0px;
+            }
+            100% {
+                background-position-y: 200px;
+            }
+        }
+
+        /* Subtle pulsing effect for text */
+        @keyframes neon-pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        /* Turn off animations for users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .synthwave-grid {
+                animation: none;
+            }
+            .neon-text {
+                animation: none;
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">Final Checklist &amp; Next Steps</h1>
+
+        <div class="calc2-section">
+            <div class="calc2-info-box">
+                <ul class="calc2-list">
+                    <li>Read all "Start Here" content completely</li>
+                    <li>Review the course syllabus thoroughly</li>
+                    <li>Record all important dates in your calendar</li>
+                    <li>Complete Edfinity setup and registration</li>
+                    <li>Send your introduction email to the instructor</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-final-note">
+            <p>Once you've completed these steps, proceed to Week 1 in the Blackboard content section to begin your learning journey.</p>
+            <div class="synthwave-grid"></div>
+            <p class="neon-text">Welcome to Calculus 2!</p>
+        </div>
+    </div>
+</body>
+</html>
+

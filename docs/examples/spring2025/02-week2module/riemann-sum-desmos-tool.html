@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Riemann Sum Tool</title>
+
+  <!-- Include MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Retrowave/Synthwave Theme Styles -->
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    /* Main container with gradient background */
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Adjust MathJax spacing for display math only */
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    /* Embed container for tools */
+    .embed-container {
+      position: relative;
+      padding-bottom: 100%; /* Square aspect ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 2px solid var(--accent-teal);
+      border-radius: 8px;
+    }
+
+    .embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Container -->
+  <div class="calc2-container">
+
+    <!-- Tool Title -->
+    <h1 class="calc2-title">Riemann Sum Tool</h1>
+
+ <!-- Introduction -->
+    <p>
+      Explore the concept of Riemann sums using this interactive tool. Input your own function, adjust the lower and upper limits of integration, and change the number of rectangles to see how the Riemann sum approximates the definite integral.
+    </p>
+
+    <p>
+      <a href="https://www.desmos.com/calculator/jucblmmiwv" target="_blank" style="color: var(--accent-teal); font-weight: bold; text-decoration: underline;">
+        Open Full Riemann Sum Calculator in Desmos
+      </a>
+    </p>
+
+    <!-- Embed Desmos Riemann Sum Tool -->
+    <div class="embed-container">
+      <iframe src="https://www.desmos.com/calculator/ly3u8ppcqi?embed" frameborder="0"></iframe>
+    </div>
+
+    <!-- Explanation of Riemann Sums -->
+    <p>
+      A Riemann sum is a method for approximating the total area under a curve (the definite integral) by summing up areas of multiple rectangles. The approximation improves as the number of rectangles increases.
+    </p>
+
+    <!-- Mathematical Expression -->
+    <p>
+      The Riemann sum for a function \( f(x) \) over the interval \( [a, b] \) is given by:
+    </p>
+    \[
+      S = \sum_{i=1}^{n} f(x_i^*) \Delta x
+    \]
+    <p>
+      where:
+    </p>
+    <ul>
+      <li>\( n \) is the number of rectangles.</li>
+      <li>\( \Delta x = \dfrac{b - a}{n} \) is the width of each rectangle.</li>
+      <li>\( x_i^* \) is a sample point in the \( i \)-th subinterval \( [x_{i-1}, x_i] \).</li>
+    </ul>
+
+    <!-- Instructions for Using the Tool -->
+    <div class="calc2-info-box">
+      <p><strong>Instructions:</strong></p>
+      <ul>
+        <li>Enter your desired function \( f(x) \) in the input field at the top of the tool.</li>
+        <li>Adjust the sliders to set the lower limit \( a \) and upper limit \( b \) of integration.</li>
+        <li>Move the slider for \( n \) to change the number of rectangles in the Riemann sum.</li>
+        <li>Observe how the approximation improves as \( n \) increases.</li>
+      </ul>
+    </div>
+
+    <!-- Closing Remarks -->
+    <p>
+      Using this tool, you can gain a deeper understanding of how Riemann sums function and how they underpin the concept of definite integrals in calculus. Experiment with different functions and parameters to see the effects on the Riemann sum approximation.
+    </p>
+
+  </div><!-- /calc2-container -->
+
+</body>
+</html>

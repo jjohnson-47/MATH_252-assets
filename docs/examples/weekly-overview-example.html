@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 8: Integration by Parts</title>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    :root {
+      --neon-pink: #ff2b9d;
+      --neon-blue: #00f3ff;
+      --neon-purple: #9d00ff;
+      --dark-bg: #120458;
+    }
+
+    /* Basic reset and layout */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      background-color: var(--dark-bg);
+      background: linear-gradient(180deg, #120458 0%, #1e0f7c 100%);
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      font-size: 1.1rem;
+    }
+
+    /* Main container for content */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      position: relative;
+      z-index: 1; /* Above the retro grid */
+    }
+
+    /* Retro grid background (fixed) */
+    .retro-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(180deg,
+          rgba(18, 4, 88, 0.9),
+          rgba(30, 15, 124, 0.9)
+      );
+      overflow: hidden;
+      z-index: 0; /* Behind container */
+    }
+
+    /* Grid lines that animate downward */
+    .grid-lines {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image:
+          linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+          linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 40px 40px;
+      transform: perspective(500px) rotateX(60deg);
+      transform-origin: 50% 0;
+      animation: grid-move 20s linear infinite;
+    }
+    @keyframes grid-move {
+      0% {
+        transform: perspective(500px) rotateX(60deg) translateY(0);
+      }
+      100% {
+        transform: perspective(500px) rotateX(60deg) translateY(40px);
+      }
+    }
+
+    /* Title styling */
+    .title {
+      font-size: 2.8rem;
+      color: var(--neon-pink);
+      text-shadow: 0 0 10px var(--neon-pink);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    /* Content boxes with neon-themed outlines */
+    .content-box {
+      background: rgba(18, 4, 88, 0.8);
+      border: 2px solid var(--neon-blue);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+    }
+
+    /* Objectives lists with angle-bracket bullets */
+    .objectives-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .objectives-list li {
+      margin-bottom: 1rem;
+      padding-left: 2rem;
+      position: relative;
+    }
+    .objectives-list li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: var(--neon-blue);
+      font-weight: bold;
+    }
+
+    /* Due dates highlight box */
+    .due-dates {
+      background: rgba(157, 0, 255, 0.1);
+      border-left: 4px solid var(--neon-purple);
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+
+    /* Links styling */
+    a {
+      color: var(--neon-blue);
+      text-decoration: none;
+      border-bottom: 1px dashed var(--neon-blue);
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      color: var(--neon-pink);
+      border-bottom: 1px solid var(--neon-pink);
+      text-shadow: 0 0 5px var(--neon-pink);
+    }
+
+    /* Formula Animation */
+    .formula-display {
+      position: relative;
+      height: 150px;
+      margin: 2rem auto;
+      perspective: 800px;
+      font-size: 24px;
+      text-align: center;
+    }
+    .formula {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      left: 0;
+      transform-style: preserve-3d;
+      transform: translateY(-50%);
+      animation: formula-rotate 15s infinite linear;
+    }
+    .formula-front, .formula-back {
+      position: absolute;
+      width: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      justify-content: center;
+    }
+    .formula-back {
+      transform: rotateY(180deg);
+    }
+    @keyframes formula-rotate {
+      0% { transform: translateY(-50%) rotateY(0); }
+      45% { transform: translateY(-50%) rotateY(175deg); }
+      50% { transform: translateY(-50%) rotateY(180deg); }
+      95% { transform: translateY(-50%) rotateY(355deg); }
+      100% { transform: translateY(-50%) rotateY(360deg); }
+    }
+    
+    /* Headings */
+    h2 {
+      color: var(--neon-blue);
+      text-shadow: 0 0 5px var(--neon-blue);
+      margin-top: 0;
+      font-size: 2rem;
+    }
+    h3 {
+      margin-bottom: 0.5rem;
+      font-size: 1.4rem;
+    }
+
+    /* Spacing for topic sections */
+    .section {
+      margin-bottom: 2.5rem;
+    }
+    
+    /* Alert box for important notices */
+    .alert-box {
+      background: rgba(255, 43, 157, 0.1);
+      border-left: 4px solid var(--neon-pink);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Example box */
+    .example-box {
+      background: rgba(157, 0, 255, 0.1);
+      border: 1px dashed var(--neon-purple);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+    
+    /* Textbook callout */
+    .textbook-callout {
+      background: rgba(0, 243, 255, 0.1);
+      border-left: 4px solid var(--neon-blue);
+      padding: 1rem;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+    }
+    .textbook-callout::before {
+      content: "📘";
+      font-size: 1.5rem;
+      margin-right: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Retro grid backdrop -->
+  <div class="retro-grid">
+    <div class="grid-lines"></div>
+  </div>
+
+  <div class="container">
+    <!-- Week title -->
+    <h1 class="title">WEEK 8: Integration by Parts</h1>
+    
+    <!-- Integration by Parts formula animation -->
+    <div class="formula-display">
+      <div class="formula">
+        <div class="formula-front">
+          <span>\( \int u \, dv = uv - \int v \, du \)</span>
+        </div>
+        <div class="formula-back">
+          <span>\( \int_a^b u(x) \, v'(x) \, dx = [u(x)v(x)]_a^b - \int_a^b v(x) \, u'(x) \, dx \)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Learning Objectives -->
+    <div class="content-box">
+      <h2>Learning Objectives</h2>
+      <ul class="objectives-list">
+        <li>Master the integration by parts technique, recognizing when and how to apply it effectively.</li>
+        <li>Develop a systematic approach to choosing u and dv in integration by parts problems.</li>
+        <li>Apply integration by parts to calculate integrals involving products of functions.</li>
+        <li>Use the tabular method for repeated applications of integration by parts.</li>
+        <li>Solve complex integration problems that combine multiple techniques.</li>
+      </ul>
+    </div>
+
+    <!-- Weekly Topics with integrated textbook links -->
+    <div class="content-box">
+      <h2>This Week's Topics</h2>
+      
+      <div class="section">
+        <h3>Section 6.1: Integration by Parts</h3>
+        <p>This week introduces one of the most powerful integration techniques: integration by parts. This method is essentially the reverse of the product rule for differentiation and allows us to solve integrals in the form <strong>\(\int u(x) \cdot v'(x)\,dx\)</strong>. As explained in <a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html" target="_blank">Section 6.1 of our textbook</a>, the key formula is \(\int u \, dv = uv - \int v \, du\), which transforms our original integral into a potentially simpler one.</p>
+        
+        <div class="textbook-callout">
+          Our <a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#IBP-ex" target="_blank">textbook's examples</a> demonstrate how to identify which function should be "u" and which should be "dv" - a critical decision that determines whether the technique succeeds or fails. The general rule is to choose "u" as the function that simplifies when differentiated (like logarithms, inverse trigonometric functions, or polynomials) and "dv" as the function that remains manageable when integrated.
+        </div>
+        
+        <p>We'll practice identifying integrals where integration by parts is the appropriate technique, particularly when you see products involving:</p>
+        <ul>
+          <li>Polynomials and trigonometric functions (like \(x\sin x\))</li>
+          <li>Polynomials and exponential functions (like \(x^2e^x\))</li>
+          <li>Logarithmic functions (like \(\ln x\))</li>
+          <li>Inverse trigonometric functions (like \(\arctan x\))</li>
+        </ul>
+      </div>
+      
+      <div class="section">
+        <h3>Section 6.1.1: Tabular Integration by Parts</h3>
+        <p>For integrals requiring multiple applications of integration by parts, we'll learn the tabular method (sometimes called the "DI method" or "Tabular IBP"). This technique, described in <a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#_tabular_integration_by_parts" target="_blank">this section of our textbook</a>, dramatically simplifies problems that would otherwise require several iterations of integration by parts.</p>
+        
+        <div class="example-box">
+          <p>Consider the integral \(\int x^3 e^x \,dx\), which would require multiple applications of the standard integration by parts formula. Using the tabular method, we can organize our work systematically and find the pattern of terms much more efficiently.</p>
+        </div>
+        
+        <p>The tabular method is particularly useful for integrals involving products of polynomials with exponential, sine, or cosine functions. These types of integrals appear frequently in physics and engineering applications, especially in oscillation problems and signal processing.</p>
+      </div>
+      
+      <div class="section">
+        <h3>Section 6.2: Trigonometric Integrals</h3>
+        <p>Building on our integration by parts knowledge, we'll also explore strategies for trigonometric integrals. <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html" target="_blank">As our textbook explains</a>, these integrals often require recognizing patterns and using special identities.</p>
+        
+        <p>We'll focus on integrals involving:</p>
+        <ul>
+          <li>Powers of sine and cosine, using <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sss-trig-power" target="_blank">double angle formulas and reduction formulas</a></li>
+          <li>Products of sines and cosines with different arguments, using <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#ss-trig-prod" target="_blank">product-to-sum identities</a></li>
+          <li>Integrals of the form \(\int \sin^m x \cos^n x \,dx\) with different strategies depending on whether m and n are odd or even</li>
+        </ul>
+        
+        <div class="textbook-callout">
+          For a comprehensive list of trigonometric integration strategies, refer to the <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#ss-trig-strategy" target="_blank">integration strategy section</a> of our textbook, which provides a decision flowchart for approaching these problems systematically.
+        </div>
+      </div>
+      
+      <div class="section">
+        <h3>Problem-Solving Workshop</h3>
+        <p>We'll dedicate time to a guided problem-solving workshop where we'll tackle increasingly complex integrals that combine multiple techniques. This will help you build the pattern recognition skills needed to identify which integration method to apply when faced with a new integral.</p>
+        
+        <p>The workshop will include practice with <a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#IBP-ex_multi" target="_blank">problems that combine integration by parts with other techniques</a> like substitution, partial fractions, or trigonometric identities. These multi-step problems reflect the types of challenges you'll face in real-world applications and on the upcoming exam.</p>
+      </div>
+    </div>
+
+    <!-- Important Due Dates -->
+    <div class="content-box">
+      <h2>Important Due Dates</h2>
+      <div class="due-dates">
+        <p>📚 Textbook Reading (Sections 6.1-6.2): <strong>Complete by Tuesday, Feb 25</strong></p>
+        <p>💬 Discussion Post (Integration Methods): <strong>Due Wednesday, Feb 26</strong></p>
+        <p>📝 Edfinity Homework (Integration by Parts): <strong>Due Friday, Feb 28</strong></p>
+        <p>📊 Weekly Quiz 8 (Integration Techniques): <strong>Due Sunday, Mar 1</strong></p>
+      </div>
+      
+      <div class="alert-box">
+        <h3>🔍 Study Tip</h3>
+        <p>When practicing integration by parts, always check your answer by differentiating it. If you get back the original integrand, your work is correct!</p>
+        <p>For additional practice, explore the interactive applets in the <a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#IBP-ex_interactive" target="_blank">interactive examples section</a> of our textbook.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

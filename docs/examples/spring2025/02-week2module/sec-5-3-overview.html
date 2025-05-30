@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 5.3 Reading Guide: Riemann Sums</title>
+
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--unit-color);
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 2px solid var(--accent-teal);
+      border-radius: 8px;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Section 5.3 Reading Guide: Riemann Sums</h1>
+
+    <div class="calc2-info-box">
+      <p><strong>📚 Required Reading:</strong> 
+        Please read Section 5.3 in our textbook: 
+        <a href="https://opentext.uleth.ca/apex-calculus/sec_riemann.html" style="color: var(--accent-teal);" target="_blank">
+          APEX Calculus - Riemann Sums
+        </a>
+      </p>
+      <p>
+        This section introduces a fundamental method for approximating definite integrals using rectangles, leading to the concept of Riemann sums.
+      </p>
+    </div>
+
+    <div class="video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/O-raFNmVN-k?si=NExu1Ufv5FVmhWx-"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <p>
+      In this section, we'll explore how to approximate the area under a curve using rectangles, and how these approximations lead to the exact value of a definite integral through limits.
+    </p>
+
+    <div class="calc2-definition">
+      <h3>Definition: Riemann Sum</h3>
+      <p>
+        For a function \(f(x)\) defined on a closed interval \([a,b]\), a Riemann sum is formed by:
+      </p>
+      <ul>
+        <li>Partitioning the interval into \(n\) subintervals</li>
+        <li>Creating rectangles whose heights are determined by evaluating \(f(x)\) at some point in each subinterval</li>
+        <li>Summing the areas of these rectangles: \[\sum_{i=1}^n f(x_i)\Delta x\]</li>
+      </ul>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>Key Methods for Rectangle Heights</h3>
+      <p>
+        There are three common ways to choose rectangle heights:
+      </p>
+      <ul>
+        <li><strong>Left Hand Rule:</strong> Evaluate \(f(x)\) at the left endpoint of each subinterval</li>
+        <li><strong>Right Hand Rule:</strong> Evaluate \(f(x)\) at the right endpoint of each subinterval</li>
+        <li><strong>Midpoint Rule:</strong> Evaluate \(f(x)\) at the midpoint of each subinterval</li>
+      </ul>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Computing a Riemann Sum</h3>
+      <p>
+        To approximate \(\int_0^4 x^2\,dx\) using 4 equal subintervals and the Right Hand Rule:
+      </p>
+      <p>
+        With \(\Delta x = 1\), we evaluate at \(x = 1, 2, 3, 4\):
+        \[\sum_{i=1}^4 f(i)\Delta x = (1^2 + 2^2 + 3^2 + 4^2)(1) = (1 + 4 + 9 + 16)(1) = 30\]
+      </p>
+    </div>
+
+    <div class="calc2-info-box">
+      <h3>Important Concepts</h3>
+      <ul>
+        <li>As we increase the number of rectangles (n → ∞), our approximation becomes more accurate</li>
+        <li>The limit of a Riemann sum as n → ∞ gives us the exact value of the definite integral</li>
+        <li>This process works for any continuous function and even some discontinuous functions</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

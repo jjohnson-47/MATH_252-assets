@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Approximation Using Trapezoid Rule and Simpson's Rule</title>
+
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-problem {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--accent-teal);
+    }
+
+    .calc2-step {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+
+    .calc2-table {
+      width: 100%;
+      margin: 1rem 0;
+      border-collapse: collapse;
+    }
+
+    .calc2-table th, .calc2-table td {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    .calc2-table th {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Approximation Using Trapezoid Rule and Simpson's Rule</h1>
+
+    <div class="calc2-problem">
+      <h2>Question</h2>
+      <p>
+        Use the Trapezoid Rule and Simpson's Rule with \( n = 6 \) to approximate the integral:
+      </p>
+      <p>
+        \[ \int_{1}^{4} 4 \cos(x^2) \, dx \]
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h2>Solution</h2>
+      <p>To approximate the integral using the Trapezoid Rule and Simpson's Rule, follow these steps:</p>
+
+      <h3>Step 1: Determine \(\Delta x\)</h3>
+      <p>The given interval \([a, b]\) is \([1, 4]\), and \( n = 6 \). The width of each subinterval is:</p>
+      <p>\[ \Delta x = \frac{b - a}{n} = \frac{4 - 1}{6} = 0.5 \]</p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 2: Compute the values of \( x_i \) and \( f(x_i) \)</h3>
+      <p>The points \( x_i \) and the corresponding function values \( y_i = f(x_i) = 4 \cos(x_i^2) \) are:</p>
+      <table class="calc2-table">
+        <thead>
+          <tr>
+            <th>i</th>
+            <th>\( x_i \)</th>
+            <th>\( y_i = f(x_i) = 4 \cos(x_i^2) \)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>1</td><td>2.16121</td></tr>
+          <tr><td>2</td><td>1.5</td><td>-2.51269</td></tr>
+          <tr><td>3</td><td>2</td><td>-2.61457</td></tr>
+          <tr><td>4</td><td>2.5</td><td>3.9978</td></tr>
+          <tr><td>5</td><td>3</td><td>-3.64452</td></tr>
+          <tr><td>6</td><td>3.5</td><td>3.80148</td></tr>
+          <tr><td>7</td><td>4</td><td>-3.83064</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="calc2-step">
+      <h3>a) Trapezoid Rule</h3>
+      <p>Using the Trapezoid Rule:</p>
+      <p>
+        \[ \int_{1}^{4} 4 \cos(x^2) \, dx \approx \frac{\Delta x}{2} \left[ y_1 + 2(y_2 + y_3 + y_4 + y_5 + y_6) + y_7 \right] \]
+      </p>
+      <p>Substitute the values:</p>
+      <p>
+        \[ \frac{0.5}{2} \left[2.16121 + 2(-2.51269 - 2.61457 + 3.9978 - 3.64452 + 3.80148) + (-3.83064)\right] \]
+      </p>
+      <p>Simplify:</p>
+      <p>
+        \[
+        \begin{align*}
+        &= \frac{0.5}{2} \left[2.16121 + 2(-2.51269 - 2.61457 + 3.9978 - 3.64452 + 3.80148) + (-3.83064)\right] \\
+        &= \frac{0.5}{2} \left[2.16121 + 2(-2.9725) - 3.83064\right] \\
+        &= \frac{0.5}{2} \left[2.16121 + (-5.945) - 3.83064\right] \\
+        &= \frac{0.5}{2} (-7.61443) \\
+        &= 0.25 \times (-7.61443) \\
+        &= -1.90361
+        \end{align*}
+        \]
+      </p>
+      <p><strong>Result for the Trapezoid Rule:</strong> \( \approx -1.90361 \)</p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>b) Simpson's Rule</h3>
+      <p>Using Simpson's Rule:</p>
+      <p>
+        \[ \int_{1}^{4} 4 \cos(x^2) \, dx \approx \frac{\Delta x}{3} \left[ y_1 + 4y_2 + 2y_3 + 4y_4 + 2y_5 + 4y_6 + y_7 \right] \]
+      </p>
+      <p>Substitute the values:</p>
+      <p>
+        \[ \frac{0.5}{3} \left[2.16121 + 4(-2.51269) + 2(-2.61457) + 4(3.9978) + 2(-3.64452) + 4(3.80148) + (-3.83064)\right] \]
+      </p>
+      <p>Simplify:</p>
+      <p>
+        \[
+        \begin{align*}
+        &= \frac{0.5}{3} \left[2.16121 - 10.05076 - 5.22914 + 15.9912 - 7.28904 + 15.20592 - 3.83064\right] \\
+        &= \frac{0.5}{3} (7.25875 + 15.9912 + 15.20592 -16.24894) \\
+        &= \frac{0.5}{3} (22.46587 -16.24894) \\
+        &= \frac{0.5}{3} (6.21693) \\
+        &= 0.1666667 \times 6.21693 \\
+        &= 1.03616
+        \end{align*}
+        \]
+      </p>
+      <p><strong>Result for Simpson's Rule:</strong> \( \approx 1.03616 \)</p>
+    </div>
+
+    <div class="calc2-step">
+      <p>The calculations above illustrate how tedious and error-prone manual calculations can be when using approximation methods such as the Trapezoid Rule and Simpson's Rule. This emphasizes the importance of encoding these formulas into computational tools or software to assist with complex calculations, ensuring accuracy and efficiency.</p>
+    </div>
+
+  </div>
+</body>
+</html>

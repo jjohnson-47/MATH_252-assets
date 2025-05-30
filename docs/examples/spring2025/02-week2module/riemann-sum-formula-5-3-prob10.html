@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Left Hand Rule Riemann Sum Example</title>
+
+  <!-- Include MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Retrowave/Synthwave Theme Styles -->
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+      .calc2-theorem {
+      background: rgba(77, 208, 225, 0.1);  /* Using accent-teal with low opacity */
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      border-left: 4px solid var(--accent-teal);
+    }
+    
+    .calc2-theorem h3 {
+      margin-top: 0;
+      color: var(--accent-teal);
+      border-bottom: 1px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .calc2-theorem-link {
+      display: block;
+      margin-top: 1rem;
+      color: var(--accent-teal);
+      text-decoration: underline;
+    }
+
+    .calc2-theorem ol {
+      padding-left: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .calc2-theorem li {
+      margin-bottom: 0.8rem;
+      line-height: 1.8;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-problem,
+    .calc2-solution,
+    .calc2-step {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+    
+    .calc2-problem h2,
+    .calc2-solution h2,
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--unit-color);
+    }
+
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    ul, ol {
+      margin-left: 1.5rem;
+    }
+    ul li, ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Left Hand Rule Riemann Sum Example</h1>
+
+    <div class="calc2-problem">
+      <h2>Problem Statement</h2>
+      <p>Approximate and evaluate the definite integral</p>
+      \[
+      \int_{0}^{1} \bigl(x^3 - x^2\bigr)\,dx
+      \]
+      <p>using the Left Hand Rule with \(n\) equally spaced subintervals. Then evaluate the resulting formula for \(n = 10,\; 100,\; 1000\), and finally find the limit as \(n \to \infty\) and compare it to the exact value of the integral.</p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>1. Derive the Left Riemann Sum Formula</h3>
+      <p>We start with the general expression for a Riemann sum:</p>
+      \[
+      \int_a^b f(x)\,dx \approx \sum_{i=1}^{n} f(c_i)\,\Delta x_i,
+      \]
+      <p>where \(\Delta x_i = x_i - x_{i-1}\) and \(c_i\) is a sample point in the \(i\)th subinterval. For a Left Hand Rule approximation with \(n\) subintervals on \([a,b]\), we choose \(c_i = x_{i-1}\), and each subinterval has equal width \(\Delta x = \frac{b-a}{n}\).</p>
+
+      <p>For our specific integral with \(a = 0\) and \(b = 1\):</p>
+      \[
+      \Delta x = \frac{1 - 0}{n} = \frac{1}{n}
+      \]
+      
+      <p>The partition points \(x_i\) are given by:</p>
+      \[
+      x_i = a + i\,\Delta x = \frac{i}{n}, \quad \text{for } i = 0,1,\dots,n
+      \]
+
+      <p>Our function is \(f(x) = x^3 - x^2\). The left Riemann sum \(L_n\) becomes:</p>
+      \[
+      L_n = \sum_{i=1}^{n} f\Bigl(\frac{i-1}{n}\Bigr) \Delta x 
+      = \sum_{i=1}^{n} \Bigl[\Bigl(\frac{i-1}{n}\Bigr)^3 
+      - \Bigl(\frac{i-1}{n}\Bigr)^2\Bigr]\frac{1}{n}
+      \]
+
+      <p>Re-indexing from \(i=0\) to \(i=n-1\):</p>
+      \[
+      L_n = \sum_{i=0}^{n-1} \Bigl[\Bigl(\frac{i}{n}\Bigr)^3 
+      - \Bigl(\frac{i}{n}\Bigr)^2\Bigr]\frac{1}{n}
+      \]
+    </div>
+
+<div class="calc2-theorem">
+    <h3>Theorem 5.3.7: Properties of Summations</h3>
+    <p>The following properties are essential for manipulating sums. We'll use properties 5, 6, and 7 in our solution:</p>
+    <ol>
+        <li>\(\sum_{i=1}^n c = c \cdot n\), where \(c\) is a constant</li>
+        <li>\(\sum_{i=m}^n (a_i \pm b_i) = \sum_{i=m}^n a_i \pm \sum_{i=m}^n b_i\)</li>
+        <li>\(\sum_{i=m}^n c \cdot a_i = c \cdot \sum_{i=m}^n a_i\)</li>
+        <li>\(\sum_{i=m}^j a_i + \sum_{i=j+1}^n a_i = \sum_{i=m}^n a_i\)</li>
+        <li>\(\sum_{i=1}^n i = \frac{n(n+1)}{2}\)</li>
+        <li>\(\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}\)</li>
+        <li>\(\sum_{i=1}^n i^3 = \left( \frac{n(n+1)}{2} \right)^2\)</li>
+    </ol>
+    <a href="https://opentext.uleth.ca/apex-calculus/sec_riemann.html#thm_summation" 
+       target="_blank" 
+       class="calc2-theorem-link">
+       View Theorem 5.3.7 in APEX Calculus →
+    </a>
+</div>
+  
+    <div class="calc2-step">
+      <h3>2. Simplify the Summation</h3>
+      <p>Let's separate and factor the summation:</p>
+      \[
+      L_n = \frac{1}{n^4}\sum_{i=0}^{n-1} i^3
+      - \frac{1}{n^3}\sum_{i=0}^{n-1} i^2
+      \]
+
+      <p>Using known summation formulas for \(1\) to \(n-1\):</p>
+      \[
+      \sum_{i=1}^{n-1} i^3 = \Bigl(\frac{(n-1)n}{2}\Bigr)^2,
+      \quad
+      \sum_{i=1}^{n-1} i^2 = \frac{(n-1)n(2n-1)}{6}
+      \]
+
+      <p>Substituting:</p>
+      \[
+      L_n = \frac{1}{n^4} \Bigl(\frac{(n-1)n}{2}\Bigr)^2
+      - \frac{1}{n^3} \cdot \frac{(n-1)n(2n-1)}{6}
+      \]
+    </div>
+
+    <div class="calc2-step">
+      <h3>3. Final Simplification</h3>
+      <p>After expanding and simplifying:</p>
+      \[
+      L_n = \frac{-n^2 + 1}{12n^2} = -\frac{1}{12} + \frac{1}{12n^2}
+      \]
+    </div>
+
+    <div class="calc2-step">
+      <h3>4. Evaluate at Different Values of n</h3>
+      <p>Using our formula \(L_n = -\frac{1}{12} + \frac{1}{12n^2}\):</p>
+      
+      <ul>
+        <li>For \(n = 10\):
+          \[L_{10} = -\frac{1}{12} + \frac{1}{1200} = -0.0825\]
+        </li>
+        <li>For \(n = 100\):
+          \[L_{100} = -\frac{1}{12} + \frac{1}{120000} \approx -0.083325\]
+        </li>
+        <li>For \(n = 1000\):
+          \[L_{1000} = -\frac{1}{12} + \frac{1}{12000000} \approx -0.08333325\]
+        </li>
+      </ul>
+    </div>
+
+    <div class="calc2-step">
+      <h3>5. Limit and Exact Value</h3>
+      <p>Taking the limit:</p>
+      \[
+      \lim_{n \to \infty} L_n = \lim_{n \to \infty} 
+      \Bigl(-\tfrac{1}{12} + \tfrac{1}{12n^2}\Bigr) = -\frac{1}{12}
+      \]
+
+      <p>The exact value of the integral using the Fundamental Theorem of Calculus:</p>
+      \[
+      \int_{0}^{1} \bigl(x^3 - x^2\bigr)\,dx 
+      = \left[\frac{x^4}{4} - \frac{x^3}{3}\right]_0^1
+      = \tfrac{1}{4} - \tfrac{1}{3} = -\frac{1}{12}
+      \]
+    </div>
+
+    <div class="calc2-solution">
+      <h2>Conclusion</h2>
+      <ul>
+        <li>The Left Hand Rule formula is:
+          \[
+          L_n = \sum_{i=0}^{n-1}
+          \Bigl[\Bigl(\tfrac{i}{n}\Bigr)^3 - \Bigl(\tfrac{i}{n}\Bigr)^2\Bigr]\frac{1}{n}
+          = -\frac{1}{12} + \frac{1}{12n^2}
+          \]
+        </li>
+        <li>As we increase \(n\), our approximations get closer to the exact value:</li>
+        <li>The limit as \(n \to \infty\) equals the exact value: \(-\frac{1}{12}\)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

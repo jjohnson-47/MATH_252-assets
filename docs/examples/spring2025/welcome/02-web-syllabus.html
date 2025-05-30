@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>MATH A252 Calculus 2 Syllabus</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+            --info-color: #2196f3;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--primary-purple), var(--primary-dark-blue));
+            color: var(--neutral-white);
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .calc2-section {
+            background: rgba(26, 35, 126, 0.9);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid var(--neutral-white);
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-subtitle {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-teal);
+        }
+
+        .calc2-info-box {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid var(--info-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .calc2-emphasis {
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+        
+        .calc2-link {
+            color: var(--accent-teal);
+            text-decoration: underline;
+            transition: color 0.3s ease;
+        }
+        
+        .calc2-link:hover, 
+        .calc2-link:focus {
+            color: var(--neutral-white);
+            outline: 2px solid var(--focus-outline);
+            outline-offset: 2px;
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calc2-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calc2-list li::before {
+            content: "•";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid var(--accent-teal);
+            color: var(--neutral-white);
+        }
+
+        th {
+            background: rgba(77, 208, 225, 0.2);
+        }
+
+        tr:last-child {
+            border-top: 2px solid var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .grade-scale {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grade-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--neutral-white);
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+
+            .calc2-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <div class="calc2-info-box">
+            This is a web-friendly version of the syllabus highlighting key information. For the complete syllabus with all policies and details, please refer to the official course documents provided on Blackboard.
+        </div>
+
+        <h1 class="calc2-title">MATH A252 - Calculus 2 - CRN 34388</h1>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">General Course Information</h2>
+            <p>Contact your instructor if you have any questions.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Instructor Information</h2>
+            <div class="calc2-grid">
+                <div>
+                    <p><span class="calc2-emphasis">Instructor:</span> Dr. Jeffrey Johnson</p>
+                    <p><span class="calc2-emphasis">Office Location:</span> KPC Kachemak Bay Campus, Bayview Hall, Office #126</p>
+                    <p><span class="calc2-emphasis">Phone:</span> (907) 235-1603</p>
+                    <p><span class="calc2-emphasis">Email:</span> jjohnson47@alaska.edu</p>
+                </div>
+                <div>
+                    <p><span class="calc2-emphasis">Meeting Time:</span> There are no regular course meeting times. This is an asynchronous online course. We can meet at a scheduled time by request.</p>
+                    <p><span class="calc2-emphasis">Office Hours:</span> Anytime by appointment. Will be determined within the first two weeks of class.</p>
+                </div>
+            </div>
+            <p>Class cancellation postings for Kachemak Bay Campus are available at (907) 235-7743, and by Facebook posts and public radio. See also the KPC Website (<a href="http://www.kpc.alaska.edu" class="calc2-link">www.kpc.alaska.edu</a>).</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Course Description</h2>
+            <p>Further topics in single-variable calculus, including techniques of integration, applications of integration, convergence of sequences and series, parameterized curves, and polar coordinates.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Course Prerequisites</h2>
+            <p><span class="calc2-emphasis">Prerequisite:</span> MATH A251 with a minimum grade of C.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Goals and Student Learning Outcomes</h2>
+            <ul class="calc2-list">
+                <li>Compute definite and indefinite integrals using a variety of techniques.</li>
+                <li>Apply integration in modeling settings, drawn from mathematics and the natural and social sciences.</li>
+                <li>Demonstrate understanding of infinite series, including Taylor series by determining convergence.</li>
+                <li>Demonstrate understanding of and use of parameterizations of curves, including in polar coordinates.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Course Outline</h2>
+            <p>This outline details the topics covered in each unit of the course.</p>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Unit 1: Integration (Chapter 5)</span>
+                    <ul class="calc2-list">
+                        <li>Antiderivatives and indefinite integrals</li>
+                        <li>Definite integrals</li>
+                        <li>Riemann sums</li>
+                        <li>Fundamental Theorem of Calculus</li>
+                        <li>Numerical integration</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Unit 2: Techniques of Antidifferentiation (Chapter 6)</span>
+                    <ul class="calc2-list">
+                        <li>Substitution</li>
+                        <li>Integration by parts</li>
+                        <li>Trigonometric integrals</li>
+                        <li>Trigonometric substitution</li>
+                        <li>Partial fraction decomposition</li>
+                        <li>Hyperbolic functions</li>
+                        <li>Improper integrals</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Unit 3: Applications of Integration (Chapter 7)</span>
+                    <ul class="calc2-list">
+                        <li>Area between curves</li>
+                        <li>Volume: disk and washer methods</li>
+                        <li>Volume: shell method</li>
+                        <li>Arclength and surface area</li>
+                        <li>Work</li>
+                        <li>Fluid forces</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Unit 4: Sequences and Series (Chapter 9)</span>
+                    <ul class="calc2-list">
+                        <li>Sequences</li>
+                        <li>Infinite series</li>
+                        <li>Integral and comparison tests</li>
+                        <li>Ratio and root tests</li>
+                        <li>Alternating series and absolute convergence</li>
+                        <li>Power series</li>
+                        <li>Taylor polynomials</li>
+                        <li>Taylor series</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Unit 5: Curves in the Plane (Chapter 10)</span>
+                    <ul class="calc2-list">
+                        <li>Conic sections</li>
+                        <li>Parametric equations</li>
+                        <li>Introduction to polar coordinates</li>
+                        <li>Polar functions</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Course Requirements</h2>
+            <p>Reading assignments, written solutions, discussion prompts, and survey responses are required in the course.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Text and Materials</h2>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Required Textbook:</span> APEX Calculus by Gregory Hartman, et al.<br>
+                The course will reference Edition 5 available as an HTML webpage. Link to APEX Calculus: <a href="https://opentext.uleth.ca/apex-calculus/apex-calculus.html" target="_blank" class="calc2-link">https://opentext.uleth.ca/apex-calculus/apex-calculus.html</a>. Other editions (and texts) are acceptable but be aware of differing section numbers and arrangements of content.</li>
+                <li><span class="calc2-emphasis">Optional Print Copy:</span> Printed copy of the text is available via online retailers.</li>
+                <li><span class="calc2-emphasis">Other Resources:</span> Readings, recorded video lessons, tutorials, references to other Calculus books and more will be available on the course Blackboard site.</li>
+                <li><span class="calc2-emphasis">Calculators:</span> Access to a standard graphing calculator is required for homework, exams, and class activities. The Desmos online scientific calculator (<a href="https://www.desmos.com/scientific" class="calc2-link">www.desmos.com/scientific</a>) and Desmos online graphing utility (<a href="https://www.desmos.com/calculator" class="calc2-link">www.desmos.com/calculator</a>) will be used for instruction and can be used instead of a physical calculator.</li>
+                <li><span class="calc2-emphasis">Required Technology:</span>
+                    <ul class="calc2-list">
+                        <li>RPNow remote proctoring software may be required for the final exam
+                            <ul class="calc2-list">
+                                <li>Requires a computer with iOS or Windows</li>
+                                <li>Not supported on Chromebook</li>
+                            </ul>
+                        </li>
+                        <li>Camera for uploading solutions to written assignments</li>
+                        <li>We will use Blackboard Discussion Board for course communication.</li>
+                        <li>Web-based software for activities:
+                            <ul class="calc2-list">
+                                <li>Google and Microsoft Services</li>
+                                <li>Desmos</li>
+                                <li>Blackboard</li>
+                            </ul>
+                        </li>
+                        <li>All course information is available on Blackboard.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Class Participation and Attendance</h2>
+            <p>Full participation is required in this course. Please contact your instructor ahead of time if you cannot respond to instructor questions or participate for any reason. Nonparticipation will result in a loss of points on discussion activities.</p>
+            <p>Participation in the course includes:</p>
+            <ul class="calc2-list">
+                <li>Participating in feedback assignments, discussions, and group activities</li>
+                <li>Completing all assignments and activities in the course on time</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Instructor Response Time</h2>
+            <p><span class="calc2-emphasis">Feedback and Communication:</span><br>
+            I am committed to providing you with timely grades and feedback on graded work for this class. Feedback to your emails and discussion posts will be given within one day during the week and by Monday if sent over the weekend. Graded assignments will be available to you within two weeks of the due date.</p>
+            <p>If you don't hear from me within this timeframe, try emailing me again. Please be professional in your email correspondence. Ensure you include your full name, the course, and an appropriate subject line. My office phone number is available on the course syllabus and on Blackboard; if I don't answer, please leave a voice message.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Academic Honesty</h2>
+            <p>While working together is encouraged in this course, all submitted assignments must be done with your own work. Copying, cheating, or plagiarizing work on an assignment will result in a zero for a first offense. A second offense or cheating on an exam will result in a grade of F for the course.</p>
+            <p>For more information on policies regarding academic honesty, see the KPC Support & Policy Guide linked at the end of this syllabus.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Grading</h2>
+            <p><span class="calc2-emphasis">Grade Scale (Total 1000 points)</span></p>
+            <div class="grade-scale">
+                <div class="grade-item">A: 90-100% (900-1000 points)</div>
+                <div class="grade-item">B: 80-89% (800-899 points)</div>
+                <div class="grade-item">C: 70-79% (700-799 points)</div>
+                <div class="grade-item">D: 60-69% (600-699 points)</div>
+                <div class="grade-item">F: Below 60% (0-599 points)</div>
+            </div>
+
+            <h3 class="calc2-subtitle">Grade Components</h3>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Percentage</th>
+                    <th>Points</th>
+                </tr>
+                <tr>
+                    <td>Discussion and Participation</td>
+                    <td>5%</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Weekly Quizzes</td>
+                    <td>15%</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Edfinity Online Homework</td>
+                    <td>25%</td>
+                    <td>250</td>
+                </tr>
+                <tr>
+                    <td>Written Homework</td>
+                    <td>15%</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Chapter Quizzes</td>
+                    <td>10%</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Midterm Exam</td>
+                    <td>15%</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Final Exam</td>
+                    <td>15%</td>
+                    <td>150</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>100%</td>
+                    <td>1000</td>
+                </tr>
+            </table>
+
+            <div class="calc2-info-box">
+                <p>Note: Stay on top of the schedule and manage your time effectively. Regular participation and timely submission of assignments are essential for success in this course. Utilize available resources such as office hours and discussion boards if you need assistance.</p>
+            </div>
+
+            <p><span class="calc2-emphasis">Grade Components Details:</span></p>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Discussion and Participation: 5% (50 points)</span>
+                    <ul class="calc2-list">
+                        <li>Weekly participation in discussion boards or class activities.</li>
+                        <li>Engage meaningfully with peers through questions and responses.</li>
+                        <li>Approximately 3-4 points per week over the semester.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Weekly Quizzes: 15% (150 points)</span>
+                    <ul class="calc2-list">
+                        <li>Multiple-choice quizzes covering weekly topics.</li>
+                        <li>Due every Wednesday by 11:59 PM.</li>
+                        <li>3 attempts allowed; best score counts.</li>
+                        <li>15 quizzes, 10 points per quiz.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Edfinity Online Homework: 25% (250 points)</span>
+                    <ul class="calc2-list">
+                        <li>Weekly problem sets assigned through Edfinity.</li>
+                        <li>Unlimited attempts; practice until mastery.</li>
+                        <li>Due every Friday by 11:59 PM.</li>
+                        <li>15 assignments, approximately 17 points per assignment.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Written Homework: 15% (150 points)</span>
+                    <ul class="calc2-list">
+                        <li>In-depth problems requiring detailed solutions and reasoning.</li>
+                        <li>9 assignments, due on assigned Fridays by 11:59 PM.</li>
+                        <li>Approximately 17 points per assignment.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Chapter Quizzes: 10% (100 points)</span>
+                    <ul class="calc2-list">
+                        <li>Five quizzes at the end of each main chapter (Chapters 5, 6, 7, 9, and 10).</li>
+                        <li>Multiple-choice format assessing cumulative understanding.</li>
+                        <li>Due on the Monday following chapter completion.</li>
+                        <li>20 points per quiz.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Midterm Exam: 15% (150 points)</span>
+                    <ul class="calc2-list">
+                        <li>Comprehensive exam covering Units 1-3 (Chapters 5-7).</li>
+                        <li>Due Friday, March 7 by 11:59 PM.</li>
+                        <li>Online, not proctored.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Final Exam: 15% (150 points)</span>
+                    <ul class="calc2-list">
+                        <li>Comprehensive exam covering the entire course.</li>
+                        <li>Due Friday, May 9 by 11:59 PM.</li>
+                        <li>Proctored exam.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Total Points: 1000</span></li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Audit Policy</h2>
+            <p>Please contact me if you are interested in auditing the course.</p>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">KPC Support &amp; Policy Guide</h2>
+            <p>It is important for all KPC students to review the KPC Support &amp; Policy Guide which contains important information about Academic Services available to you as a KPC student, KPC Policies and Processes, and Campus Safety. See the <a href="https://www.kpc.alaska.edu/" class="calc2-link">KPC Support &amp; Policy Guide</a>.</p>
+        </div>
+    </div>
+</body>
+</html>

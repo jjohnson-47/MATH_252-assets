@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Course Schedule - MATH A252 Calculus 2</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+            --info-color: #2196f3;
+            --unit-color: #ff9800;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--primary-purple), var(--primary-dark-blue));
+            color: var(--neutral-white);
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-info-box {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid var(--info-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-unit {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--unit-color);
+            padding: 1rem;
+            margin: 2rem 0 1rem 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .calc2-week {
+            background: rgba(26, 35, 126, 0.9);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid var(--neutral-white);
+        }
+
+        .calc2-week-header {
+            color: var(--accent-teal);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-section {
+            margin: 1rem 0;
+        }
+
+        .calc2-section-title {
+            color: var(--accent-teal);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0 0 1rem 0;
+        }
+
+        .calc2-list li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .calc2-list li::before {
+            content: "•";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .calc2-important-date {
+            color: var(--unit-color);
+            font-weight: bold;
+        }
+
+        .calc2-emphasis {
+            color: var(--accent-teal);
+            font-weight: bold;
+        }
+
+        .calc2-special-week {
+            background: rgba(33, 150, 243, 0.1);
+            text-align: center;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+            
+            .calc2-week {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">Course Schedule - Spring 2025</h1>
+
+        <div class="calc2-info-box">
+            <strong>Weekly Assignment Overview:</strong>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Discussion and Participation:</span> Ongoing throughout the week.</li>
+                <li><span class="calc2-emphasis">Weekly Quizzes:</span> Due <span class="calc2-emphasis">Wednesdays</span> by 11:59 PM.
+                    <ul class="calc2-list">
+                        <li><span class="calc2-emphasis">Multiple-choice quizzes</span> covering weekly topics.</li>
+                        <li><span class="calc2-emphasis">3 attempts allowed</span>; best score counts.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Edfinity Online Homework:</span> Due <span class="calc2-emphasis">Fridays</span> by 11:59 PM.
+                    <ul class="calc2-list">
+                        <li><span class="calc2-emphasis">Unlimited attempts</span>; practice until mastery.</li>
+                    </ul>
+                </li>
+                <li><span class="calc2-emphasis">Written Homework:</span> Due <span class="calc2-emphasis">Fridays</span> by 11:59 PM on assigned weeks.</li>
+                <li><span class="calc2-emphasis">Chapter Quizzes:</span> Due <span class="calc2-emphasis">Mondays</span> by 11:59 PM after chapter completion.</li>
+                <li><span class="calc2-emphasis">Exams:</span> Midterm and Final Exam due dates specified below.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-unit">Unit 1: Integration Review</div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 1 (January 13-17)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 5.1</span>: Antiderivatives and Indefinite Integration</li>
+                    <li><span class="calc2-emphasis">Section 5.2</span>: The Definite Integral</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span>: Engage in weekly discussions.</li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 1</span> (Covers Sections 5.1-5.2): Due <span class="calc2-important-date">Wednesday, Jan 15</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 1</span> (Sections 5.1-5.2): Due <span class="calc2-important-date">Friday, Jan 17</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 1</span>: Assigned <span class="calc2-important-date">Friday, Jan 17</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 2 (January 20-24)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 5.3</span>: Riemann Sums</li>
+                    <li><span class="calc2-emphasis">Section 5.4</span>: The Fundamental Theorem of Calculus</li>
+                    <li><span class="calc2-emphasis">Section 5.5</span>: Numerical Integration</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 2</span> (Covers Sections 5.3-5.5): Due <span class="calc2-important-date">Wednesday, Jan 22</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 2</span> (Sections 5.3-5.5): Due <span class="calc2-important-date">Friday, Jan 24</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 1</span>: Due <span class="calc2-important-date">Friday, Jan 24</span></li>
+                    <li><span class="calc2-emphasis">Chapter 5 Quiz</span>: Due <span class="calc2-important-date">Monday, Jan 27</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-unit">Unit 2: Techniques of Integration</div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 3 (January 27-31)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 6.1</span>: Substitution</li>
+                    <li><span class="calc2-emphasis">Section 6.2</span>: Integration by Parts</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 3</span> (Covers Sections 6.1-6.2): Due <span class="calc2-important-date">Wednesday, Jan 29</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 3</span> (Sections 6.1-6.2): Due <span class="calc2-important-date">Friday, Jan 31</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 2</span>: Assigned <span class="calc2-important-date">Friday, Jan 31</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 4 (February 3-7)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 6.3</span>: Trigonometric Integrals</li>
+                    <li><span class="calc2-emphasis">Section 6.4</span>: Trigonometric Substitution</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 4</span> (Covers Sections 6.3-6.4): Due <span class="calc2-important-date">Wednesday, Feb 5</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 4</span> (Sections 6.3-6.4): Due <span class="calc2-important-date">Friday, Feb 7</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 2</span>: Due <span class="calc2-important-date">Friday, Feb 7</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 3</span>: Assigned <span class="calc2-important-date">Friday, Feb 7</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 5 (February 10-14)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 6.5</span>: Partial Fraction Decomposition</li>
+                    <li><span class="calc2-emphasis">Section 6.6</span>: Hyperbolic Functions</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 5</span> (Covers Sections 6.5-6.6): Due <span class="calc2-important-date">Wednesday, Feb 12</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 5</span> (Sections 6.5-6.6): Due <span class="calc2-important-date">Friday, Feb 14</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 3</span>: Due <span class="calc2-important-date">Friday, Feb 14</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 4</span>: Assigned <span class="calc2-important-date">Friday, Feb 14</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 6 (February 17-21)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 6.7</span>: L’Hospital’s Rule (Review)</li>
+                    <li><span class="calc2-emphasis">Section 6.8</span>: Improper Integration</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 6</span> (Covers Sections 6.7-6.8): Due <span class="calc2-important-date">Wednesday, Feb 19</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 6</span> (Sections 6.7-6.8): Due <span class="calc2-important-date">Friday, Feb 21</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 4</span>: Due <span class="calc2-important-date">Friday, Feb 21</span></li>
+                    <li><span class="calc2-emphasis">Chapter 6 Quiz</span>: Due <span class="calc2-important-date">Monday, Feb 24</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-unit">Unit 3: Applications of Integration</div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 7 (February 24-28)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 7.1</span>: Area Between Curves</li>
+                    <li><span class="calc2-emphasis">Section 7.2</span>: Volume by Cross-Sectional Area</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 7</span> (Covers Sections 7.1-7.2): Due <span class="calc2-important-date">Wednesday, Feb 26</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 7</span> (Sections 7.1-7.2): Due <span class="calc2-important-date">Friday, Feb 28</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 5</span>: Assigned <span class="calc2-important-date">Friday, Feb 28</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 8 (March 3-7)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 7.3</span>: The Shell Method</li>
+                    <li><span class="calc2-emphasis">Section 7.4</span>: Arc Length and Surface Area</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 8</span> (Covers Sections 7.3-7.4): Due <span class="calc2-important-date">Wednesday, Mar 5</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 8</span> (Sections 7.3-7.4): Due <span class="calc2-important-date">Friday, Mar 7</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 5</span>: Due <span class="calc2-important-date">Friday, Mar 7</span></li>
+                    <li><span class="calc2-emphasis">Midterm Exam</span>: Due <span class="calc2-important-date">Friday, Mar 7</span></li>
+                    <li><span class="calc2-emphasis">Chapter 7 Quiz</span>: Due <span class="calc2-important-date">Monday, Mar 10</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-special-week">
+            <div class="calc2-week-header">Spring Break (March 10-14)</div>
+            <div>No Classes</div>
+        </div>
+
+        <div class="calc2-unit">Unit 4: Sequences and Series</div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 9 (March 17-21)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 9.1</span>: Sequences</li>
+                    <li><span class="calc2-emphasis">Section 9.2</span>: Infinite Series</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 9</span> (Covers Sections 9.1-9.2): Due <span class="calc2-important-date">Wednesday, Mar 19</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 9</span> (Sections 9.1-9.2): Due <span class="calc2-important-date">Friday, Mar 21</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 6</span>: Assigned <span class="calc2-important-date">Friday, Mar 21</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 10 (March 24-28)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 9.3</span>: Integral and Comparison Tests</li>
+                    <li><span class="calc2-emphasis">Section 9.4</span>: Ratio and Root Tests</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 10</span> (Covers Sections 9.3-9.4): Due <span class="calc2-important-date">Wednesday, Mar 26</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 10</span> (Sections 9.3-9.4): Due <span class="calc2-important-date">Friday, Mar 28</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 6</span>: Due <span class="calc2-important-date">Friday, Mar 28</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 7</span>: Assigned <span class="calc2-important-date">Friday, Mar 28</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 11 (March 31-April 4)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 9.5</span>: Alternating Series</li>
+                    <li><span class="calc2-emphasis">Section 9.6</span>: Absolute Convergence and Power Series</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 11</span> (Covers Sections 9.5-9.6): Due <span class="calc2-important-date">Wednesday, Apr 2</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 11</span> (Sections 9.5-9.6): Due <span class="calc2-important-date">Friday, Apr 4</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 7</span>: Due <span class="calc2-important-date">Friday, Apr 4</span></li>
+                    <li><span class="calc2-emphasis">Chapter 9 Quiz</span>: Due <span class="calc2-important-date">Monday, Apr 7</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 12 (April 7-11)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 9.7</span>: Taylor Polynomials</li>
+                    <li><span class="calc2-emphasis">Section 9.8</span>: Taylor Series</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 12</span> (Covers Sections 9.7-9.8): Due <span class="calc2-important-date">Wednesday, Apr 9</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 12</span> (Sections 9.7-9.8): Due <span class="calc2-important-date">Friday, Apr 11</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 8</span>: Assigned <span class="calc2-important-date">Friday, Apr 11</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-unit">Unit 5: Parametric and Polar Curves</div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 13 (April 14-18)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 10.1</span>: Conic Sections</li>
+                    <li><span class="calc2-emphasis">Section 10.2</span>: Parametric Equations</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 13</span> (Covers Sections 10.1-10.2): Due <span class="calc2-important-date">Wednesday, Apr 16</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 13</span> (Sections 10.1-10.2): Due <span class="calc2-important-date">Friday, Apr 18</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 8</span>: Due <span class="calc2-important-date">Friday, Apr 18</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 9</span>: Assigned <span class="calc2-important-date">Friday, Apr 18</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 14 (April 21-25)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 10.3</span>: Calculus with Parametric Equations</li>
+                    <li><span class="calc2-emphasis">Section 10.4</span>: Introduction to Polar Coordinates</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 14</span> (Covers Sections 10.3-10.4): Due <span class="calc2-important-date">Wednesday, Apr 23</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 14</span> (Sections 10.3-10.4): Due <span class="calc2-important-date">Friday, Apr 25</span></li>
+                    <li><span class="calc2-emphasis">Written Homework 9</span>: Due <span class="calc2-important-date">Friday, Apr 25</span></li>
+                    <li><span class="calc2-emphasis">Chapter 10 Quiz</span>: Due <span class="calc2-important-date">Monday, Apr 28</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-week">
+            <div class="calc2-week-header">Week 15 (April 28-May 2)</div>
+            <div class="calc2-section">
+                <div class="calc2-section-title">Topics:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Section 10.5</span>: Calculus with Polar Functions</li>
+                    <li>Course Review and Final Exam Preparation</li>
+                </ul>
+                <div class="calc2-section-title">Assignments:</div>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Discussion Participation</span></li>
+                    <li><span class="calc2-emphasis">Weekly Quiz 15</span> (Covers Section 10.5): Due <span class="calc2-important-date">Wednesday, Apr 30</span></li>
+                    <li><span class="calc2-emphasis">Edfinity Homework 15</span> (Section 10.5 and Review Problems): Due <span class="calc2-important-date">Friday, May 2</span></li>
+                    <li><span class="calc2-emphasis">Final Exam Review Materials</span>: Provided throughout the week</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="calc2-special-week">
+            <div class="calc2-week-header">Finals Week (May 5-9)</div>
+            <div><span class="calc2-emphasis">Final Exam</span>: Due <span class="calc2-important-date">Friday, May 9</span> by 11:59 PM</div>
+        </div>
+    </div>
+</body>
+</html>

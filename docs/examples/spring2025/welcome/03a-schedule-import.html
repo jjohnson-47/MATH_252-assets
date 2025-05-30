@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Course Calendar Import Guide</title>
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --info-color: #2196f3;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .step {
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">📅 Course Calendar Import Guide</h1>
+    
+    <p>The attached .ics file contains all important course dates including assignment due dates, exams, and holidays. Import this calendar to keep track of all course deadlines in your preferred calendar app.</p>
+
+    <div class="calc2-info-box">
+      <h2 style="color: var(--accent-teal); margin-top: 0;">Quick Import Steps:</h2>
+      <div class="step">
+        <strong>1. Save the File:</strong> Download and save the .ics file to your computer
+      </div>
+      <div class="step">
+        <strong>2. Import to Your Calendar:</strong>
+        <ul>
+          <li>Google Calendar: Click + next to "Other calendars" → Import</li>
+          <li>Outlook: File → Open & Export → Import/Export</li>
+          <li>Apple Calendar: File → Import</li>
+        </ul>
+      </div>
+    </div>
+
+    <p><strong>Note:</strong> After importing, you can set up your own reminders for due dates. All times default to 11:59 PM in your local time zone.</p>
+  </div>
+</body>
+</html>

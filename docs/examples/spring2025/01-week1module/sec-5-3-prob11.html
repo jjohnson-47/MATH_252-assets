@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Riemann Sum Using the Midpoint Rule</title>
+
+  <!-- Include MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-problem,
+    .calc2-solution,
+    .calc2-step {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+
+    .calc2-problem h2,
+    .calc2-solution h2,
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--unit-color);
+    }
+
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    .embed-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 2px solid var(--accent-teal);
+      border-radius: 8px;
+    }
+
+    .embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="calc2-container">
+  <h1 class="calc2-title">Riemann Sum Using the Midpoint Rule</h1>
+
+  <div class="calc2-problem">
+    <h2>Problem</h2>
+    <p>Find the formula, in terms of \(n\), for the \(n\)-th Riemann sum using the midpoint rule for the integral:</p>
+    \[
+    \int_{-4}^{3} (3x - 6) \, dx
+    \]
+  </div>
+
+  <div class="calc2-solution">
+    <h2>Solution</h2>
+
+    <div class="calc2-step">
+      <h3>Step 1: Determine the Interval and Subinterval Width</h3>
+      <p>The given interval \([a, b]\) is \([-4, 3]\), which has a length of:</p>
+      \[
+      b - a = 3 - (-4) = 7
+      \]
+      <p>Therefore, the length of each subinterval is:</p>
+      \[
+      \Delta x = \frac{b - a}{n} = \frac{7}{n}
+      \]
+      <p>The interval \([-4, 3]\) is divided into \(n\) subintervals of equal width \(\Delta x\).</p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 2: Determine the Midpoints</h3>
+      <p>The endpoints of each subinterval are \(x_i\). We have \(x_0 = -4\) and \(x_n = 3\).</p>
+      <p>For each subinterval, the \(i\)-th endpoint is given by:</p>
+      \[
+      x_i = -4 + i \Delta x = -4 + \frac{7i}{n}
+      \]
+      <p>Therefore, the midpoint \(\overline{x}_i\) of each subinterval \([x_i, x_{i+1}]\) is:</p>
+      \[
+      \overline{x}_i = \frac{x_i + x_{i+1}}{2} = \frac{1}{2} \left( -4 + \frac{7i}{n} + -4 + \frac{7(i+1)}{n} \right) = -4 + \frac{7i}{n} + \frac{7}{2n}
+      \]
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 3: Set Up the Riemann Sum</h3>
+      <p>Using the midpoint rule, the Riemann sum is:</p>
+      \[
+      \sum_{i=0}^{n-1} f(\overline{x}_i) \Delta x
+      \]
+      <p>Substituting \(f(x) = 3x - 6\) and \(\overline{x}_i = -4 + \frac{7i}{n} + \frac{7}{2n}\):</p>
+      \begin{align*}
+         \sum_{i = 0}^{n-1} \left[ 3 \left( -4 + \frac{7i}{n} + \frac{7}{2n} \right) - 6 \right] \cdot \frac{7}{n} 
+         & = \sum_{i = 0}^{n-1} \left[ -12 + \frac{21i}{n} + \frac{21}{2n} - 6 \right] \cdot \frac{7}{n} \\
+         & = \frac{7}{n} \sum_{i = 0}^{n-1} \left( -18 + \frac{21i}{n} + \frac{21}{2n} \right)
+      \end{align*}
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 4: Simplify the Sum</h3>
+      <p>Split the sum into individual parts:</p>
+      \[
+      \frac{7}{n} \left( \sum_{i=0}^{n-1} (-18) + \sum_{i=0}^{n-1} \frac{21i}{n} + \sum_{i=0}^{n-1} \frac{21}{2n} \right)
+      \]
+      <p>Using the formula for the sum of the first \(n\) integers:</p>
+      \[
+      \sum_{i=0}^{n-1} i = \frac{(n-1)n}{2}
+      \]
+      <p>We get:</p>
+      \[
+      \frac{7}{n} \left( -18n + \frac{21}{n} \cdot \frac{(n-1)n}{2} + \frac{21}{2n} \cdot n \right)
+      \]
+      <p>Simplifying further:</p>
+      \begin{align*}
+      -18n & + \frac{21}{2n} \cdot (n^2 - n) + \frac{21}{2} \\
+      -18n & + \frac{21}{2}(n - 1) + \frac{21}{2} \\
+      & = -18n + \frac{21}{2n} \left( n(n-1) + \frac{21}{2} \cdot n \right)
+      \end{align*}
+    </div>
+
+    <div class="calc2-step">
+      <h3>Final Result</h3>
+      <p>The final Riemann sum simplifies to:</p>
+      \begin{align*}
+      \frac{7}{n} \left( -18n + \frac{21}{2}(n-1) + 10.5 \right) 
+      & = \frac{7}{n} \left( -18n + \frac{21}{2}n \right) \\
+      & = 7 \left( -18 + \frac{21}{2} - \frac{21}{2n} \right) \\
+      & = 7 \left( -18 + 10.5 \right) \\
+      & = -52.5
+      \end{align*}
+      <p>Thus, the \(n\)-th Riemann sum using the midpoint rule for the integral is \(-52.5\), regardless of the value of \(n\).</p>
+    </div>
+  </div>
+
+  <div class="calc2-info-box">
+    <h3>Verify Your Result Using Desmos</h3>
+    <p>You can verify this result using the Riemann sum visualization tool in Desmos:</p>
+    <ol>
+      <li>Enter the function \(f(x) = 3x - 6\)</li>
+      <li>Set the lower bound to -4</li>
+      <li>Set the upper bound to 3</li>
+      <li>Adjust the number of rectangles (n)</li>
+      <li>Select "midpoint" as the approximation method</li>
+    </ol>
+  </div>
+
+  <div class="embed-container">
+    <iframe src="https://www.desmos.com/calculator/7gwh01ehwh" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div class="calc2-info-box">
+    <h3>Key Observations</h3>
+    <ul>
+      <li>The Riemann sum using the midpoint rule gives us exactly \(-52.5\) for any value of \(n\).</li>
+      <li>This suggests that the midpoint rule gives us the exact value of the integral in this case, which is possible because we're integrating a linear function.</li>
+      <li>You can verify this by comparing different values of \(n\) in the Desmos calculator - the sum remains constant!</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
