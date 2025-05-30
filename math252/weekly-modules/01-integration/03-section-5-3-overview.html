@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 5.3: Riemann Sums</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Different colored borders for different box types */
+    .calc2-definition {
+      border-left-color: var(--calc2-primary-purple);
+    }
+
+    .calc2-theorem {
+      border-left-color: var(--calc2-accent-green);
+    }
+
+    .calc2-example {
+      border-left-color: var(--calc2-accent-teal);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Video container for responsive embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Figure styling */
+    .calc2-figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .calc2-figure img {
+      max-width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-figure figcaption {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #666;
+    }
+
+    /* Table styling */
+    .calc2-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .calc2-table th, 
+    .calc2-table td {
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+
+    .calc2-table th {
+      background-color: rgba(81, 45, 168, 0.1);
+      color: var(--calc2-primary-dark-blue);
+      font-weight: bold;
+    }
+
+    .calc2-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Section 5.3: Riemann Sums</h1>
+
+    <div class="calc2-reading-box">
+      <p><strong>📚 Required Reading:</strong> <a href="https://opentext.uleth.ca/apex-calculus/sec_riemann.html" target="_blank">APEX Calculus - Section 5.3</a></p>
+      <p>This section introduces Riemann sums, a fundamental technique for approximating definite integrals using rectangles. Understanding this concept helps reveal how calculus connects to the idea of "finding area under a curve."</p>
+    </div>
+
+    <!-- Overview Video -->
+    <div class="calc2-video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/O-raFNmVN-k?si=NExu1Ufv5FVmhWx-"
+        title="YouTube video player for Riemann Sums" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2 class="calc2-subtitle">The Problem of Area</h2>
+    
+    <p>
+      In the previous sections, we defined the definite integral and explained its interpretation as the area under a curve. But this raises an important question: <em>How do we actually calculate this area?</em> For simple shapes like rectangles and triangles, the formulas are well known. But for the area under a general curve, we need a more sophisticated approach.
+    </p>
+    
+    <p>
+      The key insight is to approximate the area using shapes we understand—specifically rectangles. By using more and more rectangles, we can get better and better approximations, eventually leading to the exact area as we take a limit. This approach is known as a <strong>Riemann sum</strong>, named after the mathematician Bernhard Riemann.
+    </p>
+
+    <div class="calc2-definition">
+      <h3>Definition: Riemann Sum</h3>
+      <p>
+        Let \(f(x)\) be a function defined on a closed interval \([a,b]\). A <strong>Riemann sum</strong> for \(f\) on \([a,b]\) is constructed as follows:
+      </p>
+      <ol>
+        <li>Divide the interval \([a,b]\) into \(n\) subintervals, each of width \(\Delta x = \frac{b-a}{n}\)</li>
+        <li>For each subinterval, choose a sample point \(x_i^*\) within that subinterval</li>
+        <li>Form the sum \(\sum_{i=1}^{n} f(x_i^*)\Delta x\), which represents the sum of the areas of rectangles with:
+          <ul>
+            <li>Width = \(\Delta x\)</li>
+            <li>Height = \(f(x_i^*)\)</li>
+          </ul>
+        </li>
+      </ol>
+      <p>
+        As \(n\) approaches infinity, the Riemann sum approaches the definite integral:
+      </p>
+      <div class="calc2-equation">
+        \[
+          \int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\Delta x
+        \]
+      </div>
+    </div>
+
+    <h2 class="calc2-subtitle">Methods for Choosing Sample Points</h2>
+    
+    <p>
+      There are three common strategies for choosing the sample points in each subinterval, each leading to different approximation methods:
+    </p>
+
+    <div class="calc2-theorem">
+      <h3>Common Riemann Sum Methods</h3>
+      
+      <div class="calc2-table-responsive">
+        <table class="calc2-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Sample Point Selection</th>
+              <th>Formula</th>
+              <th>Visual Representation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Left Riemann Sum</strong></td>
+              <td>Left endpoint of each subinterval</td>
+              <td>\(\sum_{i=1}^{n} f(a + (i-1)\Delta x)\Delta x\)</td>
+              <td>Rectangles whose left sides touch the curve</td>
+            </tr>
+            <tr>
+              <td><strong>Right Riemann Sum</strong></td>
+              <td>Right endpoint of each subinterval</td>
+              <td>\(\sum_{i=1}^{n} f(a + i\Delta x)\Delta x\)</td>
+              <td>Rectangles whose right sides touch the curve</td>
+            </tr>
+            <tr>
+              <td><strong>Midpoint Riemann Sum</strong></td>
+              <td>Midpoint of each subinterval</td>
+              <td>\(\sum_{i=1}^{n} f(a + (i-\frac{1}{2})\Delta x)\Delta x\)</td>
+              <td>Rectangles whose heights are determined by the function value at the midpoint</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <div class="calc2-key-point" style="margin-top: 1rem;">
+        <p><strong>Accuracy Comparison:</strong> For the same number of subintervals, the Midpoint method typically provides the most accurate approximation, followed by the Trapezoidal method (the average of Left and Right Riemann sums), with Left and Right methods usually being the least accurate.</p>
+      </div>
+    </div>
+
+    <div class="calc2-figure">
+      <iframe src="https://www.desmos.com/calculator/pmyqtex1b0?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+      <figcaption>
+        Interactive demonstration of Riemann sums. <a href="https://www.desmos.com/calculator/pmyqtex1b0" target="_blank">Open in full screen</a> to adjust the number of rectangles and the sample point method.
+      </figcaption>
+    </div>
+
+    <h2 class="calc2-subtitle">Computing Riemann Sums</h2>
+
+    <div class="calc2-example">
+      <h3>Example: Left and Right Riemann Sums</h3>
+      <p>
+        Approximate \(\int_1^5 x^2\,dx\) using:
+      </p>
+      <ol>
+        <li>A Left Riemann Sum with 4 equal subintervals</li>
+        <li>A Right Riemann Sum with 4 equal subintervals</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      
+      <p>For the interval [1,5] with 4 subintervals, we have \(\Delta x = \frac{5-1}{4} = 1\)</p>
+      
+      <p><strong>1. Left Riemann Sum:</strong></p>
+      <p>
+        We use the left endpoints of each subinterval: \(x = 1, 2, 3, 4\)
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          L_4 &= \sum_{i=1}^{4} f(x_i)\Delta x\\
+          &= [f(1) + f(2) + f(3) + f(4)]\Delta x\\
+          &= [1^2 + 2^2 + 3^2 + 4^2] \cdot 1\\
+          &= [1 + 4 + 9 + 16] \cdot 1\\
+          &= 30
+        \end{align}
+      </div>
+      
+      <p><strong>2. Right Riemann Sum:</strong></p>
+      <p>
+        We use the right endpoints of each subinterval: \(x = 2, 3, 4, 5\)
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          R_4 &= \sum_{i=1}^{4} f(x_i)\Delta x\\
+          &= [f(2) + f(3) + f(4) + f(5)]\Delta x\\
+          &= [2^2 + 3^2 + 4^2 + 5^2] \cdot 1\\
+          &= [4 + 9 + 16 + 25] \cdot 1\\
+          &= 54
+        \end{align}
+      </div>
+      
+      <p>
+        The exact value of this integral is \(\int_1^5 x^2\,dx = \left[\frac{x^3}{3}\right]_1^5 = \frac{5^3}{3} - \frac{1^3}{3} = \frac{125 - 1}{3} = \frac{124}{3} \approx 41.33\)
+      </p>
+      
+      <p>
+        We can see that:
+      </p>
+      <ul>
+        <li>The Left Riemann Sum (30) underestimates the true value</li>
+        <li>The Right Riemann Sum (54) overestimates the true value</li>
+        <li>The average of the two, \(\frac{30 + 54}{2} = 42\), is much closer to the true value (~41.33)</li>
+      </ul>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Midpoint Riemann Sum</h3>
+      <p>
+        Approximate \(\int_0^3 \sin(x)\,dx\) using a Midpoint Riemann Sum with 3 equal subintervals.
+      </p>
+      <p><strong>Solution:</strong></p>
+      
+      <p>
+        For the interval [0,3] with 3 subintervals, we have \(\Delta x = \frac{3-0}{3} = 1\)
+      </p>
+      
+      <p>
+        The midpoints of the three subintervals are \(x = 0.5, 1.5, 2.5\)
+      </p>
+      
+      <div class="calc2-equation">
+        \begin{align}
+          M_3 &= \sum_{i=1}^{3} f(x_i)\Delta x\\
+          &= [f(0.5) + f(1.5) + f(2.5)]\Delta x\\
+          &= [\sin(0.5) + \sin(1.5) + \sin(2.5)] \cdot 1\\
+          &= [0.4794 + 0.9975 + 0.5985] \cdot 1\\
+          &= 2.0754
+        \end{align}
+      </div>
+      
+      <p>
+        The exact value of this integral is \(\int_0^3 \sin(x)\,dx = [-\cos(x)]_0^3 = -\cos(3) - (-\cos(0)) = -\cos(3) + 1 \approx 1.9899\)
+      </p>
+      
+      <p>
+        The Midpoint Riemann Sum (2.0754) comes very close to the true value (1.9899), with only 3 subintervals!
+      </p>
+    </div>
+
+    <h2 class="calc2-subtitle">Error in Riemann Sum Approximations</h2>
+    
+    <p>
+      The error in a Riemann sum approximation decreases as we increase the number of subintervals. For continuously differentiable functions:
+    </p>
+    
+    <div class="calc2-key-point">
+      <ul>
+        <li>The error in Left and Right Riemann sums decreases proportionally to \(\frac{1}{n}\)</li>
+        <li>The error in Midpoint and Trapezoidal methods decreases proportionally to \(\frac{1}{n^2}\)</li>
+        <li>This explains why the Midpoint method typically provides better approximations with the same number of subintervals</li>
+      </ul>
+    </div>
+
+    <h2 class="calc2-subtitle">Connection to the Definite Integral</h2>
+    
+    <p>
+      Riemann sums provide the theoretical foundation for the definite integral. In fact, we can formally define the definite integral as the limit of Riemann sums:
+    </p>
+    
+    <div class="calc2-equation">
+      \[
+        \int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\Delta x
+      \]
+    </div>
+    
+    <p>
+      This definition is valuable because it:
+    </p>
+    <ul>
+      <li>Gives a clear geometric interpretation of the definite integral as area</li>
+      <li>Provides a method for numerical approximation of integrals</li>
+      <li>Forms the basis for proving the Fundamental Theorem of Calculus</li>
+      <li>Allows us to extend the concept of integration to more general functions</li>
+    </ul>
+
+    <h2 class="calc2-subtitle">Key Takeaways</h2>
+    
+    <div class="calc2-key-point">
+      <ul>
+        <li>Riemann sums approximate the definite integral using a sum of rectangles</li>
+        <li>The three main methods (Left, Right, and Midpoint) differ in where they sample the function within each subinterval</li>
+        <li>As the number of subintervals increases, Riemann sums converge to the exact value of the definite integral</li>
+        <li>The Midpoint method typically gives the most accurate approximation for a given number of subintervals</li>
+        <li>Riemann sums provide both a theoretical foundation and a practical computational approach for definite integrals</li>
+      </ul>
+    </div>
+
+    <div class="calc2-reading-box">
+      <p><strong>📝 Looking Ahead:</strong> After understanding how to approximate definite integrals using Riemann sums, we'll explore the Fundamental Theorem of Calculus in future sections. This powerful theorem establishes a direct connection between differentiation and integration, allowing us to evaluate definite integrals without using Riemann sums directly.</p>
+    </div>
+  </div>
+</body>
+</html>

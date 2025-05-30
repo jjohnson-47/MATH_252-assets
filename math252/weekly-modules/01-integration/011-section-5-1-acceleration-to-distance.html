@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constant Acceleration and Distance Graph</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Problem statement box */
+    .calc2-problem {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-problem h2 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    /* Solution step boxes */
+    .calc2-step {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Key concept box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-key-point h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 0.5rem;
+      background-color: rgba(245, 245, 245, 0.5);
+      border-radius: 4px;
+    }
+
+    /* Embedded graph container */
+    .calc2-graph-container {
+      height: 500px;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-graph-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Summary box */
+    .calc2-summary {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-summary h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Button styling */
+    .calc2-button {
+      display: inline-block;
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: background-color 0.2s;
+    }
+
+    .calc2-button:hover {
+      background-color: var(--calc2-primary-dark-blue);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* List styling */
+    ul, ol {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    ul li, ol li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Important result highlight */
+    .calc2-highlight {
+      font-weight: bold;
+      color: var(--calc2-primary-purple);
+      padding: 0.25rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Formula reference */
+    .calc2-formula {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 0.75rem;
+      margin: 1rem 0;
+      background-color: rgba(245, 245, 245, 0.5);
+    }
+
+    .calc2-formula-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--calc2-primary-dark-blue);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-problem h2,
+      .calc2-key-point h3,
+      .calc2-summary h3 {
+        font-size: 1.25rem;
+      }
+      .calc2-step h3 {
+        font-size: 1.15rem;
+      }
+      .calc2-graph-container {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Constant Acceleration and Distance Graph</h1>
+
+    <div class="calc2-key-point">
+      <h3>Application of Calculus: Motion Analysis</h3>
+      <p>
+        This example demonstrates how integration concepts connect to real-world problems involving motion. A velocity function can be integrated to find a position function, which gives us distance traveled over time.
+      </p>
+      <p>
+        When acceleration is constant, velocity changes linearly with time, and distance (position) follows a quadratic function. This relationship illustrates a fundamental connection between derivatives and anti-derivatives in calculus.
+      </p>
+    </div>
+
+    <div class="calc2-problem">
+      <h2>Problem</h2>
+      <p>
+        A car is accelerating from <strong>30 mi/h</strong> to <strong>50 mi/h</strong> in <strong>5 seconds</strong>. 
+      </p>
+      <ol>
+        <li>Calculate the constant acceleration required for the car to achieve this change in velocity.</li>
+        <li>Find the function that represents the distance traveled by the car during this 5-second period.</li>
+        <li>Determine how far the car travels during these 5 seconds of acceleration.</li>
+      </ol>
+    </div>
+
+    <div class="calc2-formula">
+      <div class="calc2-formula-title">Kinematic Equations for Constant Acceleration</div>
+      <div class="calc2-equation">
+        \begin{align}
+        v(t) &= v_0 + at \\
+        s(t) &= s_0 + v_0t + \frac{1}{2}at^2
+        \end{align}
+      </div>
+      <p>
+        Where:
+      </p>
+      <ul>
+        <li>\(v(t)\) = velocity at time \(t\)</li>
+        <li>\(v_0\) = initial velocity</li>
+        <li>\(a\) = constant acceleration</li>
+        <li>\(s(t)\) = position at time \(t\)</li>
+        <li>\(s_0\) = initial position (we'll use \(s_0 = 0\))</li>
+      </ul>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 1: Convert Units to a Consistent System</h3>
+      <p>
+        Since we're working with acceleration and distance, we need to convert the speeds from miles per hour to a more appropriate unit. In physics problems, it's common to use feet per second (ft/s) in the U.S. customary system.
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        v_0 &= 30 \text{ mi/h} \times \frac{5280 \text{ ft}}{1 \text{ mi}} \times \frac{1 \text{ h}}{3600 \text{ s}} \\
+        &= 30 \times 5280 \times \frac{1}{3600} \text{ ft/s} \\
+        &= 30 \times \frac{5280}{3600} \text{ ft/s} \\
+        &= 30 \times 1.47 \text{ ft/s} \\
+        &= 44 \text{ ft/s}
+        \end{align}
+      </div>
+      <div class="calc2-equation">
+        \begin{align}
+        v_f &= 50 \text{ mi/h} \times \frac{5280 \text{ ft}}{1 \text{ mi}} \times \frac{1 \text{ h}}{3600 \text{ s}} \\
+        &= 50 \times \frac{5280}{3600} \text{ ft/s} \\
+        &= 50 \times 1.47 \text{ ft/s} \\
+        &= 73.3 \text{ ft/s}
+        \end{align}
+      </div>
+      <p>
+        So we need to find the acceleration that changes the car's velocity from 44 ft/s to 73.3 ft/s over 5 seconds.
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 2: Calculate the Constant Acceleration</h3>
+      <p>
+        Using the kinematic equation for velocity with constant acceleration:
+      </p>
+      <div class="calc2-equation">
+        \[ v(t) = v_0 + at \]
+      </div>
+      <p>
+        We can rearrange this to solve for acceleration:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        a &= \frac{v(t) - v_0}{t} \\
+        &= \frac{v_f - v_0}{t_f - t_0} \\
+        &= \frac{73.3 \text{ ft/s} - 44 \text{ ft/s}}{5 \text{ s} - 0 \text{ s}} \\
+        &= \frac{29.3 \text{ ft/s}}{5 \text{ s}} \\
+        &= 5.86 \text{ ft/s}^2
+        \end{align}
+      </div>
+      <p class="calc2-highlight">
+        The constant acceleration required is 5.86 ft/s² (approximately 5.9 ft/s²).
+      </p>
+      <p>
+        This means the car's velocity increases by 5.86 feet per second every second during this time interval.
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 3: Find the Distance Function</h3>
+      <p>
+        Now that we know the acceleration, we can find the position function \(s(t)\) using the kinematic equation:
+      </p>
+      <div class="calc2-equation">
+        \[ s(t) = s_0 + v_0t + \frac{1}{2}at^2 \]
+      </div>
+      <p>
+        If we set the initial position \(s_0 = 0\) (measuring distance from the starting point), we get:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        s(t) &= v_0t + \frac{1}{2}at^2 \\
+        &= 44t + \frac{1}{2}(5.86)t^2 \\
+        &= 44t + 2.93t^2
+        \end{align}
+      </div>
+      <p>
+        This is the equation that describes the distance the car travels as a function of time during the 5-second acceleration period.
+      </p>
+      <p>
+        From a calculus perspective, \(s(t)\) is the antiderivative of the velocity function \(v(t) = 44 + 5.86t\), illustrating the fundamental relationship between position and velocity.
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 4: Calculate the Total Distance Traveled</h3>
+      <p>
+        To find the total distance traveled during the 5-second period, we evaluate \(s(t)\) at \(t = 5\):
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        s(5) &= 44(5) + 2.93(5)^2 \\
+        &= 220 + 2.93(25) \\
+        &= 220 + 73.25 \\
+        &= 293.25 \text{ ft}
+        \end{align}
+      </div>
+      <p class="calc2-highlight">
+        The car travels approximately 293 feet during the 5-second acceleration period.
+      </p>
+      <p>
+        That's nearly the length of a football field in just 5 seconds!
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 5: Visualize the Distance Function</h3>
+      <p>
+        The graph below shows the distance function \(s(t) = 44t + 2.93t^2\). Note that this is a parabola that opens upward, indicating that the distance increases at an increasing rate as time passes.
+      </p>
+      <div class="calc2-graph-container">
+        <iframe src="https://www.desmos.com/calculator/e8qlx30ey0?embed" frameborder="0"></iframe>
+      </div>
+      <a href="https://www.desmos.com/calculator/e8qlx30ey0" target="_blank" class="calc2-button">
+        Open Interactive Graph in New Window
+      </a>
+      <p>
+        In the graph, you can see that:
+      </p>
+      <ul>
+        <li>The curve is steeper at \(t = 5\) than at \(t = 0\), showing the car is moving faster at the end</li>
+        <li>The function is quadratic, reflecting the integration of a linear velocity function</li>
+        <li>At \(t = 5\), the height of the curve is approximately 293 feet, matching our calculation</li>
+      </ul>
+    </div>
+
+    <div class="calc2-summary">
+      <h3>Calculus Connections</h3>
+      <p>
+        This problem demonstrates several important calculus concepts:
+      </p>
+      <ol>
+        <li>
+          <strong>Integration Relationship:</strong> The position function \(s(t)\) is the antiderivative (indefinite integral) of the velocity function \(v(t)\).
+          <div class="calc2-equation">
+            \[s(t) = \int v(t)\,dt = \int (v_0 + at)\,dt = v_0t + \frac{1}{2}at^2 + C\]
+          </div>
+          Setting the constant of integration \(C = 0\) gives us our position function.
+        </li>
+        <li>
+          <strong>Rate of Change:</strong> The acceleration is the rate of change of velocity, and velocity is the rate of change of position:
+          <div class="calc2-equation">
+            \[a = \frac{dv}{dt}, \quad v = \frac{ds}{dt}\]
+          </div>
+        </li>
+        <li>
+          <strong>Quadratic Function:</strong> When acceleration is constant, position follows a quadratic function, which we see in the graph.
+        </li>
+      </ol>
+      <p>
+        Understanding these relationships is fundamental to analyzing motion problems using calculus.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

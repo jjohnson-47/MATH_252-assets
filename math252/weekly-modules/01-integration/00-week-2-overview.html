@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Week 2 – The Fundamental Theorems of Calculus and Integral Approximations</title>
+  <!-- MathJax for inline/displaystyle LaTeX -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- CALC II Summer 2025 style sheet -->
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Different colored borders for different box types */
+    .calc2-definition {
+      border-left-color: var(--calc2-primary-purple);
+    }
+
+    .calc2-theorem {
+      border-left-color: var(--calc2-accent-green);
+    }
+
+    .calc2-example {
+      border-left-color: var(--calc2-accent-teal);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Video container for responsive embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Emphasis and strong text */
+    em {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bold;
+      color: var(--calc2-primary-dark-blue);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Page header -->
+    <h1 class="calc2-title">Week 2 – The Fundamental Theorems of Calculus and Integral Approximations</h1>
+
+    <!-- Reading / Section guide -->
+    <section class="calc2-reading-box">
+      <strong>Reading Guide:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html" target="_blank" rel="noopener">Section 5.4 – The Fundamental Theorem of Calculus</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_numerical_integration.html" target="_blank" rel="noopener">Section 5.5 – Numerical Integration</a></li>
+        <li>APEX Calculus Edition 5 — also review Section 6.1 for <em>u</em>-substitution.</li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Master the <a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#thm_FTC2" target="_blank" rel="noopener">Fundamental Theorem of Calculus, Part 2</a> and connect antiderivatives to definite integrals.</li>
+        <li>Apply common <a href="https://opentext.uleth.ca/apex-calculus/sec_numerical_integration.html" target="_blank" rel="noopener">numerical integration</a> techniques (Left/Right Riemann sums, Trapezoids).</li>
+      </ul>
+    </section>
+
+    <!-- Core theorems from Section 5.4 -->
+    <section>
+      <h2 class="calc2-subtitle">Core Theorems & Examples</h2>
+
+      <div class="calc2-theorem">
+        <h3><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#thm_FTC1" target="_blank" rel="noopener">Fundamental Theorem of Calculus, Part 1</a></h3>
+        <p>If \(F\) is an antiderivative of \(f\) on \([a,b]\), then
+          <span class="calc2-equation">\[ \int_{a}^{b} f(x)\,dx = F(b) - F(a). \]</span>
+          Part 1 justifies evaluating a definite integral using any antiderivative.
+        </p>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#thm_FTC2" target="_blank" rel="noopener">Fundamental Theorem of Calculus, Part 2</a></h3>
+        <p>If \(f\) is continuous on \([a,b]\), then the function
+          \(g(x)=\displaystyle\int_{a}^{x} f(t)\,dt\) is differentiable and \(g'(x)=f(x).\)
+        </p>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#thm_mvt2" target="_blank" rel="noopener">Mean Value Theorem for Integrals</a></h3>
+        <p>There exists a \(c\) in \([a,b]\) such that
+          <span class="calc2-equation">\[ \int_{a}^{b} f(x)\,dx = f(c)(b-a). \]</span>
+          We use this result to understand <em>average value</em> and to estimate errors in numerical rules.
+        </p>
+      </div>
+
+      <!-- Highlighted numerical integration example -->
+      <div class="calc2-example">
+        <h3><a href="https://opentext.uleth.ca/apex-calculus/sec_numerical_integration.html#ex_num6" target="_blank" rel="noopener">Example 5.5.6 – Comparing Rules</a></h3>
+        <figure>
+          <img src="https://opentext.uleth.ca/apex-calculus/generated/latex-image/img_num6b.svg" alt="Visualization of Trapezoidal Rule and Simpson's Rule areas" style="max-width:100%;height:auto;" />
+          <figcaption>From APEX Calculus &sect;5.5 (Figure 5.5.6a).</figcaption>
+        </figure>
+        <p>This worked example shows how the Trapezoidal Rule and Simpson’s Rule approximate \(\displaystyle\int_{0}^{6} \sqrt{36-x^{2}}\,dx\) and compares their errors.</p>
+      </div>
+    </section>
+
+    <!-- Assessment / due‑dates -->
+    <section>
+      <h2 class="calc2-subtitle">Important Due Dates</h2>
+      <ul>
+        <li>💬 <strong>Discussion Board #2</strong> — Wednesday, <time datetime="2025-05-28T23:59-08:00">May 28</time></li>
+        <li>📝 <strong>Weekly Quiz #2</strong> (Sections 5.4‑6.1) — Friday, <time datetime="2025-05-30T23:59-08:00">May 30</time></li>
+        <li>🔢 <strong>Edfinity Homework — Chapter 5</strong> — Friday, <time datetime="2025-05-30T23:59-08:00">May 30</time></li>
+        <li>✍️ <strong>Written Assignment #1 — Chapter 5</strong> — Monday, <time datetime="2025-06-02T23:59-08:00">June 2</time></li>
+      </ul>
+    </section>
+
+    <!-- Support & policy guide -->
+    <section class="calc2-key-point">
+      📚 <strong>Need campus resources?</strong> The <a href="https://drive.google.com/file/d/1lEn0osdkkN9BakEa8QjMpNd_o3RrQeww/view?usp=sharing" target="_blank" rel="noopener">KPC Support & Policy Guide</a> has contacts for tutoring, tech help, and student services.
+    </section>
+  </main>
+</body>
+</html>
+

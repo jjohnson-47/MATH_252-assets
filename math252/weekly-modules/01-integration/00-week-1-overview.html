@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 1: Integration Review</title>
+    <style>
+        :root {
+            --calc2-primary-dark-blue: #1a237e;
+            --calc2-primary-purple: #512da8;
+            --calc2-accent-teal: #4dd0e1;
+            --calc2-accent-green: #66bb6a;
+            --calc2-background: #ffffff;
+            --calc2-text: #212121;
+            --calc2-heading: #1a237e;
+            --calc2-focus-outline: #ffeb3b;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            font-size: 1rem;
+            color: var(--calc2-text);
+            background-color: var(--calc2-background);
+            margin: 0;
+            padding: 0;
+        }
+
+        .calc2-container {
+            /* Removed hardware acceleration transforms for initial simplicity */
+            /* Removed max-width and margin: 0 auto for a simpler flow;
+               Blackboard will likely control overall width.
+               Adjust padding/margin as needed for spacing within Blackboard's container. */
+            padding: 1.5rem;
+            margin: 1rem; /* Provides some spacing from Blackboard UI edges */
+            border: 1px solid #e0e0e0;
+        }
+
+        .calc2-title {
+            font-size: 2.2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--calc2-heading);
+            border-bottom: 3px solid var(--calc2-primary-purple);
+            padding-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .calc2-integral {
+            font-size: 56px; /* Kept large font size, usually not an issue */
+            color: var(--calc2-primary-purple);
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .calc2-section {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--calc2-primary-purple);
+            /* Removed border-radius */
+            /* Removed box-shadow */
+        }
+
+        .calc2-subtitle {
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+            color: var(--calc2-heading);
+            padding-bottom: 0.25rem;
+            border-bottom: 1px solid var(--calc2-accent-teal);
+        }
+
+        .calc2-topic {
+            margin-bottom: 1.25rem;
+        }
+
+        .calc2-topic-title {
+            font-size: 1.2rem;
+            margin: 0 0 0.5rem 0;
+            color: var(--calc2-primary-dark-blue);
+            font-weight: bold;
+        }
+
+        /* Simplified list styling to use standard bullets */
+        .calc2-list {
+            list-style-type: disc; /* Or 'square', or leave to browser default for <ul> */
+            margin: 0.75rem 0 0.75rem 25px; /* Adjust left margin for indent */
+            padding: 0;
+        }
+
+        .calc2-list li {
+            margin: 0.5rem 0; /* Simplified margin */
+            /* Removed padding-left, position:relative and ::before styles for custom bullets */
+        }
+
+        /* Simplified deadline layout - no flexbox */
+        .calc2-deadline {
+            background-color: rgba(77, 208, 225, 0.1);
+            padding: 0.75rem 1rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--calc2-accent-teal);
+            /* Removed border-radius */
+            /* Removed display: flex and align-items: center */
+        }
+
+        .calc2-deadline-emoji {
+            display: inline-block; /* Allows margin and vertical alignment */
+            vertical-align: middle; /* Align with adjacent text */
+            margin-right: 0.75rem;
+            font-size: 1.2rem;
+        }
+
+        .calc2-deadline > div { /* Assuming the text is in a direct child div */
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        /* Keep paragraph styling within deadline sections simple */
+        .calc2-section p {
+            margin-top: 1rem; /* From your original code */
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+                margin: 0.5rem; /* Adjust margin for smaller screens */
+            }
+            .calc2-title {
+                font-size: 1.75rem;
+            }
+            .calc2-subtitle {
+                font-size: 1.25rem;
+            }
+            .calc2-section {
+                padding: 1rem;
+            }
+            .calc2-list {
+                margin-left: 20px; /* Adjust indent for smaller screens */
+            }
+        }
+
+        /* The rule '.calc2-container * { position: static !important; }' has been removed */
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">WEEK 1: Integration Review (May 19-23)</h1>
+        
+        <div class="calc2-integral">∫</div>
+
+        <section class="calc2-section">
+            <h2 class="calc2-subtitle">Learning Objectives</h2>
+            <ul class="calc2-list">
+                <li>Define and calculate antiderivatives using basic integration rules</li>
+                <li>Explain the relationship between derivatives and indefinite integrals</li>
+                <li>Evaluate definite integrals using the Fundamental Theorem of Calculus</li>
+                <li>Understand Riemann sums and their relationship to definite integrals</li>
+                <li>Apply geometric interpretation to calculate areas under curves</li>
+            </ul>
+        </section>
+
+        <section class="calc2-section">
+            <h2 class="calc2-subtitle">This Week's Topics</h2>
+            
+            <div class="calc2-topic">
+                <h3 class="calc2-topic-title">Section 5.1 - Antiderivatives and Indefinite Integration</h3>
+                <p>Introduction to antiderivatives, basic integration rules, and the relationship between derivatives and indefinite integrals. We'll explore how to reverse the differentiation process.</p>
+            </div>
+            
+            <div class="calc2-topic">
+                <h3 class="calc2-topic-title">Section 5.2 - The Definite Integral</h3>
+                <p>Understanding definite integrals, their properties, and their geometric interpretation as signed area. We'll see how integrals quantify accumulation.</p>
+            </div>
+            
+            <div class="calc2-topic">
+                <h3 class="calc2-topic-title">Section 5.3 - Riemann Sums</h3>
+                <p>Exploring how to approximate areas using Riemann sums and understanding the limit process that leads to the definite integral.</p>
+            </div>
+        </section>
+
+        <section class="calc2-section">
+            <h2 class="calc2-subtitle">Important Due Dates</h2>
+            
+            <div class="calc2-deadline">
+                <span class="calc2-deadline-emoji">💬</span>
+                <div>
+                    <strong>Discussion Board #1 (Introduce Yourself)</strong> - Due Wednesday, May 21 by 11:59 PM AKDT
+                </div>
+            </div>
+            
+            <div class="calc2-deadline">
+                <span class="calc2-deadline-emoji">📊</span>
+                <div>
+                    <strong>Weekly Quiz #1 (Sections 5.1-5.3)</strong> - Due Friday, May 23 by 11:59 PM AKDT
+                </div>
+            </div>
+            
+            <p>Remember, each item in this module must be completed in sequence to unlock the next. If you have questions, don't hesitate to post in the Discussion Board or attend office hours (Mondays & Wednesdays, 12–1 PM AKDT via Zoom).</p>
+        </section>
+        
+        <section class="calc2-section">
+            <h2 class="calc2-subtitle">Getting Started</h2>
+            <p>Welcome to our first week of Calculus 2! To get the most out of this module:</p>
+            <ol class="calc2-list">
+                <li>Begin by introducing yourself in the Discussion Board</li>
+                <li>Review the APEX Calculus textbook sections 5.1-5.3</li>
+                <li>Watch the overview videos for each section</li>
+                <li>Work through the practice problems before attempting the quiz</li>
+                <li>Use the Desmos calculator (<a href="https://www.desmos.com/calculator" style="color: var(--calc2-primary-purple);">www.desmos.com/calculator</a>) to visualize integrals</li>
+            </ol>
+            
+            <p>Remember that integration is foundational to everything we'll do in this course. Take your time with these concepts, as they'll be the building blocks for more advanced techniques in the coming weeks.</p>
+        </section>
+    </div>
+</body>
+</html>

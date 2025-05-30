@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual Calculation Example – Numerical Integration | MATH A252 Summer 2025</title>
+  
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      }
+    };
+  </script>
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* -------------------------------------------------------------------------
+       Theme variables (matches weekly overview)  
+       --------------------------------------------------------------------- */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /*  Base layout & typography                                             */
+    /* --------------------------------------------------------------------- */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Problem statement box */
+    .calc2-problem {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight,
+    .calc2-step {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+    .calc2-step        { border-left-color: var(--calc2-primary-purple); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3,
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Warning box */
+    .calc2-warning {
+      background-color: rgba(255, 193, 7, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid #ffc107;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Table styling */
+    .calc2-table {
+      width: 100%;
+      margin: 1.5rem 0;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-table th, .calc2-table td {
+      border: 1px solid #e0e0e0;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .calc2-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: bold;
+    }
+
+    .calc2-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    .calc2-table tr:hover {
+      background-color: rgba(77, 208, 225, 0.1);
+    }
+
+    /* Step-by-step calculation styling */
+    .calculation-steps {
+      background-color: #f8f9fa;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      border: 1px solid #e9ecef;
+    }
+
+    .calculation-steps .step {
+      margin: 0.5rem 0;
+      padding: 0.25rem 0;
+    }
+
+    .calculation-steps .step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Interactive comparison */
+    .method-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .method-comparison .method {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 2px solid #e9ecef;
+    }
+
+    .method-comparison .trapezoidal {
+      border-color: var(--calc2-accent-teal);
+    }
+
+    .method-comparison .simpson {
+      border-color: var(--calc2-accent-green);
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .method-comparison { grid-template-columns: 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Manual Calculation Example: Understanding the Process</h1>
+
+    <!-- Purpose explanation -->
+    <section class="calc2-insight">
+      <h3>Why Do Manual Calculations When We Have Computers?</h3>
+      <p>This example demonstrates the <strong>tedious but essential process</strong> of manual numerical integration. While computational tools are faster and less error-prone for getting answers, working through calculations by hand provides crucial insights:</p>
+      <ul>
+        <li><strong>Understanding the method:</strong> See exactly how the formulas work</li>
+        <li><strong>Error detection:</strong> Recognize when something goes wrong</li>
+        <li><strong>Method comparison:</strong> Understand why different methods give different results</li>
+        <li><strong>Appreciation for automation:</strong> Realize when to use computational tools!</li>
+      </ul>
+      <p><strong>The key insight:</strong> Manual calculation teaches us <em>how</em> and <em>when</em> to use these methods. For actual problem-solving, computational tools are almost always preferable.</p>
+    </section>
+
+    <!-- Problem statement -->
+    <section class="calc2-problem">
+      <h2>Problem Statement</h2>
+      <p>Use both the <strong>Trapezoidal Rule</strong> and <strong>Simpson's Rule</strong> with $n = 6$ subintervals to approximate:</p>
+      <div class="calc2-equation">$$\int_{1}^{4} 4\cos(x^2) \, dx$$</div>
+      <p><strong>Why this integral?</strong> The function $4\cos(x^2)$ has no elementary antiderivative, making numerical methods our only practical option for evaluation.</p>
+    </section>
+
+    <!-- Setup -->
+    <section class="calc2-step">
+      <h3>Step 1: Setup and Initial Calculations</h3>
+      <p><strong>Given information:</strong></p>
+      <ul>
+        <li>Interval: $[a, b] = [1, 4]$</li>
+        <li>Number of subintervals: $n = 6$</li>
+        <li>Function: $f(x) = 4\cos(x^2)$</li>
+      </ul>
+      
+      <p><strong>Calculate the step size:</strong></p>
+      <div class="calc2-equation">$$\Delta x = \frac{b - a}{n} = \frac{4 - 1}{6} = \frac{3}{6} = 0.5$$</div>
+      
+      <p><strong>Partition points:</strong> $x_0 = 1, x_1 = 1.5, x_2 = 2, x_3 = 2.5, x_4 = 3, x_5 = 3.5, x_6 = 4$</p>
+    </section>
+
+    <!-- Function evaluation table -->
+    <section class="calc2-step">
+      <h3>Step 2: Evaluate the Function at All Points</h3>
+      <p>We need to compute $f(x_i) = 4\cos(x_i^2)$ at each partition point. <strong>Note:</strong> This is where manual calculation becomes tedious – each cosine evaluation requires careful computation!</p>
+      
+      <table class="calc2-table">
+        <thead>
+          <tr>
+            <th>$i$</th>
+            <th>$x_i$</th>
+            <th>$x_i^2$</th>
+            <th>$\cos(x_i^2)$</th>
+            <th>$f(x_i) = 4\cos(x_i^2)$</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>0</td><td>1.0</td><td>1.0</td><td>0.5403</td><td>2.1612</td></tr>
+          <tr><td>1</td><td>1.5</td><td>2.25</td><td>-0.6282</td><td>-2.5127</td></tr>
+          <tr><td>2</td><td>2.0</td><td>4.0</td><td>-0.6536</td><td>-2.6146</td></tr>
+          <tr><td>3</td><td>2.5</td><td>6.25</td><td>0.9995</td><td>3.9978</td></tr>
+          <tr><td>4</td><td>3.0</td><td>9.0</td><td>-0.9111</td><td>-3.6445</td></tr>
+          <tr><td>5</td><td>3.5</td><td>12.25</td><td>0.9504</td><td>3.8015</td></tr>
+          <tr><td>6</td><td>4.0</td><td>16.0</td><td>-0.9577</td><td>-3.8306</td></tr>
+        </tbody>
+      </table>
+      
+      <div class="calc2-warning">
+        <p><strong>Reality check:</strong> Computing these cosine values by hand would be extremely time-consuming and error-prone. This is exactly why computational tools exist! But understanding the process is still valuable.</p>
+      </div>
+    </section>
+
+    <!-- Method comparison -->
+    <section>
+      <h2 class="calc2-subtitle">Method Comparison: Side by Side</h2>
+      
+      <div class="method-comparison">
+        <div class="method trapezoidal">
+          <h3>Trapezoidal Rule</h3>
+          <p><strong>Formula:</strong></p>
+          <div class="calc2-equation">$$T_n = \frac{\Delta x}{2}[f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n)]$$</div>
+          
+          <p><strong>Coefficient pattern:</strong> 1, 2, 2, 2, 2, 2, 1</p>
+          
+          <div class="calculation-steps">
+            <div class="step">
+              <strong>Substitute values:</strong>
+              $$T_6 = \frac{0.5}{2}[f(x_0) + 2(f(x_1) + f(x_2) + f(x_3) + f(x_4) + f(x_5)) + f(x_6)]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{2}[2.1612 + 2(-2.5127 - 2.6146 + 3.9978 - 3.6445 + 3.8015) + (-3.8306)]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{2}[2.1612 + 2(-1.4725) - 3.8306]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{2}[2.1612 - 2.945 - 3.8306] = \frac{0.5}{2}(-4.6144)$$
+            </div>
+            <div class="step">
+              $$= 0.25 \times (-4.6144) = \boxed{-1.1536}$$
+            </div>
+          </div>
+        </div>
+
+        <div class="method simpson">
+          <h3>Simpson's Rule</h3>
+          <p><strong>Formula:</strong></p>
+          <div class="calc2-equation">$$S_n = \frac{\Delta x}{3}[f(x_0) + 4\sum_{\text{odd } i} f(x_i) + 2\sum_{\text{even } i} f(x_i) + f(x_n)]$$</div>
+          
+          <p><strong>Coefficient pattern:</strong> 1, 4, 2, 4, 2, 4, 1</p>
+          
+          <div class="calculation-steps">
+            <div class="step">
+              <strong>Substitute values:</strong>
+              $$S_6 = \frac{0.5}{3}[f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + 2f(x_4) + 4f(x_5) + f(x_6)]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{3}[2.1612 + 4(-2.5127) + 2(-2.6146) + 4(3.9978) + 2(-3.6445) + 4(3.8015) + (-3.8306)]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{3}[2.1612 - 10.0508 - 5.2292 + 15.9912 - 7.289 + 15.206 - 3.8306]$$
+            </div>
+            <div class="step">
+              $$= \frac{0.5}{3}[7.2588] = \frac{0.5 \times 7.2588}{3}$$
+            </div>
+            <div class="step">
+              $$= \frac{3.6294}{3} = \boxed{1.2098}$$
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Results and analysis -->
+    <section class="calc2-step">
+      <h3>Results and Analysis</h3>
+      
+      <div style="text-align: center; margin: 2rem 0;">
+        <table style="margin: 0 auto; border-collapse: collapse; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+          <tr style="background-color: var(--calc2-primary-purple); color: white;">
+            <th style="padding: 1rem; border: 1px solid #ddd;">Method</th>
+            <th style="padding: 1rem; border: 1px solid #ddd;">Approximation</th>
+            <th style="padding: 1rem; border: 1px solid #ddd;">Difference from Simpson's</th>
+          </tr>
+          <tr style="background-color: rgba(77, 208, 225, 0.1);">
+            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Trapezoidal Rule</strong></td>
+            <td style="padding: 1rem; border: 1px solid #ddd;">$-1.1536$</td>
+            <td style="padding: 1rem; border: 1px solid #ddd;">$2.3634$</td>
+          </tr>
+          <tr style="background-color: rgba(102, 187, 106, 0.1);">
+            <td style="padding: 1rem; border: 1px solid #ddd;"><strong>Simpson's Rule</strong></td>
+            <td style="padding: 1rem; border: 1px solid #ddd;">$1.2098$</td>
+            <td style="padding: 1rem; border: 1px solid #ddd;">$0$ (reference)</td>
+          </tr>
+        </table>
+      </div>
+
+      <p><strong>Key observations:</strong></p>
+      <ul>
+        <li>The two methods give <em>very different</em> results: $-1.1536$ vs $1.2098$</li>
+        <li>Simpson's Rule is generally more accurate for smooth functions</li>
+        <li>The function $4\cos(x^2)$ oscillates significantly over $[1,4]$, making approximation challenging</li>
+        <li>Both methods show the difficulty of approximating rapidly oscillating functions</li>
+      </ul>
+    </section>
+
+    <!-- Computational reality -->
+    <section class="calc2-insight">
+      <h3>The Computational Reality</h3>
+      <p>This manual calculation demonstrates why computational tools are essential for practical work:</p>
+      
+      <div class="calc2-key-point">
+        <p><strong>Manual calculation challenges:</strong></p>
+        <ul>
+          <li><strong>Time-consuming:</strong> Each function evaluation requires careful computation</li>
+          <li><strong>Error-prone:</strong> Many opportunities for arithmetic mistakes</li>
+          <li><strong>Limited precision:</strong> We're limited by the precision of our calculations</li>
+          <li><strong>Not scalable:</strong> Increasing $n$ makes manual calculation impractical</li>
+        </ul>
+      </div>
+
+      <div class="calc2-key-point">
+        <p><strong>When to use computational tools:</strong></p>
+        <ul>
+          <li>When you need an actual numerical answer</li>
+          <li>When working with complex functions</li>
+          <li>When you need high precision</li>
+          <li>When comparing many different values of $n$</li>
+          <li>When time efficiency matters</li>
+        </ul>
+      </div>
+
+      <div class="calc2-warning">
+        <p><strong>When manual calculation is valuable:</strong></p>
+        <ul>
+          <li>Learning and understanding the method</li>
+          <li>Developing intuition for which method to choose</li>
+          <li>Checking computational results for reasonableness</li>
+          <li>Simple functions where insight is more important than precision</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Practical wisdom -->
+    <section class="calc2-key-point">
+      <p><strong>The Bottom Line:</strong> Manual calculations teach us <em>how</em> numerical integration works and <em>when</em> to use different methods. For actual problem-solving, however, computational tools like graphing calculators, computer algebra systems, or programming languages are the practical choice. The goal is to understand the mathematics well enough to use these tools intelligently and interpret their results correctly.</p>
+    </section>
+
+  </main>
+</body>
+</html>

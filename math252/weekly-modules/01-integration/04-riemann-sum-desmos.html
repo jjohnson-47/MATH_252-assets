@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Riemann Sum Explorer</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Info box */
+    .calc2-info-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Example box */
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Embed container for Desmos */
+    .calc2-embed-container {
+      height: 500px;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-embed-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Two-column layout for tools */
+    .calc2-tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .calc2-tool-item {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-tool-title {
+      background-color: rgba(81, 45, 168, 0.1);
+      color: var(--calc2-primary-dark-blue);
+      padding: 0.75rem;
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .calc2-tool-container {
+      height: 400px;
+    }
+
+    .calc2-tool-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Button styling */
+    .calc2-button {
+      display: inline-block;
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: background-color 0.2s;
+    }
+
+    .calc2-button:hover {
+      background-color: var(--calc2-primary-dark-blue);
+      text-decoration: none;
+    }
+
+    /* Table styling */
+    .calc2-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .calc2-table th, 
+    .calc2-table td {
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+    }
+
+    .calc2-table th {
+      background-color: rgba(81, 45, 168, 0.1);
+      color: var(--calc2-primary-dark-blue);
+      font-weight: bold;
+    }
+
+    .calc2-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+      .calc2-tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Interactive Riemann Sum Explorer</h1>
+
+    <p>
+      Welcome to the Riemann Sum Explorer, an interactive tool designed to help you visualize and understand how Riemann sums approximate definite integrals. This tool will reinforce the concepts you're learning in Section 5.3 of the textbook.
+    </p>
+
+    <div class="calc2-info-box">
+      <p><strong>What you'll learn with this tool:</strong></p>
+      <ul>
+        <li>How different Riemann sum methods (left, right, and midpoint) approximate the area under a curve</li>
+        <li>How increasing the number of rectangles improves the approximation</li>
+        <li>Why some methods provide better approximations than others for certain functions</li>
+        <li>The relationship between Riemann sums and definite integrals</li>
+      </ul>
+    </div>
+
+
+    </div>
+
+    <h2 class="calc2-subtitle">Understanding Different Riemann Sum Methods</h2>
+    
+    <div class="calc2-table-responsive">
+      <table class="calc2-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Description</th>
+            <th>Characteristics</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Left Riemann Sum</strong></td>
+            <td>Evaluates function at left endpoint of each subinterval</td>
+            <td>Underestimates increasing functions<br>Overestimates decreasing functions</td>
+          </tr>
+          <tr>
+            <td><strong>Right Riemann Sum</strong></td>
+            <td>Evaluates function at right endpoint of each subinterval</td>
+            <td>Overestimates increasing functions<br>Underestimates decreasing functions</td>
+          </tr>
+          <tr>
+            <td><strong>Midpoint Riemann Sum</strong></td>
+            <td>Evaluates function at midpoint of each subinterval</td>
+            <td>Usually more accurate than left or right sums<br>Error decreases faster as n increases</td>
+          </tr>
+          <tr>
+            <td><strong>Trapezoidal Rule</strong></td>
+            <td>Average of left and right sums<br>(Uses trapezoids instead of rectangles)</td>
+            <td>Often more accurate than left or right sums<br>Error decreases at same rate as midpoint method</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="calc2-subtitle">Specialized Tools for Deeper Understanding</h2>
+    
+    <div class="calc2-tool-grid">
+      <div class="calc2-tool-item">
+        <h3 class="calc2-tool-title">Riemann Sum Error Analysis</h3>
+        <div class="calc2-tool-container">
+          <iframe src="https://www.desmos.com/calculator/pmyqtex1b0?embed" frameborder="0"></iframe>
+        </div>
+      </div>
+      
+      <div class="calc2-tool-item">
+        <h3 class="calc2-tool-title">Convergence Visualizer</h3>
+        <div class="calc2-tool-container">
+          <iframe src="https://www.desmos.com/calculator/jucblmmiwv?embed" frameborder="0"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="calc2-subtitle">Mathematical Foundation</h2>
+    
+    <p>
+      A Riemann sum is an approximation of a definite integral using a finite sum. For a function f(x) on the interval [a,b], we divide the interval into n subintervals of equal width Δx = (b-a)/n, and then form the sum:
+    </p>
+    
+    <div class="calc2-equation">
+      \[
+        \sum_{i=1}^{n} f(x_i^*) \Delta x
+      \]
+    </div>
+    
+    <p>
+      where \(x_i^*\) is a sample point in the i-th subinterval. When n approaches infinity, the Riemann sum approaches the definite integral:
+    </p>
+    
+    <div class="calc2-equation">
+      \[
+        \int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*) \Delta x
+      \]
+    </div>
+
+    <h2 class="calc2-subtitle">Practice Problems Using the Tool</h2>
+    
+    <div class="calc2-example">
+      <h3>Problem 1: Investigating Approximation Methods</h3>
+      <p>
+        Use the Comprehensive Riemann Sum Tool to approximate \(\int_0^1 e^x\,dx\) using n = 4 rectangles with each method (left, right, and midpoint).
+      </p>
+      <ol>
+        <li>Which method gives the closest approximation to the exact value?</li>
+        <li>What happens to the error as you increase n to 8, then 16?</li>
+        <li>Does the error decrease at the same rate for all methods?</li>
+      </ol>
+      <p>
+        <strong>Exact Value:</strong> \(\int_0^1 e^x\,dx = e - 1 \approx 1.718\)
+      </p>
+    </div>
+    
+    <div class="calc2-example">
+      <h3>Problem 2: Investigating Error Patterns</h3>
+      <p>
+        Using the tool, explore the following functions with n = 6 rectangles on the interval [0,2]:
+      </p>
+      <ul>
+        <li>\(f(x) = x^2\) (increasing at an increasing rate)</li>
+        <li>\(f(x) = \sqrt{x}\) (increasing at a decreasing rate)</li>
+        <li>\(f(x) = \sin(\pi x)\) (increases then decreases)</li>
+      </ul>
+      <p>
+        For each function, determine:
+      </p>
+      <ol>
+        <li>Does the Left Riemann Sum overestimate or underestimate the true value?</li>
+        <li>Does the Right Riemann Sum overestimate or underestimate the true value?</li>
+        <li>Can you identify a pattern between the function's behavior (increasing/decreasing and concavity) and whether a particular method over- or underestimates?</li>
+      </ol>
+    </div>
+
+    <div class="calc2-key-point">
+      <h3 style="margin-top: 0;">Key Insights for Quiz Preparation</h3>
+      <ul>
+        <li>For the same number of rectangles, the Midpoint method generally provides the most accurate approximation.</li>
+        <li>For increasing functions, Left sums underestimate and Right sums overestimate the true value.</li>
+        <li>For decreasing functions, Left sums overestimate and Right sums underestimate the true value.</li>
+        <li>The Trapezoidal Rule (average of Left and Right sums) often provides better approximations than either Left or Right alone.</li>
+        <li>The error in approximation decreases as n increases, but at different rates for different methods:
+          <ul>
+            <li>Left/Right sums: Error ∝ 1/n</li>
+            <li>Midpoint/Trapezoidal: Error ∝ 1/n²</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="calc2-info-box">
+      <p><strong>Connecting to Your Quiz:</strong> Section 5.3 of Week 1's quiz will include questions about Riemann sums. Use this tool to practice and build your intuition. Remember, you might be asked to:</p>
+      <ul>
+        <li>Calculate Left, Right, or Midpoint Riemann sums for specific functions</li>
+        <li>Determine whether a given approximation over- or underestimates the true value</li>
+        <li>Find the error in a Riemann sum approximation</li>
+        <li>Compare different approximation methods</li>
+      </ul>
+    </div>
+
+  </div>
+</body>
+</html>
