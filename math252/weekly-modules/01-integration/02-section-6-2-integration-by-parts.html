@@ -4,9 +4,23 @@
   <meta charset="utf-8">
   <title>Section 6.2 – Integration by Parts | MATH A252 Summer 2025</title>
 
-  <script id="MathJax-script" async
-          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
   </script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <!-- CALC II Summer 2025 shared theme -->
   <style>
@@ -28,9 +42,10 @@
     /*  Base layout & typography                                             */
     /* --------------------------------------------------------------------- */
     body {
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      line-height: 1.6;
-      font-size: 1rem;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
       color: var(--calc2-text);
       background-color: var(--calc2-background);
       margin: 0;
@@ -47,7 +62,9 @@
     }
 
     .calc2-title {
-      font-size: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
       margin: 0 0 1.5rem 0;
       color: var(--calc2-heading);
       border-bottom: 3px solid var(--calc2-primary-purple);
@@ -55,7 +72,9 @@
     }
 
     .calc2-subtitle {
-      font-size: 1.5rem;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
       margin: 1.5rem 0 1rem 0;
       color: var(--calc2-heading);
       padding-bottom: 0.25rem;
@@ -94,6 +113,9 @@
     .calc2-theorem h3,
     .calc2-example h3,
     .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
       margin-top: 0;
       color: var(--calc2-primary-dark-blue);
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -196,83 +218,148 @@
     </section>
 
     <div class="calc2-theorem">
-      <h3>Deriving Integration by Parts</h3>
-      <p>
-        Integration by parts comes from the product rule. Let's see how:
-      </p>
-      <p>
-        The product rule states that:
-      </p>
-      \[
-        \frac{d}{dx}[uv] = u\frac{dv}{dx} + v\frac{du}{dx}
-      \]
-      <p>
-        Rearranging this equation:
-      </p>
-      \[
-        u\frac{dv}{dx} = \frac{d}{dx}[uv] - v\frac{du}{dx}
-      \]
-      <p>
-        Integrating both sides:
-      </p>
-      \[
-        \int u\,dv = uv - \int v\,du
-      \]
-      <p>
-        This is the integration by parts formula, which transforms one integral into (hopefully) a simpler one.
-      </p>
+      <h3>Deriving Integration by Parts: Step-by-Step</h3>
+      <p><strong>Step 1:</strong> Start with the Product Rule for derivatives.</p>
+      <p>If we have two functions $f(x)$ and $g(x)$, the Product Rule tells us:</p>
+      <div class="calc2-equation">$$\frac{d}{dx}\Big[f(x)g(x)\Big] = f(x) \cdot g'(x) + f'(x) \cdot g(x)$$</div>
+      
+      <p><strong>Step 2:</strong> Integrate both sides with respect to the <strong>independent variable</strong> $x$.</p>
+      <p>This gives us:</p>
+      <div class="calc2-equation">$$f(x)g(x) = \int f(x) \cdot g'(x) \, dx + \int f'(x) \cdot g(x) \, dx$$</div>
+      
+      <p><strong>Step 3:</strong> Solve for one of the integrals.</p>
+      <p>Rearranging to isolate the first integral:</p>
+      <div class="calc2-equation">$$\int f(x) \cdot g'(x) \, dx = f(x)g(x) - \int f'(x) \cdot g(x) \, dx$$</div>
+      
+      <p><strong>Step 4:</strong> Introduce compact notation.</p>
+      <p>Let ${\color{blue} u = f(x)}$ and ${\color{red} v = g(x)}$. Then:</p>
+      <ul>
+        <li>${\color{blue} du = f'(x) \, dx}$ (differential of $u$)</li>
+        <li>${\color{red} dv = g'(x) \, dx}$ (differential of $v$)</li>
+      </ul>
+      
+      <p><strong>Integration by Parts Formula:</strong></p>
+      <div class="calc2-equation">$$\boxed{\int {\color{blue} u} \, {\color{red} dv} = {\color{blue} u}{\color{red} v} - \int {\color{red} v} \, {\color{blue} du}}$$</div>
     </div>
 
     <div class="calc2-definition">
-      <h3>Choosing u and dv</h3>
-      <p>
-        When applying integration by parts, we need to carefully choose which part of the integrand will be u and which will be dv. A helpful mnemonic is "LIATE":
-      </p>
-      <ul>
-        <li><strong>L</strong>ogarithmic functions (like ln x)</li>
-        <li><strong>I</strong>nverse trigonometric functions (like arctan x)</li>
-        <li><strong>A</strong>lgebraic functions (like x²)</li>
-        <li><strong>T</strong>rigonometric functions (like sin x)</li>
-        <li><strong>E</strong>xponential functions (like eˣ)</li>
-      </ul>
-      <p>
-        Choose u from the list working from top to bottom, and pair it with a function whose derivative (dv) will be simpler.
-      </p>
+      <h3>Definite Integration by Parts</h3>
+      <p>For definite integrals, integration by parts becomes:</p>
+      <div class="calc2-equation">$$\int_a^b {\color{blue} u} \, {\color{red} dv} = \Big[{\color{blue} u}{\color{red} v}\Big]_a^b - \int_a^b {\color{red} v} \, {\color{blue} du}$$</div>
+      <p><strong>Key advantage:</strong> We can evaluate the boundary term $[uv]_a^b$ directly without finding the indefinite integral first.</p>
     </div>
 
-    <div class="calc2-example">
-      <h3>Example 6.2.1: Basic Integration by Parts</h3>
-      <p>
-        Let's evaluate:
-      </p>
-      \[
-        \int x\sin(x)\,dx
-      \]
-      <p>
-        Following LIATE, we choose:
-      </p>
-      \[
-        u = x \quad \text{(algebraic)}
-      \]
-      \[
-        dv = \sin(x)\,dx \quad \text{(trigonometric)}
-      \]
-      <p>
-        Then:
-      </p>
-      \[
-        du = dx \quad \text{and} \quad v = -\cos(x)
-      \]
-      \[
-        \int x\sin(x)\,dx = -x\cos(x) - \int (-\cos(x))\,dx
-      \]
-      \[
-        = -x\cos(x) + \int \cos(x)\,dx
-      \]
-      \[
-        = -x\cos(x) + \sin(x) + C
-      \]
+    <div class="calc2-definition">
+      <h3>The LIATE Strategy</h3>
+      <p>When using integration by parts, choose ${\color{blue} u}$ based on the priority order <strong>LIATE</strong>:</p>
+      <ul>
+        <li><strong>L</strong>ogarithmic functions ($\ln x$, $\log x$)</li>
+        <li><strong>I</strong>nverse trigonometric functions ($\arcsin x$, $\arctan x$)</li>
+        <li><strong>A</strong>lgebraic functions ($x^n$, polynomials)</li>
+        <li><strong>T</strong>rigonometric functions ($\sin x$, $\cos x$, $\tan x$)</li>
+        <li><strong>E</strong>xponential functions ($e^x$, $a^x$)</li>
+      </ul>
+      <p><strong>Strategy:</strong> Choose ${\color{blue} u}$ to be the function that appears <em>earlier</em> in this list, and ${\color{red} dv}$ to be the remaining part of the integrand (including $dx$).</p>
     </div>
+
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Basic Integration by Parts with Color-Coding</h3>
+        <p><strong>Problem:</strong> Evaluate $\int x e^x \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
+          <p>We have an algebraic function ($x$) and an exponential function ($e^x$). By LIATE, choose:</p>
+          <p>${\color{blue} u = x}$ (algebraic comes before exponential)</p>
+          <p>${\color{red} dv = e^x \, dx}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Find $du$ and $v$ by differentiation and integration.</p>
+          <p>${\color{blue} du = \frac{d}{dx}[x] \, dx = 1 \, dx = dx}$</p>
+          <p>${\color{red} v = \int e^x \, dx = e^x}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply the integration by parts formula with color-coding.</p>
+          <div class="calc2-equation">$$\int {\color{blue} x} \cdot {\color{red} e^x \, dx} = {\color{blue} x} \cdot {\color{red} e^x} - \int {\color{red} e^x} \cdot {\color{blue} dx}$$</div>
+          <div class="calc2-equation">$$= x e^x - \int e^x \, dx$$</div>
+          <div class="calc2-equation">$$= x e^x - e^x + C$$</div>
+          <div class="calc2-equation">$$= e^x(x - 1) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Check:</strong> $\frac{d}{dx}[e^x(x-1)] = e^x(x-1) + e^x \cdot 1 = e^x(x-1+1) = xe^x$ ✓</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Definite Integration by Parts</h3>
+        <p><strong>Problem:</strong> Evaluate $\int_0^1 x e^{2x} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
+          <p>${\color{blue} u = x}$ (algebraic)</p>
+          <p>${\color{red} dv = e^{2x} \, dx}$ (exponential)</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Find $du$ and $v$.</p>
+          <p>${\color{blue} du = dx}$</p>
+          <p>${\color{red} v = \int e^{2x} \, dx = \frac{1}{2}e^{2x}}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply the definite integration by parts formula.</p>
+          <div class="calc2-equation">$$\int_0^1 {\color{blue} x} \cdot {\color{red} e^{2x} \, dx} = \Big[{\color{blue} x} \cdot {\color{red} \frac{1}{2}e^{2x}}\Big]_0^1 - \int_0^1 {\color{red} \frac{1}{2}e^{2x}} \cdot {\color{blue} dx}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Evaluate the boundary term and remaining integral.</p>
+          <div class="calc2-equation">$$= \left[\frac{x e^{2x}}{2}\right]_0^1 - \frac{1}{2}\int_0^1 e^{2x} \, dx$$</div>
+          <div class="calc2-equation">$$= \left(\frac{1 \cdot e^2}{2} - \frac{0 \cdot e^0}{2}\right) - \frac{1}{2} \cdot \left[\frac{e^{2x}}{2}\right]_0^1$$</div>
+          <div class="calc2-equation">$$= \frac{e^2}{2} - \frac{1}{4}(e^2 - e^0) = \frac{e^2}{2} - \frac{1}{4}(e^2 - 1)$$</div>
+          <div class="calc2-equation">$$= \frac{e^2}{2} - \frac{e^2}{4} + \frac{1}{4} = \frac{e^2}{4} + \frac{1}{4} = \frac{e^2 + 1}{4}$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: When LIATE Doesn't Make the Choice Obvious</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \ln x \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Recognize the challenge.</p>
+          <p>This integral contains only one function: $\ln x$. How do we apply integration by parts?</p>
+          <p><strong>Key insight:</strong> Write $\int \ln x \, dx = \int \ln x \cdot 1 \, dx$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Choose $u$ and $dv$ strategically.</p>
+          <p>We have logarithmic ($\ln x$) and algebraic ($1$). By LIATE:</p>
+          <p>${\color{blue} u = \ln x}$ (logarithmic comes first)</p>
+          <p>${\color{red} dv = 1 \, dx = dx}$ (the "hidden" algebraic function)</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Find $du$ and $v$.</p>
+          <p>${\color{blue} du = \frac{1}{x} \, dx}$</p>
+          <p>${\color{red} v = \int dx = x}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Apply integration by parts.</p>
+          <div class="calc2-equation">$$\int {\color{blue} \ln x} \cdot {\color{red} dx} = {\color{blue} \ln x} \cdot {\color{red} x} - \int {\color{red} x} \cdot {\color{blue} \frac{1}{x} \, dx}$$</div>
+          <div class="calc2-equation">$$= x \ln x - \int 1 \, dx = x \ln x - x + C$$</div>
+          <div class="calc2-equation">$$= x(\ln x - 1) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Key insight:</strong> Sometimes integration by parts works even when there's "only one function" - we introduce a factor of 1 and apply the technique. This is especially common with logarithmic and inverse trigonometric functions.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- Key takeaways -->
     <section class="calc2-key-point">
