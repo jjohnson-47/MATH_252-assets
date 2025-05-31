@@ -221,10 +221,11 @@
     <section class="calc2-reading-box">
       <strong>Essential Textbook Reading:</strong>
       <ul>
-        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html" target="_blank" rel="noopener">APEX Calculus §6.3 – Trigonometric Integrals</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html" target="_blank" rel="noopener">APEX Calculus §6.3 – Trigonometric Integrals</a> (Complete section overview)</li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_1" target="_blank" rel="noopener">Key Idea 6.3.2 – Integrals Involving Powers of Sine and Cosine</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_2" target="_blank" rel="noopener">Key Idea 6.3.8 – Integrals Involving Powers of Tangent and Secant</a></li>
         <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#sec_trigint-1-2" target="_blank" rel="noopener">Example 6.3.2 – Integrating powers of sine and cosine</a></li>
         <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#sec_trigint-2-2" target="_blank" rel="noopener">Example 6.3.6 – Products of different trigonometric functions</a></li>
-        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#sec_trigint-3-2" target="_blank" rel="noopener">Example 6.3.10 – Using reduction formulas</a></li>
       </ul>
     </section>
 
@@ -252,32 +253,51 @@
       <p><strong>The key insight:</strong> We use trigonometric identities to transform complex trigonometric expressions into forms we can integrate using basic rules or substitution techniques.</p>
     </section>
 
-    <!-- Core theory -->
+    <!-- Textbook Key Ideas -->
     <section>
-      <h2 class="calc2-subtitle">Essential Trigonometric Identities</h2>
+      <h2 class="calc2-subtitle">Key Ideas from APEX Calculus</h2>
 
       <div class="calc2-definition">
-        <h3>Power Reduction Formulas</h3>
-        <p>These identities are crucial for handling <strong>even powers</strong> of sine and cosine:</p>
-        <div class="calc2-equation">$$\sin^2 x = \frac{1 - \cos(2x)}{2}$$</div>
-        <div class="calc2-equation">$$\cos^2 x = \frac{1 + \cos(2x)}{2}$$</div>
-        <p><strong>Why these work:</strong> They reduce the power from 2 to 1, making integration possible using basic antiderivative rules.</p>
+        <h3>Key Idea 6.3.2: Powers of Sine and Cosine</h3>
+        <p>Consider $\int \sin^m x \cos^n x \, dx$ where $m, n$ are nonnegative integers. <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_1" target="_blank">📖 See complete strategy in textbook</a></p>
+        
+        <div class="solution-step">
+          <p><strong>Case 1:</strong> If $m$ is odd, factor out $\textcolor{blue}{\sin x}$ and use substitution $\textcolor{red}{u = \cos x}$</p>
+          <div class="calc2-equation">$$\sin^m x = (\sin^2 x)^{(m-1)/2} \sin x = \textcolor{red}{(1 - \cos^2 x)^{(m-1)/2}} \textcolor{blue}{\sin x}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Case 2:</strong> If $n$ is odd, factor out $\textcolor{blue}{\cos x}$ and use substitution $\textcolor{red}{u = \sin x}$</p>
+          <div class="calc2-equation">$$\cos^n x = (\cos^2 x)^{(n-1)/2} \cos x = \textcolor{red}{(1 - \sin^2 x)^{(n-1)/2}} \textcolor{blue}{\cos x}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Case 3:</strong> If both $m$ and $n$ are even, use power-reducing identities:</p>
+          <div class="calc2-equation">$$\sin^2 x = \frac{1 - \cos(2x)}{2}, \quad \cos^2 x = \frac{1 + \cos(2x)}{2}$$</div>
+        </div>
       </div>
 
       <div class="calc2-definition">
-        <h3>Pythagorean Identities</h3>
-        <p>Essential for working with <strong>odd powers</strong> and substitution:</p>
-        <div class="calc2-equation">$$\sin^2 x + \cos^2 x = 1$$</div>
-        <div class="calc2-equation">$$1 + \tan^2 x = \sec^2 x$$</div>
-        <div class="calc2-equation">$$1 + \cot^2 x = \csc^2 x$$</div>
+        <h3>Key Idea 6.3.8: Powers of Tangent and Secant</h3>
+        <p>Consider $\int \tan^m x \sec^n x \, dx$ where $m, n$ are nonnegative integers. <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_2" target="_blank">📖 See complete strategy in textbook</a></p>
+        
+        <div class="solution-step">
+          <p><strong>Case 1:</strong> If $n$ is even, factor out $\textcolor{blue}{\sec^2 x}$ and use substitution $\textcolor{red}{u = \tan x}$</p>
+          <div class="calc2-equation">$$\sec^n x = (\sec^2 x)^{n/2-1} \sec^2 x = \textcolor{red}{(1 + \tan^2 x)^{n/2-1}} \textcolor{blue}{\sec^2 x}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Case 2:</strong> If $m$ is odd, factor out $\textcolor{blue}{\sec x \tan x}$ and use substitution $\textcolor{red}{u = \sec x}$</p>
+          <div class="calc2-equation">$$\tan^m x \sec^n x = (\tan^2 x)^{(m-1)/2} \sec^{n-1} x \sec x \tan x = \textcolor{red}{(\sec^2 x - 1)^{(m-1)/2} \sec^{n-1} x} \textcolor{blue}{\sec x \tan x}$$</div>
+        </div>
       </div>
 
       <div class="calc2-definition">
         <h3>Product-to-Sum Formulas</h3>
-        <p>Used when integrating <strong>products of different trigonometric functions</strong>:</p>
-        <div class="calc2-equation">$$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$$</div>
-        <div class="calc2-equation">$$\cos A \cos B = \frac{1}{2}[\cos(A+B) + \cos(A-B)]$$</div>
-        <div class="calc2-equation">$$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$$</div>
+        <p>For integrals like $\int \sin(mx)\cos(nx) \, dx$, use these <strong>product-to-sum identities</strong>:</p>
+        <div class="calc2-equation">$$\sin(mx)\sin(nx) = \frac{1}{2}[\cos((m-n)x) - \cos((m+n)x)]$$</div>
+        <div class="calc2-equation">$$\cos(mx)\cos(nx) = \frac{1}{2}[\cos((m-n)x) + \cos((m+n)x)]$$</div>
+        <div class="calc2-equation">$$\sin(mx)\cos(nx) = \frac{1}{2}[\sin((m-n)x) + \sin((m+n)x)]$$</div>
       </div>
     </section>
 
@@ -327,32 +347,33 @@
       <h2 class="calc2-subtitle">Fundamental Examples</h2>
 
       <div class="calc2-example">
-        <h3>Example 1: Odd Power of Sine</h3>
-        <p><strong>Problem:</strong> Evaluate $\int \sin^3 x \cos^2 x \, dx$.</p>
+        <h3>Example 1: Applying Key Idea 6.3.2 (Odd Power of Sine)</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \sin^3 x \cos^2 x \, dx$ using the textbook's systematic approach.</p>
+        <p><em>This follows <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_1" target="_blank">Key Idea 6.3.2, Case 1</a> from your textbook.</em></p>
         
         <div class="solution-step">
-          <p><strong>Step 1:</strong> Identify the strategy.</p>
-          <p>We have an <strong>odd power of sine</strong> (3) and an even power of cosine (2).</p>
-          <p>Strategy: Factor out $\textcolor{blue}{\sin x}$ and use substitution.</p>
+          <p><strong>Step 1:</strong> Identify the case from Key Idea 6.3.2.</p>
+          <p>We have $\int \sin^{\textcolor{red}{3}} x \cos^{\textcolor{blue}{2}} x \, dx$ where $m = 3$ (odd) and $n = 2$ (even).</p>
+          <p><strong>Strategy:</strong> Since $m$ is odd, use Case 1 - factor out $\textcolor{blue}{\sin x}$ and substitute $\textcolor{red}{u = \cos x}$.</p>
         </div>
 
         <div class="solution-step">
-          <p><strong>Step 2:</strong> Factor and convert using Pythagorean identity.</p>
-          <div class="calc2-equation">$$\int \sin^3 x \cos^2 x \, dx = \int \sin^2 x \cos^2 x \cdot \textcolor{blue}{\sin x} \, dx$$</div>
-          <div class="calc2-equation">$$= \int \textcolor{red}{(1 - \cos^2 x)} \cos^2 x \cdot \textcolor{blue}{\sin x} \, dx$$</div>
-          <div class="calc2-equation">$$= \int \textcolor{red}{(\cos^2 x - \cos^4 x)} \cdot \textcolor{blue}{\sin x} \, dx$$</div>
+          <p><strong>Step 2:</strong> Apply the textbook formula for odd $m$.</p>
+          <p>Rewrite $\sin^3 x = \sin^2 x \cdot \sin x = \textcolor{red}{(1 - \cos^2 x)} \textcolor{blue}{\sin x}$</p>
+          <div class="calc2-equation">$$\int \sin^3 x \cos^2 x \, dx = \int \textcolor{red}{(1 - \cos^2 x)} \cos^2 x \textcolor{blue}{\sin x} \, dx$$</div>
+          <div class="calc2-equation">$$= \int \textcolor{red}{(\cos^2 x - \cos^4 x)} \textcolor{blue}{\sin x} \, dx$$</div>
         </div>
 
         <div class="solution-step">
-          <p><strong>Step 3:</strong> Apply substitution.</p>
-          <p>Let $\textcolor{red}{u = \cos x}$, then $\textcolor{blue}{du = -\sin x \, dx}$, so $\textcolor{blue}{\sin x \, dx = -du}$</p>
-          <div class="calc2-equation">$$= \int \textcolor{red}{(u^2 - u^4)} \cdot \textcolor{blue}{(-du)} = -\int (u^2 - u^4) \, du$$</div>
+          <p><strong>Step 3:</strong> Apply the substitution $\textcolor{red}{u = \cos x}$, $\textcolor{blue}{du = -\sin x \, dx}$.</p>
+          <div class="calc2-equation">$$= \int \textcolor{red}{(u^2 - u^4)} \textcolor{blue}{(-du)} = -\int (u^2 - u^4) \, du$$</div>
+          <div class="calc2-equation">$$= -\int u^2 \, du + \int u^4 \, du$$</div>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 4:</strong> Integrate and substitute back.</p>
-          <div class="calc2-equation">$$= -\left(\frac{u^3}{3} - \frac{u^5}{5}\right) + C = -\frac{u^3}{3} + \frac{u^5}{5} + C$$</div>
-          <div class="calc2-equation">$$= -\frac{\cos^3 x}{3} + \frac{\cos^5 x}{5} + C$$</div>
+          <div class="calc2-equation">$$= -\frac{u^3}{3} + \frac{u^5}{5} + C = -\frac{\cos^3 x}{3} + \frac{\cos^5 x}{5} + C$$</div>
+          <p><strong>Verification:</strong> You can check this result by differentiating!</p>
         </div>
       </div>
 
@@ -386,35 +407,67 @@
       </div>
 
       <div class="calc2-example">
-        <h3>Example 3: Product of Different Functions</h3>
-        <p><strong>Problem:</strong> Evaluate $\int \sin(3x) \cos(5x) \, dx$.</p>
+        <h3>Example 3: Applying Key Idea 6.3.8 (Powers of Tangent and Secant)</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \tan^2 x \sec^4 x \, dx$ using the textbook's approach.</p>
+        <p><em>This follows <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_2" target="_blank">Key Idea 6.3.8, Case 1</a> since $n = 4$ is even.</em></p>
         
         <div class="solution-step">
-          <p><strong>Step 1:</strong> Apply product-to-sum formula.</p>
-          <div class="calc2-equation">$$\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$$</div>
-          <p>With $A = 3x$ and $B = 5x$:</p>
-          <div class="calc2-equation">$$\sin(3x) \cos(5x) = \frac{1}{2}[\sin(8x) + \sin(-2x)] = \frac{1}{2}[\sin(8x) - \sin(2x)]$$</div>
+          <p><strong>Step 1:</strong> Identify the case from Key Idea 6.3.8.</p>
+          <p>We have $\int \tan^{\textcolor{blue}{2}} x \sec^{\textcolor{red}{4}} x \, dx$ where $m = 2$ (even) and $n = 4$ (even).</p>
+          <p><strong>Strategy:</strong> Since $n$ is even, use Case 1 - factor out $\textcolor{blue}{\sec^2 x}$ and substitute $\textcolor{red}{u = \tan x}$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Apply the textbook formula for even $n$.</p>
+          <p>Rewrite $\sec^4 x = \sec^2 x \cdot \sec^2 x = \textcolor{red}{(1 + \tan^2 x)} \textcolor{blue}{\sec^2 x}$</p>
+          <div class="calc2-equation">$$\int \tan^2 x \sec^4 x \, dx = \int \tan^2 x \textcolor{red}{(1 + \tan^2 x)} \textcolor{blue}{\sec^2 x} \, dx$$</div>
+          <div class="calc2-equation">$$= \int \textcolor{red}{(\tan^2 x + \tan^4 x)} \textcolor{blue}{\sec^2 x} \, dx$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply substitution $\textcolor{red}{u = \tan x}$, $\textcolor{blue}{du = \sec^2 x \, dx}$.</p>
+          <div class="calc2-equation">$$= \int \textcolor{red}{(u^2 + u^4)} \textcolor{blue}{du} = \int u^2 \, du + \int u^4 \, du$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Integrate and substitute back.</p>
+          <div class="calc2-equation">$$= \frac{u^3}{3} + \frac{u^5}{5} + C = \frac{\tan^3 x}{3} + \frac{\tan^5 x}{5} + C$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 4: Product-to-Sum Formulas</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \sin(3x) \cos(5x) \, dx$ using product-to-sum identities.</p>
+        <p><em>This technique is essential for analyzing sound waves and signal processing applications.</em></p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Apply the product-to-sum formula.</p>
+          <div class="calc2-equation">$$\sin(mx) \cos(nx) = \frac{1}{2}[\sin((m-n)x) + \sin((m+n)x)]$$</div>
+          <p>With $m = 3$ and $n = 5$:</p>
+          <div class="calc2-equation">$$\sin(3x) \cos(5x) = \frac{1}{2}[\sin((3-5)x) + \sin((3+5)x)] = \frac{1}{2}[\sin(-2x) + \sin(8x)]$$</div>
+          <div class="calc2-equation">$$= \frac{1}{2}[-\sin(2x) + \sin(8x)]$$</div>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 2:</strong> Integrate term by term.</p>
-          <div class="calc2-equation">$$\int \sin(3x) \cos(5x) \, dx = \frac{1}{2} \int [\sin(8x) - \sin(2x)] \, dx$$</div>
-          <div class="calc2-equation">$$= \frac{1}{2}\left[-\frac{\cos(8x)}{8} + \frac{\cos(2x)}{2}\right] + C$$</div>
-          <div class="calc2-equation">$$= -\frac{\cos(8x)}{16} + \frac{\cos(2x)}{4} + C$$</div>
+          <div class="calc2-equation">$$\int \sin(3x) \cos(5x) \, dx = \frac{1}{2} \int [-\sin(2x) + \sin(8x)] \, dx$$</div>
+          <div class="calc2-equation">$$= \frac{1}{2}\left[\frac{\cos(2x)}{2} - \frac{\cos(8x)}{8}\right] + C$$</div>
+          <div class="calc2-equation">$$= \frac{\cos(2x)}{4} - \frac{\cos(8x)}{16} + C$$</div>
         </div>
       </div>
     </section>
 
     <!-- Key takeaways -->
     <section class="calc2-key-point">
-      <p><strong>Mastering Trigonometric Integrals:</strong></p>
+      <p><strong>Mastering Trigonometric Integrals with APEX Calculus:</strong></p>
       <ul>
-        <li><strong>Strategy first:</strong> Identify the pattern before choosing your technique</li>
-        <li><strong>Odd powers = substitution:</strong> Factor out one function and substitute</li>
-        <li><strong>Even powers = reduction:</strong> Use power reduction formulas to lower the degree</li>
-        <li><strong>Different functions = product-to-sum:</strong> Convert products to sums for easier integration</li>
-        <li><strong>Practice pattern recognition:</strong> These become intuitive with experience</li>
-        <li><strong>Check your work:</strong> Trigonometric derivatives can verify your antiderivatives</li>
+        <li><strong>Use the textbook's Key Ideas:</strong> <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_1" target="_blank">Key Idea 6.3.2</a> for sine/cosine powers, <a href="https://opentext.uleth.ca/apex-calculus/sec_trigint.html#idea_trig_int_2" target="_blank">Key Idea 6.3.8</a> for tangent/secant powers</li>
+        <li><strong>Pattern recognition first:</strong> Identify odd/even powers before choosing substitution strategy</li>
+        <li><strong>Systematic approach:</strong> Follow the textbook's case-by-case analysis for consistent results</li>
+        <li><strong>Product-to-sum for different periods:</strong> Essential for applications in sound wave analysis</li>
+        <li><strong>Practice with textbook examples:</strong> Work through Examples 6.3.2, 6.3.6, and others for mastery</li>
+        <li><strong>Verify your results:</strong> Differentiate your antiderivatives to check your work</li>
+        <li><strong>Connect to applications:</strong> These techniques are fundamental in physics, engineering, and signal processing</li>
       </ul>
     </section>
 
