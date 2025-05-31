@@ -232,26 +232,26 @@
       <div class="calc2-equation">$$\int f(x) \cdot g'(x) \, dx = f(x)g(x) - \int f'(x) \cdot g(x) \, dx$$</div>
       
       <p><strong>Step 4:</strong> Introduce compact notation.</p>
-      <p>Let ${\color{blue} u = f(x)}$ and ${\color{red} v = g(x)}$. Then:</p>
+      <p>Let $\textcolor{blue}{u = f(x)}$ and $\textcolor{red}{v = g(x)}$. Then:</p>
       <ul>
-        <li>${\color{blue} du = f'(x) \, dx}$ (differential of $u$)</li>
-        <li>${\color{red} dv = g'(x) \, dx}$ (differential of $v$)</li>
+        <li>$\textcolor{blue}{du = f'(x) \, dx}$ (differential of $u$)</li>
+        <li>$\textcolor{red}{dv = g'(x) \, dx}$ (differential of $v$)</li>
       </ul>
       
       <p><strong>Integration by Parts Formula:</strong></p>
-      <div class="calc2-equation">$$\boxed{\int {\color{blue} u} \, {\color{red} dv} = {\color{blue} u}{\color{red} v} - \int {\color{red} v} \, {\color{blue} du}}$$</div>
+      <div class="calc2-equation">$$\boxed{\int \textcolor{blue}{u} \, \textcolor{red}{dv} = \textcolor{blue}{u}\textcolor{red}{v} - \int \textcolor{red}{v} \, \textcolor{blue}{du}}$$</div>
     </div>
 
     <div class="calc2-definition">
       <h3>Definite Integration by Parts</h3>
       <p>For definite integrals, integration by parts becomes:</p>
-      <div class="calc2-equation">$$\int_a^b {\color{blue} u} \, {\color{red} dv} = \Big[{\color{blue} u}{\color{red} v}\Big]_a^b - \int_a^b {\color{red} v} \, {\color{blue} du}$$</div>
+      <div class="calc2-equation">$$\int_a^b \textcolor{blue}{u} \, \textcolor{red}{dv} = \Big[\textcolor{blue}{u}\textcolor{red}{v}\Big]_a^b - \int_a^b \textcolor{red}{v} \, \textcolor{blue}{du}$$</div>
       <p><strong>Key advantage:</strong> We can evaluate the boundary term $[uv]_a^b$ directly without finding the indefinite integral first.</p>
     </div>
 
     <div class="calc2-definition">
       <h3>The LIATE Strategy</h3>
-      <p>When using integration by parts, choose ${\color{blue} u}$ based on the priority order <strong>LIATE</strong>:</p>
+      <p>When using integration by parts, choose $\textcolor{blue}{u}$ based on the priority order <strong>LIATE</strong>:</p>
       <ul>
         <li><strong>L</strong>ogarithmic functions ($\ln x$, $\log x$)</li>
         <li><strong>I</strong>nverse trigonometric functions ($\arcsin x$, $\arctan x$)</li>
@@ -259,7 +259,7 @@
         <li><strong>T</strong>rigonometric functions ($\sin x$, $\cos x$, $\tan x$)</li>
         <li><strong>E</strong>xponential functions ($e^x$, $a^x$)</li>
       </ul>
-      <p><strong>Strategy:</strong> Choose ${\color{blue} u}$ to be the function that appears <em>earlier</em> in this list, and ${\color{red} dv}$ to be the remaining part of the integrand (including $dx$).</p>
+      <p><strong>Strategy:</strong> Choose $\textcolor{blue}{u}$ to be the function that appears <em>earlier</em> in this list, and $\textcolor{red}{dv}$ to be the remaining part of the integrand (including $dx$).</p>
     </div>
 
     <section>
@@ -272,19 +272,19 @@
         <div class="solution-step">
           <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
           <p>We have an algebraic function ($x$) and an exponential function ($e^x$). By LIATE, choose:</p>
-          <p>${\color{blue} u = x}$ (algebraic comes before exponential)</p>
-          <p>${\color{red} dv = e^x \, dx}$</p>
+          <p>$\textcolor{blue}{u = x}$ (algebraic comes before exponential)</p>
+          <p>$\textcolor{red}{dv = e^x \, dx}$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 2:</strong> Find $du$ and $v$ by differentiation and integration.</p>
-          <p>${\color{blue} du = \frac{d}{dx}[x] \, dx = 1 \, dx = dx}$</p>
-          <p>${\color{red} v = \int e^x \, dx = e^x}$</p>
+          <p>$\textcolor{blue}{du = \frac{d}{dx}[x] \, dx = 1 \, dx = dx}$</p>
+          <p>$\textcolor{red}{v = \int e^x \, dx = e^x}$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 3:</strong> Apply the integration by parts formula with color-coding.</p>
-          <div class="calc2-equation">$$\int {\color{blue} x} \cdot {\color{red} e^x \, dx} = {\color{blue} x} \cdot {\color{red} e^x} - \int {\color{red} e^x} \cdot {\color{blue} dx}$$</div>
+          <div class="calc2-equation">$$\int \textcolor{blue}{x} \cdot \textcolor{red}{e^x \, dx} = \textcolor{blue}{x} \cdot \textcolor{red}{e^x} - \int \textcolor{red}{e^x} \cdot \textcolor{blue}{dx}$$</div>
           <div class="calc2-equation">$$= x e^x - \int e^x \, dx$$</div>
           <div class="calc2-equation">$$= x e^x - e^x + C$$</div>
           <div class="calc2-equation">$$= e^x(x - 1) + C$$</div>
@@ -301,19 +301,19 @@
         
         <div class="solution-step">
           <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
-          <p>${\color{blue} u = x}$ (algebraic)</p>
-          <p>${\color{red} dv = e^{2x} \, dx}$ (exponential)</p>
+          <p>$\textcolor{blue}{u = x}$ (algebraic)</p>
+          <p>$\textcolor{red}{dv = e^{2x} \, dx}$ (exponential)</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 2:</strong> Find $du$ and $v$.</p>
-          <p>${\color{blue} du = dx}$</p>
-          <p>${\color{red} v = \int e^{2x} \, dx = \frac{1}{2}e^{2x}}$</p>
+          <p>$\textcolor{blue}{du = dx}$</p>
+          <p>$\textcolor{red}{v = \int e^{2x} \, dx = \frac{1}{2}e^{2x}}$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 3:</strong> Apply the definite integration by parts formula.</p>
-          <div class="calc2-equation">$$\int_0^1 {\color{blue} x} \cdot {\color{red} e^{2x} \, dx} = \Big[{\color{blue} x} \cdot {\color{red} \frac{1}{2}e^{2x}}\Big]_0^1 - \int_0^1 {\color{red} \frac{1}{2}e^{2x}} \cdot {\color{blue} dx}$$</div>
+          <div class="calc2-equation">$$\int_0^1 \textcolor{blue}{x} \cdot \textcolor{red}{e^{2x} \, dx} = \Big[\textcolor{blue}{x} \cdot \textcolor{red}{\frac{1}{2}e^{2x}}\Big]_0^1 - \int_0^1 \textcolor{red}{\frac{1}{2}e^{2x}} \cdot \textcolor{blue}{dx}$$</div>
         </div>
 
         <div class="solution-step">
@@ -338,19 +338,19 @@
         <div class="solution-step">
           <p><strong>Step 2:</strong> Choose $u$ and $dv$ strategically.</p>
           <p>We have logarithmic ($\ln x$) and algebraic ($1$). By LIATE:</p>
-          <p>${\color{blue} u = \ln x}$ (logarithmic comes first)</p>
-          <p>${\color{red} dv = 1 \, dx = dx}$ (the "hidden" algebraic function)</p>
+          <p>$\textcolor{blue}{u = \ln x}$ (logarithmic comes first)</p>
+          <p>$\textcolor{red}{dv = 1 \, dx = dx}$ (the "hidden" algebraic function)</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 3:</strong> Find $du$ and $v$.</p>
-          <p>${\color{blue} du = \frac{1}{x} \, dx}$</p>
-          <p>${\color{red} v = \int dx = x}$</p>
+          <p>$\textcolor{blue}{du = \frac{1}{x} \, dx}$</p>
+          <p>$\textcolor{red}{v = \int dx = x}$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 4:</strong> Apply integration by parts.</p>
-          <div class="calc2-equation">$$\int {\color{blue} \ln x} \cdot {\color{red} dx} = {\color{blue} \ln x} \cdot {\color{red} x} - \int {\color{red} x} \cdot {\color{blue} \frac{1}{x} \, dx}$$</div>
+          <div class="calc2-equation">$$\int \textcolor{blue}{\ln x} \cdot \textcolor{red}{dx} = \textcolor{blue}{\ln x} \cdot \textcolor{red}{x} - \int \textcolor{red}{x} \cdot \textcolor{blue}{\frac{1}{x} \, dx}$$</div>
           <div class="calc2-equation">$$= x \ln x - \int 1 \, dx = x \ln x - x + C$$</div>
           <div class="calc2-equation">$$= x(\ln x - 1) + C$$</div>
         </div>
