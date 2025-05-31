@@ -7,12 +7,12 @@
   <!-- MathJax config must come BEFORE the script -->
   <script>
     window.MathJax = {
-      loader: {load: ['[tex]/color']},          // Ask loader for color.js
+      loader: {load: ['[tex]/color']},          // Explicitly load color extension
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
-        packages: {'[+]': ['color']}            // Keep the package name here
+        packages: {'[+]': ['color']}            // Enable color package
       }
     };
   </script>
