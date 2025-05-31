@@ -248,7 +248,8 @@
     <section class="calc2-reading-box">
       <strong>Essential Textbook Reading:</strong>
       <ul>
-        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html" target="_blank" rel="noopener">APEX Calculus §6.4 – Trigonometric Substitution</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html" target="_blank" rel="noopener">APEX Calculus §6.4 – Trigonometric Substitution</a> (Complete section overview)</li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank" rel="noopener">Key Idea 6.4.2 – Trigonometric Substitution</a> (Essential reference for all three cases)</li>
         <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-1-2" target="_blank" rel="noopener">Example 6.4.2 – Using the √(a²-x²) substitution</a></li>
         <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-2-2" target="_blank" rel="noopener">Example 6.4.6 – Using the √(a²+x²) substitution</a></li>
         <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-3-2" target="_blank" rel="noopener">Example 6.4.10 – Using the √(x²-a²) substitution</a></li>
@@ -280,93 +281,121 @@
       <p><strong>The key insight:</strong> By cleverly substituting trigonometric functions for algebraic variables, we can eliminate troublesome radicals and transform the integral into a purely trigonometric form that we can handle using Section 6.3 techniques.</p>
     </section>
 
-    <!-- Core theory -->
+    <!-- Textbook Key Idea -->
     <section>
-      <h2 class="calc2-subtitle">The Three Standard Cases</h2>
+      <h2 class="calc2-subtitle">Key Idea 6.4.2 from APEX Calculus</h2>
 
       <div class="calc2-definition">
-        <h3>Trigonometric Substitution Reference Table</h3>
+        <h3>Trigonometric Substitution</h3>
+        <p>The three standard cases for trigonometric substitution. <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">📖 See complete explanation in textbook</a></p>
         
-        <table class="strategy-table">
-          <thead>
-            <tr>
-              <th>Radical Form</th>
-              <th>Substitution</th>
-              <th>Differential</th>
-              <th>Simplified Radical</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>$\sqrt{\textcolor{red}{a^2} - \textcolor{blue}{x^2}}$</td>
-              <td>$\textcolor{blue}{x} = \textcolor{red}{a} \sin \theta$</td>
-              <td>$d\textcolor{blue}{x} = \textcolor{red}{a} \cos \theta \, d\theta$</td>
-              <td>$\textcolor{red}{a} \cos \theta$</td>
-            </tr>
-            <tr>
-              <td>$\sqrt{\textcolor{red}{a^2} + \textcolor{blue}{x^2}}$</td>
-              <td>$\textcolor{blue}{x} = \textcolor{red}{a} \tan \theta$</td>
-              <td>$d\textcolor{blue}{x} = \textcolor{red}{a} \sec^2 \theta \, d\theta$</td>
-              <td>$\textcolor{red}{a} \sec \theta$</td>
-            </tr>
-            <tr>
-              <td>$\sqrt{\textcolor{blue}{x^2} - \textcolor{red}{a^2}}$</td>
-              <td>$\textcolor{blue}{x} = \textcolor{red}{a} \sec \theta$</td>
-              <td>$d\textcolor{blue}{x} = \textcolor{red}{a} \sec \theta \tan \theta \, d\theta$</td>
-              <td>$\textcolor{red}{a} \tan \theta$</td>
-            </tr>
-          </tbody>
-        </table>
-        
-        <p><strong>Memory device:</strong> Each substitution creates a <em>Pythagorean identity</em> that eliminates the radical.</p>
-      </div>
+        <div class="solution-step">
+          <h4>Case 1: Integrands containing $\sqrt{a^2 - x^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
+            <div style="flex: 1; min-width: 300px;">
+              <p><strong>Substitution:</strong> $x = a\sin\theta$, $dx = a\cos\theta \, d\theta$</p>
+              <p><strong>Inverse:</strong> $\theta = \sin^{-1}(x/a)$ for $-\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2}$</p>
+              <p><strong>Result:</strong> On this interval, $\cos\theta \geq 0$, so:</p>
+              <div class="calc2-equation">$$\sqrt{a^2 - x^2} = a\cos\theta$$</div>
+            </div>
+            <div style="text-align: center;">
+              <img src="../../../images/chapter6/fig-6-4-3.svg" alt="Reference triangle for sqrt(a²-x²)" style="max-width: 200px; height: auto;">
+              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            </div>
+          </div>
+        </div>
 
-      <div class="triangle-diagram">
-        <div class="triangle-item">
-          <h4>Case 1: $\sqrt{a^2 - x^2}$</h4>
-          <p>Use $x = a\sin\theta$</p>
-          <p><strong>Triangle:</strong> hypotenuse = $a$, opposite = $x$</p>
-          <p><strong>Domain:</strong> $-\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2}$</p>
+        <div class="solution-step">
+          <h4>Case 2: Integrands containing $\sqrt{x^2 + a^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
+            <div style="flex: 1; min-width: 300px;">
+              <p><strong>Substitution:</strong> $x = a\tan\theta$, $dx = a\sec^2\theta \, d\theta$</p>
+              <p><strong>Inverse:</strong> $\theta = \tan^{-1}(x/a)$ for $-\frac{\pi}{2} < \theta < \frac{\pi}{2}$</p>
+              <p><strong>Result:</strong> On this interval, $\sec\theta > 0$, so:</p>
+              <div class="calc2-equation">$$\sqrt{x^2 + a^2} = a\sec\theta$$</div>
+            </div>
+            <div style="text-align: center;">
+              <img src="../../../images/chapter6/fig-6-4-4.svg" alt="Reference triangle for sqrt(x²+a²)" style="max-width: 200px; height: auto;">
+              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            </div>
+          </div>
         </div>
-        <div class="triangle-item">
-          <h4>Case 2: $\sqrt{a^2 + x^2}$</h4>
-          <p>Use $x = a\tan\theta$</p>
-          <p><strong>Triangle:</strong> adjacent = $a$, opposite = $x$</p>
-          <p><strong>Domain:</strong> $-\frac{\pi}{2} < \theta < \frac{\pi}{2}$</p>
-        </div>
-        <div class="triangle-item">
-          <h4>Case 3: $\sqrt{x^2 - a^2}$</h4>
-          <p>Use $x = a\sec\theta$</p>
-          <p><strong>Triangle:</strong> hypotenuse = $x$, adjacent = $a$</p>
-          <p><strong>Domain:</strong> $0 \leq \theta < \frac{\pi}{2}$ or $\pi \leq \theta < \frac{3\pi}{2}$</p>
+
+        <div class="solution-step">
+          <h4>Case 3: Integrands containing $\sqrt{x^2 - a^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
+            <div style="flex: 1; min-width: 300px;">
+              <p><strong>Substitution:</strong> $x = a\sec\theta$, $dx = a\sec\theta\tan\theta \, d\theta$</p>
+              <p><strong>Inverse:</strong> $\theta = \sec^{-1}(x/a)$</p>
+              <p><strong>Domain restrictions:</strong> If $x/a \geq 1$, then $0 \leq \theta < \frac{\pi}{2}$</p>
+              <p><strong>Result:</strong> We restrict to $x \geq a$, so on $[0, \frac{\pi}{2})$, $\tan\theta \geq 0$:</p>
+              <div class="calc2-equation">$$\sqrt{x^2 - a^2} = a\tan\theta$$</div>
+            </div>
+            <div style="text-align: center;">
+              <img src="../../../images/chapter6/fig-6-4-5.svg" alt="Reference triangle for sqrt(x²-a²)" style="max-width: 200px; height: auto;">
+              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Geometric understanding -->
+    <!-- SOHCAHTOA Explanation -->
     <section>
-      <h2 class="calc2-subtitle">Geometric Foundation</h2>
+      <h2 class="calc2-subtitle">Understanding Through SOHCAHTOA</h2>
 
-      <div class="calc2-theorem">
-        <h3>Why These Substitutions Work</h3>
-        <p>Each trigonometric substitution is based on a <strong>right triangle relationship</strong> that naturally creates the Pythagorean identity needed to eliminate the radical:</p>
+      <div class="calc2-insight">
+        <h3>Why These Formulas Work: Basic Trigonometry</h3>
+        <p>The trigonometric substitution formulas are simply applications of <strong>SOHCAHTOA</strong> and the derivatives of trigonometric functions. Let's see how each case emerges naturally:</p>
         
         <div class="solution-step">
-          <p><strong>Case 1:</strong> $\sqrt{a^2 - x^2}$ with $x = a\sin\theta$</p>
-          <div class="calc2-equation">$$\sqrt{a^2 - x^2} = \sqrt{a^2 - a^2\sin^2\theta} = \sqrt{a^2(1 - \sin^2\theta)} = \sqrt{a^2\cos^2\theta} = a|\cos\theta|$$</div>
-          <p>Since $-\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2}$, we have $\cos\theta \geq 0$, so $|\cos\theta| = \cos\theta$.</p>
+          <p><strong>Remember SOHCAHTOA:</strong></p>
+          <ul>
+            <li><strong>SOH:</strong> $\sin\theta = \frac{\text{opposite}}{\text{hypotenuse}}$</li>
+            <li><strong>CAH:</strong> $\cos\theta = \frac{\text{adjacent}}{\text{hypotenuse}}$</li>
+            <li><strong>TOA:</strong> $\tan\theta = \frac{\text{opposite}}{\text{adjacent}}$</li>
+          </ul>
         </div>
 
         <div class="solution-step">
-          <p><strong>Case 2:</strong> $\sqrt{a^2 + x^2}$ with $x = a\tan\theta$</p>
-          <div class="calc2-equation">$$\sqrt{a^2 + x^2} = \sqrt{a^2 + a^2\tan^2\theta} = \sqrt{a^2(1 + \tan^2\theta)} = \sqrt{a^2\sec^2\theta} = a|\sec\theta|$$</div>
-          <p>Since $-\frac{\pi}{2} < \theta < \frac{\pi}{2}$, we have $\sec\theta > 0$, so $|\sec\theta| = \sec\theta$.</p>
+          <p><strong>And remember derivatives:</strong></p>
+          <ul>
+            <li>$\frac{d}{d\theta}[\sin\theta] = \cos\theta$</li>
+            <li>$\frac{d}{d\theta}[\tan\theta] = \sec^2\theta$</li>
+            <li>$\frac{d}{d\theta}[\sec\theta] = \sec\theta\tan\theta$</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3>How the Substitutions Eliminate Radicals</h3>
+        <p>Each substitution transforms the radical using the <strong>Pythagorean theorem</strong> applied to a right triangle:</p>
+        
+        <div class="solution-step">
+          <p><strong>Case 1:</strong> $\sqrt{a^2 - x^2}$ with $x = a\sin\theta$</p>
+          <p>From the reference triangle: if $x = a\sin\theta$, then by Pythagorean theorem:</p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + x^2 = a^2$$</div>
+          <div class="calc2-equation">$$\text{adjacent} = \sqrt{a^2 - x^2} = a\cos\theta$$</div>
+          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\sin\theta] \, d\theta = a\cos\theta \, d\theta$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Case 2:</strong> $\sqrt{x^2 + a^2}$ with $x = a\tan\theta$</p>
+          <p>From the reference triangle: if $x = a\tan\theta$, then by Pythagorean theorem:</p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$a^2 + x^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$\text{hypotenuse} = \sqrt{x^2 + a^2} = a\sec\theta$$</div>
+          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\tan\theta] \, d\theta = a\sec^2\theta \, d\theta$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Case 3:</strong> $\sqrt{x^2 - a^2}$ with $x = a\sec\theta$</p>
-          <div class="calc2-equation">$$\sqrt{x^2 - a^2} = \sqrt{a^2\sec^2\theta - a^2} = \sqrt{a^2(\sec^2\theta - 1)} = \sqrt{a^2\tan^2\theta} = a|\tan\theta|$$</div>
-          <p>Domain restrictions ensure $\tan\theta \geq 0$, so $|\tan\theta| = \tan\theta$.</p>
+          <p>From the reference triangle: if $x = a\sec\theta$, then by Pythagorean theorem:</p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$a^2 + (\text{opposite})^2 = x^2$$</div>
+          <div class="calc2-equation">$$\text{opposite} = \sqrt{x^2 - a^2} = a\tan\theta$$</div>
+          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\sec\theta] \, d\theta = a\sec\theta\tan\theta \, d\theta$</p>
         </div>
       </div>
     </section>
@@ -382,13 +411,13 @@
         <div class="solution-step">
           <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
           <p>We have $\sqrt{4-x^2} = \sqrt{2^2-x^2}$, so this is <strong>Case 1</strong> with $a = 2$.</p>
-          <p>Use: $\textcolor{blue}{x = 2\sin\theta}$, so $\textcolor{blue}{dx = 2\cos\theta \, d\theta}$</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 2\sin\theta$, so $dx = 2\cos\theta \, d\theta$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 2:</strong> Transform the radical and integral.</p>
-          <div class="calc2-equation">$$\sqrt{4-x^2} = \sqrt{4-4\sin^2\theta} = 2\cos\theta$$</div>
-          <div class="calc2-equation">$$\int \frac{dx}{\sqrt{4-x^2}} = \int \frac{\textcolor{blue}{2\cos\theta \, d\theta}}{2\cos\theta} = \int d\theta$$</div>
+          <p>Using the SOHCAHTOA relationship: $\sqrt{4-x^2} = \sqrt{4-4\sin^2\theta} = 2\cos\theta$</p>
+          <div class="calc2-equation">$$\int \frac{dx}{\sqrt{4-x^2}} = \int \frac{2\cos\theta \, d\theta}{2\cos\theta} = \int d\theta$$</div>
         </div>
 
         <div class="solution-step">
@@ -410,13 +439,13 @@
         <div class="solution-step">
           <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
           <p>We have $\sqrt{x^2 + 9} = \sqrt{x^2 + 3^2}$, so this is <strong>Case 2</strong> with $a = 3$.</p>
-          <p>Use: $\textcolor{blue}{x = 3\tan\theta}$, so $\textcolor{blue}{dx = 3\sec^2\theta \, d\theta}$</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 3\tan\theta$, so $dx = 3\sec^2\theta \, d\theta$</p>
         </div>
 
         <div class="solution-step">
           <p><strong>Step 2:</strong> Transform the radical and integral.</p>
-          <div class="calc2-equation">$$\sqrt{x^2 + 9} = \sqrt{9\tan^2\theta + 9} = 3\sec\theta$$</div>
-          <div class="calc2-equation">$$\int \sqrt{x^2 + 9} \, dx = \int 3\sec\theta \cdot \textcolor{blue}{3\sec^2\theta \, d\theta} = 9\int \sec^3\theta \, d\theta$$</div>
+          <p>Using the SOHCAHTOA relationship: $\sqrt{x^2 + 9} = \sqrt{9\tan^2\theta + 9} = 3\sec\theta$</p>
+          <div class="calc2-equation">$$\int \sqrt{x^2 + 9} \, dx = \int 3\sec\theta \cdot 3\sec^2\theta \, d\theta = 9\int \sec^3\theta \, d\theta$$</div>
         </div>
 
         <div class="solution-step">
@@ -440,7 +469,7 @@
         <div class="solution-step">
           <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
           <p>We have $\sqrt{x^2-16} = \sqrt{x^2-4^2}$, so this is <strong>Case 3</strong> with $a = 4$.</p>
-          <p>Use: $\textcolor{blue}{x = 4\sec\theta}$, so $\textcolor{blue}{dx = 4\sec\theta\tan\theta \, d\theta}$</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 4\sec\theta$, so $dx = 4\sec\theta\tan\theta \, d\theta$</p>
         </div>
 
         <div class="solution-step">
@@ -453,7 +482,7 @@
           <p><strong>Step 3:</strong> Transform the integrand.</p>
           <div class="calc2-equation">$$\sqrt{x^2-16} = \sqrt{16\sec^2\theta-16} = 4\tan\theta$$</div>
           <div class="calc2-equation">$$\frac{1}{x^2\sqrt{x^2-16}} = \frac{1}{16\sec^2\theta \cdot 4\tan\theta} = \frac{1}{64\sec^2\theta\tan\theta}$$</div>
-          <div class="calc2-equation">$$\int \frac{dx}{x^2\sqrt{x^2-16}} = \int \frac{1}{64\sec^2\theta\tan\theta} \cdot \textcolor{blue}{4\sec\theta\tan\theta \, d\theta} = \frac{1}{16}\int \cos\theta \, d\theta$$</div>
+          <div class="calc2-equation">$$\int \frac{dx}{x^2\sqrt{x^2-16}} = \int \frac{1}{64\sec^2\theta\tan\theta} \cdot 4\sec\theta\tan\theta \, d\theta = \frac{1}{16}\int \cos\theta \, d\theta$$</div>
         </div>
 
         <div class="solution-step">
