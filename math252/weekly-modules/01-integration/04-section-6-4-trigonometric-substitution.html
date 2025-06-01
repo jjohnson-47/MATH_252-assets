@@ -291,49 +291,75 @@
         
         <div class="solution-step">
           <h4>Case 1: Integrands containing $\sqrt{a^2 - x^2}$</h4>
-          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
-            <div style="flex: 1; min-width: 300px;">
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the opposite side and $a$ is the hypotenuse!</p>
               <p><strong>Substitution:</strong> $x = a\sin\theta$, $dx = a\cos\theta \, d\theta$</p>
-              <p><strong>Inverse:</strong> $\theta = \sin^{-1}(x/a)$ for $-\frac{\pi}{2} \leq \theta \leq \frac{\pi}{2}$</p>
-              <p><strong>Result:</strong> On this interval, $\cos\theta \geq 0$, so:</p>
-              <div class="calc2-equation">$$\sqrt{a^2 - x^2} = a\cos\theta$$</div>
+              <p><strong>Why this works:</strong> If $\sin\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Opposite = $x$</li>
+                <li>Hypotenuse = $a$</li>
+                <li>Adjacent = $\sqrt{a^2 - x^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{a^2 - x^2} = a\cos\theta$ 🎉</p>
             </div>
-            <div style="text-align: center;">
-              <img src="../../../images/chapter6/fig-6-4-3.svg" alt="Reference triangle for sqrt(a²-x²)" style="max-width: 200px; height: auto;">
-              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-3.svg" alt="Reference triangle for sqrt(a²-x²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-accent-teal); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>SOH-CAH-TOA in action!</strong><br>
+                The radical becomes the adjacent side
+              </p>
             </div>
           </div>
         </div>
 
         <div class="solution-step">
           <h4>Case 2: Integrands containing $\sqrt{x^2 + a^2}$</h4>
-          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
-            <div style="flex: 1; min-width: 300px;">
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the opposite side and $a$ is the adjacent side!</p>
               <p><strong>Substitution:</strong> $x = a\tan\theta$, $dx = a\sec^2\theta \, d\theta$</p>
-              <p><strong>Inverse:</strong> $\theta = \tan^{-1}(x/a)$ for $-\frac{\pi}{2} < \theta < \frac{\pi}{2}$</p>
-              <p><strong>Result:</strong> On this interval, $\sec\theta > 0$, so:</p>
-              <div class="calc2-equation">$$\sqrt{x^2 + a^2} = a\sec\theta$$</div>
+              <p><strong>Why this works:</strong> If $\tan\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Opposite = $x$</li>
+                <li>Adjacent = $a$</li>
+                <li>Hypotenuse = $\sqrt{x^2 + a^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{x^2 + a^2} = a\sec\theta$ 🎉</p>
+              <p><em>Remember: $\sec\theta = \frac{1}{\cos\theta} = \frac{\text{hypotenuse}}{\text{adjacent}}$</em></p>
             </div>
-            <div style="text-align: center;">
-              <img src="../../../images/chapter6/fig-6-4-4.svg" alt="Reference triangle for sqrt(x²+a²)" style="max-width: 200px; height: auto;">
-              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-4.svg" alt="Reference triangle for sqrt(x²+a²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-accent-green); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>TOA + Pythagorean theorem!</strong><br>
+                The radical becomes the hypotenuse
+              </p>
             </div>
           </div>
         </div>
 
         <div class="solution-step">
           <h4>Case 3: Integrands containing $\sqrt{x^2 - a^2}$</h4>
-          <div style="display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; margin: 1rem 0;">
-            <div style="flex: 1; min-width: 300px;">
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the hypotenuse and $a$ is the adjacent side!</p>
               <p><strong>Substitution:</strong> $x = a\sec\theta$, $dx = a\sec\theta\tan\theta \, d\theta$</p>
-              <p><strong>Inverse:</strong> $\theta = \sec^{-1}(x/a)$</p>
-              <p><strong>Domain restrictions:</strong> If $x/a \geq 1$, then $0 \leq \theta < \frac{\pi}{2}$</p>
-              <p><strong>Result:</strong> We restrict to $x \geq a$, so on $[0, \frac{\pi}{2})$, $\tan\theta \geq 0$:</p>
-              <div class="calc2-equation">$$\sqrt{x^2 - a^2} = a\tan\theta$$</div>
+              <p><strong>Why this works:</strong> If $\sec\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Hypotenuse = $x$</li>
+                <li>Adjacent = $a$</li>
+                <li>Opposite = $\sqrt{x^2 - a^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{x^2 - a^2} = a\tan\theta$ 🎉</p>
+              <p><em>Remember: $\sec\theta = \frac{1}{\cos\theta} = \frac{\text{hypotenuse}}{\text{adjacent}}$</em></p>
+              <p><strong>⚠️ Important:</strong> We need $x \geq a$ for this to make sense!</p>
             </div>
-            <div style="text-align: center;">
-              <img src="../../../images/chapter6/fig-6-4-5.svg" alt="Reference triangle for sqrt(x²-a²)" style="max-width: 200px; height: auto;">
-              <p style="font-size: 0.9em; font-style: italic;">Reference triangle: SOH-CAH-TOA</p>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-5.svg" alt="Reference triangle for sqrt(x²-a²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-primary-purple); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>CAH + Pythagorean theorem!</strong><br>
+                The radical becomes the opposite side
+              </p>
             </div>
           </div>
         </div>
@@ -342,61 +368,107 @@
 
     <!-- SOHCAHTOA Explanation -->
     <section>
-      <h2 class="calc2-subtitle">Understanding Through SOHCAHTOA</h2>
+      <h2 class="calc2-subtitle">🔑 The Secret Behind Trigonometric Substitution</h2>
 
       <div class="calc2-insight">
-        <h3>Why These Formulas Work: Basic Trigonometry</h3>
-        <p>The trigonometric substitution formulas are simply applications of <strong>SOHCAHTOA</strong> and the derivatives of trigonometric functions. Let's see how each case emerges naturally:</p>
+        <h3>It's All About Building the Right Triangle! 📐</h3>
+        <p><strong>The big revelation:</strong> Trigonometric substitution isn't mysterious calculus magic—it's just <strong>SOHCAHTOA</strong> combined with the <strong>Pythagorean theorem</strong>! Once you see the pattern, you'll never forget it.</p>
         
-        <div class="solution-step">
-          <p><strong>Remember SOHCAHTOA:</strong></p>
-          <ul>
-            <li><strong>SOH:</strong> $\sin\theta = \frac{\text{opposite}}{\text{hypotenuse}}$</li>
-            <li><strong>CAH:</strong> $\cos\theta = \frac{\text{adjacent}}{\text{hypotenuse}}$</li>
-            <li><strong>TOA:</strong> $\tan\theta = \frac{\text{opposite}}{\text{adjacent}}$</li>
-          </ul>
+        <div style="background: rgba(26, 35, 126, 0.1); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--calc2-primary-dark-blue);">
+          <h4>🎯 The Master Strategy</h4>
+          <p><strong>Step 1:</strong> Look at your radical and ask: "What right triangle would give me this expression?"</p>
+          <p><strong>Step 2:</strong> Set up SOHCAHTOA to make that triangle</p>
+          <p><strong>Step 3:</strong> Use Pythagorean theorem to simplify the radical</p>
+          <p><strong>Step 4:</strong> Use calculus derivatives to get $dx$</p>
         </div>
 
         <div class="solution-step">
-          <p><strong>And remember derivatives:</strong></p>
-          <ul>
-            <li>$\frac{d}{d\theta}[\sin\theta] = \cos\theta$</li>
-            <li>$\frac{d}{d\theta}[\tan\theta] = \sec^2\theta$</li>
-            <li>$\frac{d}{d\theta}[\sec\theta] = \sec\theta\tan\theta$</li>
-          </ul>
+          <h4>🧠 SOHCAHTOA Refresher</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: rgba(77, 208, 225, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>SOH</strong></p>
+              <p>$\sin\theta = \frac{\text{Opposite}}{\text{Hypotenuse}}$</p>
+            </div>
+            <div style="background: rgba(102, 187, 106, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>CAH</strong></p>
+              <p>$\cos\theta = \frac{\text{Adjacent}}{\text{Hypotenuse}}$</p>
+            </div>
+            <div style="background: rgba(81, 45, 168, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>TOA</strong></p>
+              <p>$\tan\theta = \frac{\text{Opposite}}{\text{Adjacent}}$</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="solution-step">
+          <h4>⚡ The Calculus Connection</h4>
+          <p>The $dx$ formulas come straight from derivatives of trig functions:</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\sin\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\cos\theta$</p>
+              <p>$dx = a\cos\theta \, d\theta$ ✨</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\tan\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\sec^2\theta$</p>
+              <p>$dx = a\sec^2\theta \, d\theta$ ✨</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\sec\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\sec\theta\tan\theta$</p>
+              <p>$dx = a\sec\theta\tan\theta \, d\theta$ ✨</p>
+            </div>
+          </div>
         </div>
       </div>
 
       <div class="calc2-theorem">
-        <h3>How the Substitutions Eliminate Radicals</h3>
-        <p>Each substitution transforms the radical using the <strong>Pythagorean theorem</strong> applied to a right triangle:</p>
+        <h3>🎪 The Radical Elimination Show!</h3>
+        <p>Watch how each substitution uses the <strong>Pythagorean theorem</strong> to make radicals disappear like magic:</p>
         
         <div class="solution-step">
-          <p><strong>Case 1:</strong> $\sqrt{a^2 - x^2}$ with $x = a\sin\theta$</p>
-          <p>From the reference triangle: if $x = a\sin\theta$, then by Pythagorean theorem:</p>
+          <h4>🎯 Case 1 Transformation: $\sqrt{a^2 - x^2}$ → $a\cos\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\sin\theta$ means opposite = $x$, hypotenuse = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
           <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
           <div class="calc2-equation">$$(\text{adjacent})^2 + x^2 = a^2$$</div>
-          <div class="calc2-equation">$$\text{adjacent} = \sqrt{a^2 - x^2} = a\cos\theta$$</div>
-          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\sin\theta] \, d\theta = a\cos\theta \, d\theta$</p>
+          <div class="calc2-equation">$$\text{adjacent} = \sqrt{a^2 - x^2} = a\cos\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\cos\theta \, d\theta$ (from $\frac{d}{d\theta}[\sin\theta] = \cos\theta$)</p>
         </div>
 
         <div class="solution-step">
-          <p><strong>Case 2:</strong> $\sqrt{x^2 + a^2}$ with $x = a\tan\theta$</p>
-          <p>From the reference triangle: if $x = a\tan\theta$, then by Pythagorean theorem:</p>
+          <h4>🎯 Case 2 Transformation: $\sqrt{x^2 + a^2}$ → $a\sec\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\tan\theta$ means opposite = $x$, adjacent = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
           <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
           <div class="calc2-equation">$$a^2 + x^2 = (\text{hypotenuse})^2$$</div>
-          <div class="calc2-equation">$$\text{hypotenuse} = \sqrt{x^2 + a^2} = a\sec\theta$$</div>
-          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\tan\theta] \, d\theta = a\sec^2\theta \, d\theta$</p>
+          <div class="calc2-equation">$$\text{hypotenuse} = \sqrt{x^2 + a^2} = a\sec\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\sec^2\theta \, d\theta$ (from $\frac{d}{d\theta}[\tan\theta] = \sec^2\theta$)</p>
         </div>
 
         <div class="solution-step">
-          <p><strong>Case 3:</strong> $\sqrt{x^2 - a^2}$ with $x = a\sec\theta$</p>
-          <p>From the reference triangle: if $x = a\sec\theta$, then by Pythagorean theorem:</p>
+          <h4>🎯 Case 3 Transformation: $\sqrt{x^2 - a^2}$ → $a\tan\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\sec\theta$ means hypotenuse = $x$, adjacent = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
           <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
           <div class="calc2-equation">$$a^2 + (\text{opposite})^2 = x^2$$</div>
-          <div class="calc2-equation">$$\text{opposite} = \sqrt{x^2 - a^2} = a\tan\theta$$</div>
-          <p><strong>Differential:</strong> $dx = \frac{d}{d\theta}[a\sec\theta] \, d\theta = a\sec\theta\tan\theta \, d\theta$</p>
+          <div class="calc2-equation">$$\text{opposite} = \sqrt{x^2 - a^2} = a\tan\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\sec\theta\tan\theta \, d\theta$ (from $\frac{d}{d\theta}[\sec\theta] = \sec\theta\tan\theta$)</p>
         </div>
+      </div>
+
+      <div class="calc2-key-point">
+        <h3>💡 The Pattern Recognition Game</h3>
+        <p><strong>Pro tip:</strong> Once you see the pattern, you can solve any trigonometric substitution problem in seconds!</p>
+        <ol>
+          <li><strong>Spot the radical:</strong> Is it $\sqrt{a^2 - x^2}$, $\sqrt{x^2 + a^2}$, or $\sqrt{x^2 - a^2}$?</li>
+          <li><strong>Draw the triangle:</strong> Which trig function puts $x$ and $a$ in the right places?</li>
+          <li><strong>Apply Pythagorean theorem:</strong> The third side equals your radical!</li>
+          <li><strong>Use derivatives:</strong> Get your $dx$ from basic trig derivatives</li>
+          <li><strong>Integrate and convert back:</strong> Use inverse trig functions or reference triangles</li>
+        </ol>
+        <p><em>Remember: You're not memorizing formulas—you're understanding the geometry!</em> 📐✨</p>
       </div>
     </section>
 
