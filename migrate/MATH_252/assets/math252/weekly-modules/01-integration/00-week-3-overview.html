@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 3: Integration Techniques | MATH A252 Summer 2025</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        }
+      };
+    </script>
+
+    <!-- CALC II Summer 2025 shared theme -->
+    <style>
+      /* -------------------------------------------------------------------------
+         Theme variables (matches section styling)  
+         --------------------------------------------------------------------- */
+      :root {
+        --calc2-primary-dark-blue: #1a237e;
+        --calc2-primary-purple:   #512da8;
+        --calc2-accent-teal:      #4dd0e1;
+        --calc2-accent-green:     #66bb6a;
+        --calc2-background:       #ffffff;
+        --calc2-text:             #212121;
+        --calc2-heading:          #1a237e;
+        --calc2-focus-outline:    #ffeb3b;
+      }
+
+      /* --------------------------------------------------------------------- */
+      /*  Base layout & typography                                             */
+      /* --------------------------------------------------------------------- */
+      body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        font-size: 1rem;
+        color: var(--calc2-text);
+        background-color: var(--calc2-background);
+        margin: 0;
+        padding: 0;
+      }
+
+      .calc2-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      }
+
+      .calc2-title {
+        font-size: 2.5rem;
+        margin: 0 0 1.5rem 0;
+        color: var(--calc2-heading);
+        border-bottom: 3px solid var(--calc2-primary-purple);
+        padding-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      .calc2-subtitle {
+        font-size: 1.5rem;
+        margin: 1.5rem 0 1rem 0;
+        color: var(--calc2-heading);
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid var(--calc2-accent-teal);
+      }
+
+      /* Week overview specific styling */
+      .week-overview-box {
+        background: #f5f5f5;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-primary-purple);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .objectives-box {
+        background-color: rgba(77, 208, 225, 0.1);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-teal);
+      }
+
+      .due-dates-box {
+        background-color: rgba(102, 187, 106, 0.1);
+        padding: 1rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-green);
+      }
+
+      .topics-section {
+        background: #f5f5f5;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+        border-radius: 8px;
+        border-left: 4px solid var(--calc2-accent-green);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .topic-item {
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+      }
+
+      .topic-item:not(:last-child) {
+        border-bottom: 1px dotted #ccc;
+      }
+
+      .topic-item h3 {
+        color: var(--calc2-primary-dark-blue);
+        margin-bottom: 0.5rem;
+      }
+
+      .integral-visual {
+        text-align: center;
+        font-size: 3rem;
+        color: var(--calc2-primary-purple);
+        margin: 2rem 0;
+        font-weight: bold;
+      }
+
+      a { color: var(--calc2-primary-purple); text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      em { font-style: italic; }
+      strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+      @media (max-width: 768px) {
+        .calc2-container { padding: 1rem; }
+        .calc2-title     { font-size: 2rem; }
+        .calc2-subtitle  { font-size: 1.25rem; }
+      }
+    </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Unit 2: Techniques of Antidifferentiation</h1>
+    <h2 class="calc2-subtitle" style="text-align: center; color: var(--calc2-primary-purple);">Week 3 Overview • June 2-13, 2025</h2>
+    
+    <div class="integral-visual">∫ ∫ ∫</div>
+
+    <!-- Week overview -->
+    <section class="week-overview-box">
+      <h3 style="margin-top: 0; color: var(--calc2-primary-dark-blue);">🎯 This Week's Focus</h3>
+      <p>This week we dive into <strong>Chapter 6: Techniques of Antidifferentiation</strong>, learning four major integration methods beyond basic antiderivative rules. You'll master fundamental techniques that handle a wide variety of integrals encountered in calculus and real-world applications.</p>
+      <p><strong>The big picture:</strong> While the Fundamental Theorem of Calculus shows us <em>how</em> to evaluate definite integrals using antiderivatives, finding those antiderivatives requires specific techniques. This week introduces four essential methods that dramatically expand your integration capabilities.</p>
+    </section>
+
+    <!-- Learning objectives -->
+    <section class="objectives-box">
+      <h3 style="margin-top: 0;">📚 Learning Objectives</h3>
+      <ul>
+        <li><strong>Master substitution:</strong> Apply u-substitution to evaluate indefinite and definite integrals where a function's derivative appears in the integrand</li>
+        <li><strong>Learn integration by parts:</strong> Use the product rule in reverse to integrate products of functions</li>
+        <li><strong>Master trigonometric integrals:</strong> Integrate powers of sine, cosine, tangent, and other trigonometric functions</li>
+        <li><strong>Apply trigonometric substitution:</strong> Use trigonometric identities to evaluate integrals involving square roots</li>
+        <li><strong>Develop pattern recognition:</strong> Identify which integration technique is most appropriate for a given integral</li>
+        <li><strong>Solve real applications:</strong> Apply these methods to problems involving area, volume, and motion</li>
+        <li><strong>Build integration strategy:</strong> Combine multiple techniques when necessary</li>
+      </ul>
+    </section>
+
+    <!-- Topics covered -->
+    <section class="topics-section">
+      <h3 style="margin-top: 0;">📖 Topics Covered This Week</h3>
+      
+      <div class="topic-item">
+        <h3>Section 6.1: Integration by Substitution</h3>
+        <p>We begin with <strong>u-substitution</strong>, which reverses the Chain Rule. This is often the first technique to try when faced with a complex integral. Key concepts include:</p>
+        <ul>
+          <li><strong>Pattern recognition:</strong> Identifying when a function's derivative appears in an integral</li>
+          <li><strong>Choosing substitutions:</strong> Strategic selection of $u = g(x)$ to simplify the integrand</li>
+          <li><strong>Definite integral techniques:</strong> Changing bounds vs. converting back to original variables</li>
+          <li><strong>Common substitution patterns:</strong> Exponential, trigonometric, and algebraic functions</li>
+        </ul>
+      </div>
+      
+      <div class="topic-item">
+        <h3>Section 6.2: Integration by Parts</h3>
+        <p>Next, we explore <strong>integration by parts</strong>, derived from the Product Rule. This powerful technique handles products of functions and includes:</p>
+        <ul>
+          <li><strong>The LIATE strategy:</strong> Systematic approach for choosing $u$ and $dv$</li>
+          <li><strong>The formula:</strong> $\int u\,dv = uv - \int v\,du$ and how to apply it effectively</li>
+          <li><strong>Repeated applications:</strong> When integration by parts must be used multiple times</li>
+          <li><strong>Special cases:</strong> Integrals involving logarithms, inverse trig functions, and polynomials with exponentials</li>
+        </ul>
+      </div>
+
+      <div class="topic-item">
+        <h3>Section 6.3: Trigonometric Integrals</h3>
+        <p>We continue with <strong>trigonometric integrals</strong>, learning to integrate powers and products of trigonometric functions:</p>
+        <ul>
+          <li><strong>Powers of sine and cosine:</strong> Using reduction formulas and Pythagorean identities</li>
+          <li><strong>Powers of tangent and secant:</strong> Strategic use of trigonometric identities</li>
+          <li><strong>Products of different trig functions:</strong> Sum-to-product and product-to-sum formulas</li>
+          <li><strong>Integration strategies:</strong> When to use substitution vs. trigonometric identities</li>
+        </ul>
+      </div>
+
+      <div class="topic-item">
+        <h3>Section 6.4: Trigonometric Substitution</h3>
+        <p>Finally, we master <strong>trigonometric substitution</strong>, a powerful technique for integrals involving square roots:</p>
+        <ul>
+          <li><strong>Three standard forms:</strong> $\sqrt{a^2-x^2}$, $\sqrt{a^2+x^2}$, and $\sqrt{x^2-a^2}$</li>
+          <li><strong>Choosing substitutions:</strong> When to use $x = a\sin\theta$, $x = a\tan\theta$, or $x = a\sec\theta$</li>
+          <li><strong>Working with reference triangles:</strong> Converting back to original variables</li>
+          <li><strong>Applications:</strong> Arc length, surface area, and other geometric problems</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Important dates -->
+    <section class="due-dates-box">
+      <h3 style="margin-top: 0;">📅 Important Summer 2025 Due Dates</h3>
+      <p><strong>📘 Chapter 6 Quiz & Discussion:</strong> Due Friday, June 6th at 11:59 PM</p>
+      <p><strong>📝 Unit 2 Edfinity Homework:</strong> Due Friday, June 13th at 11:59 PM</p>
+      <p><strong>✍️ Written Submission #2:</strong> Due Friday, June 13th at 11:59 PM</p>
+      <p><strong>💬 Discussion Participation:</strong> Active engagement throughout the week</p>
+      
+      <p style="margin-top: 1rem;"><em><strong>Note:</strong> This intensive summer format covers 2 weeks of material in about 10 days. Stay on top of the reading and practice problems to keep up with the accelerated pace!</em></p>
+    </section>
+
+  </main>
+</body>
+</html>

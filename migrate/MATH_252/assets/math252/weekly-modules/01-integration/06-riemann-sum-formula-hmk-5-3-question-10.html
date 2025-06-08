@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Left Hand Rule Riemann Sum Example</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    /* Problem statement box */
+    .calc2-problem {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-problem h2 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    /* Solution step boxes */
+    .calc2-step {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Theorem reference box */
+    .calc2-theorem {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-theorem h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Conclusion box */
+    .calc2-solution {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-solution h2 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    /* Navigation box for step progress */
+    .calc2-step-nav {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f5f5f5;
+      padding: 0.75rem;
+      margin: 2rem 0 1rem 0;
+      border-radius: 4px;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 0.5rem;
+      background-color: rgba(245, 245, 245, 0.5);
+      border-radius: 4px;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .calc2-theorem-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: var(--calc2-primary-purple);
+      font-weight: bold;
+    }
+
+    /* List styling */
+    ul, ol {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    ul li, ol li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Important result highlight */
+    .calc2-highlight {
+      font-weight: bold;
+      color: var(--calc2-primary-purple);
+      padding: 0.25rem 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-problem h2,
+      .calc2-solution h2 {
+        font-size: 1.25rem;
+      }
+      .calc2-step h3,
+      .calc2-theorem h3 {
+        font-size: 1.15rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Left Hand Rule Riemann Sum Example</h1>
+
+    <div class="calc2-problem">
+      <h2>Problem Statement</h2>
+      <p>Approximate and evaluate the definite integral</p>
+      <div class="calc2-equation">
+        \[
+        \int_{0}^{1} \bigl(x^3 - x^2\bigr)\,dx
+        \]
+      </div>
+      <p>using the Left Hand Rule with \(n\) equally spaced subintervals. Then evaluate the resulting formula for \(n = 10,\; 100,\; 1000\), and finally find the limit as \(n \to \infty\) and compare it to the exact value of the integral.</p>
+    </div>
+
+    <div class="calc2-step-nav">
+      <span>Step 1 → Derive the formula</span>
+      <span>Step 2 → Simplify</span>
+      <span>Step 3 → Evaluate</span>
+      <span>Step 4 → Compare</span>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 1: Set Up the Left Riemann Sum</h3>
+      <p>We start with the general expression for a Riemann sum:</p>
+      <div class="calc2-equation">
+        \[
+        \int_a^b f(x)\,dx \approx \sum_{i=1}^{n} f(c_i)\,\Delta x_i
+        \]
+      </div>
+      <p>For the <strong>Left Hand Rule</strong>, we choose \(c_i\) to be the <strong>left endpoint</strong> of each subinterval. With \(n\) equal subintervals on \([0,1]\):</p>
+      <ul>
+        <li>Each subinterval has width \(\Delta x = \frac{1-0}{n} = \frac{1}{n}\)</li>
+        <li>The partition points are \(x_i = \frac{i}{n}\) for \(i = 0, 1, 2, \ldots, n\)</li>
+        <li>Our function is \(f(x) = x^3 - x^2\)</li>
+      </ul>
+      <p>For the Left Hand Rule, we evaluate \(f\) at the left endpoint of each subinterval:</p>
+      <div class="calc2-equation">
+        \[
+        L_n = \sum_{i=1}^{n} f\left(\frac{i-1}{n}\right) \Delta x 
+        = \sum_{i=1}^{n} \left[\left(\frac{i-1}{n}\right)^3 - \left(\frac{i-1}{n}\right)^2\right]\frac{1}{n}
+        \]
+      </div>
+      <p>To simplify our calculations, we can reindex the sum to start at \(i=0\):</p>
+      <div class="calc2-equation">
+        \[
+        L_n = \sum_{i=0}^{n-1} \left[\left(\frac{i}{n}\right)^3 - \left(\frac{i}{n}\right)^2\right]\frac{1}{n}
+        \]
+      </div>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>Theorem 5.3.7: Properties of Summations</h3>
+      <p>To evaluate our Riemann sum, we'll need these summation formulas:</p>
+      <ol>
+        <li>\(\sum_{i=1}^n c = c \cdot n\), where \(c\) is a constant</li>
+        <li>\(\sum_{i=m}^n (a_i \pm b_i) = \sum_{i=m}^n a_i \pm \sum_{i=m}^n b_i\)</li>
+        <li>\(\sum_{i=m}^n c \cdot a_i = c \cdot \sum_{i=m}^n a_i\)</li>
+        <li>\(\sum_{i=1}^n i = \frac{n(n+1)}{2}\)</li>
+        <li>\(\sum_{i=1}^n i^2 = \frac{n(n+1)(2n+1)}{6}\)</li>
+        <li>\(\sum_{i=1}^n i^3 = \left( \frac{n(n+1)}{2} \right)^2\)</li>
+      </ol>
+      <a href="https://opentext.uleth.ca/apex-calculus/sec_riemann.html#thm_summation" 
+         target="_blank" 
+         class="calc2-theorem-link">
+         View Theorem 5.3.7 in APEX Calculus →
+      </a>
+    </div>
+  
+    <div class="calc2-step">
+      <h3>Step 2: Simplify the Summation</h3>
+      <p>First, let's expand our Riemann sum and factor out constants:</p>
+      <div class="calc2-equation">
+        \begin{align}
+        L_n &= \sum_{i=0}^{n-1} \left[\left(\frac{i}{n}\right)^3 - \left(\frac{i}{n}\right)^2\right]\frac{1}{n} \\[1ex]
+        &= \frac{1}{n} \sum_{i=0}^{n-1} \left[\frac{i^3}{n^3} - \frac{i^2}{n^2}\right] \\[1ex]
+        &= \frac{1}{n^4}\sum_{i=0}^{n-1} i^3 - \frac{1}{n^3}\sum_{i=0}^{n-1} i^2
+        \end{align}
+      </div>
+      
+      <p>Now, we need to evaluate \(\sum_{i=0}^{n-1} i^3\) and \(\sum_{i=0}^{n-1} i^2\).</p>
+      <p>For \(\sum_{i=0}^{n-1} i^3\), we can use the formula \(\sum_{i=1}^{m} i^3 = \left(\frac{m(m+1)}{2}\right)^2\):</p>
+      <div class="calc2-equation">
+        \begin{align}
+        \sum_{i=0}^{n-1} i^3 &= \sum_{i=1}^{n-1} i^3 + 0^3 \\[1ex]
+        &= \sum_{i=1}^{n-1} i^3 \\[1ex]
+        &= \left(\frac{(n-1)n}{2}\right)^2 \\[1ex]
+        &= \frac{n^2(n-1)^2}{4}
+        \end{align}
+      </div>
+      
+      <p>For \(\sum_{i=0}^{n-1} i^2\), we use the formula \(\sum_{i=1}^{m} i^2 = \frac{m(m+1)(2m+1)}{6}\):</p>
+      <div class="calc2-equation">
+        \begin{align}
+        \sum_{i=0}^{n-1} i^2 &= \sum_{i=1}^{n-1} i^2 + 0^2 \\[1ex]
+        &= \sum_{i=1}^{n-1} i^2 \\[1ex]
+        &= \frac{(n-1)n(2n-1)}{6}
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 3: Finish the Computation</h3>
+      <p>Now we substitute these results back into our Riemann sum formula:</p>
+      <div class="calc2-equation">
+        \begin{align}
+        L_n &= \frac{1}{n^4} \cdot \frac{n^2(n-1)^2}{4} - \frac{1}{n^3} \cdot \frac{(n-1)n(2n-1)}{6} \\[1ex]
+        &= \frac{(n-1)^2}{4n^2} - \frac{(n-1)(2n-1)}{6n^2} \\[1ex]
+        &= \frac{3(n-1)^2 - 2(n-1)(2n-1)}{12n^2}
+        \end{align}
+      </div>
+      
+      <p>Expanding the numerator:</p>
+      <div class="calc2-equation">
+        \begin{align}
+        L_n &= \frac{3(n^2-2n+1) - 2(2n^2-3n+1)}{12n^2} \\[1ex]
+        &= \frac{3n^2-6n+3 - 4n^2+6n-2}{12n^2} \\[1ex]
+        &= \frac{-n^2+1}{12n^2} \\[1ex]
+        &= \frac{-n^2}{12n^2} + \frac{1}{12n^2} \\[1ex]
+        &= -\frac{1}{12} + \frac{1}{12n^2}
+        \end{align}
+      </div>
+      
+      <p class="calc2-highlight">Therefore, our Left Hand Rule formula is:</p>
+      <div class="calc2-equation">
+        \[
+        L_n = -\frac{1}{12} + \frac{1}{12n^2}
+        \]
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 4: Evaluate at Different Values of n</h3>
+      <p>Using our formula \(L_n = -\frac{1}{12} + \frac{1}{12n^2}\), let's evaluate for different values of \(n\):</p>
+      
+      <ul>
+        <li>For \(n = 10\):
+          <div class="calc2-equation">
+            \begin{align}
+            L_{10} &= -\frac{1}{12} + \frac{1}{12 \cdot 10^2} \\[1ex]
+            &= -\frac{1}{12} + \frac{1}{1200} \\[1ex]
+            &= -0.08333... + 0.00083... \\[1ex]
+            &= -0.0825
+            \end{align}
+          </div>
+        </li>
+        <li>For \(n = 100\):
+          <div class="calc2-equation">
+            \begin{align}
+            L_{100} &= -\frac{1}{12} + \frac{1}{12 \cdot 100^2} \\[1ex]
+            &= -\frac{1}{12} + \frac{1}{120000} \\[1ex]
+            &\approx -0.083333... + 0.000008... \\[1ex]
+            &\approx -0.083325
+            \end{align}
+          </div>
+        </li>
+        <li>For \(n = 1000\):
+          <div class="calc2-equation">
+            \begin{align}
+            L_{1000} &= -\frac{1}{12} + \frac{1}{12 \cdot 1000^2} \\[1ex]
+            &= -\frac{1}{12} + \frac{1}{12000000} \\[1ex]
+            &\approx -0.083333... + 0.0000000833... \\[1ex]
+            &\approx -0.08333325
+            \end{align}
+          </div>
+        </li>
+      </ul>
+      
+      <p>Taking the limit as \(n\) approaches infinity:</p>
+      <div class="calc2-equation">
+        \begin{align}
+        \lim_{n \to \infty} L_n &= \lim_{n \to \infty} \left(-\frac{1}{12} + \frac{1}{12n^2}\right) \\[1ex]
+        &= -\frac{1}{12} + \lim_{n \to \infty}\frac{1}{12n^2} \\[1ex]
+        &= -\frac{1}{12} + 0 \\[1ex]
+        &= -\frac{1}{12}
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 5: Compare with Exact Value</h3>
+      <p>Let's find the exact value of the integral using the Fundamental Theorem of Calculus:</p>
+      <div class="calc2-equation">
+        \begin{align}
+        \int_{0}^{1} (x^3 - x^2)\,dx &= \left[\frac{x^4}{4} - \frac{x^3}{3}\right]_0^1 \\[1ex]
+        &= \left(\frac{1^4}{4} - \frac{1^3}{3}\right) - \left(\frac{0^4}{4} - \frac{0^3}{3}\right) \\[1ex]
+        &= \frac{1}{4} - \frac{1}{3} \\[1ex]
+        &= \frac{3-4}{12} \\[1ex]
+        &= -\frac{1}{12}
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-solution">
+      <h2>Conclusion</h2>
+      <ul>
+        <li>
+          <strong>Our Left Hand Rule formula:</strong>
+          \[L_n = -\frac{1}{12} + \frac{1}{12n^2}\]
+        </li>
+        <li>
+          <strong>Approximations:</strong>
+          <ul>
+            <li>\(n = 10\): \(L_{10} = -0.0825\)</li>
+            <li>\(n = 100\): \(L_{100} \approx -0.083325\)</li>
+            <li>\(n = 1000\): \(L_{1000} \approx -0.08333325\)</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Limit as \(n \to \infty\):</strong> \(-\frac{1}{12}\)
+        </li>
+        <li>
+          <strong>Exact integral value:</strong> \(-\frac{1}{12}\)
+        </li>
+      </ul>
+      <p>The Left Hand Rule approximation converges to the exact value as \(n\) increases. Note that the error term in our formula is \(\frac{1}{12n^2}\), which approaches zero as \(n\) gets larger.</p>
+    </div>
+  </div>
+</body>
+</html>

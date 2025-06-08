@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.4 – Trigonometric Substitution | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},          // Explicitly load color extension
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}            // Enable color package
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* -------------------------------------------------------------------------
+       Theme variables (matches sections 6.1, 6.2, and 6.3)  
+       --------------------------------------------------------------------- */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /*  Base layout & typography                                             */
+    /* --------------------------------------------------------------------- */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Strategy table styling */
+    .strategy-table {
+      width: 100%;
+      margin: 1.5rem 0;
+      border-collapse: collapse;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .strategy-table th, .strategy-table td {
+      border: 1px solid #e0e0e0;
+      padding: 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .strategy-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: bold;
+    }
+
+    .strategy-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+
+    /* Triangle diagram styling */
+    .triangle-diagram {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .triangle-item {
+      text-align: center;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .triangle-item h4 {
+      margin: 0 0 0.5rem 0;
+      color: var(--calc2-primary-dark-blue);
+      font-weight: 500;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 2rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .triangle-diagram { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.4 – Trigonometric Substitution</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html" target="_blank" rel="noopener">APEX Calculus §6.4 – Trigonometric Substitution</a> (Complete section overview)</li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank" rel="noopener">Key Idea 6.4.2 – Trigonometric Substitution</a> (Essential reference for all three cases)</li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-1-2" target="_blank" rel="noopener">Example 6.4.2 – Using the √(a²-x²) substitution</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-2-2" target="_blank" rel="noopener">Example 6.4.6 – Using the √(a²+x²) substitution</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#sec_trig_sub-3-2" target="_blank" rel="noopener">Example 6.4.10 – Using the √(x²-a²) substitution</a></li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Recognize the <strong>three standard radical forms</strong> that suggest trigonometric substitution.</li>
+        <li>Apply appropriate trigonometric substitutions: <strong>sine, tangent, and secant</strong>.</li>
+        <li>Use <strong>reference triangles</strong> to convert between trigonometric and algebraic expressions.</li>
+        <li>Complete the substitution process: <strong>substitute, integrate, and convert back</strong>.</li>
+        <li>Handle both <strong>indefinite and definite integrals</strong> using trigonometric substitution.</li>
+        <li>Master the <strong>geometric interpretation</strong> of each substitution method.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/FzlyxeOYjHw?si=HnlFas-ctvEPu2cL" title="Trigonometric Substitution Overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- Big Picture Introduction -->
+    <section class="calc2-insight">
+      <h3>The Big Picture: When Standard Methods Fail</h3>
+      <p>Sometimes we encounter integrals that resist all our previous techniques—they don't fit u-substitution patterns, and integration by parts leads nowhere. <strong>Trigonometric substitution</strong> is designed specifically for integrals involving radical expressions.</p>
+      <p><strong>The key insight:</strong> By cleverly substituting trigonometric functions for algebraic variables, we can eliminate troublesome radicals and transform the integral into a purely trigonometric form that we can handle using Section 6.3 techniques.</p>
+    </section>
+
+    <!-- Textbook Key Idea -->
+    <section>
+      <h2 class="calc2-subtitle">Key Idea 6.4.2 from APEX Calculus</h2>
+
+      <div class="calc2-definition">
+        <h3>Trigonometric Substitution</h3>
+        <p>The three standard cases for trigonometric substitution. <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">📖 See complete explanation in textbook</a></p>
+        
+        <div class="solution-step">
+          <h4>Case 1: Integrands containing $\sqrt{a^2 - x^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the opposite side and $a$ is the hypotenuse!</p>
+              <p><strong>Substitution:</strong> $x = a\sin\theta$, $dx = a\cos\theta \, d\theta$</p>
+              <p><strong>Why this works:</strong> If $\sin\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Opposite = $x$</li>
+                <li>Hypotenuse = $a$</li>
+                <li>Adjacent = $\sqrt{a^2 - x^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{a^2 - x^2} = a\cos\theta$ 🎉</p>
+            </div>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-3.svg" alt="Reference triangle for sqrt(a²-x²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-accent-teal); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>SOH-CAH-TOA in action!</strong><br>
+                The radical becomes the adjacent side
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="solution-step">
+          <h4>Case 2: Integrands containing $\sqrt{x^2 + a^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the opposite side and $a$ is the adjacent side!</p>
+              <p><strong>Substitution:</strong> $x = a\tan\theta$, $dx = a\sec^2\theta \, d\theta$</p>
+              <p><strong>Why this works:</strong> If $\tan\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Opposite = $x$</li>
+                <li>Adjacent = $a$</li>
+                <li>Hypotenuse = $\sqrt{x^2 + a^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{x^2 + a^2} = a\sec\theta$ 🎉</p>
+              <p><em>Remember: $\sec\theta = \frac{1}{\cos\theta} = \frac{\text{hypotenuse}}{\text{adjacent}}$</em></p>
+            </div>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-4.svg" alt="Reference triangle for sqrt(x²+a²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-accent-green); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>TOA + Pythagorean theorem!</strong><br>
+                The radical becomes the hypotenuse
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="solution-step">
+          <h4>Case 3: Integrands containing $\sqrt{x^2 - a^2}$</h4>
+          <div style="display: flex; align-items: center; gap: 3rem; flex-wrap: wrap; margin: 1.5rem 0;">
+            <div style="flex: 1; min-width: 350px;">
+              <p><strong>🎯 The Key Insight:</strong> We want to create a right triangle where $x$ is the hypotenuse and $a$ is the adjacent side!</p>
+              <p><strong>Substitution:</strong> $x = a\sec\theta$, $dx = a\sec\theta\tan\theta \, d\theta$</p>
+              <p><strong>Why this works:</strong> If $\sec\theta = \frac{x}{a}$, then by SOHCAHTOA:</p>
+              <ul>
+                <li>Hypotenuse = $x$</li>
+                <li>Adjacent = $a$</li>
+                <li>Opposite = $\sqrt{x^2 - a^2}$ (by Pythagorean theorem!)</li>
+              </ul>
+              <p><strong>Magic moment:</strong> $\sqrt{x^2 - a^2} = a\tan\theta$ 🎉</p>
+              <p><em>Remember: $\sec\theta = \frac{1}{\cos\theta} = \frac{\text{hypotenuse}}{\text{adjacent}}$</em></p>
+              <p><strong>⚠️ Important:</strong> We need $x \geq a$ for this to make sense!</p>
+            </div>
+            <div style="text-align: center; flex: 0 0 auto;">
+              <img src="../../../images/chapter6/fig-6-4-5.svg" alt="Reference triangle for sqrt(x²-a²)" style="width: 300px; height: auto; border: 2px solid var(--calc2-primary-purple); border-radius: 8px; padding: 1rem; background: white;">
+              <p style="font-size: 1rem; font-weight: 500; color: var(--calc2-primary-dark-blue); margin-top: 0.5rem;">
+                📐 <strong>CAH + Pythagorean theorem!</strong><br>
+                The radical becomes the opposite side
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOHCAHTOA Explanation -->
+    <section>
+      <h2 class="calc2-subtitle">🔑 The Secret Behind Trigonometric Substitution</h2>
+
+      <div class="calc2-insight">
+        <h3>It's All About Building the Right Triangle! 📐</h3>
+        <p><strong>The big revelation:</strong> Trigonometric substitution isn't mysterious calculus magic—it's just <strong>SOHCAHTOA</strong> combined with the <strong>Pythagorean theorem</strong>! Once you see the pattern, you'll never forget it.</p>
+        
+        <div style="background: rgba(26, 35, 126, 0.1); padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0; border-left: 4px solid var(--calc2-primary-dark-blue);">
+          <h4>🎯 The Master Strategy</h4>
+          <p><strong>Step 1:</strong> Look at your radical and ask: "What right triangle would give me this expression?"</p>
+          <p><strong>Step 2:</strong> Set up SOHCAHTOA to make that triangle</p>
+          <p><strong>Step 3:</strong> Use Pythagorean theorem to simplify the radical</p>
+          <p><strong>Step 4:</strong> Use calculus derivatives to get $dx$</p>
+        </div>
+
+        <div class="solution-step">
+          <h4>🧠 SOHCAHTOA Refresher</h4>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: rgba(77, 208, 225, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>SOH</strong></p>
+              <p>$\sin\theta = \frac{\text{Opposite}}{\text{Hypotenuse}}$</p>
+            </div>
+            <div style="background: rgba(102, 187, 106, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>CAH</strong></p>
+              <p>$\cos\theta = \frac{\text{Adjacent}}{\text{Hypotenuse}}$</p>
+            </div>
+            <div style="background: rgba(81, 45, 168, 0.1); padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>TOA</strong></p>
+              <p>$\tan\theta = \frac{\text{Opposite}}{\text{Adjacent}}$</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="solution-step">
+          <h4>⚡ The Calculus Connection</h4>
+          <p>The $dx$ formulas come straight from derivatives of trig functions:</p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\sin\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\cos\theta$</p>
+              <p>$dx = a\cos\theta \, d\theta$ ✨</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\tan\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\sec^2\theta$</p>
+              <p>$dx = a\sec^2\theta \, d\theta$ ✨</p>
+            </div>
+            <div style="background: #f8f9fa; padding: 1rem; border-radius: 8px; text-align: center;">
+              <p><strong>If $x = a\sec\theta$</strong></p>
+              <p>$\frac{dx}{d\theta} = a\sec\theta\tan\theta$</p>
+              <p>$dx = a\sec\theta\tan\theta \, d\theta$ ✨</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3>🎪 The Radical Elimination Show!</h3>
+        <p>Watch how each substitution uses the <strong>Pythagorean theorem</strong> to make radicals disappear like magic:</p>
+        
+        <div class="solution-step">
+          <h4>🎯 Case 1 Transformation: $\sqrt{a^2 - x^2}$ → $a\cos\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\sin\theta$ means opposite = $x$, hypotenuse = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + x^2 = a^2$$</div>
+          <div class="calc2-equation">$$\text{adjacent} = \sqrt{a^2 - x^2} = a\cos\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\cos\theta \, d\theta$ (from $\frac{d}{d\theta}[\sin\theta] = \cos\theta$)</p>
+        </div>
+
+        <div class="solution-step">
+          <h4>🎯 Case 2 Transformation: $\sqrt{x^2 + a^2}$ → $a\sec\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\tan\theta$ means opposite = $x$, adjacent = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$a^2 + x^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$\text{hypotenuse} = \sqrt{x^2 + a^2} = a\sec\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\sec^2\theta \, d\theta$ (from $\frac{d}{d\theta}[\tan\theta] = \sec^2\theta$)</p>
+        </div>
+
+        <div class="solution-step">
+          <h4>🎯 Case 3 Transformation: $\sqrt{x^2 - a^2}$ → $a\tan\theta$</h4>
+          <p><strong>The setup:</strong> $x = a\sec\theta$ means hypotenuse = $x$, adjacent = $a$</p>
+          <p><strong>Pythagorean magic:</strong></p>
+          <div class="calc2-equation">$$(\text{adjacent})^2 + (\text{opposite})^2 = (\text{hypotenuse})^2$$</div>
+          <div class="calc2-equation">$$a^2 + (\text{opposite})^2 = x^2$$</div>
+          <div class="calc2-equation">$$\text{opposite} = \sqrt{x^2 - a^2} = a\tan\theta \quad \text{🎉 Radical gone!}$$</div>
+          <p><strong>Bonus:</strong> $dx = a\sec\theta\tan\theta \, d\theta$ (from $\frac{d}{d\theta}[\sec\theta] = \sec\theta\tan\theta$)</p>
+        </div>
+      </div>
+
+      <div class="calc2-key-point">
+        <h3>💡 The Pattern Recognition Game</h3>
+        <p><strong>Pro tip:</strong> Once you see the pattern, you can solve any trigonometric substitution problem in seconds!</p>
+        <ol>
+          <li><strong>Spot the radical:</strong> Is it $\sqrt{a^2 - x^2}$, $\sqrt{x^2 + a^2}$, or $\sqrt{x^2 - a^2}$?</li>
+          <li><strong>Draw the triangle:</strong> Which trig function puts $x$ and $a$ in the right places?</li>
+          <li><strong>Apply Pythagorean theorem:</strong> The third side equals your radical!</li>
+          <li><strong>Use derivatives:</strong> Get your $dx$ from basic trig derivatives</li>
+          <li><strong>Integrate and convert back:</strong> Use inverse trig functions or reference triangles</li>
+        </ol>
+        <p><em>Remember: You're not memorizing formulas—you're understanding the geometry!</em> 📐✨</p>
+      </div>
+    </section>
+
+    <!-- Worked examples -->
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Integrating $\int \frac{dx}{\sqrt{4-x^2}}$</h3>
+        <p><strong>Problem:</strong> Evaluate this integral using trigonometric substitution.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
+          <p>We have $\sqrt{4-x^2} = \sqrt{2^2-x^2}$, so this is <strong>Case 1</strong> with $a = 2$.</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 2\sin\theta$, so $dx = 2\cos\theta \, d\theta$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Transform the radical and integral.</p>
+          <p>Using the SOHCAHTOA relationship: $\sqrt{4-x^2} = \sqrt{4-4\sin^2\theta} = 2\cos\theta$</p>
+          <div class="calc2-equation">$$\int \frac{dx}{\sqrt{4-x^2}} = \int \frac{2\cos\theta \, d\theta}{2\cos\theta} = \int d\theta$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Integrate in terms of $\theta$.</p>
+          <div class="calc2-equation">$$\int d\theta = \theta + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Convert back to $x$.</p>
+          <p>Since $x = 2\sin\theta$, we have $\sin\theta = \frac{x}{2}$, so $\theta = \arcsin\left(\frac{x}{2}\right)$</p>
+          <div class="calc2-equation">$$\int \frac{dx}{\sqrt{4-x^2}} = \arcsin\left(\frac{x}{2}\right) + C$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Integrating $\int \sqrt{x^2 + 9} \, dx$</h3>
+        <p><strong>Problem:</strong> Evaluate this integral using trigonometric substitution.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
+          <p>We have $\sqrt{x^2 + 9} = \sqrt{x^2 + 3^2}$, so this is <strong>Case 2</strong> with $a = 3$.</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 3\tan\theta$, so $dx = 3\sec^2\theta \, d\theta$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Transform the radical and integral.</p>
+          <p>Using the SOHCAHTOA relationship: $\sqrt{x^2 + 9} = \sqrt{9\tan^2\theta + 9} = 3\sec\theta$</p>
+          <div class="calc2-equation">$$\int \sqrt{x^2 + 9} \, dx = \int 3\sec\theta \cdot 3\sec^2\theta \, d\theta = 9\int \sec^3\theta \, d\theta$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Use the reduction formula for $\sec^3\theta$.</p>
+          <p>From Section 6.3, we know: $\int \sec^3\theta \, d\theta = \frac{1}{2}(\sec\theta \tan\theta + \ln|\sec\theta + \tan\theta|) + C$</p>
+          <div class="calc2-equation">$$9\int \sec^3\theta \, d\theta = \frac{9}{2}(\sec\theta \tan\theta + \ln|\sec\theta + \tan\theta|) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Convert back to $x$ using the reference triangle.</p>
+          <p>From $x = 3\tan\theta$: $\tan\theta = \frac{x}{3}$, $\sec\theta = \frac{\sqrt{x^2+9}}{3}$</p>
+          <div class="calc2-equation">$$= \frac{9}{2}\left(\frac{\sqrt{x^2+9}}{3} \cdot \frac{x}{3} + \ln\left|\frac{\sqrt{x^2+9}}{3} + \frac{x}{3}\right|\right) + C$$</div>
+          <div class="calc2-equation">$$= \frac{x\sqrt{x^2+9}}{2} + \frac{9}{2}\ln\left|\frac{\sqrt{x^2+9} + x}{3}\right| + C$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: Definite Integral with $\sqrt{x^2-16}$</h3>
+        <p><strong>Problem:</strong> Evaluate $\int_5^8 \frac{dx}{x^2\sqrt{x^2-16}}$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Identify the form and choose substitution.</p>
+          <p>We have $\sqrt{x^2-16} = \sqrt{x^2-4^2}$, so this is <strong>Case 3</strong> with $a = 4$.</p>
+          <p>Following <a href="https://opentext.uleth.ca/apex-calculus/sec_trig_sub.html#idea_trigsub" target="_blank">Key Idea 6.4.2</a>: $x = 4\sec\theta$, so $dx = 4\sec\theta\tan\theta \, d\theta$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Transform limits of integration.</p>
+          <p>When $x = 5$: $\sec\theta = \frac{5}{4}$, so $\theta = \arccos\left(\frac{4}{5}\right)$</p>
+          <p>When $x = 8$: $\sec\theta = \frac{8}{4} = 2$, so $\theta = \arccos\left(\frac{1}{2}\right) = \frac{\pi}{3}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Transform the integrand.</p>
+          <div class="calc2-equation">$$\sqrt{x^2-16} = \sqrt{16\sec^2\theta-16} = 4\tan\theta$$</div>
+          <div class="calc2-equation">$$\frac{1}{x^2\sqrt{x^2-16}} = \frac{1}{16\sec^2\theta \cdot 4\tan\theta} = \frac{1}{64\sec^2\theta\tan\theta}$$</div>
+          <div class="calc2-equation">$$\int \frac{dx}{x^2\sqrt{x^2-16}} = \int \frac{1}{64\sec^2\theta\tan\theta} \cdot 4\sec\theta\tan\theta \, d\theta = \frac{1}{16}\int \cos\theta \, d\theta$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Evaluate the definite integral.</p>
+          <div class="calc2-equation">$$\frac{1}{16}\int \cos\theta \, d\theta = \frac{1}{16}\sin\theta \Big|_{\arccos(4/5)}^{\pi/3}$$</div>
+          <p>At $\theta = \frac{\pi}{3}$: $\sin\left(\frac{\pi}{3}\right) = \frac{\sqrt{3}}{2}$</p>
+          <p>At $\theta = \arccos\left(\frac{4}{5}\right)$: $\sin\theta = \sqrt{1-\cos^2\theta} = \sqrt{1-\frac{16}{25}} = \frac{3}{5}$</p>
+          <div class="calc2-equation">$$= \frac{1}{16}\left(\frac{\sqrt{3}}{2} - \frac{3}{5}\right) = \frac{1}{16} \cdot \frac{5\sqrt{3} - 6}{10} = \frac{5\sqrt{3} - 6}{160}$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key takeaways -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering Trigonometric Substitution:</strong></p>
+      <ul>
+        <li><strong>Pattern recognition:</strong> $\sqrt{a^2-x^2} \rightarrow \sin$, $\sqrt{a^2+x^2} \rightarrow \tan$, $\sqrt{x^2-a^2} \rightarrow \sec$</li>
+        <li><strong>Reference triangles:</strong> Essential for converting trigonometric expressions back to algebraic form</li>
+        <li><strong>Domain considerations:</strong> Pay attention to angle restrictions to ensure proper signs</li>
+        <li><strong>Definite integrals:</strong> Transform limits or convert back to $x$ at the end</li>
+        <li><strong>Complete the process:</strong> Always return to the original variable unless working with definite integrals</li>
+        <li><strong>Practice builds intuition:</strong> These substitutions become natural with experience</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>

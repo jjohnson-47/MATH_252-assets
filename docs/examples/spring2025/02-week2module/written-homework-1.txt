@@ -1,0 +1,92 @@
+
+A stylized retro wave image of common mathematical curves in neon colors on a dark background.
+
+
+
+Problem 1: Riemann Sums and the Definition of the Integral
+
+
+Let the function ﻿f left parenthesis x right parenthesis equals x squared plus 1f left parenthesis x right parenthesis equals x squared plus 1﻿ be defined on the interval ﻿left square bracket 0 comma 3 right square bracketleft square bracket 0 comma 3 right square bracket﻿.
+
+
+
+(a)  
+
+Express the definite integral
+
+﻿integral subscript 0 superscript 3 left parenthesis x squared plus 1 right parenthesis text end text d xintegral subscript 0 superscript 3 left parenthesis x squared plus 1 right parenthesis text end text d x﻿
+
+as a Riemann sum using ﻿nn﻿ equal subintervals and right endpoints as sample points. Write your Riemann sum in summation notation.
+
+
+
+(b)
+
+Simplify the Riemann sum expression from part (a), and then evaluate the integral by taking the limit as ﻿n rightwards arrow straight infinityn rightwards arrow straight infinity﻿:
+
+﻿integral subscript 0 superscript 3 left parenthesis x squared plus 1 right parenthesis text end text d x equals lim invisible function application subscript n rightwards arrow straight infinity end subscript left parenthesis text Your Riemann Sum end text right parenthesisintegral subscript 0 superscript 3 left parenthesis x squared plus 1 right parenthesis text end text d x equals lim invisible function application subscript n rightwards arrow straight infinity end subscript left parenthesis text Your Riemann Sum end text right parenthesis﻿
+
+
+
+Provide all algebraic steps in simplifying the sum and computing the limit. Justify the use of any summation formulas or limit properties.
+
+
+
+Problem 2: Fundamental Theorem of Calculus and the Chain Rule
+
+
+Consider the function ﻿F left parenthesis x right parenthesisF left parenthesis x right parenthesis﻿ defined by the integral:
+
+﻿F left parenthesis x right parenthesis equals integral subscript 2 superscript x cubed minus x end superscript cos invisible function application left parenthesis t right parenthesis text end text d tF left parenthesis x right parenthesis equals integral subscript 2 superscript x cubed minus x end superscript cos invisible function application left parenthesis t right parenthesis text end text d t﻿
+
+Compute the derivative ﻿F to the power of straight prime left parenthesis x right parenthesisF to the power of straight prime left parenthesis x right parenthesis﻿ using the Fundamental Theorem of Calculus (Part I) in combination with the Chain Rule.
+
+Explain how the variable upper limit of integration affects the differentiation.
+Show how the inner function ﻿x cubed minus xx cubed minus x﻿ influences the derivative through the Chain Rule.
+Detail each step of your computation, ensuring clarity in the application of the theorem and rule.
+
+
+
+
+Problem 3: Mean Value Theorem for Integrals
+
+
+Let ﻿g left parenthesis x right parenthesis equals 6 x minus x squaredg left parenthesis x right parenthesis equals 6 x minus x squared﻿ be a continuous function on the interval ﻿left square bracket 0 comma 4 right square bracketleft square bracket 0 comma 4 right square bracket﻿.
+
+
+
+(a)
+
+Compute the definite integral:
+
+﻿integral subscript 0 superscript 4 g left parenthesis x right parenthesis text end text d xintegral subscript 0 superscript 4 g left parenthesis x right parenthesis text end text d x﻿
+
+Show all steps in your calculation, including the evaluation of any antiderivatives and the application of the Fundamental Theorem of Calculus.
+
+
+
+(b)
+
+Use the Mean Value Theorem for Integrals to find all values of ﻿cc﻿ in the interval ﻿left square bracket 0 comma 4 right square bracketleft square bracket 0 comma 4 right square bracket﻿ such that:
+
+﻿integral subscript 0 superscript 4 g left parenthesis x right parenthesis text end text d x equals g left parenthesis c right parenthesis cross times left parenthesis 4 minus 0 right parenthesisintegral subscript 0 superscript 4 g left parenthesis x right parenthesis text end text d x equals g left parenthesis c right parenthesis cross times left parenthesis 4 minus 0 right parenthesis﻿
+
+
+
+Provide a detailed solution that:
+
+Explains the Mean Value Theorem for Integrals and how it applies to this problem.
+Sets up the equation based on the theorem and the function ﻿g left parenthesis x right parenthesisg left parenthesis x right parenthesis﻿.
+Solves for all possible values of ﻿cc﻿ within the given interval, showing all algebraic steps.
+Verifies that your solutions for ﻿cc﻿ lie within the interval ﻿left square bracket 0 comma 4 right square bracketleft square bracket 0 comma 4 right square bracket﻿.
+
+
+Submission Guidelines
+
+
+Deadline: Friday, January 24th
+Format: Handwritten solutions scanned and uploaded as a PDF. Please do not submit sporadic images. At the very least, insert the images into a Google Doc, then go to 'download as' and choose PDF.
+Academic Integrity: Ensure that all work is your own. Collaboration is encouraged, but direct copying is prohibited.
+
+
+This assignment is designed to assess your understanding of fundamental integration concepts. Take the time to work through each problem carefully, and don't hesitate to reach out during office hours if you have questions.

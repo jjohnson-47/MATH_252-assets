@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Riemann Sums Python Tool</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .colab-link-box {
+      background: rgba(255, 152, 0, 0.1);
+      border: 2px solid var(--unit-color);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .colab-button {
+      display: inline-block;
+      background-color: var(--accent-teal);
+      color: var(--neutral-white);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 1rem 0;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .colab-button:hover {
+      background-color: var(--accent-hot-pink);
+    }
+
+    ul {
+      list-style-type: disc;
+      margin-left: 1.5rem;
+    }
+    
+    ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Riemann Sums Python Tool</h1>
+
+    <p>
+      This interactive Python tool helps you visualize and understand Riemann sums. You'll be able to see how different numbers of rectangles approximate the area under a curve, demonstrating the fundamental concept behind definite integrals.
+    </p>
+
+    <div class="calc2-info-box">
+      <p><strong>⚠️ Important Requirements:</strong></p>
+      <ul>
+        <li>You must be signed in to your <strong>@alaska.edu Google account</strong> to access this tool.</li>
+        <li>If you see a permission error, make sure you're signed in with your university account.</li>
+      </ul>
+    </div>
+
+    <div class="colab-link-box">
+      <p><strong>Access the Riemann Sums Python Tool:</strong></p>
+      <a href="https://colab.research.google.com/drive/1iZFmTHrZ9ESxD3jnt310Fjz8EbJh8dGT?usp=sharing" 
+         target="_blank" 
+         class="colab-button">
+        Open in Google Colab
+      </a>
+      <p style="margin-top: 1rem; font-size: 0.9rem;">
+        (Opens in a new tab - Remember to sign in with your @alaska.edu account)
+      </p>
+    </div>
+
+    <p>
+      The Riemann sum for a function \(f(x)\) on an interval \([a,b]\) is an approximation of the definite integral:
+    </p>
+
+    \[
+      \int_a^b f(x)\,dx \approx \sum_{i=1}^n f(x_i)\Delta x
+    \]
+
+    <div class="calc2-info-box">
+      <p><strong>How to Use This Tool:</strong></p>
+      <ul>
+        <li>Read the instructions in the first text cell carefully.</li>
+        <li>Click the "play" button in the Python cell to run the visualization.</li>
+        <li>To experiment with the code:
+          <ul>
+            <li>Click "File" → "Save a copy in Drive" to create your own version</li>
+            <li>Modify parameters in your copy to explore different functions and numbers of rectangles</li>
+          </ul>
+        </li>
+        <li>Try changing the number of rectangles to see how the approximation improves!</li>
+      </ul>
+    </div>
+
+    <p>
+      This tool will be particularly useful as we explore more sophisticated numerical approximation techniques throughout the course. Feel free to experiment with different functions and parameters to build your intuition about Riemann sums.
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Calculus 2</title>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-orange: #ff9800;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-accent-yellow: #ffeb3b;
+      --calc2-neutral-white: #ffffff;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    .calc2-text {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-neutral-white);
+    }
+
+    .calc2-background {
+      background: linear-gradient(
+        to bottom,
+        var(--calc2-primary-purple),
+        var(--calc2-primary-dark-blue)
+      );
+      color: var(--calc2-neutral-white);
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .calc2-h1 {
+      font-size: 2.5rem;
+      margin: 0 0 1.5rem 0;
+      line-height: 1.2;
+      color: var(--calc2-neutral-white);
+    }
+
+    .calc2-content-box {
+      background: rgba(26, 35, 126, 0.9);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      border: 2px solid var(--calc2-neutral-white);
+      outline: none;
+    }
+
+    .calc2-content-box:focus {
+      outline: 3px solid var(--calc2-focus-outline);
+      outline-offset: 2px;
+    }
+
+    .calc2-link {
+      color: var(--calc2-accent-yellow);
+      text-decoration: underline;
+    }
+
+    .calc2-link:hover,
+    .calc2-link:focus {
+      color: var(--calc2-accent-teal);
+      outline: 2px solid var(--calc2-focus-outline);
+      outline-offset: 2px;
+    }
+
+    .calc2-time {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: rgba(77, 208, 225, 0.1);
+      border-radius: 4px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    .start-here-container {
+      width: 200px;
+      height: 200px;
+      margin: 2rem auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(
+        to bottom,
+        var(--calc2-primary-purple),
+        var(--calc2-primary-dark-blue)
+      );
+      border: 2px solid var(--calc2-neutral-white);
+      border-radius: 8px;
+      aria-hidden="true";
+    }
+
+    .calc2-downward-arrow {
+      width: 40px;
+      height: 80px;
+      background-color: var(--calc2-accent-teal);
+      clip-path: polygon(50% 0%, 100% 70%, 75% 70%, 75% 100%, 25% 100%, 25% 70%, 0% 70%);
+      box-shadow:
+        0 0 10px var(--calc2-accent-teal),
+        0 0 15px var(--calc2-accent-green);
+    }
+
+    .calc2-radiating-light {
+      width: 60px;
+      height: 60px;
+      border: 2px solid rgba(77, 208, 225, 0.5);
+      border-radius: 50%;
+      position: absolute;
+      animation: calc2-pulse 4s ease-in-out infinite;
+    }
+
+    .calc2-video-container {
+      position: relative;
+      width: 100%;
+      max-width: 800px;
+      margin: 2rem auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(77, 208, 225, 0.3);
+      border: 3px solid var(--calc2-accent-teal);
+      transition: transform 0.3s ease;
+    }
+
+    .calc2-video-container:hover {
+      transform: scale(1.02);
+    }
+
+    .calc2-video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .calc2-video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @keyframes calc2-pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.2); opacity: 0.2; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .calc2-radiating-light {
+        animation: none;
+      }
+      .calc2-video-container {
+        transition: none;
+      }
+      .calc2-video-container:hover {
+        transform: none;
+      }
+    }
+
+    .calc2-list {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .calc2-list li {
+      margin-bottom: 0.75rem;
+    }
+
+    .calc2-navigation {
+      margin-top: 1rem;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-h1 { font-size: 2rem; margin-bottom: 1rem; }
+      .calc2-content-box { padding: 1rem; }
+      .start-here-container { width: 150px; height: 150px; }
+      .calc2-text { font-size: 0.95rem; }
+      .calc2-video-container { margin: 1.5rem auto; }
+    }
+
+    @media (forced-colors: active) {
+      .calc2-content-box { border: 2px solid CanvasText; }
+      .calc2-link { color: LinkText; }
+    }
+  </style>
+</head>
+<body class="calc2-text">
+  <div class="calc2-background">
+    <main>
+      <h1 class="calc2-h1">Welcome to Calculus 2!</h1>
+      
+      <div class="calc2-content-box" tabindex="0">
+        <p>Welcome to the "Start Here" module! This introductory unit is designed to help you succeed in this course by:</p>
+        
+        <ul class="calc2-list">
+          <li>Outlining technical requirements, including necessary hardware and software</li>
+          <li>Ensuring you have all resources needed for success</li>
+          <li>Clarifying class expectations</li>
+          <li>Providing tools to troubleshoot basic technical issues</li>
+        </ul>
+
+        <div class="calc2-time">
+          <p>This unit should take about 15-20 minutes to complete.</p>
+        </div>
+      </div>
+
+      <div class="calc2-video-container">
+        <div class="calc2-video-wrapper">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/-WyvM_gNUOA?si=ieMChQIbev9L-qQf" title="Welcome to Calculus 2 Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
+      <div class="start-here-container">
+        <div class="calc2-radiating-light"></div>
+        <div class="calc2-downward-arrow"></div>
+      </div>
+
+      <div class="calc2-content-box" tabindex="0">
+        <p>To get started successfully, please complete these steps:</p>
+        
+        <ol class="calc2-list">
+          <li>Review all items in this <strong>Start Here</strong> module to understand the course layout and expectations.</li>
+          <li>Read the syllabus and Spring 2025 course schedule in the <strong>Syllabus &amp; Schedule</strong> section.</li>
+          <li>For questions:
+            <ul>
+              <li>Post general questions in the <strong>General Questions</strong> forum</li>
+              <li>Email me directly at <a href="mailto:jjohnson47@alaska.edu" class="calc2-link">jjohnson47@alaska.edu</a> for personal matters</li>
+            </ul>
+          </li>
+          <li>Once you're ready, proceed to <strong>Unit #1 – Integration</strong> to begin your coursework.</li>
+        </ol>
+
+        <p class="calc2-navigation">Navigate through this module by clicking each item in the list to the left, or use the 'next page' arrow in the upper right corner of this box.</p>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

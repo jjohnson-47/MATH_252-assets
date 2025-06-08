@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Midpoint Rule Calculator</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+      text-align: center;
+    }
+
+    .calc2-link-box {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .calc2-link-box a {
+      color: var(--neutral-white);
+      background-color: var(--accent-hot-pink);
+      padding: 0.75rem 1.5rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 5px;
+      border: 2px solid var(--accent-hot-pink);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .calc2-link-box a:hover {
+      background-color: transparent;
+      border-color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .calc2-math-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin: 2rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+
+    .calc2-math-box h2 {
+      color: var(--unit-color);
+      margin-top: 0;
+    }
+
+    ul {
+      margin-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Ensure display math has proper spacing */
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .feature-item {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--accent-teal);
+    }
+
+    .feature-item h3 {
+      color: var(--accent-teal);
+      margin-top: 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="calc2-container">
+  <h1 class="calc2-title">Midpoint Rule Calculator</h1>
+
+  <!-- Prominent Link to the Tool -->
+  <div class="calc2-link-box">
+    <a href="https://colab.research.google.com/drive/1gcX3fYmIqpUxBfCUr3agkvYRku5hdK9I?usp=sharing" target="_blank">
+      Access the Midpoint Rule Calculator
+    </a>
+  </div>
+
+  <div class="calc2-info-box">
+    <p>This interactive tool helps you calculate definite integral approximations using the Midpoint Rule. The calculator employs a numerical integration technique that approximates the area under a curve by using rectangles evaluated at midpoints.</p>
+  </div>
+
+  <div class="calc2-math-box">
+    <h2>The Mathematics Behind the Tool</h2>
+    <p>The Midpoint Rule approximates a definite integral by breaking the interval into \( n \) subintervals and summing the areas of rectangles whose heights are determined by the function value at the midpoint of each subinterval. The formula used is:</p>
+    
+    \[\begin{align*}
+    \int_a^b f(x)\, dx &\approx \sum_{i=1}^n f\left( \overline{x_i} \right) \Delta x\\
+    &= \Delta x \sum_{i=1}^n f\left( a + \left( i - \dfrac{1}{2} \right) \Delta x \right),
+    \end{align*}\]
+    
+    <p>where \( \Delta x = \dfrac{b - a}{n} \) is the width of each subinterval, and \( \overline{x_i} \) is the midpoint of the \( i \)-th subinterval given by:</p>
+    
+    \[\overline{x_i} = a + \left( i - \dfrac{1}{2} \right) \Delta x.\]
+    
+    <p>Thus, the Midpoint Rule approximation is:</p>
+    
+    \[ M_n = \Delta x \sum_{i=1}^n f\left( \overline{x_i} \right). \]
+  </div>
+
+  <div class="feature-list">
+    <div class="feature-item">
+      <h3>Input Options</h3>
+      <ul>
+        <li>Function expression</li>
+        <li>Integration bounds</li>
+        <li>Number of subintervals</li>
+      </ul>
+    </div>
+    <div class="feature-item">
+      <h3>Visual Output</h3>
+      <ul>
+        <li>Graph of function</li>
+        <li>Midpoint approximation</li>
+        <li>Area visualization</li>
+      </ul>
+    </div>
+    <div class="feature-item">
+      <h3>Numerical Results</h3>
+      <ul>
+        <li>Approximate integral value</li>
+        <li>Step-by-step calculations</li>
+        <li>Error estimates</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="calc2-info-box">
+    <h2>How to Use This Tool</h2>
+    <ol>
+      <li>Click the link at the top of the page to open the calculator in Google Colab.</li>
+      <li>If prompted, sign in to your Google account.</li>
+      <li>In the Colab notebook, you may need to click "Open in Playground" or "Connect" to start using it.</li>
+      <li>Enter your function in terms of \( x \) (e.g., <code>x^2</code>, <code>sin(x)</code>, <code>exp(-x)</code>) in the designated input cell.</li>
+      <li>Specify the lower and upper bounds of integration.</li>
+      <li>Choose the number of subintervals (more intervals result in a better approximation).</li>
+      <li>Run the cells to see both the numerical approximation and visual representation.</li>
+      <li>Experiment with different functions and parameters to build intuition.</li>
+    </ol>
+    <p><strong>Note:</strong> The tool automatically graphs both the function and the midpoint approximation, helping you visualize how increasing the number of subintervals improves accuracy.</p>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riemann Sum Using the Midpoint Rule</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Problem statement box */
+    .calc2-problem {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-problem h2 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    /* Solution step boxes */
+    .calc2-step {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Key concept box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-key-point h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      padding: 0.5rem;
+      background-color: rgba(245, 245, 245, 0.5);
+      border-radius: 4px;
+    }
+
+    /* Embedded graph container */
+    .calc2-graph-container {
+      height: 500px;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-graph-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Info box */
+    .calc2-info-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-info-box h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    /* Button styling */
+    .calc2-button {
+      display: inline-block;
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: background-color 0.2s;
+    }
+
+    .calc2-button:hover {
+      background-color: var(--calc2-primary-dark-blue);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Result highlight */
+    .calc2-highlight {
+      font-weight: bold;
+      color: var(--calc2-primary-purple);
+      padding: 0.25rem 0;
+    }
+
+    /* List styling */
+    ul, ol {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    ul li, ol li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-problem h2,
+      .calc2-key-point h3,
+      .calc2-info-box h3 {
+        font-size: 1.25rem;
+      }
+      .calc2-step h3 {
+        font-size: 1.15rem;
+      }
+      .calc2-graph-container {
+        height: 350px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Riemann Sum Using the Midpoint Rule</h1>
+
+    <div class="calc2-key-point">
+      <h3>Why This Example Matters</h3>
+      <p>
+        This example demonstrates an important property of the Midpoint Rule: it gives the <em>exact</em> value of the integral for linear functions, regardless of how many subintervals are used. This is not true for the Left or Right Riemann sums, which only converge to the exact value as the number of subintervals increases.
+      </p>
+      <p>
+        Understanding why this happens helps build intuition about the accuracy of different numerical integration methods and their geometric interpretations.
+      </p>
+    </div>
+
+    <div class="calc2-problem">
+      <h2>Problem</h2>
+      <p>Find the formula, in terms of \(n\), for the \(n\)-th Riemann sum using the midpoint rule for the integral:</p>
+      <div class="calc2-equation">
+        \[
+        \int_{-4}^{3} (3x - 6) \, dx
+        \]
+      </div>
+      <p>Then determine the value of this Riemann sum and compare it with the exact value of the integral.</p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 1: Set Up the Midpoint Rule Riemann Sum</h3>
+      <p>
+        For a Riemann sum using the Midpoint Rule, we:
+      </p>
+      <ol>
+        <li>Divide the interval \([a,b]\) into \(n\) subintervals of equal width \(\Delta x = \frac{b-a}{n}\)</li>
+        <li>Evaluate the function at the midpoint of each subinterval</li>
+        <li>Multiply each function value by the width \(\Delta x\)</li>
+        <li>Sum all these products</li>
+      </ol>
+      <p>
+        For our integral \(\int_{-4}^{3} (3x - 6) \, dx\), we have:
+      </p>
+      <ul>
+        <li>Lower bound \(a = -4\)</li>
+        <li>Upper bound \(b = 3\)</li>
+        <li>Function \(f(x) = 3x - 6\)</li>
+      </ul>
+      <p>
+        The width of each subinterval is:
+      </p>
+      <div class="calc2-equation">
+        \[
+        \Delta x = \frac{b - a}{n} = \frac{3 - (-4)}{n} = \frac{7}{n}
+        \]
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 2: Find the Midpoints of Subintervals</h3>
+      <p>
+        The interval \([-4, 3]\) is divided into \(n\) equal subintervals. The endpoints of these subintervals are:
+      </p>
+      <div class="calc2-equation">
+        \[
+        x_i = a + i \cdot \Delta x = -4 + i \cdot \frac{7}{n}, \quad \text{for } i = 0, 1, 2, \ldots, n
+        \]
+      </div>
+      <p>
+        For the \(i\)-th subinterval \([x_{i-1}, x_i]\), the midpoint is:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        m_i &= \frac{x_{i-1} + x_i}{2} \\
+        &= \frac{1}{2}\left[\left(-4 + (i-1) \cdot \frac{7}{n}\right) + \left(-4 + i \cdot \frac{7}{n}\right)\right] \\
+        &= \frac{1}{2}\left[-8 + (2i-1) \cdot \frac{7}{n}\right] \\
+        &= -4 + \frac{7}{2n}(2i-1) \\
+        &= -4 + \frac{7i}{n} - \frac{7}{2n}
+        \end{align}
+      </div>
+      <p>
+        Note: We're indexing from \(i = 1\) to \(i = n\) for the subintervals.
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 3: Evaluate the Function at Each Midpoint</h3>
+      <p>
+        Evaluating \(f(x) = 3x - 6\) at each midpoint:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        f(m_i) &= 3m_i - 6 \\
+        &= 3\left(-4 + \frac{7i}{n} - \frac{7}{2n}\right) - 6 \\
+        &= -12 + \frac{21i}{n} - \frac{21}{2n} - 6 \\
+        &= -18 + \frac{21i}{n} - \frac{21}{2n}
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 4: Form the Riemann Sum</h3>
+      <p>
+        The Midpoint Rule Riemann sum is:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        M_n &= \sum_{i=1}^{n} f(m_i) \cdot \Delta x \\
+        &= \sum_{i=1}^{n} \left(-18 + \frac{21i}{n} - \frac{21}{2n}\right) \cdot \frac{7}{n} \\
+        &= \frac{7}{n} \sum_{i=1}^{n} \left(-18 + \frac{21i}{n} - \frac{21}{2n}\right)
+        \end{align}
+      </div>
+      <p>
+        Breaking this into three separate sums:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        M_n &= \frac{7}{n} \left[ \sum_{i=1}^{n} (-18) + \sum_{i=1}^{n} \frac{21i}{n} - \sum_{i=1}^{n} \frac{21}{2n} \right] \\
+        &= \frac{7}{n} \left[ -18n + \frac{21}{n} \sum_{i=1}^{n} i - \frac{21}{2n} \sum_{i=1}^{n} 1 \right]
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 5: Evaluate the Sums Using Summation Formulas</h3>
+      <p>
+        Using the summation formulas:
+      </p>
+      <ul>
+        <li>\(\sum_{i=1}^{n} 1 = n\)</li>
+        <li>\(\sum_{i=1}^{n} i = \frac{n(n+1)}{2}\)</li>
+      </ul>
+      <p>
+        We get:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        M_n &= \frac{7}{n} \left[ -18n + \frac{21}{n} \cdot \frac{n(n+1)}{2} - \frac{21}{2n} \cdot n \right] \\
+        &= \frac{7}{n} \left[ -18n + \frac{21(n+1)}{2} - \frac{21}{2} \right] \\
+        &= \frac{7}{n} \left[ -18n + \frac{21n + 21}{2} - \frac{21}{2} \right] \\
+        &= \frac{7}{n} \left[ -18n + \frac{21n}{2} \right] \\
+        &= 7 \left[ -18 + \frac{21}{2} \cdot \frac{n+1}{n} - \frac{21}{2n} \right]
+        \end{align}
+      </div>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 6: Simplify to Find the Final Formula</h3>
+      <p>
+        Continuing with the simplification:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        M_n &= 7 \left[ -18 + \frac{21}{2} \right] \\
+        &= 7 \left[ -18 + 10.5 \right] \\
+        &= 7 \cdot (-7.5) \\
+        &= -52.5
+        \end{align}
+      </div>
+      <p class="calc2-highlight">
+        Therefore, the Midpoint Rule Riemann sum for this integral equals -52.5, regardless of the value of n.
+      </p>
+    </div>
+
+    <div class="calc2-step">
+      <h3>Step 7: Calculate the Exact Value of the Integral</h3>
+      <p>
+        Let's find the exact value of the integral using the Fundamental Theorem of Calculus:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+        \int_{-4}^{3} (3x - 6) \, dx &= \left[ \frac{3x^2}{2} - 6x \right]_{-4}^{3} \\
+        &= \left[ \frac{3 \cdot 3^2}{2} - 6 \cdot 3 \right] - \left[ \frac{3 \cdot (-4)^2}{2} - 6 \cdot (-4) \right] \\
+        &= \left[ \frac{27}{2} - 18 \right] - \left[ \frac{48}{2} + 24 \right] \\
+        &= \left[ 13.5 - 18 \right] - \left[ 24 + 24 \right] \\
+        &= -4.5 - 48 \\
+        &= -52.5
+        \end{align}
+      </div>
+      <p class="calc2-highlight">
+        The exact value of the integral is -52.5, which matches our Midpoint Rule approximation exactly.
+      </p>
+    </div>
+
+    <div class="calc2-key-point">
+      <h3>Key Insight: Midpoint Rule for Linear Functions</h3>
+      <p>
+        The Midpoint Rule gives the <em>exact</em> value of the integral for linear functions, regardless of how many subintervals you use. This is because:
+      </p>
+      <ul>
+        <li>For a linear function, the area under the curve over any interval equals the area of a trapezoid</li>
+        <li>The Midpoint Rule rectangle for a linear function has the same area as the trapezoid formed by the function over that interval</li>
+        <li>This property <strong>only</strong> works for linear functions (of the form \(f(x) = mx + b\))</li>
+        <li>For non-linear functions, the Midpoint Rule gives an approximation that improves as \(n\) increases</li>
+      </ul>
+    </div>
+
+    <div class="calc2-graph-container">
+      <iframe src="https://www.desmos.com/calculator/7gwh01ehwh" frameborder="0"></iframe>
+    </div>
+
+    <a href="https://www.desmos.com/calculator/7gwh01ehwh" target="_blank" class="calc2-button">
+      Open Interactive Riemann Sum Calculator
+    </a>
+
+    <div class="calc2-info-box">
+      <h3>Verification with the Interactive Tool</h3>
+      <p>Using the Desmos calculator above, you can verify that:</p>
+      <ol>
+        <li>The Midpoint Rule gives -52.5 regardless of the number of subintervals</li>
+        <li>The Left and Right Riemann sums give different values that converge to -52.5 as \(n\) increases</li>
+        <li>Try changing \(n\) in the Desmos graph and observe the behavior of different Riemann sum methods</li>
+      </ol>
+      <p>
+        This demonstrates why the Midpoint Rule is often preferred for numerical integration—it generally provides better approximations with fewer subintervals than the Left or Right rules.
+      </p>
+    </div>
+
+  </div>
+</body>
+</html>

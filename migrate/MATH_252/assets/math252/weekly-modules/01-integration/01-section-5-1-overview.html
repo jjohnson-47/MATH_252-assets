@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 5.1: Antiderivatives &amp; Indefinite Integration</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Different colored borders for different box types */
+    .calc2-definition {
+      border-left-color: var(--calc2-primary-purple);
+    }
+
+    .calc2-theorem {
+      border-left-color: var(--calc2-accent-green);
+    }
+
+    .calc2-example {
+      border-left-color: var(--calc2-accent-teal);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Video container for responsive embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Emphasis and strong text */
+    em {
+      font-style: italic;
+    }
+
+    strong {
+      font-weight: bold;
+      color: var(--calc2-primary-dark-blue);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Section 5.1: Antiderivatives and Indefinite Integration</h1>
+
+    <div class="calc2-reading-box">
+      <p><strong>📚 Required Reading:</strong> <a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html" target="_blank">APEX Calculus - Section 5.1</a></p>
+      <p>This section introduces the fundamental concepts of antiderivatives and indefinite integration, laying the groundwork for our study of integral calculus.</p>
+    </div>
+
+    <!-- Overview Video -->
+    <div class="calc2-video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/7wLHve-pPK4?si=eBHNtt2dOiMjDk64"
+        title="YouTube video player for Antiderivatives and Indefinite Integration" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2 class="calc2-subtitle">Introduction to Antiderivatives</h2>
+    
+    <p>
+      In this section, we're looking at the process of finding functions when we know their derivatives. This is the reverse of what we've been doing in differential calculus, and it's the foundation of integral calculus.
+    </p>
+    
+    <p>
+      Consider a simple differential equation: \( \frac{dF}{dx} = 1 \). What function \( F(x) \) has a derivative of 1? You might think of \( F(x) = x \). But what about \( F(x) = x + 7 \)? Or \( F(x) = x - 5 \)? All of these functions have a derivative of 1. We quickly realize that there isn't just one antiderivative, but infinitely many, all differing by a constant.
+    </p>
+
+    <div class="calc2-definition">
+      <h3>Definition: Antiderivatives and Indefinite Integrals</h3>
+      <p>
+        Let a function \( f(x) \) be given. An <em>antiderivative</em> of \( f \) is a function
+        \( F(x) \) such that \( F'(x) = f(x) \).
+      </p>
+      <p>
+        The set of <em>all</em> antiderivatives of \( f \) is called the <em>indefinite integral</em>
+        of \( f \), denoted:
+      </p>
+      <div class="calc2-equation">
+        \[
+          \int f(x)\,dx
+        \]
+      </div>
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#def_antider" target="_blank">See full definition in the textbook</a></p>
+    </div>
+
+    <div class="calc2-key-point">
+      <p>We refer to <em>an</em> antiderivative rather than <em>the</em> antiderivative of \( f \) because there are infinitely many. When \( f \) is continuous, all antiderivatives differ by a constant.</p>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>Theorem 5.1.2: Antiderivative Forms</h3>
+      <p>
+        Let \( G \) and \( H \) be antiderivatives of a continuous function \( f \) on an interval
+        \( I \). Then there exists a constant \( C \) such that, on \( I \):
+      </p>
+      <div class="calc2-equation">
+        \[
+          G(x) = H(x) + C
+        \]
+      </div>
+      <p>
+        If \( F \) is any antiderivative of \( f \) on \( I \), then the set of
+        <em>all</em> antiderivatives is given by \( F(x) + C \), for any real constant \( C \).
+      </p>
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-12" target="_blank">See full theorem in the textbook</a></p>
+    </div>
+
+    <h2 class="calc2-subtitle">Notation and Interpretation</h2>
+    
+    <p>
+      The standard notation for the indefinite integral is:
+    </p>
+    <div class="calc2-equation">
+      \[
+        \int f(x)\, dx
+      \]
+    </div>
+    <p>
+      The symbol \(\int\) (an elongated "S" for "sum") and the differential \(dx\) combine to
+      mean "find <em>all</em> antiderivatives of \( f(x) \)." You can think of it as
+      "undoing" differentiation with respect to \( x \).
+    </p>
+
+    <div class="calc2-example">
+      <h3>Example: Basic Indefinite Integral</h3>
+      <p>
+        Evaluate \( \int 1 \, dx \)
+      </p>
+      <p><strong>Solution:</strong></p>
+      <p>
+        We're looking for all functions whose derivative is 1. A family
+        of such functions is \( x + C \), where \( C \) is any real constant. So:
+      </p>
+      <div class="calc2-equation">
+        \[
+          \int 1 \, dx = x + C
+        \]
+      </div>
+      <p>
+        One might ask, "Where did the \( dx \) go?" From a deeper perspective, we're
+        solving the differential equation \( dF = dx \), which asks "what function \( F \)
+        has the differential form \( dF = dx \)?"
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Polynomial Integration</h3>
+      <p>
+        Evaluate \( \int (x^2 + 5x - 7) \, dx \)
+      </p>
+      <p><strong>Solution:</strong></p>
+      <p>
+        We can split this up using the Sum/Difference Rule:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          \int x^2\,dx &= \frac{x^3}{3} + C_1\\
+          \int 5x\,dx &= \frac{5x^2}{2} + C_2\\
+          \int (-7)\,dx &= -7x + C_3
+        \end{align}
+      </div>
+      <p>
+        Combining these results and using a single constant \( C = C_1 + C_2 + C_3 \):
+      </p>
+      <div class="calc2-equation">
+        \[
+          \int (x^2 + 5x - 7) \, dx = \frac{x^3}{3} + \frac{5x^2}{2} - 7x + C
+        \]
+      </div>
+      <p>
+        Always verify by differentiating your result:
+        \(\frac{d}{dx}\left(\frac{x^3}{3} + \frac{5x^2}{2} - 7x + C\right) = x^2 + 5x - 7\).
+      </p>
+    </div>
+
+    <h2 class="calc2-subtitle">Integration Rules</h2>
+
+    <div class="calc2-theorem">
+      <h3>Theorem 5.1.6: Common Integration Rules</h3>
+      <p>Here are fundamental rules for indefinite integrals:</p>
+      <ol>
+        <li>
+          <strong>Constant Multiple Rule:</strong>
+          \(\displaystyle \int k \cdot f(x)\,dx = k \int f(x)\,dx\)
+          <br><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-33-1-1" target="_blank">See in textbook</a>
+        </li>
+        <li>
+          <strong>Sum/Difference Rule:</strong>
+          \(\displaystyle \int [f(x) \pm g(x)]\,dx = \int f(x)\,dx \pm \int g(x)\,dx\)
+          <br><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-33-1-2" target="_blank">See in textbook</a>
+        </li>
+        <li>
+          <strong>Power Rule:</strong>
+          \(\displaystyle \int x^n \, dx = \frac{x^{n+1}}{n+1} + C,\) where \(n \neq -1\)
+          <br><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-33-1-3" target="_blank">See in textbook</a>
+        </li>
+        <li>
+          <strong>Logarithmic Rule:</strong>
+          \(\displaystyle \int \frac{1}{x}\,dx = \ln|x| + C\)
+          <br><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-34" target="_blank">See in textbook</a>
+        </li>
+      </ol>
+    </div>
+
+    <h2 class="calc2-subtitle">Initial Value Problems</h2>
+    
+    <p>
+      We can apply antiderivatives to "initial value problems," where we solve
+      differential equations with given initial conditions.
+    </p>
+
+    <div class="calc2-example">
+      <h3>Example 5.1.8: Solving an Initial Value Problem</h3>
+      <p>
+        Find \( F(x) \), given that \( \frac{dF}{dx} = 3x^2 - 4 \) and \( F(1) = 5 \).
+      </p>
+      <p><strong>Solution:</strong></p>
+      <p>
+        First, we find the general form of \(F(x)\) by integration:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          F(x) &= \int (3x^2 - 4)\,dx\\
+          &= 3 \int x^2\,dx - 4\int dx\\
+          &= 3 \cdot \frac{x^3}{3} - 4x + C\\
+          &= x^3 - 4x + C
+        \end{align}
+      </div>
+      <p>
+        Now we use the initial condition \( F(1) = 5 \) to find the specific value of \(C\):
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          F(1) &= 1^3 - 4(1) + C = 5\\
+          1 - 4 + C &= 5\\
+          C &= 8
+        \end{align}
+      </div>
+      <p>
+        Therefore, the particular solution is:
+      </p>
+      <div class="calc2-equation">
+        \[
+          F(x) = x^3 - 4x + 8
+        \]
+      </div>
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_antider.html#sec_antider-35" target="_blank">See full example in the textbook</a></p>
+    </div>
+
+    <h2 class="calc2-subtitle">Key Takeaways</h2>
+    
+    <div class="calc2-key-point">
+      <ul>
+        <li>Antiderivatives reverse the process of differentiation</li>
+        <li>For a continuous function, all antiderivatives differ by a constant</li>
+        <li>The indefinite integral \(\int f(x)\,dx\) represents the family of all antiderivatives of \(f(x)\)</li>
+        <li>Always include the arbitrary constant \(C\) when writing indefinite integrals</li>
+        <li>Use initial conditions to find specific values for the constant \(C\)</li>
+        <li>Verify your answers by differentiating the result</li>
+      </ul>
+    </div>
+
+    <div class="calc2-reading-box">
+      <p><strong>📝 Looking Ahead:</strong> In the next section, we'll explore the definite integral and begin to see connections between antiderivatives and areas under curves. This will lead us to the Fundamental Theorem of Calculus, a cornerstone of mathematical analysis.</p>
+    </div>
+  </div>
+</body>
+</html>

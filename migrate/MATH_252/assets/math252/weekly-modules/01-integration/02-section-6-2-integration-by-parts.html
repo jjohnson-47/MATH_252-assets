@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.2 – Integration by Parts | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},          // Ask loader for color.js
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}            // Keep the package name here
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* -------------------------------------------------------------------------
+       Theme variables (matches sections 5.4 and 5.5)  
+       --------------------------------------------------------------------- */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /*  Base layout & typography                                             */
+    /* --------------------------------------------------------------------- */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.2 – Integration by Parts</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html" target="_blank" rel="noopener">APEX Calculus §6.2 – Integration by Parts</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#sec_IBP-1-2" target="_blank" rel="noopener">Example 6.2.2 – Basic integration by parts</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#sec_IBP-2-2" target="_blank" rel="noopener">Example 6.2.7 – When to apply parts multiple times</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_IBP.html#sec_IBP-3-2" target="_blank" rel="noopener">Example 6.2.10 – Circular integration by parts</a></li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Understand how integration by parts <strong>reverses the Product Rule</strong> to evaluate integrals of products.</li>
+        <li>Apply the <strong>LIATE strategy</strong> to choose optimal u and dv assignments.</li>
+        <li>Execute the integration by parts process systematically and accurately.</li>
+        <li>Recognize when to apply integration by parts <strong>multiple times</strong> in sequence.</li>
+        <li>Handle <strong>circular cases</strong> where the original integral reappears after multiple applications.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/7gzymuOT6Eo?si=LZyE9KX3YyPEUI8v" title="Integration by Parts Overview" allowfullscreen></iframe>
+    </section>
+
+    <div class="calc2-theorem">
+      <h3>Deriving Integration by Parts: Step-by-Step</h3>
+      <p><strong>Step 1:</strong> Start with the Product Rule for derivatives.</p>
+      <p>If we have two functions $f(x)$ and $g(x)$, the Product Rule tells us:</p>
+      <div class="calc2-equation">$$\frac{d}{dx}\Big[f(x)g(x)\Big] = f(x) \cdot g'(x) + f'(x) \cdot g(x)$$</div>
+      
+      <p><strong>Step 2:</strong> Integrate both sides with respect to the <strong>independent variable</strong> $x$.</p>
+      <p>This gives us:</p>
+      <div class="calc2-equation">$$f(x)g(x) = \int f(x) \cdot g'(x) \, dx + \int f'(x) \cdot g(x) \, dx$$</div>
+      
+      <p><strong>Step 3:</strong> Solve for one of the integrals.</p>
+      <p>Rearranging to isolate the first integral:</p>
+      <div class="calc2-equation">$$\int f(x) \cdot g'(x) \, dx = f(x)g(x) - \int f'(x) \cdot g(x) \, dx$$</div>
+      
+      <p><strong>Step 4:</strong> Introduce compact notation.</p>
+      <p>Let $\textcolor{blue}{u = f(x)}$ and $\textcolor{red}{v = g(x)}$. Then:</p>
+      <ul>
+        <li>$\textcolor{blue}{du = f'(x) \, dx}$ (differential of $u$)</li>
+        <li>$\textcolor{red}{dv = g'(x) \, dx}$ (differential of $v$)</li>
+      </ul>
+      
+      <p><strong>Integration by Parts Formula:</strong></p>
+      <div class="calc2-equation">$$\boxed{\int \textcolor{blue}{u} \, \textcolor{red}{dv} = \textcolor{blue}{u}\textcolor{red}{v} - \int \textcolor{red}{v} \, \textcolor{blue}{du}}$$</div>
+    </div>
+
+    <div class="calc2-definition">
+      <h3>Definite Integration by Parts</h3>
+      <p>For definite integrals, integration by parts becomes:</p>
+      <div class="calc2-equation">$$\int_a^b \textcolor{blue}{u} \, \textcolor{red}{dv} = \Big[\textcolor{blue}{u}\textcolor{red}{v}\Big]_a^b - \int_a^b \textcolor{red}{v} \, \textcolor{blue}{du}$$</div>
+      <p><strong>Key advantage:</strong> We can evaluate the boundary term $[uv]_a^b$ directly without finding the indefinite integral first.</p>
+    </div>
+
+    <div class="calc2-definition">
+      <h3>The LIATE Strategy</h3>
+      <p>When using integration by parts, choose $\textcolor{blue}{u}$ based on the priority order <strong>LIATE</strong>:</p>
+      <ul>
+        <li><strong>L</strong>ogarithmic functions ($\ln x$, $\log x$)</li>
+        <li><strong>I</strong>nverse trigonometric functions ($\arcsin x$, $\arctan x$)</li>
+        <li><strong>A</strong>lgebraic functions ($x^n$, polynomials)</li>
+        <li><strong>T</strong>rigonometric functions ($\sin x$, $\cos x$, $\tan x$)</li>
+        <li><strong>E</strong>xponential functions ($e^x$, $a^x$)</li>
+      </ul>
+      <p><strong>Strategy:</strong> Choose $\textcolor{blue}{u}$ to be the function that appears <em>earlier</em> in this list, and $\textcolor{red}{dv}$ to be the remaining part of the integrand (including $dx$).</p>
+    </div>
+
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Basic Integration by Parts with Color-Coding</h3>
+        <p><strong>Problem:</strong> Evaluate $\int x e^x \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
+          <p>We have an algebraic function ($x$) and an exponential function ($e^x$). By LIATE, choose:</p>
+          <p>$\textcolor{blue}{u = x}$ (algebraic comes before exponential)</p>
+          <p>$\textcolor{red}{dv = e^x \, dx}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Find $du$ and $v$ by differentiation and integration.</p>
+          <p>$\textcolor{blue}{du = \frac{d}{dx}[x] \, dx = 1 \, dx = dx}$</p>
+          <p>$\textcolor{red}{v = \int e^x \, dx = e^x}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply the integration by parts formula with color-coding.</p>
+          <div class="calc2-equation">$$\int \textcolor{blue}{x} \cdot \textcolor{red}{e^x \, dx} = \textcolor{blue}{x} \cdot \textcolor{red}{e^x} - \int \textcolor{red}{e^x} \cdot \textcolor{blue}{dx}$$</div>
+          <div class="calc2-equation">$$= x e^x - \int e^x \, dx$$</div>
+          <div class="calc2-equation">$$= x e^x - e^x + C$$</div>
+          <div class="calc2-equation">$$= e^x(x - 1) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Check:</strong> $\frac{d}{dx}[e^x(x-1)] = e^x(x-1) + e^x \cdot 1 = e^x(x-1+1) = xe^x$ ✓</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Definite Integration by Parts</h3>
+        <p><strong>Problem:</strong> Evaluate $\int_0^1 x e^{2x} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Choose $u$ and $dv$ using LIATE.</p>
+          <p>$\textcolor{blue}{u = x}$ (algebraic)</p>
+          <p>$\textcolor{red}{dv = e^{2x} \, dx}$ (exponential)</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Find $du$ and $v$.</p>
+          <p>$\textcolor{blue}{du = dx}$</p>
+          <p>$\textcolor{red}{v = \int e^{2x} \, dx = \frac{1}{2}e^{2x}}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply the definite integration by parts formula.</p>
+          <div class="calc2-equation">$$\int_0^1 \textcolor{blue}{x} \cdot \textcolor{red}{e^{2x} \, dx} = \Big[\textcolor{blue}{x} \cdot \textcolor{red}{\frac{1}{2}e^{2x}}\Big]_0^1 - \int_0^1 \textcolor{red}{\frac{1}{2}e^{2x}} \cdot \textcolor{blue}{dx}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Evaluate the boundary term and remaining integral.</p>
+          <div class="calc2-equation">$$= \left[\frac{x e^{2x}}{2}\right]_0^1 - \frac{1}{2}\int_0^1 e^{2x} \, dx$$</div>
+          <div class="calc2-equation">$$= \left(\frac{1 \cdot e^2}{2} - \frac{0 \cdot e^0}{2}\right) - \frac{1}{2} \cdot \left[\frac{e^{2x}}{2}\right]_0^1$$</div>
+          <div class="calc2-equation">$$= \frac{e^2}{2} - \frac{1}{4}(e^2 - e^0) = \frac{e^2}{2} - \frac{1}{4}(e^2 - 1)$$</div>
+          <div class="calc2-equation">$$= \frac{e^2}{2} - \frac{e^2}{4} + \frac{1}{4} = \frac{e^2}{4} + \frac{1}{4} = \frac{e^2 + 1}{4}$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: When LIATE Doesn't Make the Choice Obvious</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \ln x \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Recognize the challenge.</p>
+          <p>This integral contains only one function: $\ln x$. How do we apply integration by parts?</p>
+          <p><strong>Key insight:</strong> Write $\int \ln x \, dx = \int \ln x \cdot 1 \, dx$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Choose $u$ and $dv$ strategically.</p>
+          <p>We have logarithmic ($\ln x$) and algebraic ($1$). By LIATE:</p>
+          <p>$\textcolor{blue}{u = \ln x}$ (logarithmic comes first)</p>
+          <p>$\textcolor{red}{dv = 1 \, dx = dx}$ (the "hidden" algebraic function)</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Find $du$ and $v$.</p>
+          <p>$\textcolor{blue}{du = \frac{1}{x} \, dx}$</p>
+          <p>$\textcolor{red}{v = \int dx = x}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Apply integration by parts.</p>
+          <div class="calc2-equation">$$\int \textcolor{blue}{\ln x} \cdot \textcolor{red}{dx} = \textcolor{blue}{\ln x} \cdot \textcolor{red}{x} - \int \textcolor{red}{x} \cdot \textcolor{blue}{\frac{1}{x} \, dx}$$</div>
+          <div class="calc2-equation">$$= x \ln x - \int 1 \, dx = x \ln x - x + C$$</div>
+          <div class="calc2-equation">$$= x(\ln x - 1) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Key insight:</strong> Sometimes integration by parts works even when there's "only one function" - we introduce a factor of 1 and apply the technique. This is especially common with logarithmic and inverse trigonometric functions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key takeaways -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering Integration by Parts:</strong></p>
+      <ul>
+        <li><strong>LIATE is your guide:</strong> Choose u following Logarithmic, Inverse trig, Algebraic, Trigonometric, Exponential</li>
+        <li><strong>Practice makes perfect:</strong> The more you recognize the patterns, the faster you'll choose u and dv</li>
+        <li><strong>Multiple applications:</strong> Don't be surprised if you need to apply the technique several times</li>
+        <li><strong>Circular integrals:</strong> When you get back to the original integral, solve algebraically</li>
+        <li><strong>Check your work:</strong> Differentiate your answer to verify it matches the original integrand</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>

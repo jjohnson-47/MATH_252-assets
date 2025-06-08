@@ -1,0 +1,7 @@
+{
+  "title": "Module Introduction",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": { "type": "none" },
+  "description": "Describe this module."
+}

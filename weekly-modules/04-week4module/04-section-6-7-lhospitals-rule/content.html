@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.7 – L'Hospital's Rule | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* Theme variables */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* Base layout & typography */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Algorithm analysis application boxes */
+    .calc2-application {
+      background: linear-gradient(135deg, rgba(77, 208, 225, 0.1), rgba(81, 45, 168, 0.05));
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-application h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .algorithm-example {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      border-left: 3px solid var(--calc2-primary-purple);
+    }
+
+    .code-snippet {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .complexity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .complexity-table th,
+    .complexity-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .complexity-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .complexity-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Indeterminate forms table */
+    .indeterminate-forms {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .indeterminate-forms th,
+    .indeterminate-forms td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: center;
+    }
+
+    .indeterminate-forms th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .indeterminate-forms tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .code-snippet    { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.7 – L'Hospital's Rule</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_lhopitals_rule.html" target="_blank" rel="noopener">APEX Calculus §6.7 – L'Hospital's Rule</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_lhopitals_rule.html#sec_lhopitals_rule-1-2" target="_blank" rel="noopener">Example 6.7.2 – Basic 0/0 form</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_lhopitals_rule.html#sec_lhopitals_rule-2-2" target="_blank" rel="noopener">Example 6.7.4 – ∞/∞ form</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_lhopitals_rule.html#sec_lhopitals_rule-3-2" target="_blank" rel="noopener">Example 6.7.6 – Other indeterminate forms</a></li>
+      </ul>
+    </section>
+
+    <!-- Professional application -->
+    <section class="calc2-application">
+      <h3>⚙️ Algorithm Analysis and Big-O Notation in Computer Science</h3>
+      <p><strong>Real-World Context:</strong> Software engineers analyze algorithm performance by comparing their growth rates as input size approaches infinity. This analysis frequently produces indeterminate forms that L'Hospital's Rule resolves.</p>
+      
+      <p><strong>Why This Matters:</strong> When comparing algorithms, expressions like $\lim_{n \to \infty} \frac{f(n)}{g(n)}$ determine which algorithm scales better. The result tells us whether one algorithm dominates another asymptotically.</p>
+      
+      <div class="algorithm-example">
+        <p><strong>Numerical Example - Sorting Algorithm Comparison:</strong></p>
+        <p>Compare the performance of a hybrid sorting algorithm with time complexity $T_1(n) = n \log n + n^{1.1}$ versus a simple algorithm with $T_2(n) = n^{1.2}$:</p>
+        <div class="calc2-equation">$$\lim_{n \to \infty} \frac{n \log n + n^{1.1}}{n^{1.2}} = \lim_{n \to \infty} \frac{n \log n}{n^{1.2}} + \lim_{n \to \infty} \frac{n^{1.1}}{n^{1.2}}$$</div>
+        <p>The second term gives $\lim_{n \to \infty} n^{-0.1} = 0$, but the first requires L'Hospital's Rule since it's of the form $\frac{\infty}{\infty}$.</p>
+      </div>
+      
+      <div class="code-snippet">
+# Python timing comparison (conceptual)
+import time
+import math
+
+def hybrid_sort_operations(n):
+    return n * math.log(n) + n**1.1
+
+def simple_sort_operations(n):
+    return n**1.2
+
+# For large n, which grows faster?
+n = 1000000
+ratio = hybrid_sort_operations(n) / simple_sort_operations(n)
+print(f"Ratio at n={n}: {ratio:.6f}")
+      </div>
+      
+      <p><strong>Professional Tools:</strong> Python time complexity analysis, Java profiling, algorithm visualization platforms</p>
+      <p><strong>Explore Further:</strong> 
+        <a href="https://en.wikipedia.org/wiki/Big_O_notation" target="_blank" rel="noopener">Big-O notation reference</a> |
+        <a href="https://www.bigocheatsheet.com/" target="_blank" rel="noopener">Algorithm complexity cheat sheet</a>
+      </p>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Recognize <strong>indeterminate forms</strong> and when L'Hospital's Rule applies.</li>
+        <li>Apply L'Hospital's Rule systematically to <strong>0/0 and ∞/∞ forms</strong>.</li>
+        <li>Transform <strong>other indeterminate forms</strong> (0·∞, ∞-∞, 0⁰, 1^∞, ∞⁰) into applicable forms.</li>
+        <li>Understand the <strong>conditions and limitations</strong> of L'Hospital's Rule.</li>
+        <li>Apply the technique to <strong>algorithm analysis</strong> and asymptotic comparisons.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/kfF40MiS7zA?si=2xP9vLQMuZ9FG3x2" title="L'Hospital's Rule Overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- L'Hospital's Rule statement -->
+    <section>
+      <h2 class="calc2-subtitle">L'Hospital's Rule</h2>
+
+      <div class="calc2-theorem">
+        <h3>L'Hospital's Rule (Guillaume de l'Hôpital, 1661-1704)</h3>
+        <p><strong>If</strong> $\lim_{x \to a} f(x) = 0$ and $\lim_{x \to a} g(x) = 0$ <strong>OR</strong> $\lim_{x \to a} f(x) = \pm\infty$ and $\lim_{x \to a} g(x) = \pm\infty$, and if $\lim_{x \to a} \frac{f'(x)}{g'(x)}$ exists, <strong>then:</strong></p>
+        
+        <div class="calc2-equation">$$\lim_{x \to a} \frac{f(x)}{g(x)} = \lim_{x \to a} \frac{f'(x)}{g'(x)}$$</div>
+        
+        <p><strong>This applies to:</strong></p>
+        <ul>
+          <li>$x \to a$ (finite limit)</li>
+          <li>$x \to a^+$ or $x \to a^-$ (one-sided limits)</li>
+          <li>$x \to \infty$ or $x \to -\infty$ (infinite limits)</li>
+        </ul>
+        
+        <p><strong>⚠️ Important Conditions:</strong></p>
+        <ul>
+          <li>Must have indeterminate form $\frac{0}{0}$ or $\frac{\infty}{\infty}$</li>
+          <li>$f'(x)$ and $g'(x)$ must exist near $a$ (except possibly at $a$)</li>
+          <li>$g'(x) \neq 0$ near $a$ (except possibly at $a$)</li>
+          <li>The limit of $\frac{f'(x)}{g'(x)}$ must exist or be $\pm\infty$</li>
+        </ul>
+      </div>
+
+      <div class="calc2-insight">
+        <h3>Computer Science Connection: Asymptotic Analysis</h3>
+        <p>L'Hospital's Rule is the mathematical foundation behind Big-O notation comparisons. When computer scientists write $f(n) = O(g(n))$, they're often using results that can be proven with L'Hospital's Rule.</p>
+        <p><strong>Example:</strong> To prove that $n \log n = O(n^{1+\epsilon})$ for any $\epsilon > 0$, we evaluate:</p>
+        <div class="calc2-equation">$$\lim_{n \to \infty} \frac{n \log n}{n^{1+\epsilon}} = \lim_{n \to \infty} \frac{\log n}{n^\epsilon}$$</div>
+        <p>This limit equals 0 by L'Hospital's Rule, confirming the Big-O relationship.</p>
+      </div>
+    </section>
+
+    <!-- Indeterminate forms -->
+    <section>
+      <h2 class="calc2-subtitle">Indeterminate Forms</h2>
+
+      <div class="calc2-definition">
+        <h3>The Seven Indeterminate Forms</h3>
+        <table class="indeterminate-forms">
+          <thead>
+            <tr>
+              <th>Form</th>
+              <th>Direct Application</th>
+              <th>Transformation Needed</th>
+              <th>CS Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$\frac{0}{0}$</td>
+              <td>✓ Apply L'Hospital's Rule</td>
+              <td>None</td>
+              <td>$\lim_{n \to 0} \frac{\sin(n)}{n}$</td>
+            </tr>
+            <tr>
+              <td>$\frac{\infty}{\infty}$</td>
+              <td>✓ Apply L'Hospital's Rule</td>
+              <td>None</td>
+              <td>$\lim_{n \to \infty} \frac{n^2}{e^n}$</td>
+            </tr>
+            <tr>
+              <td>$0 \cdot \infty$</td>
+              <td>✗</td>
+              <td>Rewrite as $\frac{0}{0}$ or $\frac{\infty}{\infty}$</td>
+              <td>$\lim_{n \to \infty} n \cdot e^{-n}$</td>
+            </tr>
+            <tr>
+              <td>$\infty - \infty$</td>
+              <td>✗</td>
+              <td>Combine fractions or factor</td>
+              <td>$\lim_{n \to \infty} (n^2 - n \log n)$</td>
+            </tr>
+            <tr>
+              <td>$0^0$</td>
+              <td>✗</td>
+              <td>Use logarithms: $\ln(f^g) = g \ln f$</td>
+              <td>$\lim_{n \to 0^+} n^n$</td>
+            </tr>
+            <tr>
+              <td>$1^\infty$</td>
+              <td>✗</td>
+              <td>Use logarithms: $\ln(f^g) = g \ln f$</td>
+              <td>$\lim_{n \to \infty} (1 + \frac{1}{n})^n$</td>
+            </tr>
+            <tr>
+              <td>$\infty^0$</td>
+              <td>✗</td>
+              <td>Use logarithms: $\ln(f^g) = g \ln f$</td>
+              <td>$\lim_{n \to \infty} n^{1/n}$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Worked examples -->
+    <section>
+      <h2 class="calc2-subtitle">Algorithm Analysis Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Comparing Logarithmic vs Polynomial Growth</h3>
+        <p><strong>Problem:</strong> Determine if $\log_2 n = O(n^{0.1})$ by evaluating $\lim_{n \to \infty} \frac{\log_2 n}{n^{0.1}}$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Convert to natural logarithm and identify the form.</p>
+          <div class="calc2-equation">$$\lim_{n \to \infty} \frac{\log_2 n}{n^{0.1}} = \lim_{n \to \infty} \frac{\ln n / \ln 2}{n^{0.1}} = \frac{1}{\ln 2} \lim_{n \to \infty} \frac{\ln n}{n^{0.1}}$$</div>
+          <p>As $n \to \infty$: $\ln n \to \infty$ and $n^{0.1} \to \infty$, so we have the form $\frac{\infty}{\infty}$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Apply L'Hospital's Rule.</p>
+          <div class="calc2-equation">$$\lim_{n \to \infty} \frac{\ln n}{n^{0.1}} = \lim_{n \to \infty} \frac{\frac{d}{dn}[\ln n]}{\frac{d}{dn}[n^{0.1}]} = \lim_{n \to \infty} \frac{1/n}{0.1 n^{-0.9}}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Simplify and evaluate.</p>
+          <div class="calc2-equation">$$\lim_{n \to \infty} \frac{1/n}{0.1 n^{-0.9}} = \lim_{n \to \infty} \frac{1}{0.1 n^{0.1}} = \lim_{n \to \infty} \frac{10}{n^{0.1}} = 0$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Interpret the result.</p>
+          <p>Since the limit is 0, we conclude that $\log_2 n = O(n^{0.1})$. This means that any polynomial growth, no matter how small the exponent, eventually dominates logarithmic growth.</p>
+        </div>
+
+        <div class="algorithm-example">
+          <p><strong>Practical Implication:</strong> Binary search ($O(\log n)$) will always be faster than any algorithm with polynomial complexity $O(n^\epsilon)$ for sufficiently large datasets, no matter how small $\epsilon > 0$.</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Machine Learning - Exponential vs Polynomial Learning Rates</h3>
+        <p><strong>Problem:</strong> Compare learning rate decay functions $\eta_1(t) = \frac{1}{t^2}$ and $\eta_2(t) = e^{-0.01t}$ by evaluating $\lim_{t \to \infty} \frac{e^{-0.01t}}{1/t^2}$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Rewrite and identify the indeterminate form.</p>
+          <div class="calc2-equation">$$\lim_{t \to \infty} \frac{e^{-0.01t}}{1/t^2} = \lim_{t \to \infty} t^2 e^{-0.01t}$$</div>
+          <p>This is of the form $\infty \cdot 0$, which we must transform.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Transform to $\frac{\infty}{\infty}$ form.</p>
+          <div class="calc2-equation">$$\lim_{t \to \infty} t^2 e^{-0.01t} = \lim_{t \to \infty} \frac{t^2}{e^{0.01t}}$$</div>
+          <p>Now we have $\frac{\infty}{\infty}$ form, suitable for L'Hospital's Rule.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Apply L'Hospital's Rule twice.</p>
+          <p><strong>First application:</strong></p>
+          <div class="calc2-equation">$$\lim_{t \to \infty} \frac{t^2}{e^{0.01t}} = \lim_{t \to \infty} \frac{2t}{0.01 e^{0.01t}}$$</div>
+          <p>Still $\frac{\infty}{\infty}$, so apply again:</p>
+          <div class="calc2-equation">$$\lim_{t \to \infty} \frac{2t}{0.01 e^{0.01t}} = \lim_{t \to \infty} \frac{2}{0.01^2 e^{0.01t}} = \lim_{t \to \infty} \frac{20000}{e^{0.01t}} = 0$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Machine learning interpretation.</p>
+          <p>The exponential decay $e^{-0.01t}$ approaches zero much faster than the polynomial decay $1/t^2$. This means exponential learning rate schedules cause the learning rate to become negligibly small much sooner than polynomial schedules.</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: Asymptotic Analysis of Recursive Algorithms</h3>
+        <p><strong>Problem:</strong> Analyze the limit $\lim_{n \to \infty} \frac{n!}{n^n e^{-n} \sqrt{2\pi n}}$ (related to Stirling's approximation).</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Take the natural logarithm to handle the factorial.</p>
+          <p>Let $L = \lim_{n \to \infty} \frac{n!}{n^n e^{-n} \sqrt{2\pi n}}$. Then:</p>
+          <div class="calc2-equation">$$\ln L = \lim_{n \to \infty} [\ln(n!) - n \ln n + n - \frac{1}{2}\ln(2\pi n)]$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Use Stirling's approximation development.</p>
+          <p>Using the asymptotic expansion $\ln(n!) \approx n \ln n - n + \frac{1}{2}\ln(2\pi n)$:</p>
+          <div class="calc2-equation">$$\ln L = \lim_{n \to \infty} [n \ln n - n + \frac{1}{2}\ln(2\pi n) - n \ln n + n - \frac{1}{2}\ln(2\pi n)] = 0$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Conclude the asymptotic relationship.</p>
+          <p>Since $\ln L = 0$, we have $L = 1$, confirming Stirling's approximation:</p>
+          <div class="calc2-equation">$$n! \sim n^n e^{-n} \sqrt{2\pi n}$$</div>
+        </div>
+
+        <div class="algorithm-example">
+          <p><strong>Computer Science Application:</strong> This result is crucial for analyzing the complexity of algorithms involving permutations and combinations, such as traveling salesman problem approximations and Monte Carlo methods.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Common mistakes and troubleshooting -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering L'Hospital's Rule in Algorithm Analysis:</strong></p>
+      <ul>
+        <li><strong>Verify indeterminate form:</strong> Always check that you actually have $\frac{0}{0}$ or $\frac{\infty}{\infty}$ before applying the rule</li>
+        <li><strong>Transform other forms:</strong> Use algebraic manipulation or logarithms to convert $0 \cdot \infty$, $\infty - \infty$, $0^0$, $1^\infty$, $\infty^0$ into applicable forms</li>
+        <li><strong>Multiple applications:</strong> You may need to apply L'Hospital's Rule multiple times - polynomials of degree $n$ require $n$ applications against exponentials</li>
+        <li><strong>Check existence:</strong> Ensure the limit of derivatives exists before concluding about the original limit</li>
+        <li><strong>Algorithm insight:</strong> Use results to understand which algorithms scale better and make informed complexity trade-offs</li>
+        <li><strong>Stirling connections:</strong> Many recursive algorithm analyses use results related to factorial approximations</li>
+      </ul>
+    </section>
+
+    <!-- Professional applications summary -->
+    <section class="calc2-application">
+      <h3>🔬 Advanced Applications in Software Engineering</h3>
+      
+      <p><strong>1. Performance Analysis:</strong> L'Hospital's Rule helps determine the dominant terms in algorithm complexity, essential for choosing between different algorithmic approaches in production systems.</p>
+      
+      <p><strong>2. Machine Learning Optimization:</strong> Understanding how different learning rate schedules compare asymptotically helps ML engineers design training regimens that converge efficiently.</p>
+      
+      <p><strong>3. Parallel Computing:</strong> When analyzing parallel algorithms, L'Hospital's Rule helps determine how speedup ratios behave as the number of processors approaches infinity.</p>
+      
+      <div class="complexity-table">
+        <thead>
+          <tr>
+            <th>Algorithm Type</th>
+            <th>Typical Complexity</th>
+            <th>L'Hospital Analysis Needed For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Divide & Conquer</td>
+            <td>$O(n \log n)$</td>
+            <td>Comparing with $O(n^{1+\epsilon})$ bounds</td>
+          </tr>
+          <tr>
+            <td>Dynamic Programming</td>
+            <td>$O(n^2)$ to $O(n^3)$</td>
+            <td>Memory-time tradeoff analysis</td>
+          </tr>
+          <tr>
+            <td>Graph Algorithms</td>
+            <td>$O(E \log V)$ to $O(V^3)$</td>
+            <td>Sparse vs dense graph performance</td>
+          </tr>
+          <tr>
+            <td>Machine Learning</td>
+            <td>$O(n \cdot d \cdot k)$</td>
+            <td>Convergence rate analysis</td>
+          </tr>
+        </tbody>
+      </table>
+      
+      <p><strong>Industry Impact:</strong> Companies like Google, Amazon, and Microsoft use these asymptotic analysis techniques to optimize search algorithms, recommendation systems, and cloud resource allocation at scale.</p>
+    </section>
+
+  </main>
+</body>
+</html>

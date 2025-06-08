@@ -1,0 +1,3 @@
+# Description Templates
+
+Place your module-description.txt templates here.

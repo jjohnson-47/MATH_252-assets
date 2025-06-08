@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Section 5.4 – The Fundamental Theorem of Calculus | MATH A252 Summer 2025</title>
+  
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      }
+    };
+  </script>
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* -------------------------------------------------------------------------
+       Theme variables (matches weekly overview)  
+       --------------------------------------------------------------------- */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /*  Base layout & typography                                             */
+    /* --------------------------------------------------------------------- */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Interactive tool container */
+    .calc2-interactive {
+      text-align: center;
+      margin: 2rem 0;
+      padding: 1rem;
+      background-color: rgba(26, 35, 126, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(26, 35, 126, 0.1);
+    }
+
+    .calc2-interactive iframe {
+      border-radius: 4px;
+      margin: 1rem 0;
+    }
+
+    .calc2-interactive a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--calc2-accent-teal);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .calc2-interactive a:hover {
+      background-color: #26c6da;
+      text-decoration: none;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Image container */
+    .calc2-image-container {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+
+    .calc2-image-container img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-image-caption {
+      font-style: italic;
+      color: #666;
+      margin-top: 0.5rem;
+      font-size: 0.9em;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .calc2-interactive iframe { width: 100%; height: 400px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 5.4 – The Fundamental Theorem of Calculus</h1>
+
+    <!-- Visual Introduction -->
+    <section class="calc2-insight">
+      <h3>Visualizing Function Behavior: A Preview of Advanced Calculus</h3>
+      <p>Here is a beautiful example of how calculus helps us understand how functions interact and change. The animation below shows a <em>convolution</em> – a mathematical operation that uses the integral to combine a rough function with a smooth one to create a new smooth function. This kind of <em>mollification</em> appears all the time in information processing, physics, and engineering.</p>
+      
+      <div style="background: white; border-radius: 10px; padding: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 20px 0; border: 1px solid #e0e0e0;">
+        <h4 style="text-align: center; color: #333; margin-bottom: 20px; font-size: 1.5em;">Convolution Animation</h4>
+        
+        <canvas id="canvas" width="800" height="400" style="border: 2px solid #e0e0e0; border-radius: 10px; display: block; margin: 20px auto; background: #fafafa;"></canvas>
+        
+        <div style="display: flex; justify-content: center; align-items: center; gap: 20px; margin: 20px 0; flex-wrap: wrap;">
+            <button id="playPause" style="padding: 12px 24px; border: none; border-radius: 25px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">▶ Play</button>
+            <button id="reset" style="padding: 12px 24px; border: none; border-radius: 25px; background: linear-gradient(45deg, #667eea, #764ba2); color: white; cursor: pointer; font-size: 16px; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">↻ Reset</button>
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <label>Speed:</label>
+                <input type="range" id="speed" min="0.5" max="3" step="0.1" value="1" style="width: 120px; height: 6px; border-radius: 3px; background: #ddd; outline: none; -webkit-appearance: none;">
+                <span id="speedValue">1.0x</span>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: center; gap: 30px; margin: 20px 0; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                <div style="width: 20px; height: 3px; border-radius: 2px; background: #ff6b6b;"></div>
+                <span>Original Function f(x)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                <div style="width: 20px; height: 3px; border-radius: 2px; background: #4ecdc4;"></div>
+                <span>Mollifier φ(x-u)</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; font-size: 14px;">
+                <div style="width: 20px; height: 3px; border-radius: 2px; background: #45b7d1;"></div>
+                <span>Convolution (f * φ)(x)</span>
+            </div>
+        </div>
+      </div>
+      
+      <p>Watch how the blue curve (the convolution) emerges as the teal function "smooths out" the red spikes. This demonstrates a key theme in calculus: <strong>how functions can be transformed and combined to reveal new information about the original data</strong>. The Fundamental Theorem of Calculus gives us similar power to connect areas, rates of change, and accumulated quantities.</p>
+
+      <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const playPauseBtn = document.getElementById('playPause');
+        const resetBtn = document.getElementById('reset');
+        const speedSlider = document.getElementById('speed');
+        const speedValue = document.getElementById('speedValue');
+        
+        let isPlaying = false;
+        let animationId;
+        let u = -5;
+        let speed = 1;
+        
+        const width = canvas.width;
+        const height = canvas.height;
+        const centerY = height / 2;
+        const scale = 60;
+        const originX = width / 2;
+        
+        function toCanvasX(x) { return originX + x * scale; }
+        function toCanvasY(y) { return centerY - y * scale; }
+        
+        function f(x) {
+            const spike1 = Math.max(0, 1 - Math.abs(x + 2));
+            const spike2 = Math.max(0, 1 - Math.abs(x - 2));
+            return spike1 + spike2;
+        }
+        
+        function phi(x) {
+            const s = 0.4;
+            return (1 / (s * Math.sqrt(2 * Math.PI))) * Math.exp(-x * x / (2 * s * s));
+        }
+        
+        function phiU(x, u) { return phi(x - u); }
+        
+        function convolution(x) {
+            let sum = 0;
+            const dt = 0.02;
+            for (let t = -6; t <= 6; t += dt) {
+                sum += f(t) * phi(x - t) * dt;
+            }
+            return sum;
+        }
+        
+        function drawGrid() {
+            ctx.strokeStyle = '#e0e0e0';
+            ctx.lineWidth = 1;
+            for (let x = -6; x <= 6; x++) {
+                const canvasX = toCanvasX(x);
+                ctx.beginPath();
+                ctx.moveTo(canvasX, 0);
+                ctx.lineTo(canvasX, height);
+                ctx.stroke();
+            }
+            for (let y = -1; y <= 3; y++) {
+                const canvasY = toCanvasY(y);
+                ctx.beginPath();
+                ctx.moveTo(0, canvasY);
+                ctx.lineTo(width, canvasY);
+                ctx.stroke();
+            }
+            ctx.strokeStyle = '#999';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, centerY);
+            ctx.lineTo(width, centerY);
+            ctx.moveTo(originX, 0);
+            ctx.lineTo(originX, height);
+            ctx.stroke();
+        }
+        
+        function drawFunction(func, color, lineWidth = 2, maxX = 6) {
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.beginPath();
+            let firstPoint = true;
+            for (let x = -6; x <= maxX; x += 0.02) {
+                const y = func(x);
+                const canvasX = toCanvasX(x);
+                const canvasY = toCanvasY(y);
+                if (firstPoint) {
+                    ctx.moveTo(canvasX, canvasY);
+                    firstPoint = false;
+                } else {
+                    ctx.lineTo(canvasX, canvasY);
+                }
+            }
+            ctx.stroke();
+        }
+        
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            drawGrid();
+            drawFunction(f, '#ff6b6b', 3);
+            drawFunction(x => phiU(x, u), '#4ecdc4', 2);
+            drawFunction(convolution, '#45b7d1', 3, u);
+            const currentY = convolution(u);
+            ctx.fillStyle = '#45b7d1';
+            ctx.beginPath();
+            ctx.arc(toCanvasX(u), toCanvasY(currentY), 5, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+        
+        function animate() {
+            if (!isPlaying) return;
+            u += 0.02 * speed;
+            if (u > 6) {
+                u = 6;
+                isPlaying = false;
+                playPauseBtn.textContent = '▶ Play';
+            }
+            draw();
+            animationId = requestAnimationFrame(animate);
+        }
+        
+        playPauseBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            if (isPlaying) {
+                playPauseBtn.textContent = '⏸ Pause';
+                animate();
+            } else {
+                playPauseBtn.textContent = '▶ Play';
+                cancelAnimationFrame(animationId);
+            }
+        });
+        
+        resetBtn.addEventListener('click', () => {
+            isPlaying = false;
+            playPauseBtn.textContent = '▶ Play';
+            cancelAnimationFrame(animationId);
+            u = -5;
+            draw();
+        });
+        
+        speedSlider.addEventListener('input', (e) => {
+            speed = parseFloat(e.target.value);
+            speedValue.textContent = speed.toFixed(1) + 'x';
+        });
+        
+        draw();
+      </script>
+    </section>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html" target="_blank" rel="noopener">APEX Calculus §5.4 – The Fundamental Theorem of Calculus</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#sec_FTC-3" target="_blank" rel="noopener">Example 5.4.2 – Exploring the "Area so far" function</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#sec-FTC-chain" target="_blank" rel="noopener">Example 5.4.11 – Displacement & distance</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#sec-FTC-ABC" target="_blank" rel="noopener">Example 5.4.15 – FTC Part 1 & the Chain Rule</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#sec_FTC-7" target="_blank" rel="noopener">Example 5.4.18 – Area between curves</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_FTC.html#sec_FTC-8" target="_blank" rel="noopener">Example 5.4.27 – Average value of a function</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_numerical_integration.html#thm_numerical_error" target="_blank" rel="noopener">Error Bounds for Numerical Integration</a></li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Understand how the <strong>area function</strong> $A(x)=\int_a^{x}f(t)\,dt$ represents accumulated change and visualize its geometric meaning.</li>
+        <li>Apply <strong>FTC Part 1</strong> to differentiate integral functions, including those requiring the Chain Rule.</li>
+        <li>Use <strong>FTC Part 2</strong> to evaluate definite integrals by finding antiderivatives.</li>
+        <li>Solve <em>motion problems</em> involving displacement and distance traveled.</li>
+        <li>Calculate <em>areas between curves</em> using definite integrals.</li>
+        <li>Find the <em>average value</em> of functions over intervals.</li>
+        <li>Determine required sample sizes for numerical integration methods to achieve specified accuracy.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/wRM6zCdxGDI?si=PVQXNKvR4batSjjX" title="The Fundamental Theorem of Calculus – overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- Big Picture Introduction -->
+    <section class="calc2-insight">
+      <h3>The Big Picture: Why the FTC Matters</h3>
+      <p>The Fundamental Theorem of Calculus is one of the most important results in all of mathematics because it creates a bridge between the two main operations of calculus: <strong>differentiation</strong> and <strong>integration</strong>.</p>
+      <p><strong>The key insight:</strong> If we accumulate a quantity at a changing rate $f(t)$, then the rate at which our accumulation is changing is exactly $f(t)$ again. This means that <em>integration and differentiation are inverse operations</em>.</p>
+      <p>This connection allows us to solve two major problems: (1) finding exact areas under curves, and (2) understanding how accumulated quantities change over time.</p>
+    </section>
+
+    <!-- Core theorems -->
+    <section>
+      <h2 class="calc2-subtitle">The Area Function and FTC Part 1</h2>
+
+      <!-- Area function intro with visualization -->
+      <div class="calc2-definition">
+        <h3>The Area Function: Accumulating Change</h3>
+        <p>For a continuous function $f$ on $[a,b]$, the <em>area function</em> is defined as:</p>
+        <div class="calc2-equation">$$A(x)=\int_{a}^{x} f(t)\,dt$$</div>
+        <p><strong>Geometric interpretation:</strong> $A(x)$ represents the <em>net signed area</em> between the curve $y = f(t)$ and the $t$-axis from $t = a$ to $t = x$. When $f(t) > 0$, we add area; when $f(t) < 0$, we subtract area.</p>
+        
+        <div class="calc2-image-container">
+          <img src="https://opentext.uleth.ca/apex-calculus/generated/latex-image/img_ftc1b.svg" alt="Area function visualization" style="max-width: 1000px;">
+          <div class="calc2-image-caption">The shaded region represents $A(x) = \int_a^x f(t)\,dt$ for a specific value of $x$.</div>
+        </div>
+
+        <p><strong>Key question:</strong> As $x$ changes, how does the accumulated area $A(x)$ change? The answer leads us to FTC Part 1.</p>
+      </div>
+
+      <!-- FTC Part 1 -->
+      <div class="calc2-theorem">
+        <h3>Fundamental Theorem of Calculus – Part 1</h3>
+        <p><strong>Statement:</strong> If $f$ is continuous on $[a,b]$, then the area function $A(x)=\int_{a}^{x} f(t)\,dt$ is differentiable on $(a,b)$ and</p>
+        <div class="calc2-equation">$$A'(x) = f(x)$$</div>
+        
+        <p><strong>What this means:</strong> The derivative of the area function at any point $x$ equals the height of the original function $f$ at that same point. In other words, <span class="highlight">the rate at which area accumulates equals the current height of the function</span>.</p>
+        
+        <p><strong>Intuitive explanation:</strong> Imagine you're sweeping out area under a curve from left to right. FTC Part 1 tells us that the rate at which you're sweeping out area at any moment equals the height of the curve at that moment.</p>
+
+        <div class="calc2-image-container">
+          <img src="https://opentext.uleth.ca/apex-calculus/generated/latex-image/img_ftc1c.svg" alt="Area function derivative visualization" style="max-width: 1000px;">
+          <div class="calc2-image-caption">The graph shows how $A'(x)$ (the slope of the area function) relates to $f(x)$ (the original function).</div>
+        </div>
+      </div>
+
+      <!-- Worked example (FTC 1) -->
+      <div class="calc2-example">
+        <h3>Example 1: Basic Application of FTC Part 1</h3>
+        <p><strong>Problem:</strong> Let $F(x)=\displaystyle\int_{0}^{x} \cos t\,dt$. Find $F'(x)$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Solution:</strong> This is a direct application of FTC Part 1. Since $f(t) = \cos t$ is continuous everywhere, we can immediately apply the theorem:</p>
+          <div class="calc2-equation">$$F'(x) = \cos x$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Verification:</strong> We can check this by actually computing the integral. We know that $\int \cos t\,dt = \sin t + C$, so:</p>
+          <div class="calc2-equation">$$F(x) = \int_0^x \cos t\,dt = [\sin t]_0^x = \sin x - \sin 0 = \sin x$$</div>
+          <p>Indeed, $\frac{d}{dx}[\sin x] = \cos x$, confirming our result.</p>
+        </div>
+      </div>
+
+      <!-- Chain Rule Example -->
+      <div class="calc2-example">
+        <h3>Example 2: FTC Part 1 with Chain Rule <small>(Based on Example 5.4.15)</small></h3>
+        <p><strong>Problem:</strong> Find $\frac{d}{dx}\left[\int_{1}^{x^3} \sin t^2\,dt\right]$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Setup:</strong> This integral has $x^3$ as the upper limit instead of just $x$, so we need to use the Chain Rule along with FTC Part 1.</p>
+          <p>Let $u = x^3$, so we're finding $\frac{d}{dx}\left[\int_{1}^{u} \sin t^2\,dt\right]$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Apply Chain Rule:</strong> By the Chain Rule:</p>
+          <div class="calc2-equation">$$\frac{d}{dx}\left[\int_{1}^{u} \sin t^2\,dt\right] = \frac{d}{du}\left[\int_{1}^{u} \sin t^2\,dt\right] \cdot \frac{du}{dx}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Apply FTC Part 1:</strong> By FTC Part 1, $\frac{d}{du}\left[\int_{1}^{u} \sin t^2\,dt\right] = \sin u^2 = \sin(x^3)^2 = \sin(x^6)$.</p>
+          <p>And $\frac{du}{dx} = \frac{d}{dx}[x^3] = 3x^2$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Final Answer:</strong></p>
+          <div class="calc2-equation">$$\frac{d}{dx}\left[\int_{1}^{x^3} \sin t^2\,dt\right] = \sin(x^6) \cdot 3x^2 = 3x^2\sin(x^6)$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FTC Part 2 Section -->
+    <section>
+      <h2 class="calc2-subtitle">FTC Part 2: Computing Definite Integrals</h2>
+
+      <!-- FTC Part 2 -->
+      <div class="calc2-theorem">
+        <h3>Fundamental Theorem of Calculus – Part 2</h3>
+        <p><strong>Statement:</strong> If $f$ is continuous on $[a,b]$ and $F$ is any antiderivative of $f$ (meaning $F'(x) = f(x)$), then</p>
+        <div class="calc2-equation">$$\int_{a}^{b} f(x)\,dx = F(b) - F(a)$$</div>
+        
+        <p><strong>What this means:</strong> To evaluate a definite integral, we don't need to use Riemann sums or geometric formulas. Instead, we can <span class="highlight">find any antiderivative and evaluate it at the endpoints</span>.</p>
+        
+        <p><strong>The magic:</strong> FTC Part 2 transforms the difficult problem of finding areas (which would require limits of Riemann sums) into the much easier problem of finding antiderivatives.</p>
+        
+        <p><strong>Notation:</strong> We often write $F(b) - F(a)$ as $[F(x)]_a^b$ or $F(x)\Big|_a^b$.</p>
+      </div>
+
+      <!-- Worked example (FTC 2) -->
+      <div class="calc2-example">
+        <h3>Example 3: Evaluating a Definite Integral</h3>
+        <p><strong>Problem:</strong> Evaluate $\displaystyle\int_{1}^{4} 2x\,dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Find an antiderivative of $f(x) = 2x$.</p>
+          <p>We need a function $F(x)$ such that $F'(x) = 2x$. By the power rule, $F(x) = x^2$ works since $\frac{d}{dx}[x^2] = 2x$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Apply FTC Part 2.</p>
+          <div class="calc2-equation">$$\int_{1}^{4} 2x\,dx = [x^2]_1^4 = 4^2 - 1^2 = 16 - 1 = 15$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Geometric check:</strong> The region under $y = 2x$ from $x = 1$ to $x = 4$ forms a trapezoid with parallel sides of length $2(1) = 2$ and $2(4) = 8$, and width $4 - 1 = 3$. The area is $\frac{1}{2}(2 + 8)(3) = 15$ ✓</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 4: A More Complex Integral</h3>
+        <p><strong>Problem:</strong> Evaluate $\displaystyle\int_{0}^{\pi/2} 3\sin x + 2\cos x\,dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Find antiderivatives.</p>
+          <p>$\int 3\sin x\,dx = -3\cos x + C_1$ and $\int 2\cos x\,dx = 2\sin x + C_2$</p>
+          <p>So an antiderivative of $3\sin x + 2\cos x$ is $F(x) = -3\cos x + 2\sin x$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Apply FTC Part 2.</p>
+          <div class="calc2-equation">
+          \begin{align}
+          \int_{0}^{\pi/2} (3\sin x + 2\cos x)\,dx &= [-3\cos x + 2\sin x]_0^{\pi/2}\\
+          &= \left(-3\cos\frac{\pi}{2} + 2\sin\frac{\pi}{2}\right) - (-3\cos 0 + 2\sin 0)\\
+          &= (-3 \cdot 0 + 2 \cdot 1) - (-3 \cdot 1 + 2 \cdot 0)\\
+          &= 2 - (-3) = 5
+          \end{align}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Motion problems -->
+    <section>
+      <h2 class="calc2-subtitle">Applications: Motion Problems</h2>
+
+      <div class="calc2-definition">
+        <h3>Motion Along a Line: Displacement vs. Distance</h3>
+        <p>When an object moves along a line with velocity function $v(t)$:</p>
+        <ul>
+          <li><strong>Displacement</strong> from time $t_1$ to $t_2$: $\int_{t_1}^{t_2} v(t)\,dt$ (net change in position)</li>
+          <li><strong>Total distance traveled</strong> from time $t_1$ to $t_2$: $\int_{t_1}^{t_2} |v(t)|\,dt$ (total path length)</li>
+        </ul>
+        <p><strong>Key difference:</strong> Displacement accounts for direction (can be negative), while distance is always positive.</p>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 5: Displacement vs. Distance <small>(Based on Example 5.4.11)</small></h3>
+        <p><strong>Problem:</strong> A particle moves along a line with velocity $v(t) = t^2 - 4$ m/s for $0 \leq t \leq 3$ seconds. Find both the displacement and total distance traveled.</p>
+        
+        <div class="solution-step">
+          <p><strong>Part 1: Displacement</strong></p>
+          <p>Displacement = $\int_0^3 v(t)\,dt = \int_0^3 (t^2 - 4)\,dt$</p>
+          <div class="calc2-equation">
+          $$\int_0^3 (t^2 - 4)\,dt = \left[\frac{t^3}{3} - 4t\right]_0^3 = \left(\frac{27}{3} - 12\right) - (0) = 9 - 12 = -3 \text{ m}$$
+          </div>
+          <p>The negative displacement means the particle ends up 3 meters to the left of where it started.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Part 2: Finding when the particle changes direction</strong></p>
+          <p>The particle changes direction when $v(t) = 0$:</p>
+          <div class="calc2-equation">$$t^2 - 4 = 0 \Rightarrow t^2 = 4 \Rightarrow t = 2 \text{ (since } t \geq 0\text{)}$$</div>
+          <p>So the particle changes direction at $t = 2$ seconds.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Part 3: Total distance</strong></p>
+          <p>Since the particle changes direction at $t = 2$, we need to split the integral:</p>
+          <p>For $0 \leq t \leq 2$: $v(t) = t^2 - 4 < 0$, so $|v(t)| = 4 - t^2$</p>
+          <p>For $2 \leq t \leq 3$: $v(t) = t^2 - 4 > 0$, so $|v(t)| = t^2 - 4$</p>
+          
+          <div class="calc2-equation">
+          \begin{align}
+          \text{Distance} &= \int_0^2 (4 - t^2)\,dt + \int_2^3 (t^2 - 4)\,dt\\
+          &= \left[4t - \frac{t^3}{3}\right]_0^2 + \left[\frac{t^3}{3} - 4t\right]_2^3\\
+          &= \left(8 - \frac{8}{3}\right) + \left(\left(9 - 12\right) - \left(\frac{8}{3} - 8\right)\right)\\
+          &= \frac{16}{3} + \left(-3 - \left(-\frac{16}{3}\right)\right)\\
+          &= \frac{16}{3} + \frac{7}{3} = \frac{23}{3} \approx 7.67 \text{ m}
+          \end{align}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Area between curves -->
+    <section>
+      <h2 class="calc2-subtitle">Area Between Curves</h2>
+
+      <div class="calc2-theorem">
+        <h3>Formula for Area Between Curves</h3>
+        <p>If $f(x) \geq g(x)$ for all $x$ in $[a,b]$, then the area between the curves is:</p>
+        <div class="calc2-equation">$$\text{Area} = \int_{a}^{b} [f(x) - g(x)]\,dx$$</div>
+        <p><strong>Key insight:</strong> We integrate the <em>difference</em> between the upper and lower functions. This automatically accounts for the "height" of the region at each $x$-value.</p>
+        <p><strong>Important:</strong> If the curves intersect within $[a,b]$, you must split the integral at the intersection points and determine which function is on top in each subinterval.</p>
+      </div>
+
+      <div class="calc2-interactive">
+        <h4>Interactive Tool: Explore Area Between Curves</h4>
+        <iframe src="https://www.desmos.com/calculator/usmkjdafvi?embed" width="400" height="300" frameborder="0"></iframe>
+        <br>
+        <a href="https://www.desmos.com/calculator/usmkjdafvi" target="_blank">Open full interactive tool</a>
+        <p><em>Use this tool to visualize how the area between curves changes as you modify the functions.</em></p>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 6: Area of an Enclosed Region <small>(Based on Example 5.4.18)</small></h3>
+        <p><strong>Problem:</strong> Find the area of the region enclosed by the curves $y = x^2$ and $y = x + 2$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Find the intersection points.</p>
+          <p>Set $x^2 = x + 2$:</p>
+          <div class="calc2-equation">$$x^2 - x - 2 = 0 \Rightarrow (x-2)(x+1) = 0 \Rightarrow x = -1 \text{ or } x = 2$$</div>
+          <p>So the curves intersect at $(-1, 1)$ and $(2, 4)$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Determine which function is on top.</p>
+          <p>Test a point between $x = -1$ and $x = 2$, say $x = 0$:</p>
+          <p>At $x = 0$: $y = x^2$ gives $y = 0$, while $y = x + 2$ gives $y = 2$.</p>
+          <p>Since $2 > 0$, we have $x + 2 > x^2$ on the interval $[-1, 2]$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Set up and evaluate the integral.</p>
+          <div class="calc2-equation">
+          \begin{align}
+          \text{Area} &= \int_{-1}^{2} [(x + 2) - x^2]\,dx\\
+          &= \int_{-1}^{2} (x + 2 - x^2)\,dx\\
+          &= \left[\frac{x^2}{2} + 2x - \frac{x^3}{3}\right]_{-1}^{2}\\
+          &= \left(\frac{4}{2} + 4 - \frac{8}{3}\right) - \left(\frac{1}{2} - 2 + \frac{1}{3}\right)\\
+          &= \left(2 + 4 - \frac{8}{3}\right) - \left(\frac{1}{2} - 2 + \frac{1}{3}\right)\\
+          &= 6 - \frac{8}{3} - \frac{1}{2} + 2 - \frac{1}{3}\\
+          &= 8 - 3 - \frac{1}{2} = \frac{9}{2} \text{ square units}
+          \end{align}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Average value -->
+    <section>
+      <h2 class="calc2-subtitle">Average Value of a Function</h2>
+
+      <div class="calc2-definition">
+        <h3>Average Value Formula</h3>
+        <p>The <strong>average value</strong> of a continuous function $f$ on the interval $[a,b]$ is:</p>
+        <div class="calc2-equation">$$f_{\text{avg}} = \frac{1}{b-a}\int_{a}^{b} f(x)\,dx$$</div>
+        <p><strong>Geometric interpretation:</strong> The average value is the height of a rectangle with base $(b-a)$ that has the same area as the region under the curve $y = f(x)$ from $x = a$ to $x = b$.</p>
+        <div class="calc2-equation">$$\text{Area under curve} = \int_a^b f(x)\,dx = f_{\text{avg}} \cdot (b-a)$$</div>
+      </div>
+
+      <div class="calc2-interactive">
+        <h4>Interactive Tool: Average Value Visualization</h4>
+        <iframe src="https://www.desmos.com/calculator/5cal5k8wr6?embed" width="400" height="300" frameborder="0"></iframe>
+        <br>
+        <a href="https://www.desmos.com/calculator/5cal5k8wr6" target="_blank">Open full interactive tool</a>
+        <p><em>This tool shows how the average value corresponds to the height of an equivalent rectangular region.</em></p>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 7: Average Value of a Sine Function <small>(Based on Example 5.4.27)</small></h3>
+        <p><strong>Problem:</strong> Find the average value of $f(x) = \sin x$ on the interval $[0, \pi]$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Apply the average value formula.</p>
+          <div class="calc2-equation">$$f_{\text{avg}} = \frac{1}{\pi - 0}\int_{0}^{\pi} \sin x\,dx = \frac{1}{\pi}\int_{0}^{\pi} \sin x\,dx$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Evaluate the integral.</p>
+          <div class="calc2-equation">$$\int_{0}^{\pi} \sin x\,dx = [-\cos x]_{0}^{\pi} = -\cos \pi - (-\cos 0) = -(-1) - (-1) = 1 + 1 = 2$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Calculate the average value.</p>
+          <div class="calc2-equation">$$f_{\text{avg}} = \frac{1}{\pi} \cdot 2 = \frac{2}{\pi} \approx 0.637$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Interpretation:</strong> Even though $\sin x$ ranges from 0 to 1 on $[0, \pi]$, its average value is $\frac{2}{\pi} \approx 0.637$. This makes sense because the sine curve spends more time near its peak value of 1 than near 0 on this interval.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Numerical Integration Error Bounds -->
+    <section>
+      <h2 class="calc2-subtitle">Preview: Error Bounds in Numerical Integration</h2>
+
+      <div class="calc2-key-point">
+        <p><strong>Looking ahead to Section 5.5:</strong> When we can't find an antiderivative analytically, we approximate $\int_a^b f(x)\,dx$ using numerical methods like the Trapezoidal Rule or Simpson's Rule.</p>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3>Error Bound Theorem for Numerical Integration</h3>
+        <p>For the <strong>Trapezoidal Rule</strong> with $n$ subintervals:</p>
+        <div class="calc2-equation">$$\left|E_T\right| \leq \frac{M(b-a)^3}{12n^2}$$</div>
+        <p>where $M$ is the maximum value of $|f''(x)|$ on $[a,b]$.</p>
+        
+        <p>For <strong>Simpson's Rule</strong> with $n$ subintervals (where $n$ is even):</p>
+        <div class="calc2-equation">$$\left|E_S\right| \leq \frac{M(b-a)^5}{180n^4}$$</div>
+        <p>where $M$ is the maximum value of $|f^{(4)}(x)|$ on $[a,b]$.</p>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 8: Finding Required Sample Size</h3>
+        <p><strong>Problem:</strong> How many subintervals are needed to approximate $\int_0^1 e^{x^2}\,dx$ using the Trapezoidal Rule with error less than $0.001$?</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Find the error bound formula.</p>
+          <p>We need $\left|E_T\right| \leq \frac{M(1-0)^3}{12n^2} = \frac{M}{12n^2} < 0.001$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Find $M = \max_{x \in [0,1]} |f''(x)|$ where $f(x) = e^{x^2}$.</p>
+          <p>$f'(x) = 2xe^{x^2}$</p>
+          <p>$f''(x) = 2e^{x^2} + 4x^2e^{x^2} = 2e^{x^2}(1 + 2x^2)$</p>
+          <p>On $[0,1]$, this is maximized at $x = 1$: $f''(1) = 2e(1 + 2) = 6e \approx 16.31$</p>
+          <p>So $M = 6e$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Solve for $n$.</p>
+          <div class="calc2-equation">$$\frac{6e}{12n^2} < 0.001 \Rightarrow \frac{e}{2n^2} < 0.001 \Rightarrow n^2 > \frac{e}{0.002} \Rightarrow n > \sqrt{\frac{e}{0.002}} \approx 36.8$$</div>
+          <p>Therefore, we need $n \geq 37$ subintervals.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Key technique:</strong> When solving error bound problems, always round <em>up</em> to the next integer to ensure the error tolerance is met.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>

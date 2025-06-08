@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        
+    - name: Validate Markdown files
+      run: |
+        echo "Markdown validation skipped - using manual review process"
+        echo "Files found:"
+        find . -name "*.md" -not -path "./.git/*" | head -10
+        
+    - name: Check submodule consistency
+      run: |
+        git submodule status
+        cd assets
+        echo "Assets repository commit: $(git rev-parse HEAD)"
+        echo "Assets repository URL: $(git remote get-url origin)"
+        
+    - name: Validate JSON metadata files
+      run: |
+        for file in $(find . -name "*.json" -not -path "./.git/*"); do
+          echo "Validating $file"
+          python3 -m json.tool "$file" > /dev/null
+        done
+        
+    - name: Check for large files
+      run: |
+        find . -type f -size +10M -not -path "./.git/*" -exec ls -lh {} \; | head -20
+        
+    - name: Verify course structure
+      run: |
+        echo "Checking required directories..."
+        test -d "course-documents" || echo "Warning: course-documents directory missing"
+        test -d "weekly-modules" || echo "Warning: weekly-modules directory missing"
+        test -d "welcome-module" || echo "Warning: welcome-module directory missing"
+        test -d "templates" || echo "Warning: templates directory missing"
+        test -d "assets" || echo "Error: assets submodule missing"

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 5.5 Reading Guide: Numerical Integration</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+      background-color: var(--primary-dark-blue);
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    .calc2-info-box {
+      background: rgba(33, 150, 243, 0.1);
+      border-left: 4px solid var(--info-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--unit-color);
+    }
+
+    .equation {
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    .mathjax-placeholder {
+      display: block;
+      width: 100%;
+      height: 2.5em; /* Adjust based on expected equation height */
+      margin: 1em 0;
+    }
+
+    /* Styles for the video container */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border-radius: 8px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calc2-container">
+    
+    <h1 class="calc2-title">Section 5.5: Numerical Integration</h1>
+
+    <!-- Textbook link prominently at the top -->
+    <div class="calc2-info-box">
+      <p><strong>📖 Textbook Reading:</strong> Please read Section 5.5 in our textbook:
+        <a href="https://opentext.uleth.ca/apex-calculus/sec_numerical_integration.html" style="color: var(--accent-teal);" target="_blank">
+          APEX Calculus - Numerical Integration
+        </a>
+      </p>
+      <p>
+        This section explores methods for approximating definite integrals when finding exact values is difficult or impossible. We will learn about the Left and Right Hand Rules, the Trapezoidal Rule, the Midpoint Rule, and Simpson's Rule, which are essential for approximating areas under curves, especially when antiderivatives are hard to compute.
+      </p>
+    </div>
+
+    <!-- Overview video embedded -->
+    <div class="video-container">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/J7vCxXHUmkk?si=ZK_Pt4XspdShx9Nl" title="Numerical Integration Overview" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div class="calc2-definition">
+      <h3>Understanding Numerical Integration</h3>
+      <p>
+        The Fundamental Theorem of Calculus allows us to compute exact values of definite integrals using antiderivatives. However, there are situations where we cannot find the antiderivative of the integrand, or we only have discrete data instead of a function. In such cases, numerical integration techniques provide approximate values of definite integrals.
+      </p>
+      <p>
+        For example, we cannot find elementary antiderivatives for functions like \( e^{-x^2} \), \( \sin(x^3) \), or \( \frac{\sin(x)}{x} \). Thus, we resort to numerical methods to approximate integrals involving these functions.
+      </p>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>The Left and Right Hand Rule Methods</h3>
+      <p>
+        We can approximate a definite integral \( \int_a^b f(x)\,dx \) by partitioning the interval \([a, b]\) into \( n \) equally spaced subintervals of width \( \Delta x = \frac{b - a}{n} \). The Left Hand Rule (LHR) and Right Hand Rule (RHR) use rectangles to approximate the area under the curve.
+      </p>
+      <p>
+        Left Hand Rule approximation:
+      </p>
+      <div class="equation">
+        \[ L_n = \Delta x \sum_{i=0}^{n-1} f(x_i) \]
+      </div>
+      <p>
+        Right Hand Rule approximation:
+      </p>
+      <div class="equation">
+        \[ R_n = \Delta x \sum_{i=1}^{n} f(x_i) \]
+      </div>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Using Left and Right Hand Rules</h3>
+      <p>
+        Approximate \( \int_0^1 e^{-x^2}\,dx \) using the Left and Right Hand Rules with \( n = 5 \) equally spaced subintervals.
+      </p>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Compute \( \Delta x = \frac{1 - 0}{5} = 0.2 \).</li>
+        <li>Find the partition points:
+          \[ x_0 = 0, \quad x_1 = 0.2, \quad x_2 = 0.4, \quad x_3 = 0.6, \quad x_4 = 0.8, \quad x_5 = 1 \]
+        </li>
+        <li>Compute the left endpoints \( x_i \) for \( i = 0 \) to \( 4 \) and evaluate \( f(x_i) = e^{-x_i^2} \).</li>
+        <li>Compute \( L_5 = \Delta x \sum_{i=0}^{4} f(x_i) \).</li>
+        <li>Compute the right endpoints \( x_i \) for \( i = 1 \) to \( 5 \) and evaluate \( f(x_i) = e^{-x_i^2} \).</li>
+        <li>Compute \( R_5 = \Delta x \sum_{i=1}^{5} f(x_i) \).</li>
+        <li>Calculate the approximate values:
+          \[ L_5 \approx 0.8951, \quad R_5 \approx 0.8050 \]
+        </li>
+      </ol>
+      <p>
+        Therefore, the approximations are \( L_5 \approx 0.8951 \) and \( R_5 \approx 0.8050 \).
+      </p>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>The Trapezoidal Rule</h3>
+      <p>
+        The Trapezoidal Rule improves upon the rectangle methods by approximating the area under \( f(x) \) using trapezoids instead of rectangles. The approximation is given by:
+      </p>
+      <div class="equation">
+        \[ T_n = \frac{\Delta x}{2} \left( f(x_0) + 2\sum_{i=1}^{n-1} f(x_i) + f(x_n) \right) \]
+      </div>
+      <p>
+        Where \( x_i = a + i\Delta x \) and \( \Delta x = \frac{b - a}{n} \).
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Using the Trapezoidal Rule</h3>
+      <p>
+        Use the Trapezoidal Rule with \( n = 5 \) to approximate \( \int_0^1 e^{-x^2}\,dx \).
+      </p>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Compute \( \Delta x = 0.2 \) and partition points as before.</li>
+        <li>Evaluate \( f(x_i) = e^{-x_i^2} \) at each \( x_i \).</li>
+        <li>Apply the Trapezoidal Rule formula:
+          \[ T_5 = \frac{0.2}{2} \left( f(0) + 2f(0.2) + 2f(0.4) + 2f(0.6) + 2f(0.8) + f(1) \right) \]
+        </li>
+        <li>Calculate \( T_5 \) using the function values.</li>
+        <li>Result:
+          \[ T_5 \approx 0.8492 \]
+        </li>
+      </ol>
+      <p>
+        So, the Trapezoidal Rule approximation is \( T_5 \approx 0.8492 \).
+      </p>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>The Midpoint Rule</h3>
+      <p>
+        The Midpoint Rule approximates the area under \( f(x) \) by using rectangles whose heights are determined by the function value at the midpoint of each subinterval. The approximation is:
+      </p>
+      <div class="equation">
+        \[ M_n = \Delta x \sum_{i=1}^{n} f\left( x_{i - 1} + \frac{\Delta x}{2} \right) \]
+      </div>
+      <p>
+        Where \( x_i^* = x_{i - 1} + \frac{\Delta x}{2} \) are the midpoints of each subinterval.
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Using the Midpoint Rule</h3>
+      <p>
+        Approximate \( \int_{0.5}^{4\pi} \frac{\sin(x)}{x}\,dx \) using the Midpoint Rule with \( n = 10 \) equally spaced subintervals.
+      </p>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Compute \( \Delta x = \frac{4\pi - 0.5}{10} \approx 1.084 \).</li>
+        <li>Compute the midpoints:
+          \[ x_i^* = x_{i - 1} + \frac{\Delta x}{2}, \quad i = 1, 2, \dots, 10 \]
+        </li>
+        <li>Evaluate \( f(x_i^*) = \frac{\sin(x_i^*)}{x_i^*} \) at each midpoint.</li>
+        <li>Apply the Midpoint Rule formula:
+          \[ M_{10} = \Delta x \sum_{i=1}^{10} f(x_i^*) \]
+        </li>
+        <li>Calculate \( M_{10} \) using the function values.</li>
+        <li>Result:
+          \[ M_{10} \approx 1.4187 \]
+        </li>
+      </ol>
+      <p>
+        Therefore, the Midpoint Rule approximation is \( M_{10} \approx 1.4187 \).
+      </p>
+    </div>
+
+    <div class="calc2-theorem">
+      <h3>Simpson's Rule</h3>
+      <p>
+        Simpson's Rule provides an even better approximation by using quadratic polynomials (parabolas) to approximate \( f(x) \) over each pair of subintervals. The approximation is given by:
+      </p>
+      <div class="equation">
+        \[ S_n = \frac{\Delta x}{3} \left( f(x_0) + 4\sum_{i=1,\, \text{odd}}^{n-1} f(x_i) + 2\sum_{i=2,\, \text{even}}^{n-2} f(x_i) + f(x_n) \right) \]
+      </div>
+      <p>
+        Where \( n \) is even, \( \Delta x = \frac{b - a}{n} \), and \( x_i = a + i\Delta x \).
+      </p>
+      <p>
+        Note the pattern of coefficients: 1, 4, 2, 4, 2, ..., 4, 1.
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Using Simpson's Rule</h3>
+      <p>
+        Use Simpson's Rule with \( n = 4 \) to approximate \( \int_0^1 e^{-x^2}\,dx \).
+      </p>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Compute \( \Delta x = \frac{1 - 0}{4} = 0.25 \).</li>
+        <li>Compute \( x_0 = 0, \ x_1 = 0.25, \ x_2 = 0.5, \ x_3 = 0.75, \ x_4 = 1 \).</li>
+        <li>Evaluate \( f(x_i) = e^{-x_i^2} \) at each \( x_i \).</li>
+        <li>Apply Simpson's Rule formula:
+          \[ S_4 = \frac{0.25}{3} \left( f(0) + 4f(0.25) + 2f(0.5) + 4f(0.75) + f(1) \right) \]
+        </li>
+        <li>Calculate \( S_4 \) using the function values.</li>
+        <li>Result:
+          \[ S_4 \approx 0.8556 \]
+        </li>
+      </ol>
+      <p>
+        So, Simpson's Rule approximation is \( S_4 \approx 0.8556 \).
+      </p>
+    </div>
+
+    <div class="calc2-definition">
+      <h3>Error Analysis</h3>
+      <p>
+        When using numerical integration methods, it's important to understand the accuracy of the approximations. Error bounds can be calculated for each method. For example, the error bound for the Trapezoidal Rule is:
+      </p>
+      <div class="equation">
+        \[ |E_T| \leq \frac{(b - a)^3}{12n^2} K \]
+      </div>
+      <p>
+        Where \( K \) is the maximum value of \( |f''(x)| \) on \([a, b]\). Similarly, error bounds for the Midpoint and Simpson's Rules are:
+      </p>
+      <div class="equation">
+        \[ |E_M| \leq \frac{(b - a)^3}{24n^2} K \]
+      </div>
+      <div class="equation">
+        \[ |E_S| \leq \frac{(b - a)^5}{180n^4} M \]
+      </div>
+      <p>
+        Where \( M \) is the maximum value of \( |f^{(4)}(x)| \) on \([a, b]\).
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Calculating Error Bounds</h3>
+      <p>
+        Estimate the error when approximating \( \int_0^1 e^{-x^2}\,dx \) using the Trapezoidal Rule with \( n = 5 \) subintervals.
+      </p>
+      <p><strong>Solution:</strong></p>
+      <ol>
+        <li>Calculate \( f''(x) \) for \( f(x) = e^{-x^2} \):
+          \[ f'(x) = -2x e^{-x^2}, \quad f''(x) = (-2 + 4x^2) e^{-x^2} \]
+        </li>
+        <li>Find \( |f''(x)| \) on \([0,1]\):
+          \[ |f''(x)| \leq \max_{0 \leq x \leq 1} \left| (-2 + 4x^2) e^{-x^2} \right| \]
+          The maximum occurs at \( x = 1 \), so \( K = |(-2 + 4(1)^2) e^{-(1)^2}| = |2 e^{-1}| \approx 0.7358 \).
+        </li>
+        <li>Compute the error bound:
+          \[ |E_T| \leq \frac{(1 - 0)^3}{12(5)^2} (0.7358) = \frac{1}{300} (0.7358) \approx 0.00245 \]
+        </li>
+        <li>Therefore, the error is bounded by \( |E_T| \leq 0.00245 \).
+        </li>
+      </ol>
+      <p>
+        This indicates that our Trapezoidal Rule approximation is within \( 0.00245 \) of the actual value.
+      </p>
+    </div>
+
+    <div class="calc2-info-box">
+      <p><strong>Key Takeaways:</strong></p>
+      <ul>
+        <li>When exact values of definite integrals are difficult to compute, numerical methods provide approximations.</li>
+        <li>The Left and Right Hand Rules use rectangles but can be less accurate with fewer subintervals.</li>
+        <li>The Trapezoidal Rule uses trapezoids, often providing better approximations.</li>
+        <li>The Midpoint Rule uses midpoints for heights, sometimes outperforming the Trapezoidal Rule.</li>
+        <li>Simpson's Rule uses parabolic arcs, typically yielding highly accurate results.</li>
+        <li>Error analysis helps us understand and estimate the accuracy of our approximations.</li>
+      </ul>
+    </div>
+
+    <p>
+      Numerical integration is a powerful tool for approximating definite integrals, especially when antiderivatives are hard to find or data is given discretely. Understanding these methods empowers us to tackle complex integrals in applied mathematics and engineering.
+    </p>
+
+  </div>
+
+  <!-- JavaScript to replace placeholders with equations -->
+  <script>
+    // Wait for MathJax to be ready
+    MathJax.startup.promise.then(() => {
+      // No placeholders to replace as all equations are directly included
+
+      // Typeset the equations
+      MathJax.typesetPromise();
+    }).catch((err) => console.error(err));
+  </script>
+
+</body>
+</html>

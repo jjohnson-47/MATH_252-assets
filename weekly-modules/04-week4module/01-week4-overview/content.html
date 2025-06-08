@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Week 4 Overview – Advanced Integration Techniques | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* Theme variables */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* Base layout & typography */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Professional application boxes */
+    .calc2-application {
+      background: linear-gradient(135deg, rgba(77, 208, 225, 0.1), rgba(81, 45, 168, 0.05));
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-application h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .calc2-application .tech-stack {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 0.8rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      border-left: 3px solid var(--calc2-primary-purple);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Week timeline */
+    .week-timeline {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border: 1px solid #e9ecef;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      margin: 0.75rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .timeline-item:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    .timeline-section {
+      font-weight: 500;
+      color: var(--calc2-primary-purple);
+      min-width: 200px;
+    }
+
+    .timeline-description {
+      flex: 1;
+      margin-left: 1rem;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .timeline-item   { flex-direction: column; align-items: flex-start; }
+      .timeline-description { margin-left: 0; margin-top: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Week 4 Overview – Advanced Integration Techniques</h1>
+
+    <!-- Introduction -->
+    <section class="calc2-insight">
+      <h3>Completing Your Integration Toolkit</h3>
+      <p>Welcome to Week 4, where we add the final sophisticated tools to your integration arsenal. This week completes Chapter 6 with four advanced techniques that are essential in professional engineering, data science, and quantitative analysis.</p>
+      <p>These methods follow the <strong>APEX Calculus</strong> textbook presentation while connecting directly to real-world applications you'll encounter in your career. By the end of this week, you'll have a complete integration toolkit and the strategic thinking to tackle any integral systematically.</p>
+    </section>
+
+    <!-- Professional applications section -->
+    <section>
+      <h2 class="calc2-subtitle">Professional Applications</h2>
+
+      <div class="calc2-application">
+        <h3>🏗️ Partial Fractions in Control Systems Engineering</h3>
+        <p><strong>Real-World Context:</strong> Modern autonomous vehicles and robotics systems rely on control theory to maintain stability. When designing feedback controllers, engineers frequently encounter transfer functions expressed as complex rational functions.</p>
+        
+        <p><strong>The Mathematics:</strong> Transfer functions like $H(s) = \frac{K(s+2)}{s(s+1)(s+5)}$ must be decomposed using partial fractions to analyze system behavior and design controllers that prevent oscillation or instability.</p>
+        
+        <div class="tech-stack">
+          <strong>Industry Tools:</strong> MATLAB Control System Toolbox, Python scipy.signal, Julia ControlSystems.jl
+          <br><strong>Applications:</strong> Drone stabilization, robotic arm control, automotive cruise control
+        </div>
+        
+        <p><strong>Explore Further:</strong> 
+          <a href="https://www.mathworks.com/help/control/ref/residue.html" target="_blank" rel="noopener">MATLAB residue function for partial fractions</a> |
+          <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.residue.html" target="_blank" rel="noopener">SciPy implementation</a>
+        </p>
+      </div>
+
+      <div class="calc2-application">
+        <h3>🧠 L'Hospital's Rule in Machine Learning Optimization</h3>
+        <p><strong>Real-World Context:</strong> Training neural networks requires analyzing the convergence behavior of optimization algorithms. Data scientists frequently encounter indeterminate forms when studying learning rate schedules and gradient descent convergence.</p>
+        
+        <p><strong>The Mathematics:</strong> When analyzing optimizer performance, expressions like $\lim_{t \to \infty} \frac{\text{loss}(t)}{\text{learning\_rate}(t)}$ often yield indeterminate forms $\frac{0}{0}$ or $\frac{\infty}{\infty}$ that L'Hospital's Rule resolves.</p>
+        
+        <div class="tech-stack">
+          <strong>Industry Tools:</strong> PyTorch schedulers, TensorFlow optimizers, JAX gradient transformations
+          <br><strong>Applications:</strong> Learning rate decay analysis, optimizer convergence proofs, hyperparameter tuning
+        </div>
+        
+        <p><strong>Explore Further:</strong> 
+          <a href="https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate" target="_blank" rel="noopener">PyTorch learning rate scheduling</a> |
+          <a href="https://arxiv.org/abs/1412.6980" target="_blank" rel="noopener">Adam optimizer convergence analysis</a>
+        </p>
+      </div>
+
+      <div class="calc2-application">
+        <h3>📊 Improper Integrals in Statistical Signal Processing</h3>
+        <p><strong>Real-World Context:</strong> Engineers processing sensor data from IoT devices, medical equipment, or financial markets must work with probability distributions that extend to infinity and signals with discontinuities.</p>
+        
+        <p><strong>The Mathematics:</strong> Computing probabilities requires evaluating integrals like $P(X > k) = \int_k^{\infty} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x-\mu)^2}{2\sigma^2}} dx$ and analyzing filter responses with impulse functions.</p>
+        
+        <div class="tech-stack">
+          <strong>Industry Tools:</strong> NumPy/SciPy statistical functions, R statistical packages, Apache Kafka for streaming data
+          <br><strong>Applications:</strong> Anomaly detection, financial risk modeling, biomedical signal analysis
+        </div>
+        
+        <p><strong>Explore Further:</strong> 
+          <a href="https://docs.scipy.org/doc/scipy/reference/stats.html" target="_blank" rel="noopener">SciPy statistical distributions</a> |
+          <a href="https://numpy.org/doc/stable/reference/generated/numpy.trapz.html" target="_blank" rel="noopener">Numerical integration in NumPy</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- Week structure and timeline -->
+    <section>
+      <h2 class="calc2-subtitle">This Week's Learning Path</h2>
+      
+      <div class="week-timeline">
+        <div class="timeline-item">
+          <div class="timeline-section">Section 6.5</div>
+          <div class="timeline-description"><strong>Partial Fraction Decomposition</strong> – Breaking rational functions into integrable components</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-section">Section 6.6</div>
+          <div class="timeline-description"><strong>Hyperbolic Functions</strong> – sinh, cosh, tanh and their elegant integration properties</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-section">Section 6.7</div>
+          <div class="timeline-description"><strong>L'Hospital's Rule</strong> – Resolving indeterminate limits using derivatives</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-section">Section 6.8</div>
+          <div class="timeline-description"><strong>Improper Integrals</strong> – Infinite domains and discontinuous functions</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-section">Integration Strategy</div>
+          <div class="timeline-description"><strong>Technique Selection</strong> – Becoming a systematic problem solver</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-section">Practice & Assessment</div>
+          <div class="timeline-description"><strong>Quiz Preparation</strong> – Chapter 6 comprehensive review</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Strategic mindset -->
+    <section class="calc2-key-point">
+      <p><strong>Developing Integration Intuition:</strong></p>
+      <p>By the end of this week, you'll think like a <strong>"technique detective"</strong> – quickly recognizing patterns and selecting the optimal method for any integral. This systematic approach is exactly how professional engineers and data scientists tackle complex mathematical problems in industry.</p>
+      <ul>
+        <li><strong>Pattern Recognition:</strong> Identify function types and structural clues</li>
+        <li><strong>Strategic Thinking:</strong> Know when to use each technique and why</li>
+        <li><strong>Verification Skills:</strong> Check solutions and recognize when methods fail</li>
+        <li><strong>Professional Confidence:</strong> Approach unfamiliar integrals systematically</li>
+      </ul>
+    </section>
+
+    <!-- Assessment timeline -->
+    <section class="calc2-definition">
+      <h3>Week 4 Assessment Schedule</h3>
+      <ul>
+        <li><strong>Wednesday, June 4:</strong> Chapter 6 Quiz covering all integration techniques (6.1-6.8)</li>
+        <li><strong>Friday, June 13:</strong> Unit 2 Edfinity Homework due (comprehensive Chapter 6 practice)</li>
+        <li><strong>Friday, June 13:</strong> Written Submission #2 due (advanced integration problems)</li>
+      </ul>
+      <p><strong>Success Strategy:</strong> Stay current with each section and use the practice problems to identify areas needing additional review before the quiz.</p>
+    </section>
+
+  </main>
+</body>
+</html>

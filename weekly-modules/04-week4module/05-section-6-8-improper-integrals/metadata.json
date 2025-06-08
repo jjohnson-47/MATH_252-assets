@@ -1,0 +1,13 @@
+{
+  "title": "Section 6.8 – Improper Integrals",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": {
+    "type": "performance",
+    "performance": {
+      "prerequisite_item": "Section 6.7 – L'Hospital's Rule",
+      "criterion": "view"
+    }
+  },
+  "description": "Master improper integrals with infinite domains and discontinuities! Explore probability distributions, IoT sensor lifetime modeling, financial risk analysis, and signal processing applications with convergence tests and numerical examples."
+}

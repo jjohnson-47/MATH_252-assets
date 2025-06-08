@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.1 – Integration by Substitution | MATH A252 Summer 2025</title>
+
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* -------------------------------------------------------------------------
+       Theme variables (matches sections 5.4 and 5.5)  
+       --------------------------------------------------------------------- */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* --------------------------------------------------------------------- */
+    /*  Base layout & typography                                             */
+    /* --------------------------------------------------------------------- */
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.1 – Integration by Substitution</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_substitution.html" target="_blank" rel="noopener">APEX Calculus §6.1 – Integration by Substitution</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_substitution.html#sec_substitution-1-2" target="_blank" rel="noopener">Example 6.1.2 – Basic substitution technique</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_substitution.html#sec_substitution-2-2" target="_blank" rel="noopener">Example 6.1.7 – Definite integrals with substitution</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_substitution.html#sec_substitution-3-2" target="_blank" rel="noopener">Example 6.1.12 – When substitution doesn't immediately work</a></li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Understand how substitution <strong>reverses the Chain Rule</strong> to evaluate integrals of composite functions.</li>
+        <li>Recognize patterns that suggest substitution: when the derivative of an inner function appears in the integrand.</li>
+        <li>Apply substitution to <strong>indefinite integrals</strong> and convert back to the original variable.</li>
+        <li>Use substitution with <strong>definite integrals</strong> by changing limits or converting back to original variables.</li>
+        <li>Identify when substitution may not be immediately helpful and develop strategies for more complex cases.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/RDbZbLBI0fQ?si=7MWwLcJvJt882Ge8" title="Integration by Substitution Overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- Big Picture Introduction -->
+    <section class="calc2-insight">
+      <h3>The Big Picture: Reversing the Chain Rule</h3>
+      <p>Integration by substitution is our first major technique for handling complex integrals. <strong>The key insight:</strong> substitution reverses the Chain Rule, allowing us to integrate composite functions that would otherwise be impossible to handle.</p>
+      <p>Just as the Chain Rule helps us differentiate compositions like $f(g(x))$, substitution helps us integrate expressions that arise from differentiating composite functions.</p>
+    </section>
+
+    <!-- Core theory -->
+    <section>
+      <h2 class="calc2-subtitle">The Foundation: Chain Rule Connection</h2>
+
+      <div class="calc2-theorem">
+        <h3>How Substitution Reverses the Chain Rule</h3>
+        <p>The Chain Rule tells us that:</p>
+        <div class="calc2-equation">$$\frac{d}{dx}\Big[F\big(g(x)\big)\Big] = F'(g(x)) \cdot g'(x)$$</div>
+        
+        <p><strong>Reading this backwards:</strong> If we can recognize an integrand of the form $F'(g(x)) \cdot g'(x)$, then we know its antiderivative is $F(g(x)) + C$.</p>
+        
+        <p><strong>The substitution process:</strong> When we set $u = g(x)$, we have $du = g'(x)\,dx$, and our integral becomes:</p>
+        <div class="calc2-equation">$$\int F'(g(x)) \cdot g'(x)\,dx = \int F'(u)\,du = F(u) + C = F(g(x)) + C$$</div>
+      </div>
+
+      <div class="calc2-definition">
+        <h3>When to Use Substitution: Pattern Recognition</h3>
+        <p>Look for these key elements in the integrand:</p>
+        <ul>
+          <li><strong>Composite function:</strong> A function nested inside another function</li>
+          <li><strong>Derivative present:</strong> The derivative (or a constant multiple) of the inner function appears elsewhere in the integrand</li>
+          <li><strong>Simplification potential:</strong> The integral becomes easier after substitution</li>
+        </ul>
+        <p><strong>Common patterns:</strong> $\int f(g(x)) \cdot g'(x)\,dx$, where recognizing $g(x)$ and $g'(x)$ is the key to success.</p>
+      </div>
+    </section>
+
+    <!-- Worked examples -->
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Basic Substitution <small>(Based on Example 6.1.2)</small></h3>
+        <p><strong>Problem:</strong> Evaluate $\int x\cos(x^2)\,dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Identify the pattern.</p>
+          <p>We see $\cos(x^2)$ (a composite function) and $x$ (related to the derivative of $x^2$).</p>
+          <p>Since $\frac{d}{dx}[x^2] = 2x$, we have $x = \frac{1}{2} \cdot 2x$, which suggests $u = x^2$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Set up the substitution.</p>
+          <div class="calc2-equation">$$u = x^2 \quad \Rightarrow \quad du = 2x\,dx \quad \Rightarrow \quad \frac{1}{2}du = x\,dx$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Replace everything in terms of $u$.</p>
+          <div class="calc2-equation">$$\int x\cos(x^2)\,dx = \int \cos(u) \cdot \frac{1}{2}\,du = \frac{1}{2}\int \cos(u)\,du$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Integrate with respect to $u$.</p>
+          <div class="calc2-equation">$$\frac{1}{2}\int \cos(u)\,du = \frac{1}{2}\sin(u) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 5:</strong> Convert back to the original variable.</p>
+          <div class="calc2-equation">$$\frac{1}{2}\sin(u) + C = \frac{1}{2}\sin(x^2) + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Check:</strong> $\frac{d}{dx}\left[\frac{1}{2}\sin(x^2)\right] = \frac{1}{2}\cos(x^2) \cdot 2x = x\cos(x^2)$ ✓</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Definite Integration with Substitution <small>(Based on Example 6.1.7)</small></h3>
+        <p><strong>Problem:</strong> Evaluate $\int_0^2 x\sqrt{x^2 + 1}\,dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Method 1: Change the limits of integration</strong></p>
+          <p>Let $u = x^2 + 1$, so $du = 2x\,dx$ and $\frac{1}{2}du = x\,dx$.</p>
+          <p><strong>Change limits:</strong> When $x = 0$: $u = 0^2 + 1 = 1$. When $x = 2$: $u = 2^2 + 1 = 5$.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Transform the integral:</strong></p>
+          <div class="calc2-equation">$$\int_0^2 x\sqrt{x^2 + 1}\,dx = \int_1^5 \sqrt{u} \cdot \frac{1}{2}\,du = \frac{1}{2}\int_1^5 u^{1/2}\,du$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Evaluate:</strong></p>
+          <div class="calc2-equation">$$\frac{1}{2}\int_1^5 u^{1/2}\,du = \frac{1}{2} \cdot \frac{u^{3/2}}{3/2}\Big|_1^5 = \frac{1}{3}\left[u^{3/2}\right]_1^5 = \frac{1}{3}(5^{3/2} - 1^{3/2}) = \frac{1}{3}(5\sqrt{5} - 1)$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key takeaways -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering Substitution:</strong></p>
+      <ul>
+        <li><strong>Pattern recognition is crucial:</strong> Look for composite functions paired with derivatives of inner functions</li>
+        <li><strong>Practice the process:</strong> Substitute, integrate, convert back</li>
+        <li><strong>Check your work:</strong> Differentiate your answer to verify it matches the original integrand</li>
+        <li><strong>For definite integrals:</strong> Either change limits or convert back to original variable</li>
+        <li><strong>Don't force it:</strong> If substitution doesn't clearly simplify the integral, try a different approach</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>

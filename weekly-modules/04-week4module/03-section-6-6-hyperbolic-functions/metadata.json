@@ -1,0 +1,13 @@
+{
+  "title": "Section 6.6 – Hyperbolic Functions",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": {
+    "type": "performance",
+    "performance": {
+      "prerequisite_item": "Section 6.5 – Partial Fraction Decomposition",
+      "criterion": "view"
+    }
+  },
+  "description": "Discover hyperbolic functions and their crucial role in neural networks! Master sinh, cosh, and tanh through real examples from deep learning, including numerical calculations from image classification networks and gradient descent optimization."
+}

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.8 – Improper Integrals | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* Theme variables */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* Base layout & typography */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Statistical application boxes */
+    .calc2-application {
+      background: linear-gradient(135deg, rgba(77, 208, 225, 0.1), rgba(81, 45, 168, 0.05));
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-application h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .statistical-example {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      border-left: 3px solid var(--calc2-primary-purple);
+    }
+
+    .code-snippet {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    .convergence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .convergence-table th,
+    .convergence-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .convergence-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .convergence-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Types of improper integrals */
+    .improper-types {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .improper-types th,
+    .improper-types td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .improper-types th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .improper-types tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .code-snippet    { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.8 – Improper Integrals</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_improper_integration.html" target="_blank" rel="noopener">APEX Calculus §6.8 – Improper Integration</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_improper_integration.html#sec_improper_integration-1-2" target="_blank" rel="noopener">Example 6.8.2 – Type I improper integrals</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_improper_integration.html#sec_improper_integration-2-2" target="_blank" rel="noopener">Example 6.8.4 – Type II improper integrals</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_improper_integration.html#sec_improper_integration-3-2" target="_blank" rel="noopener">Example 6.8.6 – Comparison tests</a></li>
+      </ul>
+    </section>
+
+    <!-- Professional application -->
+    <section class="calc2-application">
+      <h3>📊 Probability Distributions and Statistical Signal Processing</h3>
+      <p><strong>Real-World Context:</strong> Data scientists and engineers working with continuous probability distributions constantly encounter improper integrals. From financial risk modeling to machine learning feature analysis, these integrals determine whether probability models are mathematically valid.</p>
+      
+      <p><strong>Why This Matters:</strong> Every continuous probability distribution must satisfy $\int_{-\infty}^{\infty} f(x) \, dx = 1$. Understanding convergence helps data scientists design valid statistical models and ensures Monte Carlo simulations terminate correctly.</p>
+      
+      <div class="statistical-example">
+        <p><strong>Numerical Example - Gaussian Distribution Analysis:</strong></p>
+        <p>Consider a data preprocessing pipeline that standardizes sensor readings using a normal distribution with $\mu = 0$ and $\sigma = 1$:</p>
+        <div class="calc2-equation">$$f(x) = \frac{1}{\sqrt{2\pi}} e^{-x^2/2}$$</div>
+        <p>To verify this is a valid probability density, we must confirm:</p>
+        <div class="calc2-equation">$$\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-x^2/2} \, dx = 1$$</div>
+        <p>This improper integral converges because the exponential decay $e^{-x^2/2}$ dominates the polynomial growth for large $|x|$.</p>
+      </div>
+      
+      <div class="code-snippet">
+# Python: Numerical verification of Gaussian normalization
+import numpy as np
+from scipy import integrate
+
+def gaussian_pdf(x, mu=0, sigma=1):
+    return (1/np.sqrt(2*np.pi*sigma**2)) * np.exp(-0.5*((x-mu)/sigma)**2)
+
+# Numerical integration over large range
+result, error = integrate.quad(gaussian_pdf, -10, 10)
+print(f"Integral approximation: {result:.6f}")
+print(f"Error estimate: {error:.2e}")
+# Output: Integral approximation: 1.000000, Error estimate: 1.11e-14
+      </div>
+      
+      <p><strong>Professional Tools:</strong> SciPy integrate module, NumPy statistical functions, R probability packages</p>
+      <p><strong>Explore Further:</strong> 
+        <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.quad.html" target="_blank" rel="noopener">SciPy numerical integration</a> |
+        <a href="https://numpy.org/doc/stable/reference/random/index.html" target="_blank" rel="noopener">NumPy random distributions</a>
+      </p>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Recognize <strong>Type I and Type II improper integrals</strong> and their convergence properties.</li>
+        <li>Evaluate improper integrals using <strong>limit processes</strong> and proper techniques.</li>
+        <li>Apply <strong>comparison tests</strong> to determine convergence without explicit calculation.</li>
+        <li>Understand <strong>probability applications</strong> and why normalization conditions matter.</li>
+        <li>Connect to <strong>signal processing</strong> and Monte Carlo methods in professional contexts.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/85zGYB_34rE?si=3xP9vLQMuZ9FG4x3" title="Improper Integrals Overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- Definition and types -->
+    <section>
+      <h2 class="calc2-subtitle">Types of Improper Integrals</h2>
+
+      <div class="calc2-definition">
+        <h3>Classification of Improper Integrals</h3>
+        <table class="improper-types">
+          <thead>
+            <tr>
+              <th>Type</th>
+              <th>Characteristic</th>
+              <th>Definition</th>
+              <th>Statistical Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Type I</strong></td>
+              <td>Infinite limit(s) of integration</td>
+              <td>$\int_a^{\infty} f(x) \, dx = \lim_{t \to \infty} \int_a^t f(x) \, dx$</td>
+              <td>Exponential distribution tail probabilities</td>
+            </tr>
+            <tr>
+              <td><strong>Type I</strong></td>
+              <td>Infinite limit(s) of integration</td>
+              <td>$\int_{-\infty}^{\infty} f(x) \, dx = \lim_{t \to \infty} \int_{-t}^t f(x) \, dx$</td>
+              <td>Normal distribution normalization</td>
+            </tr>
+            <tr>
+              <td><strong>Type II</strong></td>
+              <td>Discontinuous integrand</td>
+              <td>$\int_a^b f(x) \, dx = \lim_{t \to c^-} \int_a^t f(x) \, dx$ (if $f$ discontinuous at $c$)</td>
+              <td>Improper priors in Bayesian analysis</td>
+            </tr>
+            <tr>
+              <td><strong>Mixed</strong></td>
+              <td>Both infinite limits and discontinuities</td>
+              <td>Split into separate improper integrals</td>
+              <td>Heavy-tailed distributions with singularities</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc2-insight">
+        <h3>Data Science Connection: Model Validation</h3>
+        <p>In machine learning, many algorithms assume data follows specific probability distributions. Improper integrals help data scientists:</p>
+        <ul>
+          <li><strong>Validate normalization:</strong> Ensure $\int f(x) \, dx = 1$ for custom probability densities</li>
+          <li><strong>Check tail behavior:</strong> Determine if distributions have finite moments (mean, variance)</li>
+          <li><strong>Design sampling algorithms:</strong> Monte Carlo methods require convergent integrals</li>
+          <li><strong>Assess model stability:</strong> Heavy-tailed distributions can cause numerical instability</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Convergence and divergence -->
+    <section>
+      <h2 class="calc2-subtitle">Convergence Tests and Analysis</h2>
+
+      <div class="calc2-theorem">
+        <h3>P-Test for Convergence (Type I)</h3>
+        <p>The integral $\int_1^{\infty} \frac{1}{x^p} \, dx$ converges if and only if $p > 1$.</p>
+        
+        <div class="calc2-equation">
+          $$\int_1^{\infty} \frac{1}{x^p} \, dx = \begin{cases}
+          \text{Converges to } \frac{1}{p-1} & \text{if } p > 1 \\
+          \text{Diverges} & \text{if } p \leq 1
+          \end{cases}$$
+        </div>
+        
+        <div class="statistical-example">
+          <p><strong>Statistical Application:</strong> The Pareto distribution has PDF $f(x) = \frac{\alpha x_m^\alpha}{x^{\alpha+1}}$ for $x \geq x_m$. This is valid only when $\alpha > 0$, and has finite mean only when $\alpha > 1$, following the p-test.</p>
+        </div>
+      </div>
+
+      <div class="calc2-theorem">
+        <h3>Comparison Tests</h3>
+        <p><strong>Direct Comparison Test:</strong> If $0 \leq f(x) \leq g(x)$ for $x \geq a$, then:</p>
+        <ul>
+          <li>If $\int_a^{\infty} g(x) \, dx$ converges, then $\int_a^{\infty} f(x) \, dx$ converges</li>
+          <li>If $\int_a^{\infty} f(x) \, dx$ diverges, then $\int_a^{\infty} g(x) \, dx$ diverges</li>
+        </ul>
+        
+        <p><strong>Limit Comparison Test:</strong> If $\lim_{x \to \infty} \frac{f(x)}{g(x)} = L > 0$ (finite), then both integrals have the same convergence behavior.</p>
+      </div>
+    </section>
+
+    <!-- Worked examples -->
+    <section>
+      <h2 class="calc2-subtitle">Statistical and Engineering Applications</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Exponential Distribution - IoT Sensor Lifetime</h3>
+        <p><strong>Problem:</strong> IoT sensors fail with exponential distribution $f(t) = \lambda e^{-\lambda t}$ for $t \geq 0$. Verify this is a valid probability density and find the probability a sensor lasts longer than 2 years if $\lambda = 0.1$ per year.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Verify normalization by evaluating the improper integral.</p>
+          <div class="calc2-equation">$$\int_0^{\infty} \lambda e^{-\lambda t} \, dt = \lim_{T \to \infty} \int_0^T \lambda e^{-\lambda t} \, dt$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Evaluate the definite integral.</p>
+          <div class="calc2-equation">$$\int_0^T \lambda e^{-\lambda t} \, dt = \lambda \left[ \frac{e^{-\lambda t}}{-\lambda} \right]_0^T = -[e^{-\lambda T} - e^0] = 1 - e^{-\lambda T}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Take the limit to verify convergence.</p>
+          <div class="calc2-equation">$$\lim_{T \to \infty} (1 - e^{-\lambda T}) = 1 - 0 = 1$$</div>
+          <p>✓ The integral converges to 1, confirming this is a valid probability density.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Calculate the probability for the specific application.</p>
+          <p>For $\lambda = 0.1$ and $t > 2$ years:</p>
+          <div class="calc2-equation">$$P(T > 2) = \int_2^{\infty} 0.1 e^{-0.1t} \, dt = \lim_{T \to \infty} [-e^{-0.1t}]_2^T = e^{-0.2} \approx 0.819$$</div>
+          <p>About 81.9% of sensors will last longer than 2 years.</p>
+        </div>
+
+        <div class="statistical-example">
+          <p><strong>Engineering Application:</strong> This analysis helps engineers design maintenance schedules and estimate replacement costs for large IoT deployments.</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Heavy-Tailed Distribution - Financial Risk Modeling</h3>
+        <p><strong>Problem:</strong> Analyze the Cauchy distribution $f(x) = \frac{1}{\pi(1 + x^2)}$ used in financial modeling. Show it's normalized but has no finite mean.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Verify normalization.</p>
+          <div class="calc2-equation">$$\int_{-\infty}^{\infty} \frac{1}{\pi(1 + x^2)} \, dx = \frac{1}{\pi} \lim_{T \to \infty} \int_{-T}^T \frac{1}{1 + x^2} \, dx$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Evaluate using arctangent antiderivative.</p>
+          <div class="calc2-equation">$$\frac{1}{\pi} \lim_{T \to \infty} [\arctan x]_{-T}^T = \frac{1}{\pi} \lim_{T \to \infty} [\arctan T - \arctan(-T)]$$</div>
+          <div class="calc2-equation">$$= \frac{1}{\pi} \lim_{T \to \infty} [2\arctan T] = \frac{1}{\pi} \cdot 2 \cdot \frac{\pi}{2} = 1$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Attempt to find the mean.</p>
+          <div class="calc2-equation">$$E[X] = \int_{-\infty}^{\infty} x \cdot \frac{1}{\pi(1 + x^2)} \, dx = \frac{1}{\pi} \int_{-\infty}^{\infty} \frac{x}{1 + x^2} \, dx$$</div>
+          <p>This is an odd function integrated over a symmetric interval, suggesting the integral might be 0, but we must check convergence first.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Check convergence of the mean integral.</p>
+          <p>For large $|x|$, $\frac{x}{1 + x^2} \sim \frac{1}{x}$, and $\int \frac{1}{x} \, dx$ diverges. The mean does not exist!</p>
+          <div class="calc2-equation">$$\lim_{T \to \infty} \int_{-T}^T \frac{x}{1 + x^2} \, dx \text{ does not exist}$$</div>
+        </div>
+
+        <div class="statistical-example">
+          <p><strong>Financial Implication:</strong> The Cauchy distribution models extreme market events but has no defined mean or variance, making traditional risk metrics meaningless. This is why financial engineers use alternative risk measures like Value at Risk (VaR).</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: Signal Processing - Power Spectral Density</h3>
+        <p><strong>Problem:</strong> Determine if the power spectral density $S(f) = \frac{1}{1 + f^4}$ represents a valid signal by checking if its total power is finite.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Set up the improper integral for total power.</p>
+          <p>Total power = $\int_{-\infty}^{\infty} S(f) \, df = \int_{-\infty}^{\infty} \frac{1}{1 + f^4} \, df$</p>
+          <p>By symmetry: $2 \int_0^{\infty} \frac{1}{1 + f^4} \, df$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Use comparison test for convergence.</p>
+          <p>For large $f$: $\frac{1}{1 + f^4} < \frac{1}{f^4}$</p>
+          <p>Since $\int_1^{\infty} \frac{1}{f^4} \, df$ converges (p-test with $p = 4 > 1$), our integral converges.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Evaluate using partial fraction decomposition.</p>
+          <p>$1 + f^4 = (f^2 + \sqrt{2}f + 1)(f^2 - \sqrt{2}f + 1)$</p>
+          <p>Using complex analysis or advanced techniques: $\int_0^{\infty} \frac{1}{1 + f^4} \, df = \frac{\pi}{2\sqrt{2}}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Calculate total power.</p>
+          <div class="calc2-equation">$$\text{Total Power} = 2 \cdot \frac{\pi}{2\sqrt{2}} = \frac{\pi}{\sqrt{2}} \approx 2.22$$</div>
+          <p>The signal has finite power and is physically realizable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Convergence tests summary -->
+    <section>
+      <h2 class="calc2-subtitle">Practical Convergence Analysis</h2>
+
+      <div class="convergence-table">
+        <thead>
+          <tr>
+            <th>Function Behavior</th>
+            <th>Test to Use</th>
+            <th>Convergence Condition</th>
+            <th>Data Science Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>$\frac{1}{x^p}$ as $x \to \infty$</td>
+            <td>P-test</td>
+            <td>Converges if $p > 1$</td>
+            <td>Power-law distributions</td>
+          </tr>
+          <tr>
+            <td>$e^{-ax}$ as $x \to \infty$</td>
+            <td>Direct evaluation</td>
+            <td>Converges if $a > 0$</td>
+            <td>Exponential distributions</td>
+          </tr>
+          <tr>
+            <td>$\frac{1}{x^p}$ as $x \to 0^+$</td>
+            <td>P-test (Type II)</td>
+            <td>Converges if $p < 1$</td>
+            <td>Improper priors in Bayesian stats</td>
+          </tr>
+          <tr>
+            <td>Unknown complicated function</td>
+            <td>Comparison test</td>
+            <td>Compare to known convergent/divergent</td>
+            <td>Custom probability densities</td>
+          </tr>
+          <tr>
+            <td>Ratio of polynomials</td>
+            <td>Limit comparison</td>
+            <td>Compare degrees of numerator/denominator</td>
+            <td>Rational function models</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Professional applications -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering Improper Integrals in Data Science:</strong></p>
+      <ul>
+        <li><strong>Always check convergence first:</strong> Before computing integrals numerically, use analytical tests to ensure they converge</li>
+        <li><strong>Understand tail behavior:</strong> Heavy-tailed distributions (Pareto, Cauchy) can cause computational issues in machine learning</li>
+        <li><strong>Validate probability models:</strong> Custom distributions must satisfy normalization and moment conditions</li>
+        <li><strong>Monte Carlo considerations:</strong> Sampling algorithms require convergent integrals for theoretical guarantees</li>
+        <li><strong>Signal processing applications:</strong> Power spectral densities and filter responses often involve improper integrals</li>
+        <li><strong>Financial modeling:</strong> Risk measures and option pricing frequently use distributions with infinite support</li>
+      </ul>
+    </section>
+
+    <!-- Advanced applications -->
+    <section class="calc2-application">
+      <h3>🔬 Advanced Applications in Machine Learning and Signal Processing</h3>
+      
+      <p><strong>1. Variational Inference:</strong> Modern Bayesian machine learning uses improper integrals to define prior distributions and compute posterior normalizing constants.</p>
+      
+      <p><strong>2. Kernel Density Estimation:</strong> Non-parametric density estimation requires verifying that kernel functions integrate to 1 over infinite domains.</p>
+      
+      <p><strong>3. Fourier Analysis:</strong> Signal processing applications use improper integrals to compute frequency domain representations of non-periodic signals.</p>
+      
+      <div class="code-snippet">
+# Advanced: Custom probability distribution validation
+import numpy as np
+from scipy import integrate
+import matplotlib.pyplot as plt
+
+class CustomDistribution:
+    def __init__(self, alpha, beta):
+        self.alpha = alpha
+        self.beta = beta
+        
+    def pdf(self, x):
+        return self.alpha * np.exp(-self.beta * x**2)
+    
+    def validate_normalization(self):
+        # Check if integral from -∞ to ∞ equals 1
+        result, error = integrate.quad(self.pdf, -np.inf, np.inf)
+        return abs(result - 1.0) < 1e-6, result
+        
+    def find_normalizing_constant(self):
+        # Find alpha such that distribution is normalized
+        integral, _ = integrate.quad(lambda x: np.exp(-self.beta * x**2), 
+                                   -np.inf, np.inf)
+        return 1.0 / integral
+
+# Example usage
+dist = CustomDistribution(alpha=1.0, beta=0.5)
+is_valid, integral_value = dist.validate_normalization()
+print(f"Distribution valid: {is_valid}, Integral: {integral_value:.6f}")
+      </div>
+      
+      <p><strong>Industry Impact:</strong> Companies like Netflix use these techniques in recommendation algorithms, while financial firms apply them in risk modeling and algorithmic trading systems.</p>
+    </section>
+
+  </main>
+</body>
+</html>

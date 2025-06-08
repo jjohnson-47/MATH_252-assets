@@ -1,0 +1,56 @@
+Simpson's Rule Error Analysis
+
+
+Consider the integral
+
+
+
+﻿I equals integral subscript 0 superscript 1 e to the power of x squared end exponent d xI equals integral subscript 0 superscript 1 e to the power of x squared end exponent d x﻿
+
+
+
+This integral does not have an elementary closed-form antiderivative. However, we can approximate ﻿II﻿ using Simpson's Rule and control the error using the standard error bound.
+
+
+
+Let ﻿E subscript SE subscript S﻿ be the error when using Simpson's Rule with ﻿nn﻿ subintervals on ﻿left square bracket 0 comma 1 right square bracketleft square bracket 0 comma 1 right square bracket﻿. If ﻿f left parenthesis x right parenthesis equals e to the power of x squared end exponentf left parenthesis x right parenthesis equals e to the power of x squared end exponent﻿ and ﻿f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesisf to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis﻿ is continuous on ﻿left square bracket 0 comma 1 right square bracketleft square bracket 0 comma 1 right square bracket﻿, then there exists a constant ﻿KK﻿ such that
+
+
+
+ ﻿open vertical bar f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis close vertical bar less or equal than K space text for all end text space x element of left square bracket 0 comma 1 right square bracketopen vertical bar f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis close vertical bar less or equal than K space text for all end text space x element of left square bracket 0 comma 1 right square bracket﻿
+
+
+
+and Simpson's Rule guarantees
+
+
+
+﻿open vertical bar E subscript S close vertical bar equals space open vertical bar integral subscript 0 superscript 1 f left parenthesis x right parenthesis d x minus S subscript n close vertical bar less or equal than fraction numerator left parenthesis 1 minus 0 right parenthesis to the power of 5 over denominator 180 n to the power of 4 end fraction K equals fraction numerator K over denominator 180 n to the power of 4 end fraction.open vertical bar E subscript S close vertical bar equals space open vertical bar integral subscript 0 superscript 1 f left parenthesis x right parenthesis d x minus S subscript n close vertical bar less or equal than fraction numerator left parenthesis 1 minus 0 right parenthesis to the power of 5 over denominator 180 n to the power of 4 end fraction K equals fraction numerator K over denominator 180 n to the power of 4 end fraction.﻿
+
+
+
+Complete the following:
+
+
+1. Show that ﻿max with 0 less or equal than x less or equal than 1 below open vertical bar f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis close vertical barmax with 0 less or equal than x less or equal than 1 below open vertical bar f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis close vertical bar﻿ can be taken as ﻿K equals 76 eK equals 76 e﻿.
+
+  
+
+  *(Hint: Compute ﻿f to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesisf to the power of left parenthesis 4 right parenthesis end exponent left parenthesis x right parenthesis﻿ explicitly and evaluate its maximum on ﻿left square bracket 0 comma 1 right square bracketleft square bracket 0 comma 1 right square bracket﻿.)*
+
+
+
+2. Determine how large ﻿nn﻿ (an even integer) must be so that the absolute error in approximating ﻿integral subscript 0 superscript 1 e to the power of x squared end exponent d xintegral subscript 0 superscript 1 e to the power of x squared end exponent d x﻿ by Simpson's Rule is at most ﻿10 to the power of negative 4 end exponent10 to the power of negative 4 end exponent﻿.
+
+
+
+Submission Guidelines
+---------------------
+
+
+
+- Show all your work clearly and systematically. A similar question is solved in section 5.5 of our text.
+
+- For part 1, include each step of finding the derivatives and explain how you determined the maximum.
+
+- For part 2, clearly show your algebraic steps in solving for ﻿nn﻿ and explain why your final choice of ﻿nn﻿ is appropriate.

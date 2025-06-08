@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Riemann Sums Calculator</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Alert box */
+    .calc2-alert {
+      background-color: rgba(255, 152, 0, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid #ff9800;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .calc2-alert-icon {
+      font-size: 1.5rem;
+      margin-right: 1rem;
+      color: #ff9800;
+    }
+
+    /* Info box */
+    .calc2-info-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Example box */
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Two-column layout */
+    .calc2-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    /* Button styling */
+    .calc2-button {
+      display: inline-block;
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 1rem 0;
+      transition: background-color 0.2s;
+      text-align: center;
+    }
+
+    .calc2-button:hover {
+      background-color: var(--calc2-primary-dark-blue);
+      text-decoration: none;
+      color: white;
+    }
+
+    /* Code block styling */
+    .calc2-code {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    /* Table styling */
+    .calc2-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+
+    .calc2-table th, 
+    .calc2-table td {
+      padding: 0.75rem;
+      border: 1px solid #e0e0e0;
+    }
+
+    .calc2-table th {
+      background-color: rgba(81, 45, 168, 0.1);
+      color: var(--calc2-primary-dark-blue);
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .calc2-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    /* Access button with icon */
+    .calc2-colab-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      margin: 1.5rem auto;
+      font-weight: bold;
+      transition: background-color 0.2s;
+      max-width: 400px;
+      gap: 0.75rem;
+    }
+
+    .calc2-colab-button:hover {
+      background-color: var(--calc2-primary-dark-blue);
+      text-decoration: none;
+      color: white;
+    }
+
+    .calc2-colab-button img {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+      .calc2-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Python Riemann Sums Calculator</h1>
+
+    <p>
+      Welcome to the Python Riemann Sums Calculator, a powerful computational tool that extends your understanding of Riemann sums using Python programming. Unlike the web-based calculators, this tool gives you the ability to analyze more complex functions, customize your approach, and develop computational skills that will be valuable throughout your mathematical career.
+    </p>
+
+    <div class="calc2-alert">
+      <div class="calc2-alert-icon">⚠️</div>
+      <div>
+        <p><strong>Important Access Requirements:</strong></p>
+        <ul>
+          <li>You must be signed in to your <strong>@alaska.edu Google account</strong> to access this tool</li>
+          <li>If you encounter a permission error, make sure you're signed in with your university account</li>
+          <li>The notebook will open in Google Colab, Google's free cloud-based Python environment</li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="https://colab.research.google.com/drive/1iZFmTHrZ9ESxD3jnt310Fjz8EbJh8dGT?usp=sharing" 
+       target="_blank" 
+       class="calc2-colab-button">
+      <img src="https://colab.research.google.com/img/colab_favicon_256px.png" alt="Google Colab logo">
+      Open Python Calculator in Google Colab
+    </a>
+
+    <h2 class="calc2-subtitle">Why Use Python for Riemann Sums?</h2>
+    
+    <div class="calc2-grid">
+      <div class="calc2-key-point">
+        <h3 style="margin-top: 0;">Benefits of Python</h3>
+        <ul>
+          <li><strong>Handle Complex Functions:</strong> Analyze functions that are difficult to enter in Desmos</li>
+          <li><strong>Computational Power:</strong> Calculate sums with thousands of rectangles instantly</li>
+          <li><strong>Customization:</strong> Modify the algorithm to explore different sampling methods</li>
+          <li><strong>Data Analysis:</strong> Examine error patterns and convergence rates numerically</li>
+          <li><strong>Transferable Skills:</strong> Learn programming techniques used in upper-level math courses</li>
+        </ul>
+      </div>
+      
+      <div class="calc2-info-box">
+        <h3 style="margin-top: 0;">What You'll Find in the Notebook</h3>
+        <ul>
+          <li><strong>Interactive Visualizations:</strong> See how different Riemann sum methods approximate areas</li>
+          <li><strong>Error Analysis:</strong> Compare approximation errors as n increases</li>
+          <li><strong>Convergence Study:</strong> Observe how quickly different methods converge to exact values</li>
+          <li><strong>Customizable Code:</strong> Modify parameters to explore your own functions</li>
+          <li><strong>Guided Exercises:</strong> Practice problems with solutions to strengthen understanding</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="calc2-subtitle">Mathematical Foundation</h2>
+    
+    <p>
+      As a review, the Riemann sum approximates the definite integral by dividing the interval into subintervals and summing the areas of rectangles:
+    </p>
+    
+    <div class="calc2-equation">
+      \[
+        \int_a^b f(x)\,dx \approx \sum_{i=1}^n f(x_i^*)\Delta x
+      \]
+    </div>
+    
+    <p>
+      where \(\Delta x = \frac{b-a}{n}\) and \(x_i^*\) is a sample point in the \(i\)-th subinterval.
+    </p>
+
+    <div class="calc2-example">
+      <h3>Python Implementation Preview</h3>
+      <p>The Python notebook implements Riemann sums using code similar to this:</p>
+      <div class="calc2-code">
+# Define the function
+def f(x):
+    return x**2  # Example: f(x) = x²
+
+# Calculate Left Riemann Sum
+def left_riemann_sum(f, a, b, n):
+    dx = (b - a) / n
+    riemann_sum = 0
+    for i in range(n):
+        x_i = a + i * dx  # Left endpoint
+        riemann_sum += f(x_i) * dx
+    return riemann_sum
+
+# Example usage
+result = left_riemann_sum(f, 0, 1, 10)
+print(f"Left Riemann sum approximation: {result}")
+      </div>
+      <p>In the notebook, you'll find implementations for left, right, midpoint, and trapezoidal approximations, along with visualizations and error analysis.</p>
+    </div>
+
+    <h2 class="calc2-subtitle">Getting Started with the Notebook</h2>
+    
+    <div class="calc2-table">
+      <table>
+        <tr>
+          <th>Step</th>
+          <th>Instructions</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Click the "Open Python Calculator in Google Colab" button above</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Make sure you're signed in with your @alaska.edu account</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Read the introduction and background information in the first few cells</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Run each code cell by clicking the play button (▶️) to the left of the cell or pressing Shift+Enter</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>To save a personal copy: Click "File" → "Save a copy in Drive"</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Modify parameters in your personal copy to experiment with different functions and values</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2 class="calc2-subtitle">Suggested Exploration Activities</h2>
+    
+    <div class="calc2-example">
+      <h3>Activity 1: Comparing Methods</h3>
+      <p>
+        In your copy of the notebook, modify the code to compare all four approximation methods (left, right, midpoint, trapezoidal) for the function \(f(x) = e^x\) on the interval \([0,2]\) with \(n = 10\) rectangles.
+      </p>
+      <ul>
+        <li>Which method gives the closest approximation to the exact value?</li>
+        <li>How does the error change as you increase n to 20, 50, and 100?</li>
+        <li>Can you determine the rate at which each method's error decreases?</li>
+      </ul>
+    </div>
+    
+    <div class="calc2-example">
+      <h3>Activity 2: Challenging Functions</h3>
+      <p>
+        Try approximating the integral of \(f(x) = \sin(x^2)\) over \([0,\sqrt{\pi}]\).
+      </p>
+      <ul>
+        <li>This function oscillates more rapidly as x increases, making it challenging for Riemann sums</li>
+        <li>How many rectangles do you need for the midpoint method to achieve an error less than 0.01?</li>
+        <li>Compare this to the number needed for a simpler function like \(f(x) = x^2\)</li>
+      </ul>
+    </div>
+
+    <div class="calc2-key-point">
+      <h3 style="margin-top: 0;">Connection to Course Material</h3>
+      <p>
+        This Python tool reinforces concepts from Section 5.3 on Riemann sums while introducing computational methods that will be valuable throughout your mathematical education. The skills you develop here will help you:
+      </p>
+      <ul>
+        <li>Better understand the Week 1 quiz material on Riemann sums</li>
+        <li>Prepare for more advanced numerical integration techniques later in the course</li>
+        <li>Develop computational thinking that connects theory with practical applications</li>
+        <li>See the power of programming as a tool for mathematical exploration</li>
+      </ul>
+    </div>
+
+    <div class="calc2-info-box">
+      <p><strong>No Programming Experience Required:</strong> The notebook is designed to be accessible to everyone, even if you've never used Python before. All code is explained step-by-step, and you can learn by modifying existing examples rather than writing code from scratch.</p>
+    </div>
+
+  </div>
+</body>
+</html>

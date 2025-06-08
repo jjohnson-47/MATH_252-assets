@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Section 5.2: The Definite Integral</title>
+
+  <!-- MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <style>
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple: #512da8;
+      --calc2-accent-teal: #4dd0e1;
+      --calc2-accent-green: #66bb6a;
+      --calc2-background: #ffffff;
+      --calc2-text: #212121;
+      --calc2-heading: #1a237e;
+      --calc2-focus-outline: #ffeb3b;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      font-size: 1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Different colored borders for different box types */
+    .calc2-definition {
+      border-left-color: var(--calc2-primary-purple);
+    }
+
+    .calc2-theorem {
+      border-left-color: var(--calc2-accent-green);
+    }
+
+    .calc2-example {
+      border-left-color: var(--calc2-accent-teal);
+    }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3 {
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Video container for responsive embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+    
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Format for centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    /* Link styling */
+    a {
+      color: var(--calc2-primary-purple);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Figure styling */
+    .calc2-figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .calc2-figure img {
+      max-width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-figure figcaption {
+      margin-top: 0.5rem;
+      font-style: italic;
+      color: #666;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+      .calc2-title {
+        font-size: 1.75rem;
+      }
+      .calc2-subtitle {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="calc2-container">
+    <h1 class="calc2-title">Section 5.2: The Definite Integral</h1>
+
+    <div class="calc2-reading-box">
+      <p><strong>📚 Required Reading:</strong> <a href="https://opentext.uleth.ca/apex-calculus/sec_def_int.html" target="_blank">APEX Calculus - Section 5.2</a></p>
+      <p>This section introduces the definite integral, a powerful concept that quantifies accumulated change and allows us to calculate areas under curves.</p>
+    </div>
+
+    <!-- Overview Video -->
+    <div class="calc2-video-container">
+      <iframe 
+        src="https://www.youtube.com/embed/I6VioswMStA?si=WLQfnm8IudUjMayi"
+        title="YouTube video player for The Definite Integral" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <h2 class="calc2-subtitle">Introduction to Definite Integrals</h2>
+    
+    <p>
+      In Section 5.1, we explored antiderivatives and the indefinite integral. Now we'll build on those concepts to develop the <em>definite integral</em>, which has a geometric interpretation as the area under a curve.
+    </p>
+    
+    <p>
+      The definite integral gives us a way to calculate accumulated change over an interval. This has powerful applications in physics, engineering, economics, and many other fields. For example, in physics, if we know the velocity of an object over time, we can use a definite integral to find the total displacement.
+    </p>
+
+    <div class="calc2-definition">
+      <h3>Definition: The Definite Integral</h3>
+      <p>
+        Let \(f\) be a continuous function on the interval \([a,b]\). The <em>definite integral</em> of \(f\) from \(a\) to \(b\) is defined as:
+      </p>
+      <div class="calc2-equation">
+        \[
+          \int_a^b f(x)\,dx
+        \]
+      </div>
+      <p>
+        The definite integral represents the net signed area between the curve \(y = f(x)\) and the x-axis from \(x = a\) to \(x = b\). Areas above the x-axis count as positive, while areas below the x-axis count as negative.
+      </p>
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_def_int.html#def_def_int" target="_blank">See full definition in the textbook</a></p>
+    </div>
+
+    <div class="calc2-key-point">
+      <p>Unlike the indefinite integral, the definite integral results in a <em>number</em>, not a function. The definite integral measures accumulated change over a specific interval.</p>
+    </div>
+
+    <h2 class="calc2-subtitle">Properties of Definite Integrals</h2>
+
+    <div class="calc2-theorem">
+      <h3>Theorem: Properties of Definite Integrals</h3>
+      <p>Let \(f\) and \(g\) be continuous functions on \([a,b]\) and let \(c\) be a constant. The following properties hold:</p>
+      
+      <ol>
+        <li>
+          <strong>Zero Width Property:</strong>
+          \[\int_a^a f(x)\,dx = 0\]
+          <div class="calc2-key-point" style="margin: 0.5rem 0 1rem 1rem; padding: 0.75rem;">
+            <p><strong>Geometric Interpretation:</strong> The integral over an interval of zero width is zero because there's no horizontal space to calculate any area. Picture a vertical line segment at \(x = a\) – it has height but no width, so its area is zero.</p>
+          </div>
+        </li>
+        
+        <li>
+          <strong>Reverse Limits:</strong>
+          \[\int_a^b f(x)\,dx = -\int_b^a f(x)\,dx\]
+          <div class="calc2-key-point" style="margin: 0.5rem 0 1rem 1rem; padding: 0.75rem;">
+            <p><strong>Geometric Interpretation:</strong> Reversing the limits of integration changes the sign of the integral. Think of this as traveling through the area in the opposite direction – if moving left-to-right counts areas as positive, then moving right-to-left counts the same areas as negative.</p>
+          </div>
+        </li>
+        
+        <li>
+          <strong>Constant Multiple:</strong>
+          \[\int_a^b c \cdot f(x)\,dx = c \int_a^b f(x)\,dx\]
+          <div class="calc2-key-point" style="margin: 0.5rem 0 1rem 1rem; padding: 0.75rem;">
+            <p><strong>Geometric Interpretation:</strong> Constants can be factored out of the integral. Visually, this is like scaling the height of the function by a factor of \(c\). If we double the height of a function (\(c=2\)), we double the area under the curve.</p>
+          </div>
+        </li>
+        
+        <li>
+          <strong>Sum/Difference:</strong>
+          \[\int_a^b [f(x) \pm g(x)]\,dx = \int_a^b f(x)\,dx \pm \int_a^b g(x)\,dx\]
+          <div class="calc2-key-point" style="margin: 0.5rem 0 1rem 1rem; padding: 0.75rem;">
+            <p><strong>Geometric Interpretation:</strong> The integral of a sum is the sum of the integrals. Geometrically, this means adding or subtracting the corresponding areas. If you stack two functions on top of each other, the total area equals the sum of their individual areas.</p>
+          </div>
+        </li>
+        
+        <li>
+          <strong>Additivity of Intervals:</strong>
+          \[\int_a^b f(x)\,dx + \int_b^c f(x)\,dx = \int_a^c f(x)\,dx\]
+          <div class="calc2-key-point" style="margin: 0.5rem 0 1rem 1rem; padding: 0.75rem;">
+            <p><strong>Geometric Interpretation:</strong> The integral over adjacent intervals can be split or combined. This is like cutting a large area into smaller pieces at point \(b\). The area from \(a\) to \(c\) equals the sum of the area from \(a\) to \(b\) plus the area from \(b\) to \(c\).</p>
+          </div>
+        </li>
+      </ol>
+      
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_def_int.html#thm_defintprop" target="_blank">See full theorem in the textbook</a></p>
+    </div>
+
+    <h2 class="calc2-subtitle">Physical Applications: Displacement from Velocity</h2>
+    
+    <p>
+      One of the most important applications of the definite integral is in physics, where it helps us understand motion. If we know the velocity function \(v(t)\) of an object moving along a straight line, the definite integral of velocity gives us the displacement (change in position) over a time interval.
+    </p>
+
+    <div class="calc2-example">
+      <h3>Example: Finding Displacement from Velocity</h3>
+      <p>
+        A particle moves along a straight line with velocity function \(v(t) = 3t^2 - 5t + 2\) (in meters per second), where \(t\) is measured in seconds. Find the displacement of the particle during the time interval \([1, 4]\).
+      </p>
+      <p><strong>Solution:</strong></p>
+      <p>
+        The displacement is given by the definite integral of velocity:
+      </p>
+      <div class="calc2-equation">
+        \begin{align}
+          \text{Displacement} &= \int_1^4 v(t)\,dt \\
+          &= \int_1^4 (3t^2 - 5t + 2)\,dt \\
+          &= \left[ t^3 - \frac{5t^2}{2} + 2t \right]_1^4 \\
+          &= \left[ 4^3 - \frac{5(4^2)}{2} + 2(4) \right] - \left[ 1^3 - \frac{5(1^2)}{2} + 2(1) \right] \\
+          &= \left[ 64 - 40 + 8 \right] - \left[ 1 - 2.5 + 2 \right] \\
+          &= 32 - 0.5 \\
+          &= 31.5 \text{ meters}
+        \end{align}
+      </div>
+      <p>
+        So the particle moves 31.5 meters during the time interval from \(t = 1\) to \(t = 4\).
+      </p>
+    </div>
+
+    <div class="calc2-example">
+      <h3>Example: Understanding Motion with Changing Direction</h3>
+      <p>
+        A car moves along a straight road with velocity \(v(t) = t^2 - 4t + 3\) (in meters per second) for \(0 \leq t \leq 5\).
+      </p>
+      <ol>
+        <li>When is the car moving forward (positive velocity), and when is it moving backward (negative velocity)?</li>
+        <li>Find the total displacement of the car during the 5-second interval.</li>
+        <li>Find the total distance traveled by the car during the 5-second interval.</li>
+      </ol>
+      <p><strong>Solution:</strong></p>
+      <p>1. Finding when the car changes direction:</p>
+      <p>
+        The car moves forward when \(v(t) > 0\) and backward when \(v(t) < 0\). To find when the velocity is zero:
+        \[v(t) = t^2 - 4t + 3 = (t-1)(t-3) = 0\]
+        So \(v(t) = 0\) when \(t = 1\) or \(t = 3\).
+      </p>
+      <p>
+        Testing values in different intervals, we can determine:
+        <ul>
+          <li>For \(0 \leq t < 1\): \(v(t) > 0\), car moves forward</li>
+          <li>For \(1 < t < 3\): \(v(t) < 0\), car moves backward</li>
+          <li>For \(3 < t \leq 5\): \(v(t) > 0\), car moves forward again</li>
+        </ul>
+      </p>
+      <p>2. Total displacement (net change in position):</p>
+      <div class="calc2-equation">
+        \begin{align}
+          \text{Displacement} &= \int_0^5 v(t)\,dt \\
+          &= \int_0^5 (t^2 - 4t + 3)\,dt \\
+          &= \left[ \frac{t^3}{3} - 2t^2 + 3t \right]_0^5 \\
+          &= \left[ \frac{5^3}{3} - 2(5^2) + 3(5) \right] - \left[ 0 \right] \\
+          &= \frac{125}{3} - 50 + 15 \\
+          &= \frac{125}{3} - 35 \\
+          &= \frac{125 - 105}{3} \\
+          &= \frac{20}{3} \approx 6.67 \text{ meters}
+        \end{align}
+      </div>
+      <p>3. Total distance traveled:</p>
+      <p>
+        To find the total distance (accounting for both forward and backward motion), we need to integrate the absolute value of velocity:
+        \[\text{Distance} = \int_0^5 |v(t)|\,dt\]
+        
+        We'll split this into three intervals based on the sign of \(v(t)\):
+        \[\begin{align}
+          \text{Distance} &= \int_0^1 v(t)\,dt + \int_1^3 -v(t)\,dt + \int_3^5 v(t)\,dt \\
+          &= \int_0^1 (t^2 - 4t + 3)\,dt + \int_1^3 -(t^2 - 4t + 3)\,dt + \int_3^5 (t^2 - 4t + 3)\,dt
+        \end{align}\]
+        
+        Evaluating these integrals and adding them gives us the total distance of approximately 10.67 meters.
+      </p>
+      <p><a href="https://opentext.uleth.ca/apex-calculus/sec_def_int.html#sec_def_int-33" target="_blank">See similar examples in the textbook</a></p>
+    </div>
+
+    <h2 class="calc2-subtitle">Geometric Interpretation of the Definite Integral</h2>
+    
+    <p>
+      The definite integral \(\int_a^b f(x)\,dx\) represents the net signed area between the curve \(y = f(x)\) and the x-axis over the interval \([a,b]\).
+    </p>
+    
+    <p>
+      <strong>Signed area means:</strong>
+    </p>
+    <ul>
+      <li>Regions where \(f(x) > 0\) (above the x-axis) contribute positive area</li>
+      <li>Regions where \(f(x) < 0\) (below the x-axis) contribute negative area</li>
+      <li>The definite integral gives the algebraic sum of these areas</li>
+    </ul>
+
+    <div class="calc2-figure">
+      <img src="https://math.libretexts.org/@api/deki/files/6305/signed_area.png" alt="Signed areas representing a definite integral" width="500">
+      <figcaption>Areas above the x-axis (in blue) count positively, while areas below the x-axis (in red) count negatively in the definite integral.</figcaption>
+    </div>
+
+    <h2 class="calc2-subtitle">Key Takeaways</h2>
+    
+    <div class="calc2-key-point">
+      <ul>
+        <li>The definite integral \(\int_a^b f(x)\,dx\) gives us the net signed area between the function and the x-axis over the interval \([a,b]\)</li>
+        <li>Definite integrals represent accumulated change over an interval</li>
+        <li>In physics, the definite integral of velocity gives displacement</li>
+        <li>Properties of definite integrals let us manipulate and evaluate integrals more easily</li>
+        <li>The total distance traveled is found by integrating the absolute value of velocity</li>
+      </ul>
+    </div>
+
+    <div class="calc2-reading-box">
+      <p><strong>📝 Looking Ahead:</strong> In the next section, we'll explore Riemann sums, which provide a method for approximating definite integrals using summations. This approach helps us understand the definite integral as a limit process and leads us toward the Fundamental Theorem of Calculus.</p>
+    </div>
+    
+    <h2 class="calc2-subtitle">Interactive Exploration: Connecting Position, Velocity, and Acceleration</h2>
+    
+    <p>One of the most powerful applications of integration is finding position from velocity, and velocity from acceleration. The interactive Desmos calculator below demonstrates these relationships:</p>
+    
+    <div class="calc2-figure">
+      <iframe src="https://www.desmos.com/calculator/7mx4oizusx?embed" width="500" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+      <figcaption>Preview of integration relationships. <a href="https://www.desmos.com/calculator/7mx4oizusx" target="_blank">Click here to open the full interactive tool</a> where you can adjust the acceleration function and see how it affects velocity and position.</figcaption>
+    </div>
+    
+    <div class="calc2-key-point">
+      <p><strong>Key Relationships Demonstrated:</strong></p>
+      <ul>
+        <li>Velocity is the integral of acceleration: \(v(t) = \int a(t)\,dt\)</li>
+        <li>Position is the integral of velocity: \(s(t) = \int v(t)\,dt\)</li>
+        <li>Therefore, position is the second integral of acceleration: \(s(t) = \int\int a(t)\,dt\,dt\)</li>
+      </ul>
+      <p>Try changing the acceleration function in the full tool and observe how changes in acceleration propagate to changes in velocity and position!</p>
+    </div>
+  </div>
+</body>
+</html>

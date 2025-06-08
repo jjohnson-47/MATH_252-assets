@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Email Policy and Account Management - MATH A252 Calculus 2</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+            --warning-color: #ff9800;
+            --alert-color: #f44336;
+            --info-color: #2196f3;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--primary-purple), var(--primary-dark-blue));
+            color: var(--neutral-white);
+            border-radius: 8px;
+        }
+
+        .calc2-section {
+            background: rgba(26, 35, 126, 0.9);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid var(--neutral-white);
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-subtitle {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-teal);
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calc2-list li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .calc2-list li::before {
+            content: "•";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .calc2-emphasis {
+            font-weight: bold;
+            color: var(--accent-teal);
+        }
+
+        .calc2-info-box {
+            background: rgba(33, 150, 243, 0.1);
+            border-left: 4px solid var(--info-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-warning-box {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-task-box {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--alert-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+
+            .calc2-title {
+                font-size: 1.75rem;
+            }
+
+            .calc2-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">Email Policy and Account Management</h1>
+
+        <div class="calc2-info-box">
+            <strong>Important Account Management:</strong> Students are strongly suggested to keep their @alaska.edu accounts separate from personal and school district accounts. These systems have different expectations and purposes. Your university accounts are connected to several services (Google, Microsoft) and should be used exclusively for university-related communication.
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Official Email Account</h2>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">UA Google Account:</span> All course emails will be sent to your UAA/KPC Google account.</li>
+                <li><span class="calc2-emphasis">Account Setup:</span> Adjust your profile, name, and settings in UA Online.</li>
+                <li><span class="calc2-emphasis">Check Often:</span> Log in regularly or set up forwarding if you prefer another email service.</li>
+                <li><span class="calc2-emphasis">Privacy Notice:</span> Grade-related information will not be sent to non-UA addresses.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Email Etiquette</h2>
+            <div class="calc2-warning-box">
+                <strong>Professional Communication:</strong> All email communication should maintain a professional tone and format.
+            </div>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Preferred Method:</span> Send emails from Blackboard if possible.</li>
+                <li><span class="calc2-emphasis">Subject Line:</span> Include the course name for clarity (e.g., "MATH A252 - Question about Assignment 1").</li>
+                <li><span class="calc2-emphasis">Professional Tone:</span> Use correct spelling, grammar, and punctuation; sign with your full name.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Required Setup Task</h2>
+            <div class="calc2-task-box">
+                <strong>Send an Introduction Email</strong>
+                <ul class="calc2-list">
+                    <li><span class="calc2-emphasis">Subject:</span> "Configuration"</li>
+                    <li><span class="calc2-emphasis">Body:</span> Briefly describe your computer setup (hardware & software), confirm it meets course requirements, and sign with your full name.</li>
+                </ul>
+            </div>
+
+            <div class="calc2-info-box">
+                <strong>Optional Email Forwarding:</strong> If you choose not to use your UA Google account directly:
+                <ul class="calc2-list">
+                    <li>Follow the instructions at UA Google Apps to set up email forwarding</li>
+                    <li>Test the forwarding setup to ensure it works properly</li>
+                    <li>Note that you're still responsible for all course communications</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

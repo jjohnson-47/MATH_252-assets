@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx} % Required for including images, though we are describing it here.
+
+\begin{document}
+
+\section*{Problem Description}
+We are asked to fill in the details for a Simpson's Rule approximation for a function $g$.
+
+\subsection*{Image Description (for accessibility)}
+The problem refers to an image with the following important properties:
+\begin{itemize}
+    \item The function $g$ is defined on the interval $[-3, 3]$.
+    \item The image displays a plot with a horizontal x-axis and a vertical y-axis.
+    \item The graph of the function $g$ is shown in red.
+    \item On the x-axis, labels are present only at the value 1. On the y-axis, labels are present only at the value 1.
+    \item Gridlines are visible at every 0.5 unit step, both horizontally and vertically.
+    \item The x and y axes use the same scale.
+    \item The plot area extends from an x-value of -3.5 to 3, and from a y-value of -2.5 to 2.5.
+\end{itemize}
+The specific known values of the function $g(x)$ are:
+\begin{itemize}
+    \item $g(-3) = 2$
+    \item $g(-2) = 1$
+    \item $g(-1) = -0.5$
+    \item $g(0) = -2.5$
+    \item $g(1) = -2.5$
+    \item $g(2) = -0.5$
+    \item $g(3) = 2.5$
+\end{itemize}
+
+\section*{Simpson's Rule Approximation}
+We are given the following parameters for Simpson's Rule:
+\begin{itemize}
+    \item $n = 6$ (number of subintervals)
+    \item $a = -3$ (lower limit of integration)
+    \item $b = 3$ (upper limit of integration)
+\end{itemize}
+
+The width of each subinterval is:
+$$ \Delta x = \frac{b-a}{n} = \frac{3-(-3)}{6} = \frac{6}{6} = 1 $$
+
+The $x$-coordinates for the subintervals, $x_i = a + i \Delta x$, are:
+\begin{itemize}
+    \item $x_0 = -3 + 0(1) = -3$
+    \item $x_1 = -3 + 1(1) = -2$
+    \item $x_2 = -3 + 2(1) = -1$
+    \item $x_3 = -3 + 3(1) = 0$
+    \item $x_4 = -3 + 4(1) = 1$
+    \item $x_5 = -3 + 5(1) = 2$
+    \item $x_6 = -3 + 6(1) = 3$
+\end{itemize}
+
+The corresponding function values $g(x_i)$ (as provided and consistent with the image description) are:
+\begin{itemize}
+    \item $g(x_0) = g(-3) = 2$
+    \item $g(x_1) = g(-2) = 1$
+    \item $g(x_2) = g(-1) = -0.5$
+    \item $g(x_3) = g(0) = -2.5$
+    \item $g(x_4) = g(1) = -2.5$
+    \item $g(x_5) = g(2) = -0.5$
+    \item $g(x_6) = g(3) = 2.5$
+\end{itemize}
+
+Simpson's Rule formula for $n=6$ is:
+$$ S_6 = \frac{\Delta x}{3} [g(x_0) + 4g(x_1) + 2g(x_2) + 4g(x_3) + 2g(x_4) + 4g(x_5) + g(x_6)] $$
+
+Plugging in the values:
+\begin{align*} S_6 &= \frac{1}{3} [g(-3) + 4g(-2) + 2g(-1) + 4g(0) + 2g(1) + 4g(2) + g(3)] \\ &= \frac{1}{3} [2 + 4(1) + 2(-0.5) + 4(-2.5) + 2(-2.5) + 4(-0.5) + 2.5] \\ &= \frac{1}{3} [2 + 4 - 1 - 10 - 5 - 2 + 2.5] \\ &= \frac{1}{3} [6 - 1 - 10 - 5 - 2 + 2.5] \\ &= \frac{1}{3} [5 - 10 - 5 - 2 + 2.5] \\ &= \frac{1}{3} [-5 - 5 - 2 + 2.5] \\ &= \frac{1}{3} [-10 - 2 + 2.5] \\ &= \frac{1}{3} [-12 + 2.5] \\ &= \frac{1}{3} [-9.5] \\ &= -\frac{9.5}{3} \\ &= -\frac{19/2}{3} \\ &= -\frac{19}{6} \end{align*}
+Thus, the Simpson's Rule approximation is $S_6 = -\frac{19}{6}$.
+
+\end{document}

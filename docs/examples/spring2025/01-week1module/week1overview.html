@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Week 1: Introduction to Integration</title>
+    <style>
+        :root {
+            --neon-pink: #ff2b9d;
+            --neon-blue: #00f3ff;
+            --neon-purple: #9d00ff;
+            --dark-bg: #120458;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        body {
+            background-color: var(--dark-bg);
+            background: linear-gradient(180deg, #120458 0%, #1e0f7c 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .retro-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg,
+                rgba(18, 4, 88, 0.9),
+                rgba(30, 15, 124, 0.9)
+            );
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: 50% 0;
+            animation: grid-move 20s linear infinite;
+        }
+        @keyframes grid-move {
+            0% {
+                transform: perspective(500px) rotateX(60deg) translateY(0);
+            }
+            100% {
+                transform: perspective(500px) rotateX(60deg) translateY(40px);
+            }
+        }
+
+        .title {
+            font-size: 2.8rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .content-box {
+            background: rgba(18, 4, 88, 0.8);
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        }
+
+        .objectives-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .objectives-list li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .objectives-list li::before {
+            content: ">";
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        .due-dates {
+            background: rgba(157, 0, 255, 0.1);
+            border-left: 4px solid var(--neon-purple);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .integral-symbol {
+            font-size: 56px;
+            color: #ff6b00;
+            text-align: center;
+            animation: glow 2s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px #ff6b00;
+            }
+            50% {
+                text-shadow:
+                    0 0 20px #ff6b00,
+                    0 0 30px #ff9d00;
+            }
+        }
+
+        h2 {
+            color: var(--neon-blue);
+            text-shadow: 0 0 5px var(--neon-blue);
+            margin-top: 0;
+            font-size: 2rem;
+        }
+        h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="retro-grid">
+        <div class="grid-lines"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">WEEK 1: Introduction to Integration</h1>
+        
+        <div class="integral-symbol">∫</div>
+
+        <div class="content-box">
+            <h2>Learning Objectives</h2>
+            <ul class="objectives-list">
+                <li>Define and calculate antiderivatives using basic integration rules</li>
+                <li>Explain the relationship between derivatives and indefinite integrals</li>
+                <li>Evaluate definite integrals using fundamental properties</li>
+                <li>Understand the geometric interpretation of the definite integral</li>
+            </ul>
+        </div>
+
+        <div class="content-box">
+            <h2>This Week's Topics</h2>
+            
+            <div class="section">
+                <h3>Section 5.1 - Antiderivatives and Indefinite Integration</h3>
+                <p>Introduction to antiderivatives, basic integration rules, and the relationship between derivatives and indefinite integrals.</p>
+            </div>
+            
+            <div class="section">
+                <h3>Section 5.2 - The Definite Integral</h3>
+                <p>Understanding definite integrals, their properties, and their geometric interpretation as signed area.</p>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <h2>Additional Resources</h2>
+            <ul class="objectives-list">
+                <li><a href="sec-5-1-overview.html" style="color: var(--neon-blue);">Section 5.1 Reading Guide</a></li>
+                <li><a href="sec-5-2-overview.html" style="color: var(--neon-blue);">Section 5.2 Reading Guide</a></li>
+                <li><a href="sec-5-3-overview.html" style="color: var(--neon-blue);">Section 5.3 Reading Guide</a></li>
+                <li><a href="sec-5-4-overview.html" style="color: var(--neon-blue);">Section 5.4 Reading Guide</a></li>
+                <li><a href="sec-5-5-overview.html" style="color: var(--neon-blue);">Section 5.5 Reading Guide</a></li>
+                <li><a href="sec-5-3-prob11.html" style="color: var(--neon-blue);">Example: Midpoint Rule Riemann Sum</a></li>
+                <li><a href="sec-5-1-textbook-overview.md" style="color: var(--neon-blue);">Section 5.1 Reference Guide (Markdown)</a></li>
+                <li><a href="sec-5-2-textbook-overview.md" style="color: var(--neon-blue);">Section 5.2 Reference Guide (Markdown)</a></li>
+                <li><a href="sec-5-1-homework-resource.html" style="color: var(--neon-blue);">Example Problem: Constant Acceleration</a></li>
+                <li><a href="sec-5-1-extra-video-resources.html" style="color: var(--neon-blue);">Integration and FTC Video</a></li>
+                <li><a href="week1-discussion-description.txt" style="color: var(--neon-blue);">Discussion Instructions</a></li>
+                <li><a href="../course-docs/textbook.html" target="_blank" style="color: var(--neon-blue);">Interactive Textbook: Chapter 5</a></li>
+            </ul>
+        </div>
+
+        <div class="content-box">
+            <h2>Important Due Dates</h2>
+            <div class="due-dates">
+                <p>📘 Weekly Quiz 1 (Sections 5.1-5.5) - Due Wednesday, January 15, 2025 by 11:59 PM</p>
+                <p>📝 Edfinity Homework 1 (Sections 5.1-5.5) - Due Friday, January 17, 2025 by 11:59 PM</p>
+                <p>✍️ Written Homework 1 Assigned - Due Friday, January 24, 2025</p>
+                <p>💬 Participate in Discussion Board throughout the week</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

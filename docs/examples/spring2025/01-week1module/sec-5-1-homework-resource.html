@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Calculating Constant Acceleration and Distance Graph</title>
+
+  <!-- Include MathJax for LaTeX rendering -->
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js">
+  </script>
+
+  <!-- Retrowave/Synthwave Theme Styles -->
+  <style>
+    :root {
+      --primary-dark-blue: #1a237e;
+      --primary-purple: #512da8;
+      --accent-teal: #4dd0e1;
+      --accent-hot-pink: #ff006e;
+      --neutral-white: #ffffff;
+      --focus-outline: #ffeb3b;
+      --info-color: #2196f3;
+      --unit-color: #ff9800;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      color: var(--neutral-white);
+    }
+
+    /* Main container with gradient background */
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border-radius: 8px;
+      background: linear-gradient(
+        to bottom,
+        var(--primary-purple) 0%,
+        var(--accent-hot-pink) 50%,
+        var(--primary-dark-blue) 100%
+      );
+      line-height: 1.6;
+    }
+
+    .calc2-title {
+      font-size: 2rem;
+      margin: 0 0 1.5rem 0;
+      border-bottom: 2px solid var(--accent-teal);
+      padding-bottom: 0.5rem;
+      color: var(--neutral-white);
+    }
+
+    /* Problem, Solution, Step styling */
+    .calc2-problem,
+    .calc2-solution,
+    .calc2-step {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+      border-left: 4px solid var(--unit-color);
+    }
+    .calc2-problem h2,
+    .calc2-solution h2,
+    .calc2-step h3 {
+      margin-top: 0;
+      color: var(--unit-color);
+    }
+
+    /* Adjust MathJax spacing for display math only */
+    mjx-container[jax="CHTML"][display="true"] {
+      display: block;
+      text-align: center;
+      margin: 1em 0;
+    }
+
+    /* Embed container for graphs */
+    .embed-container {
+      position: relative;
+      padding-bottom: 100%; /* Square aspect ratio */
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 2px solid var(--accent-teal);
+      border-radius: 8px;
+    }
+
+    .embed-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* List styling */
+    ul, ol {
+      margin-left: 1.5rem;
+    }
+    ul li, ol li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .calc2-container {
+        padding: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Container -->
+  <div class="calc2-container">
+
+    <!-- Title -->
+    <h1 class="calc2-title">Calculating Constant Acceleration and Distance Graph</h1>
+
+    <!-- Problem Statement -->
+    <div class="calc2-problem">
+      <h2>Problem</h2>
+      <p>
+        A car is accelerating from <strong>30 mi/h</strong> to <strong>50 mi/h</strong> in <strong>5 seconds</strong>. To solve this problem, you will need to:
+      </p>
+      <ol>
+        <li>Calculate the constant acceleration required for the car to increase its speed from \(30\) mi/h to \(50\) mi/h in \(5\) seconds.</li>
+        <li>Sketch a graph showing the distance traveled by the car, \( s(t) \), during this \(5\)-second period.</li>
+      </ol>
+    </div>
+
+    <!-- Solution -->
+    <div class="calc2-solution">
+      <h2>Solution</h2>
+
+      <!-- Step 1 -->
+      <div class="calc2-step">
+        <h3>Step 1: Calculate the Constant Acceleration</h3>
+        <p>
+          First, we need to calculate the constant acceleration \( a \) using the kinematic equation for velocity with constant acceleration:
+        </p>
+        \[ v_f = v_i + a t \]
+        <p>
+          Where:
+        </p>
+        <ul>
+          <li>\( v_i \) is the initial velocity.</li>
+          <li>\( v_f \) is the final velocity.</li>
+          <li>\( t \) is the time elapsed.</li>
+          <li>\( a \) is the acceleration.</li>
+        </ul>
+        <p>
+          <strong>Note:</strong> We need to convert velocities from miles per hour to feet per second for consistency in units.
+        </p>
+
+        <!-- Conversion of Units -->
+        <p>
+          <strong>Converting velocities:</strong>
+        </p>
+        \[
+          v_i = 30 \text{ mi/h} \times \frac{5280 \text{ ft}}{1 \text{ mi}} \times \frac{1 \text{ h}}{3600 \text{ s}} = 44 \text{ ft/s}
+        \]
+        \[
+          v_f = 50 \text{ mi/h} \times \frac{5280 \text{ ft}}{1 \text{ mi}} \times \frac{1 \text{ h}}{3600 \text{ s}} \approx 73.3 \text{ ft/s}
+        \]
+        <p>
+          Now, we can solve for \( a \):
+        </p>
+        \[
+          a = \frac{v_f - v_i}{t}
+        \]
+        \[
+          a = \frac{73.3 \text{ ft/s} - 44 \text{ ft/s}}{5 \text{ s}} = \frac{29.3 \text{ ft/s}}{5 \text{ s}} \approx 5.86 \text{ ft/s}^2
+        \]
+        <p>
+          <strong>Answer:</strong> The constant acceleration required is approximately <strong>\( 5.86 \text{ ft/s}^2 \)</strong>.
+        </p>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="calc2-step">
+        <h3>Step 2: Sketch the Distance Graph</h3>
+        <p>
+          Next, we will find the equation for the distance traveled \( s(t) \) over time \( t \) using the kinematic equation for position:
+        </p>
+        \[ s(t) = v_i t + \tfrac{1}{2} a t^2 \]
+        <p>
+          Substitute the known values:
+        </p>
+        \[ s(t) = 44 t + \tfrac{1}{2} (5.86) t^2 \]
+        \[ s(t) = 44 t + 2.93 t^2 \]
+        <p>
+          This quadratic equation represents the distance traveled over time during the acceleration period.
+        </p>
+
+        <!-- Embedding the Graph -->
+        <p>
+          <strong>Graphing the Distance Function:</strong>
+        </p>
+        <div class="embed-container">
+          <iframe src="https://www.desmos.com/calculator/e8qlx30ey0?embed" frameborder="0"></iframe>
+        </div>
+        <p>
+          You can also view the full Desmos graph by visiting the following link:
+        </p>
+        <p>
+          <a href="https://www.desmos.com/calculator/e8qlx30ey0" target="_blank" style="color: var(--accent-teal);">Desmos Graph: Distance Function \( s(t) = 44 t + 2.93 t^2 \)</a>
+        </p>
+        <p>
+          The graph shows the distance function \( s(t) = 44 t + 2.93 t^2 \), which is a parabola opening upwards. It represents how the distance increases over the \(5\)-second interval.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Further Explanation -->
+    <div class="calc2-info-box">
+      <p><strong>Understanding the Concepts:</strong></p>
+      <ul>
+        <li><strong>Acceleration</strong> is the rate at which velocity changes with time. A constant acceleration means the velocity changes uniformly over time.</li>
+        <li>The <strong>kinematic equations</strong> are essential for solving problems involving constant acceleration in one dimension.</li>
+        <li>Converting units is crucial to ensure consistency, especially when using standard equations that require specific units.</li>
+        <li>The <strong>distance function</strong> \( s(t) \) is quadratic because acceleration contributes a \( t^2 \) term, indicating that distance increases quadratically over time when acceleration is constant.</li>
+      </ul>
+    </div>
+
+    <!-- Conclusion -->
+    <p>
+      By calculating the constant acceleration and graphing the distance function, we've analyzed the car's motion during its acceleration from \(30\) mi/h to \(50\) mi/h over \(5\) seconds. This exercise demonstrates the application of kinematic equations in solving real-world problems.
+    </p>
+
+  </div><!-- /calc2-container -->
+
+</body>
+</html>

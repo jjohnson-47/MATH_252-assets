@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Technology Troubleshooting Guide - MATH A252 Calculus 2</title>
+    <style>
+        :root {
+            --primary-dark-blue: #1a237e;
+            --primary-purple: #512da8;
+            --accent-teal: #4dd0e1;
+            --neutral-white: #ffffff;
+            --focus-outline: #ffeb3b;
+            --success-color: #66bb6a;
+            --warning-color: #ff9800;
+            --alert-color: #f44336;
+        }
+
+        .calc2-container {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: linear-gradient(to bottom, var(--primary-purple), var(--primary-dark-blue));
+            color: var(--neutral-white);
+            border-radius: 8px;
+        }
+
+        .calc2-section {
+            background: rgba(26, 35, 126, 0.9);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            border: 2px solid var(--neutral-white);
+        }
+
+        .calc2-title {
+            font-size: 2rem;
+            margin: 0 0 1.5rem 0;
+            color: var(--neutral-white);
+            border-bottom: 2px solid var(--accent-teal);
+            padding-bottom: 0.5rem;
+        }
+
+        .calc2-subtitle {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--accent-teal);
+        }
+
+        .calc2-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .calc2-list li {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .calc2-list li::before {
+            content: "•";
+            color: var(--accent-teal);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .calc2-emphasis {
+            font-weight: bold;
+            color: var(--accent-teal);
+        }
+
+        .calc2-tip-box {
+            background: rgba(102, 187, 106, 0.1);
+            border-left: 4px solid var(--success-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-warning-box {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-alert-box {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 4px solid var(--alert-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .calc2-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .calc2-step-number {
+            background: var(--accent-teal);
+            color: var(--primary-dark-blue);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .calc2-container {
+                padding: 1rem;
+            }
+
+            .calc2-title {
+                font-size: 1.75rem;
+            }
+
+            .calc2-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calc2-container">
+        <h1 class="calc2-title">Technology Troubleshooting Guide</h1>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Preventing Technical Issues</h2>
+            <div class="calc2-tip-box">
+                <strong>Pro Tip:</strong> Taking preventive measures can help you avoid most common technical problems.
+            </div>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Use Both Wired & Wireless:</span> A wired Ethernet connection provides more stability, especially during online tests. Keep it as a backup option.</li>
+                <li><span class="calc2-emphasis">Keep Software Updated:</span> Regularly check and install updates for your operating system, browsers, and applications.</li>
+                <li><span class="calc2-emphasis">Scan for Viruses:</span> Maintain active antivirus protection and conduct regular system scans to prevent malicious software interference.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Quick Solutions</h2>
+            <div class="calc2-warning-box">
+                <strong>When Problems Occur:</strong> Try these simple fixes before seeking additional help.
+            </div>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Close & Reopen:</span> If a program or webpage isn't working properly, close it completely and try again.</li>
+                <li><span class="calc2-emphasis">Switch Browsers:</span> If Chrome isn't working, try Firefox (or vice versa). Keep multiple browsers installed.</li>
+                <li><span class="calc2-emphasis">Restart Device:</span> A simple reboot can resolve many unexpected technical glitches.</li>
+                <li><span class="calc2-emphasis">Try Another Computer:</span> If possible, test whether the issue persists on a different device.</li>
+            </ul>
+        </div>
+
+        <div class="calc2-section">
+            <h2 class="calc2-subtitle">Getting Help</h2>
+            <div class="calc2-alert-box">
+                <strong>Need Additional Support?</strong> Don't struggle alone - reach out for help.
+            </div>
+            <ul class="calc2-list">
+                <li><span class="calc2-emphasis">Course Resources:</span> Check the "Student Help" section in Blackboard for guides and FAQs.</li>
+                <li><span class="calc2-emphasis">KPC IT HelpDesk:</span> Contact for technical assistance with any campus technology issues.</li>
+                <li><span class="calc2-emphasis">Document the Problem:</span> When reporting issues, note:
+                    <ul class="calc2-list">
+                        <li>What you were trying to do</li>
+                        <li>What error messages appeared</li>
+                        <li>What steps you've already tried</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

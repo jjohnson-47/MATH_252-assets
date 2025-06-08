@@ -1,0 +1,10 @@
+{
+  "title": "Week 4 Overview – Advanced Integration Techniques",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": {
+    "type": "date",
+    "date": "2025-06-02T07:00:00"
+  },
+  "description": "Welcome to Week 4's advanced integration techniques! Explore professional applications in control systems, machine learning, and signal processing while mastering partial fractions, hyperbolic functions, L'Hospital's Rule, and improper integrals."
+}

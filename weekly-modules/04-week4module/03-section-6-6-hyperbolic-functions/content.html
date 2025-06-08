@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.6 – Hyperbolic Functions | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* Theme variables */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* Base layout & typography */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Neural network application boxes */
+    .calc2-application {
+      background: linear-gradient(135deg, rgba(77, 208, 225, 0.1), rgba(81, 45, 168, 0.05));
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .calc2-application h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .numerical-example {
+      background-color: rgba(81, 45, 168, 0.1);
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      border-left: 3px solid var(--calc2-primary-purple);
+    }
+
+    .code-snippet {
+      background-color: #2d3748;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: auto;
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Properties table */
+    .properties-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .properties-table th,
+    .properties-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .properties-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .properties-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+      .code-snippet    { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.6 – Hyperbolic Functions</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_hyperbolic.html" target="_blank" rel="noopener">APEX Calculus §6.6 – Hyperbolic Functions</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_hyperbolic.html#sec_hyperbolic-1-2" target="_blank" rel="noopener">Example 6.6.2 – Basic hyperbolic derivatives</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_hyperbolic.html#sec_hyperbolic-2-2" target="_blank" rel="noopener">Example 6.6.4 – Integration techniques</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_hyperbolic.html#sec_hyperbolic-3-2" target="_blank" rel="noopener">Example 6.6.6 – Inverse hyperbolic functions</a></li>
+      </ul>
+    </section>
+
+    <!-- Professional application -->
+    <section class="calc2-application">
+      <h3>🧠 Neural Network Activation Functions in Deep Learning</h3>
+      <p><strong>Real-World Context:</strong> The hyperbolic tangent (tanh) function is a cornerstone activation function in neural networks, used in millions of AI models processing everything from image recognition to natural language processing.</p>
+      
+      <p><strong>Why tanh Matters:</strong> Unlike the step function or linear activations, tanh provides a smooth, differentiable function that maps any real input to the range (-1, 1), making it ideal for normalized neural network signals.</p>
+      
+      <div class="numerical-example">
+        <p><strong>Numerical Example - Image Classification Network:</strong></p>
+        <p>Consider a neural network processing a 28×28 pixel handwritten digit (MNIST dataset). After convolution and pooling, a pixel intensity value of $x = 2.5$ reaches a tanh activation:</p>
+        <div class="calc2-equation">$$\tanh(2.5) = \frac{e^{2.5} - e^{-2.5}}{e^{2.5} + e^{-2.5}} = \frac{12.18 - 0.082}{12.18 + 0.082} \approx 0.987$$</div>
+        <p>This strong positive signal (close to +1) indicates the presence of an edge or feature that the network associates with a specific digit.</p>
+      </div>
+      
+      <div class="code-snippet">
+# Modern PyTorch implementation
+import torch
+import torch.nn as nn
+
+class DigitClassifier(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.hidden = nn.Linear(784, 128)
+        self.output = nn.Linear(128, 10)
+        
+    def forward(self, x):
+        # tanh activation in hidden layer
+        x = torch.tanh(self.hidden(x))  # ← Hyperbolic function here!
+        return self.output(x)
+      </div>
+      
+      <p><strong>Professional Tools:</strong> PyTorch torch.tanh(), TensorFlow tf.nn.tanh, JAX jax.numpy.tanh</p>
+      <p><strong>Explore Further:</strong> 
+        <a href="https://pytorch.org/docs/stable/generated/torch.tanh.html" target="_blank" rel="noopener">PyTorch tanh documentation</a> |
+        <a href="https://papers.nips.cc/paper/1989-2095-multilayer-feedforward-networks-are-universal-approximators.pdf" target="_blank" rel="noopener">Universal approximation theorem</a>
+      </p>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Understand hyperbolic functions as <strong>combinations of exponentials</strong> rather than circular functions.</li>
+        <li>Master the <strong>fundamental identities</strong> and their parallels to trigonometric identities.</li>
+        <li>Compute <strong>derivatives and integrals</strong> involving hyperbolic functions efficiently.</li>
+        <li>Apply <strong>inverse hyperbolic functions</strong> to solve integration problems.</li>
+        <li>Recognize <strong>professional applications</strong> in neural networks, engineering, and physics.</li>
+      </ul>
+    </section>
+
+    <!-- Definitions and basic properties -->
+    <section>
+      <h2 class="calc2-subtitle">Hyperbolic Function Definitions</h2>
+
+      <div class="calc2-definition">
+        <h3>The Six Hyperbolic Functions</h3>
+        <p>Hyperbolic functions are defined in terms of exponential functions, creating a family of functions with remarkable properties:</p>
+        
+        <table class="properties-table">
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Definition</th>
+              <th>Pronunciation</th>
+              <th>Range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$\sinh x$</td>
+              <td>$\frac{e^x - e^{-x}}{2}$</td>
+              <td>"shine" or "sinch"</td>
+              <td>$(-\infty, \infty)$</td>
+            </tr>
+            <tr>
+              <td>$\cosh x$</td>
+              <td>$\frac{e^x + e^{-x}}{2}$</td>
+              <td>"cosh"</td>
+              <td>$[1, \infty)$</td>
+            </tr>
+            <tr>
+              <td>$\tanh x$</td>
+              <td>$\frac{\sinh x}{\cosh x} = \frac{e^x - e^{-x}}{e^x + e^{-x}}$</td>
+              <td>"tanch"</td>
+              <td>$(-1, 1)$</td>
+            </tr>
+            <tr>
+              <td>$\text{csch } x$</td>
+              <td>$\frac{1}{\sinh x}$</td>
+              <td>"cosech"</td>
+              <td>$(-\infty, 0) \cup (0, \infty)$</td>
+            </tr>
+            <tr>
+              <td>$\text{sech } x$</td>
+              <td>$\frac{1}{\cosh x}$</td>
+              <td>"sech"</td>
+              <td>$(0, 1]$</td>
+            </tr>
+            <tr>
+              <td>$\coth x$</td>
+              <td>$\frac{\cosh x}{\sinh x}$</td>
+              <td>"coth"</td>
+              <td>$(-\infty, -1) \cup (1, \infty)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc2-insight">
+        <h3>Why "Hyperbolic"?</h3>
+        <p>The name comes from the parametric representation of a <strong>unit hyperbola</strong> $x^2 - y^2 = 1$:</p>
+        <div class="calc2-equation">$$x = \cosh t, \quad y = \sinh t$$</div>
+        <p>This is analogous to how circular functions parametrize the unit circle $x^2 + y^2 = 1$ with $x = \cos t, y = \sin t$.</p>
+        <p><strong>Neural Network Connection:</strong> The hyperbolic tangent's S-shaped curve makes it ideal for modeling the "decision boundary" between neural network activations.</p>
+      </div>
+    </section>
+
+    <!-- Key identities -->
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Hyperbolic Identities</h2>
+
+      <div class="calc2-theorem">
+        <h3>Essential Identities (Parallel to Trigonometric Functions)</h3>
+        
+        <p><strong>Fundamental Identity:</strong></p>
+        <div class="calc2-equation">$$\cosh^2 x - \sinh^2 x = 1$$</div>
+        
+        <p><strong>Addition Formulas:</strong></p>
+        <div class="calc2-equation">
+          $$\sinh(x + y) = \sinh x \cosh y + \cosh x \sinh y$$
+          $$\cosh(x + y) = \cosh x \cosh y + \sinh x \sinh y$$
+        </div>
+        
+        <p><strong>Double Angle Formulas:</strong></p>
+        <div class="calc2-equation">
+          $$\sinh(2x) = 2\sinh x \cosh x$$
+          $$\cosh(2x) = \cosh^2 x + \sinh^2 x = 2\cosh^2 x - 1 = 1 + 2\sinh^2 x$$
+        </div>
+        
+        <div class="numerical-example">
+          <p><strong>Neural Network Training Example:</strong> During backpropagation, the derivative of tanh is needed:</p>
+          <p>If $f(x) = \tanh x$, then $f'(x) = \text{sech}^2 x = 1 - \tanh^2 x$</p>
+          <p>For our earlier example where $\tanh(2.5) \approx 0.987$:</p>
+          <div class="calc2-equation">$$f'(2.5) = 1 - (0.987)^2 \approx 1 - 0.974 = 0.026$$</div>
+          <p>This small derivative indicates the neuron is in the "saturation region" where learning slows down.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Derivatives and integrals -->
+    <section>
+      <h2 class="calc2-subtitle">Calculus of Hyperbolic Functions</h2>
+
+      <div class="calc2-theorem">
+        <h3>Derivatives of Hyperbolic Functions</h3>
+        <table class="properties-table">
+          <thead>
+            <tr>
+              <th>Function</th>
+              <th>Derivative</th>
+              <th>Memory Aid</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$\frac{d}{dx}[\sinh x]$</td>
+              <td>$\cosh x$</td>
+              <td>Like sine → cosine</td>
+            </tr>
+            <tr>
+              <td>$\frac{d}{dx}[\cosh x]$</td>
+              <td>$\sinh x$</td>
+              <td>Like cosine → sine (no minus!)</td>
+            </tr>
+            <tr>
+              <td>$\frac{d}{dx}[\tanh x]$</td>
+              <td>$\text{sech}^2 x$</td>
+              <td>Like $\sec^2 x$ for tangent</td>
+            </tr>
+            <tr>
+              <td>$\frac{d}{dx}[\text{sech } x]$</td>
+              <td>$-\text{sech } x \tanh x$</td>
+              <td>Similar to $-\csc x \cot x$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 1: Neural Network Gradient Calculation</h3>
+        <p><strong>Problem:</strong> Find $\frac{d}{dx}[\tanh(3x^2 + 1)]$ for a neural network with quadratic preprocessing.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Apply the chain rule.</p>
+          <div class="calc2-equation">$$\frac{d}{dx}[\tanh(3x^2 + 1)] = \text{sech}^2(3x^2 + 1) \cdot \frac{d}{dx}[3x^2 + 1]$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Compute the inner derivative.</p>
+          <div class="calc2-equation">$$\frac{d}{dx}[3x^2 + 1] = 6x$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Combine using chain rule.</p>
+          <div class="calc2-equation">$$\frac{d}{dx}[\tanh(3x^2 + 1)] = 6x \cdot \text{sech}^2(3x^2 + 1)$$</div>
+        </div>
+
+        <div class="numerical-example">
+          <p><strong>At $x = 0.5$ (common in normalized input data):</strong></p>
+          <p>$3(0.5)^2 + 1 = 1.75$, so $\tanh(1.75) \approx 0.946$</p>
+          <p>$\text{sech}^2(1.75) = 1 - \tanh^2(1.75) \approx 1 - 0.895 = 0.105$</p>
+          <p>$\frac{d}{dx}[\tanh(3x^2 + 1)]|_{x=0.5} = 6(0.5)(0.105) = 0.315$</p>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Integration Using Hyperbolic Substitution</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \frac{1}{\sqrt{x^2 + 1}} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Recognize the form suggests hyperbolic substitution.</p>
+          <p>Let $x = \sinh u$, so $dx = \cosh u \, du$ and $\sqrt{x^2 + 1} = \sqrt{\sinh^2 u + 1} = \cosh u$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Transform the integral.</p>
+          <div class="calc2-equation">$$\int \frac{1}{\sqrt{x^2 + 1}} \, dx = \int \frac{\cosh u}{\cosh u} \, du = \int 1 \, du = u + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Back-substitute using inverse hyperbolic function.</p>
+          <p>Since $x = \sinh u$, we have $u = \sinh^{-1} x$</p>
+          <div class="calc2-equation">$$\int \frac{1}{\sqrt{x^2 + 1}} \, dx = \sinh^{-1} x + C$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Alternative form using logarithms.</p>
+          <div class="calc2-equation">$$\sinh^{-1} x = \ln(x + \sqrt{x^2 + 1}) + C$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inverse hyperbolic functions -->
+    <section>
+      <h2 class="calc2-subtitle">Inverse Hyperbolic Functions</h2>
+
+      <div class="calc2-definition">
+        <h3>Logarithmic Forms of Inverse Hyperbolic Functions</h3>
+        <table class="properties-table">
+          <thead>
+            <tr>
+              <th>Inverse Function</th>
+              <th>Logarithmic Form</th>
+              <th>Domain</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>$\sinh^{-1} x$</td>
+              <td>$\ln(x + \sqrt{x^2 + 1})$</td>
+              <td>$(-\infty, \infty)$</td>
+            </tr>
+            <tr>
+              <td>$\cosh^{-1} x$</td>
+              <td>$\ln(x + \sqrt{x^2 - 1})$</td>
+              <td>$[1, \infty)$</td>
+            </tr>
+            <tr>
+              <td>$\tanh^{-1} x$</td>
+              <td>$\frac{1}{2}\ln\left(\frac{1+x}{1-x}\right)$</td>
+              <td>$(-1, 1)$</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc2-key-point">
+        <p><strong>Integration Applications:</strong></p>
+        <p>These inverse functions appear as antiderivatives in several important integral forms:</p>
+        <ul>
+          <li>$\int \frac{1}{\sqrt{x^2 + a^2}} \, dx = \sinh^{-1}\left(\frac{x}{a}\right) + C$</li>
+          <li>$\int \frac{1}{\sqrt{x^2 - a^2}} \, dx = \cosh^{-1}\left(\frac{x}{a}\right) + C$ (for $x > a > 0$)</li>
+          <li>$\int \frac{1}{a^2 - x^2} \, dx = \frac{1}{a}\tanh^{-1}\left(\frac{x}{a}\right) + C$ (for $|x| < a$)</li>
+        </ul>
+        <p><strong>Neural Network Connection:</strong> The inverse tanh function is used in some advanced optimization algorithms and in analyzing activation function behavior.</p>
+      </div>
+    </section>
+
+    <!-- Professional applications summary -->
+    <section class="calc2-application">
+      <h3>🔬 Advanced Applications in Data Science</h3>
+      
+      <p><strong>1. Gradient Descent Optimization:</strong> Understanding tanh derivatives helps data scientists tune learning rates and diagnose vanishing gradient problems in deep networks.</p>
+      
+      <p><strong>2. Feature Normalization:</strong> Hyperbolic functions provide smooth alternatives to hard clipping for normalizing data features in preprocessing pipelines.</p>
+      
+      <p><strong>3. Physics-Informed Neural Networks (PINNs):</strong> Hyperbolic functions appear in PDEs modeling heat transfer and wave propagation, which are increasingly solved using neural networks.</p>
+      
+      <div class="code-snippet">
+# Advanced: Custom tanh activation with learnable parameters
+class LearnableTanh(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.alpha = nn.Parameter(torch.ones(1))
+        self.beta = nn.Parameter(torch.zeros(1))
+    
+    def forward(self, x):
+        return torch.tanh(self.alpha * x + self.beta)
+      </div>
+      
+      <p><strong>Industry Impact:</strong> Major tech companies use these concepts in recommendation systems, computer vision, and natural language processing models serving billions of users daily.</p>
+    </section>
+
+  </main>
+</body>
+</html>
