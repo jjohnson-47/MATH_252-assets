@@ -1,0 +1,13 @@
+{
+  "title": "Section 6.7 – L'Hospital's Rule",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": {
+    "type": "performance",
+    "performance": {
+      "prerequisite_item": "Section 6.6 – Hyperbolic Functions",
+      "criterion": "view"
+    }
+  },
+  "description": "Master L'Hospital's Rule for resolving indeterminate limits! Explore professional applications in Big-O notation and algorithm analysis, with numerical examples comparing sorting algorithms, learning rate schedules, and asymptotic complexity bounds."
+}

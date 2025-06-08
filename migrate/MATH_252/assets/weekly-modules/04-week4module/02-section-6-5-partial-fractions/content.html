@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Section 6.5 – Partial Fraction Decomposition | MATH A252 Summer 2025</title>
+
+  <!-- MathJax config must come BEFORE the script -->
+  <script>
+    window.MathJax = {
+      loader: {load: ['[tex]/color']},
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        packages: {'[+]': ['color']}
+      }
+    };
+  </script>
+  
+  <!-- MathJax for LaTeX rendering with color support -->
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <!-- Google Fonts for better readability -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- CALC II Summer 2025 shared theme -->
+  <style>
+    /* Theme variables */
+    :root {
+      --calc2-primary-dark-blue: #1a237e;
+      --calc2-primary-purple:   #512da8;
+      --calc2-accent-teal:      #4dd0e1;
+      --calc2-accent-green:     #66bb6a;
+      --calc2-background:       #ffffff;
+      --calc2-text:             #212121;
+      --calc2-heading:          #1a237e;
+      --calc2-focus-outline:    #ffeb3b;
+    }
+
+    /* Base layout & typography */
+    body {
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      font-size: 1.1rem;
+      color: var(--calc2-text);
+      background-color: var(--calc2-background);
+      margin: 0;
+      padding: 0;
+    }
+
+    .calc2-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .calc2-title {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 2.25rem;
+      margin: 0 0 1.5rem 0;
+      color: var(--calc2-heading);
+      border-bottom: 3px solid var(--calc2-primary-purple);
+      padding-bottom: 0.5rem;
+    }
+
+    .calc2-subtitle {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.75rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--calc2-heading);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--calc2-accent-teal);
+    }
+
+    /* Reading guide box */
+    .calc2-reading-box {
+      background-color: rgba(77, 208, 225, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-teal);
+    }
+
+    /* Definition, theorem and example boxes */
+    .calc2-definition,
+    .calc2-theorem,
+    .calc2-example,
+    .calc2-insight {
+      background: #f5f5f5;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-primary-purple);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Color‑code box types */
+    .calc2-definition  { border-left-color: var(--calc2-primary-purple); }
+    .calc2-theorem     { border-left-color: var(--calc2-accent-green);   }
+    .calc2-example     { border-left-color: var(--calc2-accent-teal);    }
+    .calc2-insight     { border-left-color: #ff9800; background-color: rgba(255, 152, 0, 0.05); }
+
+    .calc2-definition h3,
+    .calc2-theorem h3,
+    .calc2-example h3,
+    .calc2-insight h3 {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 1.3rem;
+      margin-top: 0;
+      color: var(--calc2-primary-dark-blue);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Key point / info box */
+    .calc2-key-point {
+      background-color: rgba(102, 187, 106, 0.1);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 8px;
+      border-left: 4px solid var(--calc2-accent-green);
+    }
+
+    /* Responsive video embed */
+    .calc2-video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin: 2rem 0;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+    }
+
+    .calc2-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Centered math equations */
+    .calc2-equation {
+      text-align: center;
+      margin: 1.5rem 0;
+      font-size: 1.1em;
+    }
+
+    /* Step-by-step solution styling */
+    .solution-step {
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .solution-step:not(:last-child) {
+      border-bottom: 1px dotted #ccc;
+    }
+
+    /* Fraction types table */
+    .fraction-types-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    .fraction-types-table th,
+    .fraction-types-table td {
+      border: 1px solid #ddd;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    .fraction-types-table th {
+      background-color: var(--calc2-primary-purple);
+      color: white;
+      font-weight: 500;
+    }
+
+    .fraction-types-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    a { color: var(--calc2-primary-purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    em { font-style: italic; }
+    strong { font-weight: bold; color: var(--calc2-primary-dark-blue); }
+
+    .highlight { background-color: rgba(255, 235, 59, 0.3); padding: 0.1em 0.2em; border-radius: 2px; }
+
+    @media (max-width: 768px) {
+      .calc2-container { padding: 1rem; }
+      .calc2-title     { font-size: 1.75rem; }
+      .calc2-subtitle  { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <main class="calc2-container">
+    <!-- Header -->
+    <h1 class="calc2-title">Section 6.5 – Partial Fraction Decomposition</h1>
+
+    <!-- Reading guide -->
+    <section class="calc2-reading-box">
+      <strong>Essential Textbook Reading:</strong>
+      <ul>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_partial_fraction.html" target="_blank" rel="noopener">APEX Calculus §6.5 – Partial Fraction Decomposition</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_partial_fraction.html#sec_partial_fraction-1-2" target="_blank" rel="noopener">Example 6.5.2 – Linear factors</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_partial_fraction.html#sec_partial_fraction-2-2" target="_blank" rel="noopener">Example 6.5.5 – Repeated linear factors</a></li>
+        <li><a href="https://opentext.uleth.ca/apex-calculus/sec_partial_fraction.html#sec_partial_fraction-3-2" target="_blank" rel="noopener">Example 6.5.7 – Irreducible quadratic factors</a></li>
+      </ul>
+    </section>
+
+    <!-- Learning objectives -->
+    <section>
+      <h2 class="calc2-subtitle">Learning Objectives</h2>
+      <ul>
+        <li>Understand when and why <strong>partial fraction decomposition</strong> applies to rational function integration.</li>
+        <li>Master the <strong>three cases</strong>: linear factors, repeated linear factors, and irreducible quadratic factors.</li>
+        <li>Execute the <strong>algebraic process</strong> systematically to find unknown coefficients.</li>
+        <li>Apply <strong>polynomial long division</strong> when the degree of numerator ≥ degree of denominator.</li>
+        <li>Integrate the resulting <strong>simplified fractions</strong> using basic antiderivative rules.</li>
+      </ul>
+    </section>
+
+    <!-- Overview video -->
+    <section class="calc2-video-container">
+      <iframe src="https://www.youtube.com/embed/YJLxAVSL6z8?si=3kP8vLQMuZ9FG2x1" title="Partial Fraction Decomposition Overview" allowfullscreen></iframe>
+    </section>
+
+    <!-- Big Picture Introduction -->
+    <section class="calc2-insight">
+      <h3>The Big Picture: Breaking Down Complex Fractions</h3>
+      <p>Partial fraction decomposition is a <strong>reverse engineering</strong> technique. Instead of adding fractions to get a complex rational function, we break down a complex rational function into simpler fractions that we can integrate easily.</p>
+      <p><strong>Analogy:</strong> Just as we can factor polynomials to reveal their building blocks, partial fraction decomposition reveals the "building block fractions" that, when added together, give us our original rational function.</p>
+      <div class="calc2-equation">$$\frac{3x + 1}{x^2 - 1} = \frac{A}{x-1} + \frac{B}{x+1}$$</div>
+      <p>Once we find $A$ and $B$, each simple fraction integrates easily!</p>
+    </section>
+
+    <!-- When to use partial fractions -->
+    <section>
+      <h2 class="calc2-subtitle">When to Use Partial Fraction Decomposition</h2>
+
+      <div class="calc2-definition">
+        <h3>Conditions for Partial Fraction Decomposition</h3>
+        <p><strong>Use partial fractions when:</strong></p>
+        <ol>
+          <li>The integrand is a <strong>rational function</strong>: $\frac{P(x)}{Q(x)}$ where $P(x)$ and $Q(x)$ are polynomials</li>
+          <li>The degree of the numerator is <strong>less than</strong> the degree of the denominator (proper fraction)</li>
+          <li>The denominator can be <strong>factored</strong> into linear and/or irreducible quadratic factors</li>
+        </ol>
+        
+        <p><strong>If degree of numerator ≥ degree of denominator:</strong> Use polynomial long division first to get:</p>
+        <div class="calc2-equation">$$\frac{P(x)}{Q(x)} = \text{Polynomial} + \frac{\text{Remainder}}{Q(x)}$$</div>
+        <p>Then apply partial fractions to the proper fraction remainder.</p>
+      </div>
+    </section>
+
+    <!-- The three cases -->
+    <section>
+      <h2 class="calc2-subtitle">The Three Cases of Partial Fraction Decomposition</h2>
+
+      <table class="fraction-types-table">
+        <thead>
+          <tr>
+            <th>Case</th>
+            <th>Factor Type</th>
+            <th>Decomposition Form</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Case 1</strong></td>
+            <td>Distinct Linear Factors</td>
+            <td>$\frac{A}{x-a} + \frac{B}{x-b}$</td>
+            <td>$\frac{1}{(x-1)(x+2)} = \frac{A}{x-1} + \frac{B}{x+2}$</td>
+          </tr>
+          <tr>
+            <td><strong>Case 2</strong></td>
+            <td>Repeated Linear Factors</td>
+            <td>$\frac{A}{x-a} + \frac{B}{(x-a)^2} + \frac{C}{(x-a)^3}$</td>
+            <td>$\frac{1}{(x-1)^3} = \frac{A}{x-1} + \frac{B}{(x-1)^2} + \frac{C}{(x-1)^3}$</td>
+          </tr>
+          <tr>
+            <td><strong>Case 3</strong></td>
+            <td>Irreducible Quadratic Factors</td>
+            <td>$\frac{Ax + B}{x^2 + px + q}$</td>
+            <td>$\frac{1}{(x-1)(x^2+1)} = \frac{A}{x-1} + \frac{Bx + C}{x^2+1}$</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Worked examples -->
+    <section>
+      <h2 class="calc2-subtitle">Fundamental Examples</h2>
+
+      <div class="calc2-example">
+        <h3>Example 1: Case 1 - Distinct Linear Factors</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \frac{3x + 1}{x^2 - 1} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Factor the denominator and set up partial fractions.</p>
+          <p>$x^2 - 1 = (x-1)(x+1)$</p>
+          <div class="calc2-equation">$$\frac{3x + 1}{(x-1)(x+1)} = \frac{\textcolor{blue}{A}}{x-1} + \frac{\textcolor{red}{B}}{x+1}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Clear denominators by multiplying both sides by $(x-1)(x+1)$.</p>
+          <div class="calc2-equation">$$3x + 1 = \textcolor{blue}{A}(x+1) + \textcolor{red}{B}(x-1)$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Find the unknown coefficients using strategic substitution.</p>
+          <p><strong>Method 1: Strategic values</strong></p>
+          <p>Let $x = 1$: $3(1) + 1 = \textcolor{blue}{A}(1+1) + \textcolor{red}{B}(1-1)$ → $4 = 2\textcolor{blue}{A}$ → $\textcolor{blue}{A = 2}$</p>
+          <p>Let $x = -1$: $3(-1) + 1 = \textcolor{blue}{A}(-1+1) + \textcolor{red}{B}(-1-1)$ → $-2 = -2\textcolor{red}{B}$ → $\textcolor{red}{B = 1}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Write the partial fraction decomposition.</p>
+          <div class="calc2-equation">$$\frac{3x + 1}{x^2 - 1} = \frac{\textcolor{blue}{2}}{x-1} + \frac{\textcolor{red}{1}}{x+1}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 5:</strong> Integrate each term.</p>
+          <div class="calc2-equation">$$\int \frac{3x + 1}{x^2 - 1} \, dx = \int \frac{\textcolor{blue}{2}}{x-1} \, dx + \int \frac{\textcolor{red}{1}}{x+1} \, dx$$</div>
+          <div class="calc2-equation">$$= \textcolor{blue}{2}\ln|x-1| + \textcolor{red}{1}\ln|x+1| + C$$</div>
+          <div class="calc2-equation">$$= 2\ln|x-1| + \ln|x+1| + C$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 2: Case 2 - Repeated Linear Factors</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \frac{x^2 + 1}{(x-1)^3} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Set up partial fractions for repeated linear factors.</p>
+          <div class="calc2-equation">$$\frac{x^2 + 1}{(x-1)^3} = \frac{\textcolor{blue}{A}}{x-1} + \frac{\textcolor{red}{B}}{(x-1)^2} + \frac{\textcolor{green}{C}}{(x-1)^3}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Clear denominators.</p>
+          <div class="calc2-equation">$$x^2 + 1 = \textcolor{blue}{A}(x-1)^2 + \textcolor{red}{B}(x-1) + \textcolor{green}{C}$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Find coefficients using substitution and expanding.</p>
+          <p><strong>Easy coefficient:</strong> Let $x = 1$: $1^2 + 1 = \textcolor{green}{C}$ → $\textcolor{green}{C = 2}$</p>
+          <p><strong>Expand and compare coefficients:</strong></p>
+          <p>$x^2 + 1 = \textcolor{blue}{A}(x^2 - 2x + 1) + \textcolor{red}{B}(x - 1) + \textcolor{green}{2}$</p>
+          <p>$x^2 + 1 = \textcolor{blue}{A}x^2 + (-2\textcolor{blue}{A} + \textcolor{red}{B})x + (\textcolor{blue}{A} - \textcolor{red}{B} + \textcolor{green}{2})$</p>
+          <p>Comparing coefficients: $x^2$: $1 = \textcolor{blue}{A}$ → $\textcolor{blue}{A = 1}$</p>
+          <p>$x^1$: $0 = -2\textcolor{blue}{A} + \textcolor{red}{B} = -2(1) + \textcolor{red}{B}$ → $\textcolor{red}{B = 2}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Write the decomposition and integrate.</p>
+          <div class="calc2-equation">$$\frac{x^2 + 1}{(x-1)^3} = \frac{\textcolor{blue}{1}}{x-1} + \frac{\textcolor{red}{2}}{(x-1)^2} + \frac{\textcolor{green}{2}}{(x-1)^3}$$</div>
+          
+          <div class="calc2-equation">$$\int \frac{x^2 + 1}{(x-1)^3} \, dx = \int \frac{\textcolor{blue}{1}}{x-1} \, dx + \int \frac{\textcolor{red}{2}}{(x-1)^2} \, dx + \int \frac{\textcolor{green}{2}}{(x-1)^3} \, dx$$</div>
+          
+          <div class="calc2-equation">$$= \textcolor{blue}{\ln|x-1|} + \textcolor{red}{2 \cdot \frac{(x-1)^{-1}}{-1}} + \textcolor{green}{2 \cdot \frac{(x-1)^{-2}}{-2}} + C$$</div>
+          
+          <div class="calc2-equation">$$= \ln|x-1| - \frac{2}{x-1} - \frac{1}{(x-1)^2} + C$$</div>
+        </div>
+      </div>
+
+      <div class="calc2-example">
+        <h3>Example 3: Case 3 - Irreducible Quadratic Factor</h3>
+        <p><strong>Problem:</strong> Evaluate $\int \frac{2x^2 + 1}{(x-1)(x^2+1)} \, dx$.</p>
+        
+        <div class="solution-step">
+          <p><strong>Step 1:</strong> Set up partial fractions with linear and quadratic terms.</p>
+          <div class="calc2-equation">$$\frac{2x^2 + 1}{(x-1)(x^2+1)} = \frac{\textcolor{blue}{A}}{x-1} + \frac{\textcolor{red}{Bx + C}}{x^2+1}$$</div>
+          <p><strong>Note:</strong> For irreducible quadratics, use $\textcolor{red}{Bx + C}$ in the numerator.</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 2:</strong> Clear denominators.</p>
+          <div class="calc2-equation">$$2x^2 + 1 = \textcolor{blue}{A}(x^2+1) + (\textcolor{red}{Bx + C})(x-1)$$</div>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 3:</strong> Find coefficients.</p>
+          <p><strong>Strategic substitution:</strong> Let $x = 1$: $2(1)^2 + 1 = \textcolor{blue}{A}(1^2+1) + 0$ → $3 = 2\textcolor{blue}{A}$ → $\textcolor{blue}{A = \frac{3}{2}}$</p>
+          <p><strong>Expand and compare:</strong></p>
+          <p>$2x^2 + 1 = \frac{3}{2}(x^2+1) + (\textcolor{red}{Bx + C})(x-1)$</p>
+          <p>$2x^2 + 1 = \frac{3}{2}x^2 + \frac{3}{2} + \textcolor{red}{B}x^2 - \textcolor{red}{B}x + \textcolor{red}{C}x - \textcolor{red}{C}$</p>
+          <p>Comparing $x^2$ coefficients: $2 = \frac{3}{2} + \textcolor{red}{B}$ → $\textcolor{red}{B = \frac{1}{2}}$</p>
+          <p>Comparing constant terms: $1 = \frac{3}{2} - \textcolor{red}{C}$ → $\textcolor{red}{C = \frac{1}{2}}$</p>
+        </div>
+
+        <div class="solution-step">
+          <p><strong>Step 4:</strong> Integrate the decomposed fractions.</p>
+          <div class="calc2-equation">$$\frac{2x^2 + 1}{(x-1)(x^2+1)} = \frac{\textcolor{blue}{\frac{3}{2}}}{x-1} + \frac{\textcolor{red}{\frac{1}{2}x + \frac{1}{2}}}{x^2+1}$$</div>
+          
+          <div class="calc2-equation">$$\int \frac{2x^2 + 1}{(x-1)(x^2+1)} \, dx = \frac{3}{2}\int \frac{1}{x-1} \, dx + \frac{1}{2}\int \frac{x}{x^2+1} \, dx + \frac{1}{2}\int \frac{1}{x^2+1} \, dx$$</div>
+          
+          <div class="calc2-equation">$$= \frac{3}{2}\ln|x-1| + \frac{1}{4}\ln(x^2+1) + \frac{1}{2}\arctan(x) + C$$</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key takeaways -->
+    <section class="calc2-key-point">
+      <p><strong>Mastering Partial Fraction Decomposition:</strong></p>
+      <ul>
+        <li><strong>Factor first:</strong> Always completely factor the denominator before setting up partial fractions</li>
+        <li><strong>Know the three cases:</strong> Linear, repeated linear, and irreducible quadratic factors each have specific forms</li>
+        <li><strong>Strategic substitution:</strong> Use values that make terms zero to find coefficients efficiently</li>
+        <li><strong>Polynomial division:</strong> If degree of numerator ≥ degree of denominator, divide first</li>
+        <li><strong>Check your work:</strong> Add your partial fractions back together to verify they equal the original</li>
+        <li><strong>Integration payoff:</strong> Each partial fraction becomes a basic integral (logarithmic, arctangent, or power rule)</li>
+      </ul>
+    </section>
+
+  </main>
+</body>
+</html>
