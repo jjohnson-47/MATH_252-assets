@@ -1,0 +1,13 @@
+{
+  "title": "Section 6.5 – Partial Fraction Decomposition",
+  "content_type": "document",
+  "visibility": "visible",
+  "release_condition": {
+    "type": "performance",
+    "performance": {
+      "prerequisite_item": "Week 4 Overview and Introduction",
+      "criterion": "view"
+    }
+  },
+  "description": "Master the algebraic technique of partial fraction decomposition for integrating rational functions. Learn the three cases: distinct linear factors, repeated linear factors, and irreducible quadratic factors, with systematic methods for finding unknown coefficients."
+}
